@@ -2,6 +2,12 @@
 
 
 [[projects]]
+  branch = "master"
+  name = "github.com/nbio/st"
+  packages = ["."]
+  revision = "e9e8d9816f3268def6dcbd2dea03301f40e9de94"
+
+[[projects]]
   name = "gopkg.in/h2non/gock.v1"
   packages = ["."]
   revision = "26775f23aa9da4cbd47bc2600a57ac07bbf3bd20"
@@ -10,6 +16,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "500dfb58bdded7c01999e39d6c577897694fbfac3972cedd0ce46c2c5f8a4e67"
+  inputs-digest = "d2753db66513c61618b0a3c660a97371df9f26d4972783af671ba4d6870d3092"
   solver-name = "gps-cdcl"
   solver-version = 1

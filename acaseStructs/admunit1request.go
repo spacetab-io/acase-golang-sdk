@@ -1,16 +1,7 @@
 package acaseStructs
 
-import "encoding/xml"
-
-type LanguageTypeEnum string
-const (
-	Ru LanguageTypeEnum = "ru"
-	En LanguageTypeEnum = "en"
-)
-
-type AdmUnitActionNameEnum string
-const (
-	List AdmUnitActionNameEnum = "LIST"
+import (
+	"encoding/xml"
 )
 
 type AdmUnit1RequestType struct {
@@ -41,19 +32,19 @@ type AdmUnit1ResponseType struct {
 	Password		string				`xml:"Password,attr"`
 	Language		LanguageTypeEnum	`xml:"Language,attr,omitempty"`
 	Action			ActionType			`xml:"Action"`
-	Success			string				`xml:"Success"`
+	Success			string				`xml:"Success,omitempty"`
 	AdmUnit1List	AdmUnit1ListType	`xml:"AdmUnit1List"`
-	Error			ErrorType			`xml:"Error"`
+	Error			ErrorType			`xml:"Error,omitempty"`
 }
 
 type AdmUnit1ListType struct {
-	XMLName		xml.Name		`xml:"AdmUnit1List"`
-	AdmUnit1	[]AdmUnit1Type	`xml:"AdmUnit1"`
+	XMLName		xml.Name		`xml:"AdmUnit1List",json:"-"`
+	AdmUnit1	[]AdmUnit1Type	`xml:"AdmUnit1",json:"adm_unit_1"`
 }
 
 type AdmUnit1Type struct {
-	Code	int		`xml:"Code,attr"`
-	Name	string	`xml:"Name,attr"`
+	Code	int		`xml:"Code,attr",json:"code"`
+	Name	string	`xml:"Name,attr",json:"name"`
 }
 
 type ErrorType struct {

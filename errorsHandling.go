@@ -23,17 +23,17 @@ func FatalError(err error) {
 	}
 }
 
-func ErrorResponse(acaseErrors *[]RespError) *[]AcaseResponseError {
-	if acaseErrors == nil || len(*acaseErrors) == 0 {
+func ErrorResponse(acaseErrors []RespError) []AcaseResponseError {
+	if acaseErrors == nil || len(acaseErrors) == 0 {
 		res := make([]AcaseResponseError, 1)
 		res[0].Message = "Undefined error"
-		return &res
+		return res
 	}
-	res := make([]AcaseResponseError, len(*acaseErrors))
-	for i, item := range *acaseErrors {
+	res := make([]AcaseResponseError, len(acaseErrors))
+	for i, item := range acaseErrors {
 		res[i].Message = item.Message
 		res[i].Code = item.Code
 	}
-	return &res
+	return res
 }
 

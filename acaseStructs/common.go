@@ -1,9 +1,12 @@
 package acaseStructs
 
-type ObjectDistance float32
+type LanguageTypeEnum string
+const (
+	Ru LanguageTypeEnum = "ru"
+	En LanguageTypeEnum = "en"
+)
 
-// LISTMETROSTYLE enum
-type ObjectActionName string
-
-type ObjectTypeActionName string
-
+type AdmUnitActionNameEnum string
+const (
+	List AdmUnitActionNameEnum = "LIST"
+)

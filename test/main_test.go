@@ -6,7 +6,18 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/tmconsulting/acase-golang-sdk"
 	"gopkg.in/h2non/gock.v1"
+)
+
+var (
+	au = &acase_sdk.Auth{
+		BuyerId: "BuyerId",
+		UserId: "UserId",
+		Password: "Password",
+		Language: "Language",
+	}
+	acApi = acase_sdk.NewApi(*au)
 )
 
 func main() {
