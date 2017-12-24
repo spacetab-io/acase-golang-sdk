@@ -5,6 +5,8 @@ import (
 	"encoding/xml"
 	"io/ioutil"
 	"net/http"
+
+	"github.com/tmconsulting/acase-golang-sdk/acaseSts"
 )
 
 const apiUrl = "http://test-www.acase.ru/xml/form.jsp"
@@ -13,15 +15,15 @@ type Api struct {
 	BuyerId  string
 	UserId   string
 	Password string
-	Language LanguageTypeEnum
+	Language acaseSts.LanguageTypeEnum
 }
 
 func NewApi(auth Auth) *Api {
-	var	lang LanguageTypeEnum
+	var	lang acaseSts.LanguageTypeEnum
 	if auth.Language == "RU" {
-		lang = Ru
+		lang = acaseSts.Ru
 	} else {
-		lang = En
+		lang = acaseSts.En
 	}
 	return &Api{
 		BuyerId:  auth.BuyerId,
@@ -44,15 +46,15 @@ func requestInternal(data []byte) ([]byte, error) {
 	return ioutil.ReadAll(resp.Body)
 }
 
-func (a *Api) AdmUnit1Request(countryCode int, admUnitCode string, admUnitName string) (*AdmUnit1ListType, *AcaseResponseError) {
-	req := &AdmUnit1RequestType{
+func (a *Api) AdmUnit1Request(countryCode int, admUnitCode string, admUnitName string) (*acaseSts.AdmUnit1ListType, *AcaseResponseError) {
+	req := &acaseSts.AdmUnit1RequestType{
 		Language: a.Language,
 		Password: a.Password,
 		UserId: a.UserId,
 		BuyerId: a.BuyerId,
-		Action: AdmUnit1ActionType{
-			Name: List,
-			Parameters: AdmUnit1ActionTypeParameters{
+		Action: acaseSts.AdmUnit1ActionType{
+			Name: acaseSts.List,
+			Parameters: acaseSts.AdmUnit1ActionTypeParameters{
 				CountryCode: countryCode,
 				AdmUnit1Code: admUnitCode,
 				AdmUnit1Name: admUnitCode,
@@ -63,7 +65,7 @@ func (a *Api) AdmUnit1Request(countryCode int, admUnitCode string, admUnitName s
 	FatalError(err)
 	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
 	FatalError(err)
-	resp := &AdmUnit1ResponseType{}
+	resp := &acaseSts.AdmUnit1ResponseType{}
 	err = xml.Unmarshal(respData, resp)
 	FatalError(err)
 	if resp.Error.Code != "" {
@@ -79,15 +81,15 @@ func (a *Api) AdmUnit1Request(countryCode int, admUnitCode string, admUnitName s
 	return &resp.AdmUnit1List, nil
 }
 
-func (a *Api) AdmUnit2Request(countryCode int, admUnit1Code string, admUnit1Name string, admUnit2Code string, admUnit2Name string) (*AdmUnit2ListType, *AcaseResponseError) {
-	req := &AdmUnit2RequestType{
+func (a *Api) AdmUnit2Request(countryCode int, admUnit1Code string, admUnit1Name string, admUnit2Code string, admUnit2Name string) (*acaseSts.AdmUnit2ListType, *AcaseResponseError) {
+	req := &acaseSts.AdmUnit2RequestType{
 		Language: a.Language,
 		Password: a.Password,
 		UserId: a.UserId,
 		BuyerId: a.BuyerId,
-		Action: AdmUnit2ActionType{
-			Name: List,
-			Parameters: AdmUnit2ActionTypeParameters{
+		Action: acaseSts.AdmUnit2ActionType{
+			Name: acaseSts.List,
+			Parameters: acaseSts.AdmUnit2ActionTypeParameters{
 				CountryCode: countryCode,
 				AdmUnit1Code: admUnit1Code,
 				AdmUnit1Name: admUnit1Code,
@@ -100,7 +102,7 @@ func (a *Api) AdmUnit2Request(countryCode int, admUnit1Code string, admUnit1Name
 	FatalError(err)
 	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
 	FatalError(err)
-	resp := &AdmUnit2ResponseType{}
+	resp := &acaseSts.AdmUnit2ResponseType{}
 	err = xml.Unmarshal(respData, resp)
 	FatalError(err)
 	if resp.Error.Code != "" {
@@ -116,8 +118,8 @@ func (a *Api) AdmUnit2Request(countryCode int, admUnit1Code string, admUnit1Name
 	return &resp.AdmUnit2List, nil
 }
 
-func (a *Api) CitizenshipListRequest() (*CitizenshipListType, *AcaseResponseError) {
-	req := &CitizenshipListRequestType{
+func (a *Api) CitizenshipListRequest() (*acaseSts.CitizenshipListType, *AcaseResponseError) {
+	req := &acaseSts.CitizenshipListRequestType{
 		Language: a.Language,
 		Password: a.Password,
 		UserId: a.UserId,
@@ -127,7 +129,7 @@ func (a *Api) CitizenshipListRequest() (*CitizenshipListType, *AcaseResponseErro
 	FatalError(err)
 	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
 	FatalError(err)
-	resp := &CitizenshipListType{}
+	resp := &acaseSts.CitizenshipListType{}
 	err = xml.Unmarshal(respData, resp)
 	FatalError(err)
 	if resp.Error.Code != "" {

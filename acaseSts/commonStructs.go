@@ -1,4 +1,4 @@
-package acaseSdk
+package acaseSts
 
 import (
 	"encoding/xml"
