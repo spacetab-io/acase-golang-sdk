@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClientCategoryList>
+   <Success />
+   <ClientCategory Code="1" Name="Господин" />
+   <ClientCategory Code="2" Name="Госпожа" />
+   <ClientCategory Code="3" Name="Ребенок" />
+   <ClientCategory Code="4" Name="Младенец" />
+</ClientCategoryList>
