@@ -46,7 +46,7 @@ func requestInternal(data []byte) ([]byte, error) {
 	return ioutil.ReadAll(resp.Body)
 }
 
-func (a *Api) AdmUnit1Request(countryCode int, admUnitCode string, admUnitName string) (*acaseSts.AdmUnit1ListType, *AcaseResponseError) {
+func (a *Api) AdmUnit1Request(countryCode int, admUnitCode, admUnitName string) (*acaseSts.AdmUnit1ListType, *AcaseResponseError) {
 	req := &acaseSts.AdmUnit1RequestType{
 		Language: a.Language,
 		Password: a.Password,
@@ -81,7 +81,7 @@ func (a *Api) AdmUnit1Request(countryCode int, admUnitCode string, admUnitName s
 	return &resp.AdmUnit1List, nil
 }
 
-func (a *Api) AdmUnit2Request(countryCode int, admUnit1Code string, admUnit1Name string, admUnit2Code string, admUnit2Name string) (*acaseSts.AdmUnit2ListType, *AcaseResponseError) {
+func (a *Api) AdmUnit2Request(countryCode int, admUnit1Code, admUnit1Name, admUnit2Code, admUnit2Name string) (*acaseSts.AdmUnit2ListType, *AcaseResponseError) {
 	req := &acaseSts.AdmUnit2RequestType{
 		Language: a.Language,
 		Password: a.Password,
@@ -158,6 +158,37 @@ func (a *Api) CityDescriptionRequest(cityCode string) (*acaseSts.CityDescription
 	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
 	FatalError(err)
 	resp := &acaseSts.CityDescriptionType{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: resp.Error.Code,
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return resp, nil
+}
+
+func (a *Api) CityListRequest(countryCode, countryName, cityCode, cityName string) (*acaseSts.CityListType, *AcaseResponseError) {
+	req := &acaseSts.CityListRequestType{
+		Language: a.Language,
+		Password: a.Password,
+		UserId: a.UserId,
+		BuyerId: a.BuyerId,
+		CountryCode: countryCode,
+		CountryName: countryName,
+		CityCode: cityCode,
+		CityName: cityName,
+	}
+	bItem, err := xml.Marshal(req)
+	FatalError(err)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+	resp := &acaseSts.CityListType{}
 	err = xml.Unmarshal(respData, resp)
 	FatalError(err)
 	if resp.Error.Code != "" {
