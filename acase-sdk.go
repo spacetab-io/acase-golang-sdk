@@ -173,7 +173,7 @@ func (a *Api) CityDescriptionRequest(cityCode string) (*acaseSts.CityDescription
 	return resp, nil
 }
 
-func (a *Api) CityListRequest(countryCode, countryName, cityCode, cityName string) (*acaseSts.CityListType, *AcaseResponseError) {
+func (a *Api) CityListRequest(countryCode, countryName, cityName string, cityCode int) (*acaseSts.CityListType, *AcaseResponseError) {
 	req := &acaseSts.CityListRequestType{
 		Language: a.Language,
 		Password: a.Password,
@@ -189,6 +189,34 @@ func (a *Api) CityListRequest(countryCode, countryName, cityCode, cityName strin
 	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
 	FatalError(err)
 	resp := &acaseSts.CityListType{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: resp.Error.Code,
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return resp, nil
+}
+
+func (a *Api) CountryDescriptionRequest(countryCode int) (*acaseSts.CountryDescriptionType, *AcaseResponseError) {
+	req := &acaseSts.CountryDescriptionRequestType{
+		Language: a.Language,
+		Password: a.Password,
+		UserId: a.UserId,
+		BuyerId: a.BuyerId,
+		CountryCode: countryCode,
+	}
+	bItem, err := xml.Marshal(req)
+	FatalError(err)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+	resp := &acaseSts.CountryDescriptionType{}
 	err = xml.Unmarshal(respData, resp)
 	FatalError(err)
 	if resp.Error.Code != "" {

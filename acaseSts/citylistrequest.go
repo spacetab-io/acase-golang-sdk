@@ -10,7 +10,7 @@ type CityListRequestType struct {
 	Language	LanguageTypeEnum	`xml:"Language,attr,omitempty"`
 	CountryCode	string				`xml:"CountryCode,attr,omitempty"`
 	CountryName	string				`xml:"CountryName,attr,omitempty"`
-	CityCode	string				`xml:"CityCode,attr,omitempty"`
+	CityCode	int					`xml:"CityCode,attr,omitempty"`
 	CityName	string				`xml:"CityName,attr,omitempty"`
 }
 
