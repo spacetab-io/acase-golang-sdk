@@ -66,10 +66,10 @@ func (a *Api) AdmUnit1Request(countryCode int, admUnitCode string, admUnitName s
 	resp := &AdmUnit1ResponseType{}
 	err = xml.Unmarshal(respData, resp)
 	FatalError(err)
-	if resp.Error.Code != 0 && resp.Error.Description != "" {
+	if resp.Error.Code != "" {
 		rError := make([]RespError, 1)
 		rError[0] = RespError{
-			Code: string(resp.Error.Code),
+			Code: resp.Error.Code,
 			Message: resp.Error.Description,
 		}
 		res := ErrorResponse(rError)
@@ -103,10 +103,10 @@ func (a *Api) AdmUnit2Request(countryCode int, admUnit1Code string, admUnit1Name
 	resp := &AdmUnit2ResponseType{}
 	err = xml.Unmarshal(respData, resp)
 	FatalError(err)
-	if resp.Error.Code != 0 && resp.Error.Description != "" {
+	if resp.Error.Code != "" {
 		rError := make([]RespError, 1)
 		rError[0] = RespError{
-			Code: string(resp.Error.Code),
+			Code: resp.Error.Code,
 			Message: resp.Error.Description,
 		}
 		res := ErrorResponse(rError)

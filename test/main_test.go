@@ -1,7 +1,6 @@
 package test
 
 import (
-	"encoding/xml"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -21,22 +20,23 @@ var (
 )
 
 func main() {
-	defer gock.Off()
+//	defer gock.Off()
 }
 
-func getXml(filename string) (interface{}, error) {
+func getXml(filename string) ([]byte, error) {
 	cwd, _ := os.Getwd()
 	fullFileName := filepath.Join(cwd, "data", filename)
 	data, err := ioutil.ReadFile(fullFileName)
 	if err != nil {
 		return nil, err
 	}
-
-	var res map[string]map[string]interface{}
-	if err := xml.Unmarshal(data, &res); err != nil {
-		return nil, err
-	}
 	return data, nil
+}
+
+func getCustomErrorType() *acaseSdk.AcaseResponseError {
+	var er *acaseSdk.AcaseResponseError
+	er = nil
+	return er
 }
 
 func testRequest(filename string) error {

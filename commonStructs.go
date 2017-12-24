@@ -19,12 +19,12 @@ type ErrorType struct {
 	XMLName		xml.Name		`xml:"Error"`
 	Type		ErrorTypeType	`xml:"Type"`
 	Pointer		string			`xml:"Pointer"`
-	Code		int				`xml:"Code,attr"`
-	Description	string			`xml:"Description"`
+	Code		string			`xml:"Code,attr"`
+	Description	string			`xml:"Description,attr"`
 }
 
 type ErrorTypeType struct {
 	XMLName		xml.Name	`xml:"Type"`
-	Code		int			`xml:"Code,attr"`
-	Name		string		`xml:"Code,attr"`
+	Code		string		`xml:"Code,attr"`
+	Name		string		`xml:"Name,attr"`
 }
