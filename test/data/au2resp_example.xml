@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AdmUnit2Response BuyerId="MyCompanyId" UserId="MyUserId" Password="MyPassword" Language="ru">
+   <Action Name="LIST">
+      <Parameters CountryCode="9" AdmUnit1Code="3" AdmUnit1Name="" AdmUnit2Code="" AdmUnit2Name=""/>
+   </Action>
+   <Success/>
+   <AdmUnit2List>
+      <AdmUnit2 Code="2" Name="Тарусский район">
+         <AdmUnit1 Code="3" Name="Калужская область"/>
+      </AdmUnit2>
+      <AdmUnit2 Code="3" Name="Козельский район">
+         <AdmUnit1 Code="3" Name="Калужская область"/>
+      </AdmUnit2>
+   </AdmUnit2List>
+</AdmUnit2Response>

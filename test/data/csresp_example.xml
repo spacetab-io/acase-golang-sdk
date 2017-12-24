@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CitizenshipList>
+   <Success /> 
+   <Citizenship Code="31" Name="Австралия" /> 
+   <Citizenship Code="25" Name="Австрия" /> 
+   <Citizenship Code="68" Name="Азербайджан" /> 
+   <Citizenship Code="90" Name="Албания" /> 
+   <Citizenship Code="128" Name="Алжир" /> 
+   <Citizenship Code="125" Name="Ангола" /> 
+   <Citizenship Code="104" Name="Андорра" /> 
+   <Citizenship Code="48" Name="Аргентина" /> 
+   <Citizenship Code="78" Name="Армения" /> 
+   <Citizenship Code="115" Name="Афганистан" /> 
+   <Citizenship Code="109" Name="Бангладеш" /> 
+   <Citizenship Code="34" Name="Беларусь" /> 
+   <Citizenship Code="26" Name="Бельгия" /> 
+   <Citizenship Code="55" Name="Бермудские о-ва" /> 
+   <Citizenship Code="87" Name="Болгария" /> 
+   <Citizenship Code="118" Name="Босния-Герцеговина" /> 
+   <Citizenship Code="113" Name="Ботсвана" /> 
+   <Citizenship Code="15" Name="Бразилия" /> 
+   <Citizenship Code="4" Name="Великобритания" /> 
+   <Citizenship Code="46" Name="Венгрия" /> 
+   <Citizenship Code="54" Name="Венесуэла" /> 
+   <Citizenship Code="99" Name="Вьетнам" /> 
+   <Citizenship Code="101" Name="Гайана" /> 
+   <Citizenship Code="62" Name="Гваделупа" /> 
+   <Citizenship Code="43" Name="Гватемала" /> 
+   <Citizenship Code="5" Name="Германия" /> 
+   <Citizenship Code="72" Name="Гондурас" /> 
+   <Citizenship Code="53" Name="Гонконг" /> 
+   <Citizenship Code="19" Name="Гренландия" /> 
+   <Citizenship Code="41" Name="Греция" /> 
+   <Citizenship Code="74" Name="Грузия" /> 
+   <Citizenship Code="8" Name="Дания" /> 
+   <Citizenship Code="120" Name="Джибути" /> 
+   <Citizenship Code="37" Name="Доминиканская респ." /> 
+   <Citizenship Code="44" Name="Египет" /> 
+   <Citizenship Code="91" Name="Зимбабве" /> 
+   <Citizenship Code="12" Name="Израиль" /> 
+   <Citizenship Code="61" Name="Индия" /> 
+   <Citizenship Code="83" Name="Индонезия" /> 
+   <Citizenship Code="106" Name="Иордания" /> 
+   <Citizenship Code="119" Name="Ирак" /> 
+   <Citizenship Code="98" Name="Иран" /> 
+   <Citizenship Code="23" Name="Ирландия" /> 
+   <Citizenship Code="63" Name="Исландия" /> 
+   <Citizenship Code="29" Name="Испания" /> 
+   <Citizenship Code="14" Name="Италия" /> 
+   <Citizenship Code="70" Name="Казахстан" /> 
+   <Citizenship Code="111" Name="Камерун" /> 
+   <Citizenship Code="16" Name="Канада" /> 
+   <Citizenship Code="114" Name="Кения" /> 
+   <Citizenship Code="64" Name="Кипр" /> 
+   <Citizenship Code="97" Name="Китай" /> 
+   <Citizenship Code="6" Name="Колумбия" /> 
+   <Citizenship Code="71" Name="Коста-Рика" /> 
+   <Citizenship Code="107" Name="Куба" /> 
+   <Citizenship Code="79" Name="Кыргызстан" /> 
+   <Citizenship Code="30" Name="Латвия" /> 
+   <Citizenship Code="89" Name="Ливан" /> 
+   <Citizenship Code="58" Name="Литва" /> 
+   <Citizenship Code="47" Name="Лихтенштейн" /> 
+   <Citizenship Code="24" Name="Люксембург" /> 
+   <Citizenship Code="94" Name="Маврикий" /> 
+   <Citizenship Code="123" Name="Мавритания" /> 
+   <Citizenship Code="124" Name="Македония" /> 
+   <Citizenship Code="65" Name="Малайзия" /> 
+   <Citizenship Code="103" Name="Мальта" /> 
+   <Citizenship Code="81" Name="Марокко" /> 
+   <Citizenship Code="18" Name="Мексика" /> 
+   <Citizenship Code="75" Name="Молдова" /> 
+   <Citizenship Code="51" Name="Монако" /> 
+   <Citizenship Code="116" Name="Монголия" /> 
+   <Citizenship Code="40" Name="Намибия" /> 
+   <Citizenship Code="121" Name="Непал" /> 
+   <Citizenship Code="108" Name="Нигерия" /> 
+   <Citizenship Code="13" Name="Нидерланды" /> 
+   <Citizenship Code="80" Name="Никарагуа" /> 
+   <Citizenship Code="32" Name="Новая Зеландия" /> 
+   <Citizenship Code="11" Name="Норвегия" /> 
+   <Citizenship Code="85" Name="ОАЭ" /> 
+   <Citizenship Code="66" Name="Пакистан" /> 
+   <Citizenship Code="122" Name="Палестина" /> 
+   <Citizenship Code="95" Name="Панама" /> 
+   <Citizenship Code="102" Name="Парагвай" /> 
+   <Citizenship Code="35" Name="Перу" /> 
+   <Citizenship Code="20" Name="Польша" /> 
+   <Citizenship Code="56" Name="Португалия" /> 
+   <Citizenship Code="9" Name="Россия" /> 
+   <Citizenship Code="93" Name="Румыния" /> 
+   <Citizenship Code="3" Name="США" /> 
+   <Citizenship Code="82" Name="Сальвадор" /> 
+   <Citizenship Code="57" Name="Сан-Марино" /> 
+   <Citizenship Code="73" Name="Саудовская Аравия" /> 
+   <Citizenship Code="69" Name="Северная Ирландия" /> 
+   <Citizenship Code="100" Name="Северная Корея" /> 
+   <Citizenship Code="105" Name="Сенегал" /> 
+   <Citizenship Code="84" Name="Сент-Китс и Невис" /> 
+   <Citizenship Code="129" Name="Сербия" /> 
+   <Citizenship Code="88" Name="Сингапур" /> 
+   <Citizenship Code="96" Name="Сирия" /> 
+   <Citizenship Code="110" Name="Словакия" /> 
+   <Citizenship Code="92" Name="Словения" /> 
+   <Citizenship Code="127" Name="Судан" /> 
+   <Citizenship Code="76" Name="Таджикистан" /> 
+   <Citizenship Code="42" Name="Таиланд" /> 
+   <Citizenship Code="39" Name="Тайвань" /> 
+   <Citizenship Code="117" Name="Танзания" /> 
+   <Citizenship Code="126" Name="Тунис" /> 
+   <Citizenship Code="77" Name="Туркменистан" /> 
+   <Citizenship Code="27" Name="Турция" /> 
+   <Citizenship Code="67" Name="Узбекистан" /> 
+   <Citizenship Code="38" Name="Украина" /> 
+   <Citizenship Code="59" Name="Уругвай" /> 
+   <Citizenship Code="33" Name="Филиппины" /> 
+   <Citizenship Code="7" Name="Финляндия" /> 
+   <Citizenship Code="10" Name="Франция" /> 
+   <Citizenship Code="45" Name="Хорватия" /> 
+   <Citizenship Code="22" Name="Чехия" /> 
+   <Citizenship Code="50" Name="Чили" /> 
+   <Citizenship Code="2" Name="Швейцария" /> 
+   <Citizenship Code="28" Name="Швеция" /> 
+   <Citizenship Code="86" Name="Шри Ланка" /> 
+   <Citizenship Code="49" Name="Эквадор" /> 
+   <Citizenship Code="36" Name="Эстония" /> 
+   <Citizenship Code="17" Name="ЮАР" /> 
+   <Citizenship Code="21" Name="Югославия" /> 
+   <Citizenship Code="52" Name="Южная Корея" /> 
+   <Citizenship Code="112" Name="Ямайка" /> 
+   <Citizenship Code="60" Name="Япония" /> 
+</CitizenshipList>
