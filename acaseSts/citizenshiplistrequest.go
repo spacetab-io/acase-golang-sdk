@@ -5,7 +5,7 @@ import (
 )
 
 type CitizenshipListRequestType struct {
-	XMLName	xml.Name	`xml:"CitizenshipListRequest"`
+	XMLName		xml.Name			`xml:"CitizenshipListRequest"`
 	BuyerId		string				`xml:"BuyerId,attr"`
 	UserId		string				`xml:"UserId,attr"`
 	Password	string				`xml:"Password,attr"`
