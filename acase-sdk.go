@@ -115,3 +115,30 @@ func (a *Api) AdmUnit2Request(countryCode int, admUnit1Code string, admUnit1Name
 
 	return &resp.AdmUnit2List, nil
 }
+
+func (a *Api) CitizenshipListRequest() (*CitizenshipListType, *AcaseResponseError) {
+	req := &CitizenshipListRequestType{
+		Language: a.Language,
+		Password: a.Password,
+		UserId: a.UserId,
+		BuyerId: a.BuyerId,
+	}
+	bItem, err := xml.Marshal(req)
+	FatalError(err)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+	resp := &CitizenshipListType{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: resp.Error.Code,
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return resp, nil
+}
