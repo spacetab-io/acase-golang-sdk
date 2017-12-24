@@ -30,7 +30,7 @@ func TestAdmUnit2Request_Error(t *testing.T) {
 	testRequest("au2error_example.xml")
 	defer gock.Off()
 
-	_, err := acApi.AdmUnit1Request(9, "", "обл")
+	_, err := acApi.AdmUnit2Request(9, "3", "", "", "")
 
 	st.Expect(t, err.Code, "9998")
 	st.Expect(t, err.Message, "Доступ запрещен !")
