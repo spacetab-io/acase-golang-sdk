@@ -44,6 +44,8 @@ func testRequest(filename string) error {
 	if err != nil {
 		return err
 	}
-	gock.New("").Post("").Reply(200).XML(data)
+	gock.New("http://test-www.acase.ru").Post("/xml/form.jsp").Reply(200).XML(data)
 	return nil
 }
+
+

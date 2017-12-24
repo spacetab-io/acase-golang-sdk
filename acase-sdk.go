@@ -9,7 +9,7 @@ import (
 	"github.com/tmconsulting/acase-golang-sdk/acaseStructs"
 )
 
-const apiUrl = ""
+const apiUrl = "http://test-www.acase.ru/xml/form.jsp"
 
 type Api struct {
 	BuyerId  string
@@ -33,20 +33,6 @@ func NewApi(auth Auth) *Api {
 	}
 }
 
-func deSerializeResponse(data []byte) *AcaseResponse {
-	res := &AcaseResponse{}
-	err := xml.Unmarshal(data, res)
-	FatalError(err)
-	return res
-}
-
-func serializeRequest(reqDetails *RequestDetails) *bytes.Buffer {
-	bItem, err := xml.Marshal(reqDetails)
-	FatalError(err)
-	data := xml.Header + string(bItem)
-	return bytes.NewBuffer([]byte(data))
-}
-
 func requestInternal(data []byte) ([]byte, error) {
 	req, err := http.NewRequest("POST", apiUrl, bytes.NewBuffer([]byte(data)))
 	FatalError(err)
@@ -66,7 +52,7 @@ func (a *Api) AdmUnit1Request(countryCode int, admUnitCode string, admUnitName s
 		Password: a.Password,
 		UserId: a.UserId,
 		BuyerId: a.BuyerId,
-		Action: acaseStructs.ActionType{
+		Action: acaseStructs.AdmUnit1ActionType{
 			Name: acaseStructs.List,
 			Parameters: acaseStructs.AdmUnit1ActionTypeParameters{
 				CountryCode: countryCode,
@@ -93,4 +79,41 @@ func (a *Api) AdmUnit1Request(countryCode int, admUnitCode string, admUnitName s
 	}
 
 	return &resp.AdmUnit1List, nil
+}
+
+func (a *Api) AdmUnit2Request(countryCode int, admUnit1Code string, admUnit1Name string, admUnit2Code string, admUnit2Name string) (*acaseStructs.AdmUnit2ListType, *AcaseResponseError) {
+	req := &acaseStructs.AdmUnit2RequestType{
+		Language: a.Language,
+		Password: a.Password,
+		UserId: a.UserId,
+		BuyerId: a.BuyerId,
+		Action: acaseStructs.AdmUnit2ActionType{
+			Name: acaseStructs.List,
+			Parameters: acaseStructs.AdmUnit2ActionTypeParameters{
+				CountryCode: countryCode,
+				AdmUnit1Code: admUnit1Code,
+				AdmUnit1Name: admUnit1Code,
+				AdmUnit2Code: admUnit2Code,
+				AdmUnit2Name: admUnit2Name,
+			},
+		},
+	}
+	bItem, err := xml.Marshal(req)
+	FatalError(err)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+	resp := &acaseStructs.AdmUnit2ResponseType{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != 0 && resp.Error.Description != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: string(resp.Error.Code),
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return &resp.AdmUnit2List, nil
 }

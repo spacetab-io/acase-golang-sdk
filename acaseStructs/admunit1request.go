@@ -10,13 +10,7 @@ type AdmUnit1RequestType struct {
 	UserId		string				`xml:"UserId,attr"`
 	Password	string				`xml:"Password,attr"`
 	Language	LanguageTypeEnum	`xml:"Language,attr,omitempty"`
-	Action		ActionType			`xml:"Action"`
-}
-
-type ActionType struct {
-	XMLName		xml.Name						`xml:"Action"`
-	Name		AdmUnitActionNameEnum			`xml:"Name,attr"`
-	Parameters	AdmUnit1ActionTypeParameters	`xml:"Parameters"`
+	Action		AdmUnit1ActionType	`xml:"Action"`
 }
 
 type AdmUnit1ActionTypeParameters struct {
@@ -31,10 +25,16 @@ type AdmUnit1ResponseType struct {
 	UserId			string				`xml:"UserId,attr"`
 	Password		string				`xml:"Password,attr"`
 	Language		LanguageTypeEnum	`xml:"Language,attr,omitempty"`
-	Action			ActionType			`xml:"Action"`
+	Action			AdmUnit1ActionType	`xml:"Action,omitempty"`
 	Success			string				`xml:"Success,omitempty"`
-	AdmUnit1List	AdmUnit1ListType	`xml:"AdmUnit1List"`
+	AdmUnit1List	AdmUnit1ListType	`xml:"AdmUnit1List,omitempty"`
 	Error			ErrorType			`xml:"Error,omitempty"`
+}
+
+type AdmUnit1ActionType struct {
+	XMLName		xml.Name						`xml:"Action"`
+	Name		AdmUnitActionNameEnum			`xml:"Name,attr"`
+	Parameters	AdmUnit1ActionTypeParameters	`xml:"Parameters"`
 }
 
 type AdmUnit1ListType struct {
@@ -45,17 +45,4 @@ type AdmUnit1ListType struct {
 type AdmUnit1Type struct {
 	Code	int		`xml:"Code,attr",json:"code"`
 	Name	string	`xml:"Name,attr",json:"name"`
-}
-
-type ErrorType struct {
-	XMLName		xml.Name		`xml:"Error"`
-	Code		int				`xml:"Code,attr"`
-	Description	string			`xml:"Description"`
-	Type		ErrorTypeType	`xml:"Type"`
-}
-
-type ErrorTypeType struct {
-	XMLName		xml.Name	`xml:"Type"`
-	Code		int			`xml:"Code,attr"`
-	Name		string		`xml:"Code,attr"`
 }
