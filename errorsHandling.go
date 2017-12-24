@@ -1,4 +1,4 @@
-package acase_sdk
+package acaseSdk
 
 import (
 	"log"

@@ -11,13 +11,13 @@ import (
 )
 
 var (
-	au = &acase_sdk.Auth{
+	au = &acaseSdk.Auth{
 		BuyerId: "BuyerId",
 		UserId: "UserId",
 		Password: "Password",
 		Language: "Language",
 	}
-	acApi = acase_sdk.NewApi(*au)
+	acApi = acaseSdk.NewApi(*au)
 )
 
 func main() {
