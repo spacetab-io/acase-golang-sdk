@@ -1,4 +1,4 @@
-package acaseStructs
+package acase_sdk
 
 import "encoding/xml"
 
