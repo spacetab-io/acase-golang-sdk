@@ -21,6 +21,6 @@ type CitizenshipListType struct {
 
 type CitizenshipType struct {
 	XMLName	xml.Name	`xml:"Citizenship"`
-	Code	string		`xml:"Code,attr"`
+	Code	int			`xml:"Code,attr"`
 	Name	string		`xml:"Name,attr"`
 }

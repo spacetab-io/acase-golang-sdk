@@ -19,10 +19,6 @@ var (
 	acApi = acaseSdk.NewApi(*au)
 )
 
-func main() {
-//	defer gock.Off()
-}
-
 func getXml(filename string) ([]byte, error) {
 	cwd, _ := os.Getwd()
 	fullFileName := filepath.Join(cwd, "data", filename)

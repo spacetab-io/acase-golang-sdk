@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CityList>
+   <Success />
+   <Country Code="9" Name="Россия">
+      <Position Latitude="57.5158" Longitude="82.6172"/>
+      <City Code="151" Name="Абакан" Genitive="Абакана" Dative="Абакану" Accusative="Абакан" Ablative="Абаканом" Prepositive="Абакане">
+         <AdmUnit1 Code="1" Name="Не определено"/>
+         <AdmUnit2 Code="1" Name="Не определено"/>
+         <TypeOfPlace Code="2" Name="город"/>
+         <Position Latitude="53.730192" Longitude="91.454773"/>
+      </City>
+      <City Code="109" Name="Светлогорск" Genitive="Светлогорска" Dative="Светлогорску" Accusative="Светлогорск" Ablative="Светлогорском" Prepositive="Светлогорске">
+         <AdmUnit1 Code="23" Name="Калининградская область"/>
+         <AdmUnit2 Code="67" Name="Гурьевский район"/>
+         <TypeOfPlace Code="2" Name="город"/>
+         <Position Latitude="54.938292" Longitude="20.158213"/>
+      </City>
+   </Country>
+</CityList>

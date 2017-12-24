@@ -8,7 +8,7 @@ type CityDescriptionRequestType struct {
 	UserId		string				`xml:"UserId,attr"`
 	Password	string				`xml:"Password,attr"`
 	Language	LanguageTypeEnum	`xml:"Language,attr,omitempty"`
-	CityCode	string				`xml:"CityCode"`
+	CityCode	string				`xml:"CityCode,attr"`
 }
 
 type CityDescriptionType struct {

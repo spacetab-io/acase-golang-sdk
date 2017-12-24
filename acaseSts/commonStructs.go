@@ -31,8 +31,25 @@ type ErrorTypeType struct {
 
 type CountryType struct {
 	XMLName		xml.Name		`xml:"Country"`
-	Code		string			`xml:"Code,attr"`
+	Code		int				`xml:"Code,attr"`
 	Name		string			`xml:"Name,attr"`
+	Position	PositionType	`xml:"Position"`
+	Cities		[]CityType		`xml:"City"`
+}
+
+type CityType struct {
+	XMLName		xml.Name		`xml:"City"`
+	Code		int				`xml:"Code,attr"`
+	Name		string			`xml:"Name,attr"`
+	Genitive	string			`xml:"Genitive,attr"`
+	Dative		string			`xml:"Dative,attr"`
+	Accusative	string			`xml:"Accusative,attr"`
+	Ablative	string			`xml:"Ablative,attr"`
+	Prepositive	string			`xml:"Prepositive,attr"`
+	Ref			string			`xml:"Ref,arre"`
+	AdmUnit1	AdmUnit1Type	`xml:"AdmUnit1"`
+	AdmUnit2	AdmUnit2Type	`xml:"AdmUnit2"`
+	TypeOfPlace	TypeOfPlaceType	`xml:"TypeOfPlace"`
 	Position	PositionType	`xml:"Position"`
 }
 
