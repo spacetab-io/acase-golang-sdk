@@ -26,7 +26,7 @@ type AdmUnit1ResponseType struct {
 	Password		string				`xml:"Password,attr"`
 	Language		LanguageTypeEnum	`xml:"Language,attr,omitempty"`
 	Action			AdmUnit1ActionType	`xml:"Action,omitempty"`
-	Success			string				`xml:"Success,omitempty"`
+	Success			string				`xml:"Success"`
 	AdmUnit1List	AdmUnit1ListType	`xml:"AdmUnit1List,omitempty"`
 	Error			ErrorType			`xml:"Error,omitempty"`
 }

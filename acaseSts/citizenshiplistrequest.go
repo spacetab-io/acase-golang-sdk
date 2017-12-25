@@ -14,7 +14,7 @@ type CitizenshipListRequestType struct {
 
 type CitizenshipListType struct {
 	XMLName		xml.Name			`xml:"CitizenshipList"`
-	Success		string				`xml:"Success,omitempty"`
+	Success		string				`xml:"Success"`
 	Error		ErrorType			`xml:"Error,omitempty"`
 	Citizenship	[]CitizenshipType	`xml:"Citizenship"`
 }

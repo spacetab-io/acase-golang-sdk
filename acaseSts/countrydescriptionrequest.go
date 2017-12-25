@@ -16,7 +16,7 @@ type CountryDescriptionType struct {
 	Code		int				`xml:"Code,attr"`
 	Name		string			`xml:"Name,attr"`
 	Description	string			`xml:"Description,attr"`
-	Success		string			`xml:"Success,omitempty"`
+	Success		string			`xml:"Success"`
 	Error		ErrorType		`xml:"Error,omitempty"`
 	Position	PositionType	`xml:"Position"`
 }

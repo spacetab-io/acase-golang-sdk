@@ -14,7 +14,7 @@ type ClientCategoryListRequestType struct {
 
 type ClientCategoryListType struct {
 	XMLName				xml.Name				`xml:"ClientCategoryList"`
-	Success				string					`xml:"Success,omitempty"`
+	Success				string					`xml:"Success"`
 	Error				ErrorType				`xml:"Error,omitempty"`
 	ClientCategories	[]ClientCategoryType	`xml:"ClientCategory"`
 }
