@@ -34,7 +34,7 @@ type CountryType struct {
 	Code		int				`xml:"Code,attr"`
 	Name		string			`xml:"Name,attr"`
 	Position	PositionType	`xml:"Position"`
-	Cities		[]CityType		`xml:"City"`
+	Cities		[]CityType		`xml:"City,omitempty"`
 }
 
 type CityType struct {
