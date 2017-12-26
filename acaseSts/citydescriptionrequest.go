@@ -17,7 +17,7 @@ type CityDescriptionType struct {
 	Name		string			`xml:"Name,attr"`
 	Description	string			`xml:"Description,attr"`
 	Url			string			`xml:"Url,attr"`
-	Success		string			`xml:"Success,omitempty"`
+	Success		string			`xml:"Success"`
 	Error		ErrorType		`xml:"Error,omitempty"`
 	Country		CountryType		`xml:"Country"`
 	AdmUnit1	AdmUnit1Type	`xml:"AdmUnit1"`

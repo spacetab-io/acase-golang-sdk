@@ -16,7 +16,7 @@ type CityListRequestType struct {
 
 type CityListType struct {
 	XMLName		xml.Name		`xml:"CityList"`
-	Success		string			`xml:"Success,omitempty"`
+	Success		string			`xml:"Success"`
 	Error		ErrorType		`xml:"Error,omitempty"`
 	Countries	[]CountryType	`xml:"Country"`
 }

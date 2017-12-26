@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CurrencyListResponse>
+   <Success/>
+   <Currency Code="2" Name="RUR"/>
+   <Currency Code="3" Name="USD"/>
+   <Currency Code="5" Name="EUR"/>
+</CurrencyListResponse>
