@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomerResponse BuyerId="MyCompanyId" UserId="MyUserId" Password="MyPassword" Language="ru">
+    <ActionCreate>
+        <Parameters>
+            <Customer FullName="Международный клуб Ромашка" ZipCode="123456" Address="Тестовая ул. д.5/2 кв.5" PIAddress="" INN="123456789" KPP="" Phone="+371 1 222 333" Name="Ромашка">
+                <BuyerType Code="3" Name="Юридическое лицо"/>
+                <Country Code="30" Name="Латвия"/>
+                <City Code="24" Name="Рига"/>
+            </Customer>
+        </Parameters>
+    </ActionCreate>
+    <Success/>
+    <Customer FullName="Международный клуб Ромашка" ZipCode="123456" Address="Тестовая ул. д.5/2 кв.5" PIAddress="Латвия, 123456, Рига, Тестовая ул. д.5/2 кв.5" INN="123456789" Phone="+371 1 222 333" Code="1322076" Name="Ромашка">
+        <BuyerType Code="3" Name="Юридическое лицо"/>
+        <Country Code="30" Name="Латвия"/>
+        <City Code="24" Name="Рига">
+            <CityType Code="2" Name="Город"/>
+            <AdmUnit1 Code="1" Name="Не определено"/>
+            <AdmUnit2 Code="1" Name="Не определено"/>
+        </City>
+        <Actual Code="1" Name="Да"/>
+        <AllowModify Code="1" Name="Да"/>
+    </Customer>
+</CustomerResponse>

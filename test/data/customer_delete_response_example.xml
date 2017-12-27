@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomerResponse BuyerId="MyCompanyId" UserId="MyUserId" Password="MyPassword" Language="ru">
+    <ActionDelete>
+        <Parameters CustomerCode="1322076"/>
+    </ActionDelete>
+    <Success/>
+</CustomerResponse>
