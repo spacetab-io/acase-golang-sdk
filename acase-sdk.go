@@ -318,3 +318,58 @@ func (a *Api) CurrencyListRequest(currencyCode int, currencyName, options string
 
 	return resp, nil
 }
+
+func (a *Api) CustomerRequestCreate(fullName, zipCode, address, piAddress, inn, kpp, phone, name, buyerTypeName,
+	countryName, cityName string, buyerTypeCode, countryCode, cityCode int) (*acaseSts.CustomerResponseCreateType, *AcaseResponseError) {
+
+	req := &acaseSts.CustomerRequestCreateType{
+		Language: a.Language,
+		Password: a.Password,
+		UserId: a.UserId,
+		BuyerId: a.BuyerId,
+		ActionCreate: acaseSts.ActionCreateType{
+			Parameters:acaseSts.CustomerReqCreateParametersType{
+				Customer:acaseSts.CustomerType{
+					FullName:fullName,
+					ZipCode:zipCode,
+					Address:address,
+					PIAddress:piAddress,
+					INN:inn,
+					KPP:kpp,
+					Phone:phone,
+					Name:name,
+					BuyerType:acaseSts.BuyerTypeType{
+						Name:buyerTypeName,
+						Code:buyerTypeCode,
+					},
+					Country:acaseSts.CountryType{
+						Code:countryCode,
+						Name:countryName,
+					},
+					City:acaseSts.CityType{
+						Code:cityCode,
+						Name:cityName,
+					},
+				},
+			},
+		},
+	}
+	bItem, err := xml.Marshal(req)
+	FatalError(err)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+	resp := &acaseSts.CustomerResponseCreateType{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: resp.Error.Code,
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return resp, nil
+}
