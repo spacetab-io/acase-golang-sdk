@@ -2,6 +2,48 @@ package acaseSts
 
 import "encoding/xml"
 
+type CustomerRequestInfoType struct {
+	XMLName		xml.Name			`xml:"CustomerRequest"`
+	BuyerId		string				`xml:"BuyerId,attr"`
+	UserId		string				`xml:"UserId,attr"`
+	Password	string				`xml:"Password,attr"`
+	Language	LanguageTypeEnum	`xml:"Language,attr,omitempty"`
+	ActionInfo	ActionInfoType		`xml:"ActionInfo"`
+}
+
+type ActionInfoType struct {
+	XMLName		xml.Name						`xml:"ActionInfo"`
+	Parameters	CustomerRequestParametersType	`xml:"Parameters"`
+}
+
+type CustomerRequestListType struct {
+	XMLName		xml.Name			`xml:"CustomerRequest"`
+	BuyerId		string				`xml:"BuyerId,attr"`
+	UserId		string				`xml:"UserId,attr"`
+	Password	string				`xml:"Password,attr"`
+	Language	LanguageTypeEnum	`xml:"Language,attr,omitempty"`
+	ActionList	ActionListType		`xml:"ActionList"`
+}
+
+type ActionListType struct {
+	XMLName		xml.Name						`xml:"ActionList"`
+	Parameters	CustomerRequestParametersType	`xml:"Parameters"`
+}
+
+type CustomerRequestDeleteType struct {
+	XMLName			xml.Name			`xml:"CustomerRequest"`
+	BuyerId			string				`xml:"BuyerId,attr"`
+	UserId			string				`xml:"UserId,attr"`
+	Password		string				`xml:"Password,attr"`
+	Language		LanguageTypeEnum	`xml:"Language,attr,omitempty"`
+	ActionDelete	ActionDeleteType	`xml:"ActionDelete"`
+}
+
+type ActionDeleteType struct {
+	XMLName		xml.Name						`xml:"ActionDelete"`
+	Parameters	CustomerRequestParametersType	`xml:"Parameters"`
+}
+
 type CustomerRequestCreateType struct {
 	XMLName			xml.Name			`xml:"CustomerRequest"`
 	BuyerId			string				`xml:"BuyerId,attr"`
@@ -13,13 +55,29 @@ type CustomerRequestCreateType struct {
 
 type ActionCreateType struct {
 	XMLName		xml.Name						`xml:"ActionCreate"`
-	Parameters	CustomerReqCreateParametersType	`xml:"Parameters"`
+	Parameters	CustomerRequestParametersType	`xml:"Parameters"`
 }
 
-type CustomerReqCreateParametersType struct {
+type CustomerRequestUpdateType struct {
+	XMLName			xml.Name			`xml:"CustomerRequest"`
+	BuyerId			string				`xml:"BuyerId,attr"`
+	UserId			string				`xml:"UserId,attr"`
+	Password		string				`xml:"Password,attr"`
+	Language		LanguageTypeEnum	`xml:"Language,attr,omitempty"`
+	ActionUpdate	ActionUpdateType	`xml:"ActionUpdate"`
+}
+
+type ActionUpdateType struct {
+	XMLName		xml.Name						`xml:"ActionUpdate"`
+	Parameters	CustomerRequestParametersType	`xml:"Parameters"`
+}
+
+type CustomerRequestParametersType struct {
 	XMLName			xml.Name		`xml:"Parameters"`
-	CustomerCode	string			`xml:"CustomerCode,attr"`
-	Customer		CustomerType	`xml:"Customer"`
+	Sort			int				`xml:"Sort,attr,omitempty"`
+	ShowActualOnly	int				`xml:"ShowActualOnly,attr,omitempty"`
+	CustomerCode	int				`xml:"CustomerCode,attr,omitempty"`
+	Customer		*CustomerType	`xml:"Customer,omitempty"`
 }
 
 type CustomerType struct {
@@ -58,6 +116,18 @@ type BuyerTypeType struct {
 	Name	string		`xml:"Name,attr"`
 }
 
+type CustomerResponseDeleteType struct {
+	XMLName			xml.Name			`xml:"CustomerResponse"`
+	BuyerId			string				`xml:"BuyerId,attr"`
+	UserId			string				`xml:"UserId,attr"`
+	Password		string				`xml:"Password,attr"`
+	Language		LanguageTypeEnum	`xml:"Language,attr,omitempty"`
+	ActionDelete	ActionDeleteType	`xml:"ActionDelete"`
+	Success			string				`xml:"Success"`
+	Error			ErrorType			`xml:"Error,omitempty"`
+	Customer		*CustomerType		`xml:"Customer,omitempty"`
+}
+
 type CustomerResponseCreateType struct {
 	XMLName			xml.Name			`xml:"CustomerResponse"`
 	BuyerId			string				`xml:"BuyerId,attr"`
@@ -65,6 +135,47 @@ type CustomerResponseCreateType struct {
 	Password		string				`xml:"Password,attr"`
 	Language		LanguageTypeEnum	`xml:"Language,attr,omitempty"`
 	ActionCreate	ActionCreateType	`xml:"ActionCreate"`
+	Success			string				`xml:"Success"`
+	Error			ErrorType			`xml:"Error,omitempty"`
+	Customer		CustomerType		`xml:"Customer"`
+}
+
+type CustomerResponseUpdateType struct {
+	XMLName			xml.Name			`xml:"CustomerResponse"`
+	BuyerId			string				`xml:"BuyerId,attr"`
+	UserId			string				`xml:"UserId,attr"`
+	Password		string				`xml:"Password,attr"`
+	Language		LanguageTypeEnum	`xml:"Language,attr,omitempty"`
+	ActionUpdate	ActionUpdateType	`xml:"ActionUpdate"`
+	Success			string				`xml:"Success"`
+	Error			ErrorType			`xml:"Error,omitempty"`
+	Customer		CustomerType		`xml:"Customer"`
+}
+
+type CustomerResponseListType struct {
+	XMLName			xml.Name			`xml:"CustomerResponse"`
+	BuyerId			string				`xml:"BuyerId,attr"`
+	UserId			string				`xml:"UserId,attr"`
+	Password		string				`xml:"Password,attr"`
+	Language		LanguageTypeEnum	`xml:"Language,attr,omitempty"`
+	ActionList		ActionListType		`xml:"ActionList"`
+	Success			string				`xml:"Success"`
+	Error			ErrorType			`xml:"Error,omitempty"`
+	CustomerList	CustomerListType	`xml:"CustomerList"`
+}
+
+type CustomerListType struct {
+	XMLName		xml.Name		`xml:"CustomerList"`
+	Customers	[]CustomerType	`xml:"Customer"`
+}
+
+type CustomerResponseInfoType struct {
+	XMLName			xml.Name			`xml:"CustomerResponse"`
+	BuyerId			string				`xml:"BuyerId,attr"`
+	UserId			string				`xml:"UserId,attr"`
+	Password		string				`xml:"Password,attr"`
+	Language		LanguageTypeEnum	`xml:"Language,attr,omitempty"`
+	ActionInfo		ActionInfoType		`xml:"ActionInfo"`
 	Success			string				`xml:"Success"`
 	Error			ErrorType			`xml:"Error,omitempty"`
 	Customer		CustomerType		`xml:"Customer"`

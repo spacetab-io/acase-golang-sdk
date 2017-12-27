@@ -328,8 +328,8 @@ func (a *Api) CustomerRequestCreate(fullName, zipCode, address, piAddress, inn, 
 		UserId: a.UserId,
 		BuyerId: a.BuyerId,
 		ActionCreate: acaseSts.ActionCreateType{
-			Parameters:acaseSts.CustomerReqCreateParametersType{
-				Customer:acaseSts.CustomerType{
+			Parameters:acaseSts.CustomerRequestParametersType{
+				Customer:&acaseSts.CustomerType{
 					FullName:fullName,
 					ZipCode:zipCode,
 					Address:address,
@@ -373,3 +373,160 @@ func (a *Api) CustomerRequestCreate(fullName, zipCode, address, piAddress, inn, 
 
 	return resp, nil
 }
+
+func (a *Api) CustomerRequestUpdate(fullName, zipCode, address, piAddress, inn, kpp, phone, name, buyerTypeName,
+	countryName, cityName string, customerCode, buyerTypeCode, countryCode, cityCode int) (*acaseSts.CustomerResponseUpdateType, *AcaseResponseError) {
+
+	req := &acaseSts.CustomerRequestUpdateType{
+		Language: a.Language,
+		Password: a.Password,
+		UserId: a.UserId,
+		BuyerId: a.BuyerId,
+		ActionUpdate: acaseSts.ActionUpdateType{
+			Parameters:acaseSts.CustomerRequestParametersType{
+				Customer:&acaseSts.CustomerType{
+					Code:customerCode,
+					FullName:fullName,
+					ZipCode:zipCode,
+					Address:address,
+					PIAddress:piAddress,
+					INN:inn,
+					KPP:kpp,
+					Phone:phone,
+					Name:name,
+					BuyerType:acaseSts.BuyerTypeType{
+						Name:buyerTypeName,
+						Code:buyerTypeCode,
+					},
+					Country:acaseSts.CountryType{
+						Code:countryCode,
+						Name:countryName,
+					},
+					City:acaseSts.CityType{
+						Code:cityCode,
+						Name:cityName,
+					},
+				},
+			},
+		},
+	}
+	bItem, err := xml.Marshal(req)
+	FatalError(err)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+	resp := &acaseSts.CustomerResponseUpdateType{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: resp.Error.Code,
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return resp, nil
+}
+
+func (a *Api) CustomerRequestDelete(customerCode int) (*acaseSts.CustomerResponseDeleteType, *AcaseResponseError) {
+
+	req := &acaseSts.CustomerRequestDeleteType{
+		Language: a.Language,
+		Password: a.Password,
+		UserId: a.UserId,
+		BuyerId: a.BuyerId,
+		ActionDelete: acaseSts.ActionDeleteType{
+			Parameters:acaseSts.CustomerRequestParametersType{
+				Customer:&acaseSts.CustomerType{
+					Code:customerCode,
+				},
+			},
+		},
+	}
+	bItem, err := xml.Marshal(req)
+	FatalError(err)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+	resp := &acaseSts.CustomerResponseDeleteType{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: resp.Error.Code,
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return resp, nil
+}
+
+func (a *Api) CustomerRequestList(sort, actualOnly int) (*acaseSts.CustomerResponseListType, *AcaseResponseError) {
+	req := &acaseSts.CustomerRequestListType{
+		Language: a.Language,
+		Password: a.Password,
+		UserId: a.UserId,
+		BuyerId: a.BuyerId,
+		ActionList: acaseSts.ActionListType{
+			Parameters:acaseSts.CustomerRequestParametersType{
+				Sort:sort,
+				ShowActualOnly:actualOnly,
+			},
+		},
+	}
+	bItem, err := xml.Marshal(req)
+	FatalError(err)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+	resp := &acaseSts.CustomerResponseListType{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: resp.Error.Code,
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return resp, nil
+}
+
+func (a *Api) CustomerRequestInfo(customerCode int) (*acaseSts.CustomerResponseInfoType, *AcaseResponseError) {
+	req := &acaseSts.CustomerRequestInfoType{
+		Language: a.Language,
+		Password: a.Password,
+		UserId: a.UserId,
+		BuyerId: a.BuyerId,
+		ActionInfo: acaseSts.ActionInfoType{
+			Parameters:acaseSts.CustomerRequestParametersType{
+				CustomerCode:customerCode,
+			},
+		},
+	}
+	bItem, err := xml.Marshal(req)
+	FatalError(err)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+	resp := &acaseSts.CustomerResponseInfoType{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: resp.Error.Code,
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return resp, nil
+}
+
