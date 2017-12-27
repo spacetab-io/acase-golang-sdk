@@ -11,7 +11,7 @@ func TestCityListRequest_Ok(t *testing.T)  {
 	testRequest("citylistresp_example.xml")
 	defer gock.Off()
 
-	data, err := acApi.CityListRequest("", "","","")
+	data, err := acApi.CityListRequest("", "","",0)
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
 	st.Expect(t, len(data.Countries), 1)
@@ -56,7 +56,7 @@ func TestCityListRequest_Error(t *testing.T) {
 	testRequest("citylisterror_example.xml")
 	defer gock.Off()
 
-	_, err := acApi.CityListRequest("", "","","")
+	_, err := acApi.CityListRequest("", "","",0)
 
 	st.Expect(t, err.Code, "9998")
 	st.Expect(t, err.Message, "Доступ запрещен !")

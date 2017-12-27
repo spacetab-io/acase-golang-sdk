@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CountryList>
+   <Success />
+   <Country Code="68" Name="Азербайджан" >
+      <Position Latitude="55.7513" Longitude="35.6156" />    
+   </Country>   
+   <Country Code="78" Name="Армения" >
+      <Position Latitude="55.7513" Longitude="35.6156" />    
+   </Country>          
+   <Country Code="34" Name="Беларусь" >
+      <Position Latitude="55.7513" Longitude="35.6156" />    
+   </Country>          
+   <Country Code="74" Name="Грузия" />
+   <Country Code="70" Name="Казахстан" >
+      <Position Latitude="55.7513" Longitude="35.6156" />    
+   </Country>          
+   <Country Code="79" Name="Кыргызстан" />
+   <Country Code="30" Name="Латвия" />
+   <Country Code="58" Name="Литва" />
+   <Country Code="75" Name="Молдова" >
+      <Position Latitude="55.7513" Longitude="35.6156" />    
+   </Country>          
+   <Country Code="9" Name="Россия" >
+      <Position Latitude="55.7513" Longitude="35.6156" />    
+   </Country>          
+   <Country Code="76" Name="Таджикистан" >
+      <Position Latitude="55.7513" Longitude="35.6156" />    
+   </Country>          
+   <Country Code="77" Name="Туркменистан" >
+      <Position Latitude="55.7513" Longitude="35.6156" />    
+   </Country>          
+   <Country Code="67" Name="Узбекистан" >
+      <Position Latitude="55.7513" Longitude="35.6156" />    
+   </Country>          
+   <Country Code="38" Name="Украина" >
+      <Position Latitude="55.7513" Longitude="35.6156" />    
+   </Country>          
+   <Country Code="36" Name="Эстония" >
+      <Position Latitude="55.7513" Longitude="35.6156" />    
+   </Country>          
+</CountryList>

@@ -17,7 +17,7 @@ const (
 
 type ErrorType struct {
 	XMLName		xml.Name		`xml:"Error"`
-	Type		ErrorTypeType	`xml:"Type"`
+	Type		ErrorTypeType	`xml:"Type,omitempty"`
 	Pointer		string			`xml:"Pointer"`
 	Code		string			`xml:"Code,attr"`
 	Description	string			`xml:"Description,attr"`
@@ -25,42 +25,49 @@ type ErrorType struct {
 
 type ErrorTypeType struct {
 	XMLName		xml.Name	`xml:"Type"`
-	Code		string		`xml:"Code,attr"`
-	Name		string		`xml:"Name,attr"`
+	Code		string		`xml:"Code,attr,omitempty"`
+	Name		string		`xml:"Name,attr,omitempty"`
 }
 
 type CountryType struct {
 	XMLName		xml.Name		`xml:"Country"`
 	Code		int				`xml:"Code,attr"`
 	Name		string			`xml:"Name,attr"`
-	Position	PositionType	`xml:"Position"`
-	Cities		[]CityType		`xml:"City"`
+	Position	*PositionType	`xml:"Position,omitempty"`
+	Cities		[]CityType		`xml:"City,omitempty"`
 }
 
 type CityType struct {
-	XMLName		xml.Name		`xml:"City"`
-	Code		int				`xml:"Code,attr"`
-	Name		string			`xml:"Name,attr"`
-	Genitive	string			`xml:"Genitive,attr"`
-	Dative		string			`xml:"Dative,attr"`
-	Accusative	string			`xml:"Accusative,attr"`
-	Ablative	string			`xml:"Ablative,attr"`
-	Prepositive	string			`xml:"Prepositive,attr"`
-	Ref			string			`xml:"Ref,arre"`
-	AdmUnit1	AdmUnit1Type	`xml:"AdmUnit1"`
-	AdmUnit2	AdmUnit2Type	`xml:"AdmUnit2"`
-	TypeOfPlace	TypeOfPlaceType	`xml:"TypeOfPlace"`
-	Position	PositionType	`xml:"Position"`
+	XMLName		xml.Name			`xml:"City"`
+	Code		int					`xml:"Code,attr"`
+	Name		string				`xml:"Name,attr"`
+	Genitive	string				`xml:"Genitive,attr,omitempty"`
+	Dative		string				`xml:"Dative,attr,omitempty"`
+	Accusative	string				`xml:"Accusative,attr,omitempty"`
+	Ablative	string				`xml:"Ablative,attr,omitempty"`
+	Prepositive	string				`xml:"Prepositive,attr,omitempty"`
+	Ref			string				`xml:"Ref,attr,omitempty"`
+	CityType	*CityTypeType		`xml:"CityType,omitempty"`
+	AdmUnit1	*AdmUnit1Type		`xml:"AdmUnit1,omitempty"`
+	AdmUnit2	*AdmUnit2Type		`xml:"AdmUnit2,omitempty"`
+	TypeOfPlace	*TypeOfPlaceType	`xml:"TypeOfPlace,omitempty"`
+	Position	*PositionType		`xml:"Position,omitempty"`
+}
+
+type CityTypeType struct {
+	XMLName	xml.Name	`xml:"CityType"`
+	Code	int			`xml:"Code,attr,omitempty"`
+	Name	string		`xml:"Name,attr,omitempty"`
 }
 
 type TypeOfPlaceType struct {
 	XMLName	xml.Name	`xml:"TypeOfPlace"`
-	Code	int			`xml:"Code,attr"`
-	Name	string		`xml:"Name,attr"`
+	Code	int			`xml:"Code,attr,omitempty"`
+	Name	string		`xml:"Name,attr,omitempty"`
 }
 
 type PositionType struct {
 	XMLName		xml.Name	`xml:"Position"`
-	Latitude	string		`xml:"Latitude,attr"`
-	Longitude	string		`xml:"Longitude,attr"`
+	Latitude	string		`xml:"Latitude,attr,omitempty"`
+	Longitude	string		`xml:"Longitude,attr,omitempty"`
 }

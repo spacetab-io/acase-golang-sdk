@@ -2,22 +2,19 @@ package acaseSts
 
 import "encoding/xml"
 
-type CityListRequestType struct {
-	XMLName		xml.Name			`xml:"CityListRequest"`
+type CountryListRequestType struct {
+	XMLName		xml.Name			`xml:"CountryListRequest"`
 	BuyerId		string				`xml:"BuyerId,attr"`
 	UserId		string				`xml:"UserId,attr"`
 	Password	string				`xml:"Password,attr"`
 	Language	LanguageTypeEnum	`xml:"Language,attr,omitempty"`
-	CountryCode	string				`xml:"CountryCode,attr,omitempty"`
+	CountryCode	int					`xml:"CountryCode,attr,omitempty"`
 	CountryName	string				`xml:"CountryName,attr,omitempty"`
-	CityCode	int					`xml:"CityCode,attr,omitempty"`
-	CityName	string				`xml:"CityName,attr,omitempty"`
 }
 
-type CityListType struct {
-	XMLName		xml.Name		`xml:"CityList"`
+type CountryListType struct {
+	XMLName		xml.Name		`xml:"CountryList"`
 	Success		string			`xml:"Success"`
 	Error		ErrorType		`xml:"Error,omitempty"`
 	Countries	[]CountryType	`xml:"Country"`
 }
-
