@@ -10,7 +10,7 @@ type HotelAmenityListRequestType struct {
 	Language			LanguageTypeEnum	`xml:"Language,attr,omitempty"`
 	HotelAmenityCode	int					`xml:"HotelAmenityCode,attr,omitempty"`
 	HotelAmenityName	string				`xml:"HotelAmenityName,attr,omitempty"`
-	Options				string				`xml:"Options,attr"`
+	Options				string				`xml:"Opt,attr,omitempty"`
 }
 
 type HotelAmenityListResponseType struct {

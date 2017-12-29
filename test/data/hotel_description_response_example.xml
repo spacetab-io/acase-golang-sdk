@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HotelDescription Code="900376" Name="Петрово-Дальнее Пансионат" Zip="143422" Address="Московская область, Красногорский район, Петрово-Дальнее село" Story="Пансионат &quot;Петрово - Дальнее&quot; - это загородный дом, городская квартира и номер отеля на отдыхе, расположенный в одном из красивейших уголков Рублевки при слиянии р. Истры с Москвой рекой, на территории усадьбы Петровское. Усадьба была любимым подмосковным имением рода Голициных. В окрестностях расположено пять златоглавых церквей, что позволило назвать в народе эти места &quot;благостными&quot;. Сегодня, дом отдыха &quot;Петрово - Дальнее&quot; представляет собой уникальную зону отдыха с комфортными условиями проживания. Здесь есть все, что нужно для работы и досуга. Расположенные на территории пансионата мини-острова: &quot;Остров любви&quot;, &quot;Остров Удачи&quot;, &quot;Березовая роща&quot; - прекрасное место для проведения частных праздников: VIP свадеб, летних пикников, детских праздников, а также корпоративных мероприятий и team building.
+Приехав отдохнуть в &quot;Петрово - Дальнее&quot; пансионат УДП РФ - гости всегда найдут чем заняться. К услугам гостей: рыбалка, конюшня, футбольное поле, открытый и закрытый теннисные корты, тренажерный зал, детская площадка, зимний сад, рестораны, VIP сауна до 15 гостей (в ней имеется: бильярдная комната, турецкий хамам, финская сауна, купель, комнаты для отдыха), SPA центр (в нем имеется: 2 бассейна, турецкий хамам, финская сауна, ультракрасная сауна, соляная комната, 2 купели в бочках, душ впечатлений, солярий).
+Элитный пансионат УДП &quot;Петрово - Дальнее&quot; имеет в своем распоряжении современный спортивный комплекс, который придется по душе всем любителям активного отдыха, а также гостям, заботящимся о своей фигуре и соблюдающие здоровый образ жизни. Уникальный санаторий &quot;Петрово - Дальнее&quot; - это роскошный отдых в пределах Подмосковья.
+" Built="1977" Reconstructed="2008" NumberOfBlocks="" NumberOfRooms="106" NumberOfFloors="8" CityCentre="Центр города - 20 км" Underground="Тушинская - Таганско-Краснопресненская линия - 9,5 км" Description="Музей-усадьба &quot;Архангельское&quot;, Парк Победы на Поклонной Горе" Airport="Внуково - 28 км, Шереметьево - 44 км, Домодедово - 79 км" RailwayStation="Белорусский - 35 км" RiverPort="Северный речной порт - 37 км" SeaPort="" Map="http://images.acase.ru/maps_images/900376_map.gif" SpecialRequirements="1. Гостиница имеет право взимать регистрационный сбор или депозит за дополнительные услуги при размещении. Размер регистрационного сбора гостиница устанавливает самостоятельно..">
+<Success/>
+<ObjType Code="2" Name="Гостиница"/>
+<City Code="2" Name="Москва">
+<Position Latitude="55.758959" Longitude="37.616272"/>
+</City>
+<AlternativeCities>
+<AlternativeCity Code="313" Name="Красногорск">
+<Country Code="9" Name="Россия"/>
+<AdmUnit1 Code="1" Name="Не определено"/>
+<AdmUnit2 Code="1" Name="Не определено"/>
+<TypeOfPlace Code="2" Name="Город"/>
+</AlternativeCity>
+</AlternativeCities>
+<AdmUnit1 Code="1" Name="Не определено"/>
+<AdmUnit2 Code="1" Name="Не определено"/>
+<TypeOfPlace Code="2" Name="Город"/>
+<Country Code="9" Name="Россия">
+<Position Latitude="57.5158" Longitude="82.6172"/>
+</Country>
+<Position Latitude="55.746274" Longitude="37.147111"/>
+<Rating Code="99" Name="-"/>
+<Stars Code="3" Name="Уровень 3 из 5" Value="3" Url="http://images.acase.ru/signs_images/Level 3 grey.svg">
+<OfficialCertificate Code="1" Name="Нет">
+<Certificate Code="99" Name="-" Url="http://images.acase.ru/signs_images/no_stars_hotel.gif"/>
+</OfficialCertificate>
+</Stars>
+<TimeCheck In="18:00" Out="16:00"/>
+<Images>
+<Image Url="http://images.acase.ru/hotels_images/900376_00.jpg"/>
+<Image Url="http://images.acase.ru/hotels_images/900376_01.jpg"/>
+<Image Url="http://images.acase.ru/hotels_images/900376_02.jpg"/>
+<Image Url="http://images.acase.ru/hotels_images/900376_03.jpg"/>
+<Image Url="http://images.acase.ru/hotels_images/900376_04.jpg"/>
+</Images>
+<Amenities>
+<Amenity Code="1" Name="Отель в зоне отдыха" Url="http://images.acase.ru/signs_images/hotel_in_recreation_area.gif"/>
+<Amenity Code="2" Name="Парковка охраняемая" Url="http://images.acase.ru/signs_images/guarded_parking.gif"/>
+<Amenity Code="69" Name="Банкомат" Url="http://images.acase.ru/signs_images/atm.gif"/>
+<Amenity Code="8" Name="Лифт" Url="http://images.acase.ru/signs_images/elevator.gif"/>
+<Amenity Code="9" Name="Ресторан" Url="http://images.acase.ru/signs_images/restaurant.gif"/>
+<Amenity Code="10" Name="Бар" Url="http://images.acase.ru/signs_images/bar.gif"/>
+<Amenity Code="14" Name="Круглосуточные офисные услуги бизнес-центра (факс/ксерокс)" Url="http://images.acase.ru/signs_images/business_centre_24_hours_a_day.gif"/>
+<Amenity Code="16" Name="Вызов такси" Url="http://images.acase.ru/signs_images/taxi.gif"/>
+<Amenity Code="23" Name="Тренажерный зал" Url="http://images.acase.ru/signs_images/fitness_centre_gym.gif"/>
+<Amenity Code="70" Name="СПА-центр" Url="http://images.acase.ru/signs_images/spa_centre.gif"/>
+<Amenity Code="93" Name="Массаж" Url="http://images.acase.ru/signs_images/massage.gif"/>
+<Amenity Code="25" Name="Сауна" Url="http://images.acase.ru/signs_images/sauna.gif"/>
+<Amenity Code="27" Name="Крытый плавательный бассейн" Url="http://images.acase.ru/signs_images/indoor_swimming_pool.gif"/>
+<Amenity Code="30" Name="Открытый теннисный корт" Url="http://images.acase.ru/signs_images/outdoor_tennis_court.gif"/>
+<Amenity Code="31" Name="Крытый теннисный корт" Url="http://images.acase.ru/signs_images/indoor_tennis_court.gif"/>
+<Amenity Code="33" Name="Пляж" Url="http://images.acase.ru/signs_images/beach.gif"/>
+<Amenity Code="34" Name="Бильярд" Url="http://images.acase.ru/signs_images/billiards.gif"/>
+<Amenity Code="41" Name="Наличие соединяющихся (connecting) номеров" Url="http://images.acase.ru/signs_images/connecting_rooms.gif"/>
+<Amenity Code="45" Name="Некруглосуточное обслуживание (room-service) в номерах" Url="http://images.acase.ru/signs_images/room_service_limited_service.gif"/>
+<Amenity Code="73" Name="Электронные дверные замки во всех номерах" Url="http://images.acase.ru/signs_images/electronic_door_locks_in_all_rooms.gif"/>
+<Amenity Code="52" Name="Телефон во всех номерах" Url="http://images.acase.ru/signs_images/phone_in_all_rooms.gif"/>
+<Amenity Code="54" Name="Минибар / холодильник во всех номерах" Url="http://images.acase.ru/signs_images/minibar_refrigerator_in_all_rooms.gif"/>
+<Amenity Code="80" Name="Душевая кабина в отдельных номерах" Url="http://images.acase.ru/signs_images/shower_available.gif"/>
+<Amenity Code="79" Name="Ванна во всех номерах" Url="http://images.acase.ru/signs_images/bathtub_in_all_rooms.gif"/>
+<Amenity Code="55" Name="Фен в отдельных номерах" Url="http://images.acase.ru/signs_images/available_rooms_with_hair_dryer.gif"/>
+<Amenity Code="98" Name="Кухня в отдельных номерах" Url="http://images.acase.ru/signs_images/rooms_with_kitchen_available.gif"/>
+<Amenity Code="83" Name="Чайник во всех номерах" Url="http://images.acase.ru/signs_images/kettle_in_all_rooms.gif"/>
+<Amenity Code="60" Name="Высокоскоростной доступ в Интернет во всех номерах" Url="http://images.acase.ru/signs_images/hi_speed_internet_access_in_all_rooms.gif"/>
+<Amenity Code="67" Name="Кабельное подключение к Интернету в номерах (LAN)" Url="http://images.acase.ru/signs_images/cable_connection_to_internet_in_rooms_lan.gif"/>
+</Amenities>
+<Product/>
+<RoomsList>
+<Room Code="1313292" Name="Студия" Description="Шикарный номер я балконом, гостинной и кухней" MaxNumberOfGuests="2" MaxNumberOfExtraBeds="1" MaxNumberOfExtraBedsAdult="1" MaxNumberOfExtraBedsChild="1" MaxNumberOfExtraBedsInfant="0"/>
+<Room Code="900254" Name="Люкс" MaxNumberOfGuests="2" MaxNumberOfExtraBeds="1" MaxNumberOfExtraBedsAdult="1" MaxNumberOfExtraBedsChild="1" MaxNumberOfExtraBedsInfant="0"/>
+<Room Code="900251" Name="Стандартный номер с видом на реку (две кровати)" MaxNumberOfGuests="2" MaxNumberOfExtraBeds="1" MaxNumberOfExtraBedsAdult="1" MaxNumberOfExtraBedsChild="1" MaxNumberOfExtraBedsInfant="0"/>
+<Room Code="900250" Name="Стандартный номер (две кровати)(вид на павильон)" MaxNumberOfGuests="2" MaxNumberOfExtraBeds="1" MaxNumberOfExtraBedsAdult="1" MaxNumberOfExtraBedsChild="1" MaxNumberOfExtraBedsInfant="0"/>
+</RoomsList>
+<SpecialRequirementList>
+<SpecialRequirement Code="595" Text="Гостиница имеет право взимать регистрационный сбор или депозит за дополнительные услуги при размещении. Размер регистрационного сбора гостиница устанавливает самостоятельно."/>
+</SpecialRequirementList>
+<Objects>
+<Object Code="800004" Name="Внуково" Distance="28">
+<ObjectType Code="800001" Name="Аэропорт"/>
+<ObjectSubType Code="9500001" Name="Не имеет значения"/>
+<City Code="2" Name="Москва"/>
+</Object>
+<Object Code="800003" Name="Шереметьево" Distance="44">
+<ObjectType Code="800001" Name="Аэропорт"/>
+<ObjectSubType Code="9500001" Name="Не имеет значения"/>
+<City Code="2" Name="Москва"/>
+</Object>
+<Object Code="800002" Name="Домодедово" Distance="79">
+<ObjectType Code="800001" Name="Аэропорт"/>
+<ObjectSubType Code="9500001" Name="Не имеет значения"/>
+<City Code="2" Name="Москва"/>
+</Object>
+<Object Code="800221" Name="Тушинская" Distance="9.5">
+<ObjectType Code="800104" Name="Метро"/>
+<ObjectSubType Code="1100024" Name="Таганско-Краснопресненская линия"/>
+<City Code="2" Name="Москва"/>
+</Object>
+<Object Code="900586" Name="Музей-усадьба &quot;Архангельское&quot;" >
+<ObjectType Code="900001" Name="Достопримечательности"/>
+<ObjectSubType Code="900002" Name="Музеи, галереи, заповедники"/>
+<City Code="2" Name="Москва"/>
+</Object>
+<Object Code="900695" Name="Парк Победы на Поклонной Горе" >
+<ObjectType Code="900001" Name="Достопримечательности"/>
+<ObjectSubType Code="900004" Name="Парки, сады, зоопарки"/>
+<City Code="2" Name="Москва"/>
+</Object>
+<Object Code="1000375" Name="Белорусский" Distance="35">
+<ObjectType Code="1000039" Name="Ж/д вокзалы"/>
+<ObjectSubType Code="9500001" Name="Не имеет значения"/>
+<City Code="2" Name="Москва"/>
+</Object>
+<Object Code="1000081" Name="Северный речной порт" Distance="37">
+<ObjectType Code="1000041" Name="Речной порт"/>
+<ObjectSubType Code="9500001" Name="Не имеет значения"/>
+<City Code="2" Name="Москва"/>
+</Object>
+<Object Code="1000208" Name="Центр города" Distance="20">
+<ObjectType Code="1000042" Name="Центр города"/>
+<ObjectSubType Code="9500001" Name="Не имеет значения"/>
+<City Code="2" Name="Москва"/>
+</Object>
+</Objects>
+</HotelDescription>
