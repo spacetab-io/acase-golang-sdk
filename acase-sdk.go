@@ -559,7 +559,7 @@ func (a *Api) HotelAmenityListRequest(hotelAmenityCode int, hotelAmenityName str
 	return resp, nil
 }
 
-func (a *Api)  	HotelDescriptionRequest(hotelCode, currencyCode int) (*acaseSts.HotelDescriptionResponseType, *AcaseResponseError) {
+func (a *Api) HotelDescriptionRequest(hotelCode, currencyCode int) (*acaseSts.HotelDescriptionResponseType, *AcaseResponseError) {
 	req := &acaseSts.HotelDescriptionRequestType{
 		Language: a.Language,
 		Password: a.Password,
@@ -573,6 +573,39 @@ func (a *Api)  	HotelDescriptionRequest(hotelCode, currencyCode int) (*acaseSts.
 	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
 	FatalError(err)
 	resp := &acaseSts.HotelDescriptionResponseType{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: resp.Error.Code,
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return resp, nil
+}
+
+func (a *Api) HotelListRequest(hotelCode, countryCode, cityCode, hotelRatingCode int, hotelName, options string) (*acaseSts.HotelListResponseType, *AcaseResponseError) {
+	req := &acaseSts.HotelListRequestType{
+		Language: a.Language,
+		Password: a.Password,
+		UserId: a.UserId,
+		BuyerId: a.BuyerId,
+		HotelCode:hotelCode,
+		HotelName:hotelName,
+		CountryCode:countryCode,
+		CityCode:cityCode,
+		HotelRatingCode:hotelRatingCode,
+		Options:options,
+	}
+	bItem, err := xml.Marshal(req)
+	FatalError(err)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+	resp := &acaseSts.HotelListResponseType{}
 	err = xml.Unmarshal(respData, resp)
 	FatalError(err)
 	if resp.Error.Code != "" {

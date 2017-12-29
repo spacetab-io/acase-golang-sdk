@@ -10,7 +10,7 @@ type HotelDescriptionRequestType struct {
 	Language		LanguageTypeEnum	`xml:"Language,attr,omitempty"`
 	HotelCode		int					`xml:"HotelCode,attr"`
 	CurrencyCode	int					`xml:"CurrencyCode,attr,omitempty"`
-	Options			string				`xml:"Opt,attr"`
+	Options			string				`xml:"Opt,attr,omitempty"`
 }
 
 type HotelDescriptionResponseType struct {

@@ -34,11 +34,19 @@ type CountryType struct {
 	Code		int				`xml:"Code,attr"`
 	Name		string			`xml:"Name,attr"`
 	Position	*PositionType	`xml:"Position,omitempty"`
-	Cities		[]CityType		`xml:"City,omitempty"`
+	Cities		*[]CityType		`xml:"City,omitempty"`
+}
+
+type AlternativeCountryType struct {
+	XMLName		xml.Name		`xml:"AlternativeCountry"`
+	Code		int				`xml:"Code,attr"`
+	Name		string			`xml:"Name,attr"`
+	Position	*PositionType	`xml:"Position,omitempty"`
+	Cities		*[]CityType		`xml:"AlternativeCity,omitempty"`
 }
 
 type CityType struct {
-	XMLName		xml.Name			`xml:"City"`
+//	XMLName		xml.Name			`xml:"City"`
 	Code		int					`xml:"Code,attr"`
 	Name		string				`xml:"Name,attr"`
 	Genitive	string				`xml:"Genitive,attr,omitempty"`
@@ -52,6 +60,53 @@ type CityType struct {
 	AdmUnit2	*AdmUnit2Type		`xml:"AdmUnit2,omitempty"`
 	TypeOfPlace	*TypeOfPlaceType	`xml:"TypeOfPlace,omitempty"`
 	Position	*PositionType		`xml:"Position,omitempty"`
+	Hotels		*[]HotelType		`xml:"Hotel,omitempty"`
+}
+
+type HotelType struct {
+	XMLName		xml.Name				`xml:"Hotel"`
+	Code		int						`xml:"Code,attr"`
+	Name		string					`xml:"Name,attr"`
+	Zip			string					`xml:"Zip,attr"`
+	Address		string					`xml:"Address,attr"`
+	Underground	string					`xml:"Underground,attr"`
+	CityCentre	string					`xml:"CityCentre,attr"`
+	Description	string					`xml:"Description,attr"`
+	Url			string					`xml:"Url,attr"`
+	Position	PositionType			`xml:"Position"`
+	Rating		RatingType				`xml:"Rating"`
+	Type		TypeType				`xml:"Type"`
+	Stars		StarsType				`xml:"Stars"`
+	VirtualTour	VirtualTourType			`xml:"VirtualTour"`
+	FreeSale	FreeSaleType			`xml:"FreeSale"`
+	Amenities	HotelAmenitiesListType	`xml:"Amenities"`
+}
+
+type HotelAmenitiesListType struct {
+	XMLName	xml.Name	`xml:"Amenities"`
+	Amenity	[]HAType	`xml:"HA"`
+}
+
+type HAType struct {
+	XMLName	xml.Name	`xml:"HA"`
+	Code	int			`xml:"Code,attr"`
+}
+
+type FreeSaleType struct {
+	XMLName	xml.Name	`xml:"FreeSale"`
+	Code	int			`xml:"Code,attr"`
+	Name	string		`xml:"Name,attr"`
+}
+
+type VirtualTourType struct {
+	XMLName	xml.Name	`xml:"VirtualTour"`
+	Code	int			`xml:"Code,attr"`
+}
+
+type TypeType struct {
+	XMLName	xml.Name	`xml:"Type"`
+	Code	int			`xml:"Code,attr"`
+	Name	string		`xml:"Name,attr"`
 }
 
 type CityTypeType struct {
