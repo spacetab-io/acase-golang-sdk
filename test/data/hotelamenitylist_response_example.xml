@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HotelAmenityList>
+<Success/>
+<HotelAmenity Code="1" Name="Отель в зоне отдыха" Url="http://images.acase.ru/signs_images/hotel_in_recreation_area.gif"/>
+<HotelAmenity Code="2" Name="Парковка охраняемая" Url="http://images.acase.ru/signs_images/guarded_parking.gif"/>
+<HotelAmenity Code="3" Name="Парковка неохраняемая" Url="http://images.acase.ru/signs_images/nonguarded_parking.gif"/>
+<HotelAmenity Code="4" Name="Поднос багажа" Url="http://images.acase.ru/signs_images/luggage_service.gif"/>
+<HotelAmenity Code="6" Name="Сейф в отеле" Url="http://images.acase.ru/signs_images/safe_deposit_box_at_reception.gif"/>
+<HotelAmenity Code="7" Name="Пункт обмена валюты" Url="http://images.acase.ru/signs_images/currency_exchange.gif"/>
+<HotelAmenity Code="69" Name="Банкомат" Url="http://images.acase.ru/signs_images/atm.gif"/>
+<HotelAmenity Code="8" Name="Лифт" Url="http://images.acase.ru/signs_images/elevator.gif"/>
+<HotelAmenity Code="9" Name="Ресторан" Url="http://images.acase.ru/signs_images/restaurant.gif"/>
+<HotelAmenity Code="10" Name="Бар" Url="http://images.acase.ru/signs_images/bar.gif"/>
+<HotelAmenity Code="11" Name="Услуги прачечной" Url="http://images.acase.ru/signs_images/laundry_service.gif"/>
+<HotelAmenity Code="12" Name="Услуги химчистки" Url="http://images.acase.ru/signs_images/dry_cleaning_service.gif"/>
+<HotelAmenity Code="14" Name="Круглосуточные офисные услуги бизнес-центра (факс/ксерокс)" Url="http://images.acase.ru/signs_images/business_centre_24_hours_a_day.gif"/>
+<HotelAmenity Code="13" Name="Некруглосуточные офисные услуги бизнес-центра (факс/ксерокс)" Url="http://images.acase.ru/signs_images/business_centre_limited_service.gif"/>
+<HotelAmenity Code="15" Name="Высокоскоростной доступ в Интернет в бизнес-центре" Url="http://images.acase.ru/signs_images/hi_speed_internet_access_in_business_centre.gif"/>
+<HotelAmenity Code="66" Name="Беспроводной доступ в Интернет в публичных зонах" Url="http://images.acase.ru/signs_images/hi_speed_internet_access_in_public_area.gif"/>
+<HotelAmenity Code="16" Name="Вызов такси" Url="http://images.acase.ru/signs_images/taxi.gif"/>
+<HotelAmenity Code="17" Name="Аренда автомобиля" Url="http://images.acase.ru/signs_images/rent_a_car.gif"/>
+<HotelAmenity Code="18" Name="Авиа-, ж/д- билеты" Url="http://images.acase.ru/signs_images/air_railway_tickets.gif"/>
+<HotelAmenity Code="19" Name="Услуги няни" Url="http://images.acase.ru/signs_images/baby_sitting.gif"/>
+<HotelAmenity Code="20" Name="Аптечный пункт" Url="http://images.acase.ru/signs_images/pharmacy.gif"/>
+<HotelAmenity Code="21" Name="Сувенирный магазин" Url="http://images.acase.ru/signs_images/gift_shop.gif"/>
+<HotelAmenity Code="22" Name="Услуги по предоставлению газет" Url="http://images.acase.ru/signs_images/newspapers.gif"/>
+<HotelAmenity Code="86" Name="Халат по запросу" Url="http://images.acase.ru/signs_images/bathrobe_upon_request.gif"/>
+<HotelAmenity Code="87" Name="Тапочки по запросу" Url="http://images.acase.ru/signs_images/slippers_upon_request.gif"/>
+<HotelAmenity Code="88" Name="Гипоаллергенное постельное белье по запросу" Url="http://images.acase.ru/signs_images/hypoallergenic_bed_linen_upon_request.gif"/>
+<HotelAmenity Code="89" Name="Фен по запросу" Url="http://images.acase.ru/signs_images/hair_dryer_upon_request.gif"/>
+<HotelAmenity Code="90" Name="Утюг по запросу" Url="http://images.acase.ru/signs_images/iron_upon_request.gif"/>
+<HotelAmenity Code="91" Name="Чайник по запросу" Url="http://images.acase.ru/signs_images/kettle_upon_request.gif"/>
+<HotelAmenity Code="92" Name="DVD-проигрыватель по запросу" Url="http://images.acase.ru/signs_images/dvd_player_upon_request.gif"/>
+<HotelAmenity Code="23" Name="Тренажерный зал" Url="http://images.acase.ru/signs_images/fitness_centre_gym.gif"/>
+<HotelAmenity Code="70" Name="СПА-центр" Url="http://images.acase.ru/signs_images/spa_centre.gif"/>
+<HotelAmenity Code="24" Name="Салон красоты" Url="http://images.acase.ru/signs_images/beauty_parlour.gif"/>
+<HotelAmenity Code="93" Name="Массаж" Url="http://images.acase.ru/signs_images/massage.gif"/>
+<HotelAmenity Code="25" Name="Сауна" Url="http://images.acase.ru/signs_images/sauna.gif"/>
+<HotelAmenity Code="26" Name="Открытый плавательный бассейн" Url="http://images.acase.ru/signs_images/outdoor_swimming_pool.gif"/>
+<HotelAmenity Code="27" Name="Крытый плавательный бассейн" Url="http://images.acase.ru/signs_images/indoor_swimming_pool.gif"/>
+<HotelAmenity Code="30" Name="Открытый теннисный корт" Url="http://images.acase.ru/signs_images/outdoor_tennis_court.gif"/>
+<HotelAmenity Code="31" Name="Крытый теннисный корт" Url="http://images.acase.ru/signs_images/indoor_tennis_court.gif"/>
+<HotelAmenity Code="33" Name="Пляж" Url="http://images.acase.ru/signs_images/beach.gif"/>
+<HotelAmenity Code="34" Name="Бильярд" Url="http://images.acase.ru/signs_images/billiards.gif"/>
+<HotelAmenity Code="35" Name="Боулинг" Url="http://images.acase.ru/signs_images/bowling.gif"/>
+<HotelAmenity Code="37" Name="Казино" Url="http://images.acase.ru/signs_images/casino.gif"/>
+<HotelAmenity Code="39" Name="Наличие отдельных номеров для некурящих" Url="http://images.acase.ru/signs_images/available_non_smoking_rooms.gif"/>
+<HotelAmenity Code="40" Name="Наличие номеров, оборудованных для инвалидов" Url="http://images.acase.ru/signs_images/available_rooms_for_handicapped_persons.gif"/>
+<HotelAmenity Code="41" Name="Наличие соединяющихся (connecting) номеров" Url="http://images.acase.ru/signs_images/connecting_rooms.gif"/>
+<HotelAmenity Code="65" Name="Наличие клубного этажа" Url="http://images.acase.ru/signs_images/club_executive_floor.gif"/>
+<HotelAmenity Code="42" Name="Возможность размещения с домашними животными" Url="http://images.acase.ru/signs_images/pets_accepted.gif"/>
+<HotelAmenity Code="43" Name="Ежедневная cмена постельного белья во всех номерах" Url="http://images.acase.ru/signs_images/change_of_bed_linen_daily_in_all_rooms.gif"/>
+<HotelAmenity Code="44" Name="Ежедневная cмена постельного белья в отдельных номерах" Url="http://images.acase.ru/signs_images/change_of_bed_linen_daily_limited_service.gif"/>
+<HotelAmenity Code="46" Name="Круглосуточное обслуживание (room-service) в номерах" Url="http://images.acase.ru/signs_images/room_service_24_hours_a_day.gif"/>
+<HotelAmenity Code="45" Name="Некруглосуточное обслуживание (room-service) в номерах" Url="http://images.acase.ru/signs_images/room_service_limited_service.gif"/>
+<HotelAmenity Code="48" Name="Кондиционирование во всех номерах" Url="http://images.acase.ru/signs_images/air_conditioning_in_all_rooms.gif"/>
+<HotelAmenity Code="47" Name="Кондиционирование в отдельных номерах" Url="http://images.acase.ru/signs_images/available_rooms_with_air_conditioning.gif"/>
+<HotelAmenity Code="73" Name="Электронные дверные замки во всех номерах" Url="http://images.acase.ru/signs_images/electronic_door_locks_in_all_rooms.gif"/>
+<HotelAmenity Code="72" Name="Электронные дверные замки в отдельных номерах" Url="http://images.acase.ru/signs_images/electronic_door_locks_available.gif"/>
+<HotelAmenity Code="50" Name="Сейф во всех номерах" Url="http://images.acase.ru/signs_images/safe_deposit_box_in_all_rooms.gif"/>
+<HotelAmenity Code="49" Name="Сейф в отдельных номерах" Url="http://images.acase.ru/signs_images/available_rooms_with_safe_deposit_box.gif"/>
+<HotelAmenity Code="52" Name="Телефон во всех номерах" Url="http://images.acase.ru/signs_images/phone_in_all_rooms.gif"/>
+<HotelAmenity Code="51" Name="Телефон в отдельных номерах" Url="http://images.acase.ru/signs_images/available_rooms_with_phone.gif"/>
+<HotelAmenity Code="54" Name="Минибар / холодильник во всех номерах" Url="http://images.acase.ru/signs_images/minibar_refrigerator_in_all_rooms.gif"/>
+<HotelAmenity Code="53" Name="Минибар / холодильник в отдельных номерах" Url="http://images.acase.ru/signs_images/available_rooms_with_minibar_refrigerator.gif"/>
+<HotelAmenity Code="77" Name="Халат во всех номерах" Url="http://images.acase.ru/signs_images/bathrobe_in_all_rooms.gif"/>
+<HotelAmenity Code="76" Name="Халат в отдельных номерах" Url="http://images.acase.ru/signs_images/rooms_with_bathrobe_available.gif"/>
+<HotelAmenity Code="95" Name="Тапочки во всех номерах" Url="http://images.acase.ru/signs_images/slippers_in_all_rooms.gif"/>
+<HotelAmenity Code="94" Name="Тапочки в отдельных номерах" Url="http://images.acase.ru/signs_images/rooms_with_slippers_available.gif"/>
+<HotelAmenity Code="97" Name="Гипоаллергенное постельное белье во всех номерах" Url="http://images.acase.ru/signs_images/hypoallergenic_bed_linen_in_all_rooms.gif"/>
+<HotelAmenity Code="96" Name="Гипоаллергенное постельное белье в отдельных номерах" Url="http://images.acase.ru/signs_images/rooms_with_hypoallergenic_bed_linen_available.gif"/>
+<HotelAmenity Code="81" Name="Душевая кабина во всех номерах" Url="http://images.acase.ru/signs_images/shower_in_all_rooms.gif"/>
+<HotelAmenity Code="80" Name="Душевая кабина в отдельных номерах" Url="http://images.acase.ru/signs_images/shower_available.gif"/>
+<HotelAmenity Code="79" Name="Ванна во всех номерах" Url="http://images.acase.ru/signs_images/bathtub_in_all_rooms.gif"/>
+<HotelAmenity Code="78" Name="Ванна в отдельных номерах" Url="http://images.acase.ru/signs_images/bathtub_available.gif"/>
+<HotelAmenity Code="75" Name="Подогрев полов в ванной комнате во всех номерах" Url="http://images.acase.ru/signs_images/bathroom_floor_heating_in_all_rooms.gif"/>
+<HotelAmenity Code="74" Name="Подогрев полов в ванной комнате в отдельных номерах" Url="http://images.acase.ru/signs_images/bathroom_floor_heating_available.gif"/>
+<HotelAmenity Code="56" Name="Фен во всех номерах" Url="http://images.acase.ru/signs_images/hair_dryer_in_all_rooms.gif"/>
+<HotelAmenity Code="55" Name="Фен в отдельных номерах" Url="http://images.acase.ru/signs_images/available_rooms_with_hair_dryer.gif"/>
+<HotelAmenity Code="58" Name="Утюг во всех номерах" Url="http://images.acase.ru/signs_images/iron_in_all_rooms.gif"/>
+<HotelAmenity Code="57" Name="Утюг в отдельных номерах" Url="http://images.acase.ru/signs_images/available_rooms_with_iron.gif"/>
+<HotelAmenity Code="99" Name="Кухня во всех номерах" Url="http://images.acase.ru/signs_images/kitchen_in_all_rooms.gif"/>
+<HotelAmenity Code="98" Name="Кухня в отдельных номерах" Url="http://images.acase.ru/signs_images/rooms_with_kitchen_available.gif"/>
+<HotelAmenity Code="83" Name="Чайник во всех номерах" Url="http://images.acase.ru/signs_images/kettle_in_all_rooms.gif"/>
+<HotelAmenity Code="82" Name="Чайник в отдельных номерах" Url="http://images.acase.ru/signs_images/kettle_available.gif"/>
+<HotelAmenity Code="85" Name="DVD-проигрыватель во всех номерах" Url="http://images.acase.ru/signs_images/dvd_player_in_all_rooms.gif"/>
+<HotelAmenity Code="84" Name="DVD-проигрыватель в отдельных номерах" Url="http://images.acase.ru/signs_images/dvd_player_available.gif"/>
+<HotelAmenity Code="64" Name="Платные телеканалы во всех номерах" Url="http://images.acase.ru/signs_images/pay_tv_in_all_rooms.gif"/>
+<HotelAmenity Code="63" Name="Платные телеканалы в отдельных номерах" Url="http://images.acase.ru/signs_images/available_rooms_with_pay_tv.gif"/>
+<HotelAmenity Code="60" Name="Высокоскоростной доступ в Интернет во всех номерах" Url="http://images.acase.ru/signs_images/hi_speed_internet_access_in_all_rooms.gif"/>
+<HotelAmenity Code="59" Name="Высокоскоростной доступ в Интернет в отдельных номерах" Url="http://images.acase.ru/signs_images/available_rooms_with_hi_speed_internet_access.gif"/>
+<HotelAmenity Code="67" Name="Кабельное подключение к Интернету в номерах (LAN)" Url="http://images.acase.ru/signs_images/cable_connection_to_internet_in_rooms_lan.gif"/>
+<HotelAmenity Code="68" Name="Беспроводное подключение к Интернету в номерах (WiFi)" Url="http://images.acase.ru/signs_images/wireless_connection_to_internet_in_rooms_wifi.gif"/>
+</HotelAmenityList>
