@@ -22,10 +22,86 @@ type HotelProductRequestType struct {
 }
 
 type HotelProductResponseType struct {
-	XMLName				xml.Name					`xml:"HotelList"`
-	Success				string						`xml:"Success"`
-	Error				ErrorType					`xml:"Error,omitempty"`
-	Country				[]CountryType				`xml:"Country"`
-	AlternativeCountry	[]AlternativeCountryType	`xml:"AlternativeCountry"`
+	XMLName					xml.Name					`xml:"HotelProductResponse"`
+	Success					string						`xml:"Success"`
+	Error					ErrorType					`xml:"Error,omitempty"`
+	BuyerId					string						`xml:"BuyerId,attr"`
+	UserId					string						`xml:"UserId,attr"`
+	Password				string						`xml:"Password,attr"`
+	Language				string						`xml:"Language,attr,omitempty"`
+	Code					int							`xml:"Code,attr"`
+	Name					string						`xml:"Name,attr"`
+	StartDate				string						`xml:"StartDate,attr"`
+	EndDate					string						`xml:"EndDate,attr"`
+	NumberOfGuests			int							`xml:"NumberOfGuests,attr"`
+	NumberOfExtraBedsAdult	int							`xml:"NumberOfExtraBedsAdult,attr"`
+	NumberOfExtraBedsChild	int							`xml:"NumberOfExtraBedsChild,attr,omitempty"`
+	NumberOfExtraBedsInfant	int							`xml:"NumberOfExtraBedsInfant,attr,omitempty"`
+	SpecialRequirements		string						`xml:"SpecialRequirements,attr"`
+	Country					CountryType					`xml:"Country"`
+	AdmUnit1				AdmUnit1Type				`xml:"AdmUnit1"`
+	AdmUnit2				AdmUnit2Type				`xml:"AdmUnit2"`
+	TypeOfPlace				TypeOfPlaceType				`xml:"TypeOfPlace"`
+	City					CityType					`xml:"City"`
+	Position				PositionType				`xml:"Position"`
+	ObjType					ObjTypeType					`xml:"ObjType"`
+	Currency				CurrencyType				`xml:"Currency"`
+	Infants					AgeRestrictionType			`xml:"Infants"`
+	Children				AgeRestrictionType			`xml:"Children"`
+	SpecialRequirementList	SpecialRequirementListType	`xml:"SpecialRequirementList"`
+	HotelProductList		HotelProductListType		`xml:"HotelProductList"`
 }
 
+type HotelProductListType struct {
+	XMLName	xml.Name					`xml:"HotelProductList"`
+	Items	[]HotelProductDetailType	`xml:"HotelProductDetail"`
+}
+
+type HotelProductDetailType struct {
+	XMLName						xml.Name				`xml:"HotelProductDetail"`
+	Code 						string					`xml:"Code,attr"`
+	RoomName 					string					`xml:"RoomName,attr"`
+	RoomCode 					string					`xml:"RoomCode,attr"`
+	RateCode 					string					`xml:"RateCode,attr"`
+	RateName 					string					`xml:"RateName,attr"`
+	RateDescription 			string					`xml:"RateDescription,attr"`
+	IsHourRate 					string					`xml:"IsHourRate,attr"`
+	MaxHours 					int						`xml:"MaxHours,attr"`
+	StartTime 					string					`xml:"StartTime,attr"`
+	EndTime 					string					`xml:"EndTime,attr"`
+	RateGroupCode 				string					`xml:"RateGroupCode,attr"`
+	RateGroupName 				string					`xml:"RateGroupName,attr"`
+	MinimumRetailPrice			float64					`xml:"MinimumRetailPrice,attr"`
+	Price						float64					`xml:"Price,attr"`
+	TravelAgencyCommission		float64					`xml:"TravelAgencyCommission,attr"`
+	FullVATInPrice 				string					`xml:"FullVATInPrice,attr"`
+	VATIncludedInPrice 			float64					`xml:"VATIncludedInPrice,attr"`
+	DeadlineDate 				string					`xml:"DeadlineDate,attr"`
+	DeadlineTimeLoc 			string					`xml:"DeadlineTimeLoc,attr"`
+	DeadlineTimeSys 			string					`xml:"DeadlineTimeSys,attr"`
+	DeadlineTimeUTC 			string					`xml:"DeadlineTimeUTC,attr"`
+	PenaltySize 				float64					`xml:"PenaltySize,attr"`
+	MaxNumberOfGuests 			int						`xml:"MaxNumberOfGuests,attr"`
+	MaxNumberOfExtraBeds		int						`xml:"MaxNumberOfExtraBeds,attr"`
+	MaxNumberOfExtraBedsAdult	int						`xml:"MaxNumberOfExtraBedsAdult,attr"`
+	MaxNumberOfExtraBedsChild	int						`xml:"MaxNumberOfExtraBedsChild,attr"`
+	MaxNumberOfExtraBedsInfant	int						`xml:"MaxNumberOfExtraBedsInfant,attr"`
+	SpecialOfferList			SpecialOfferListType	`xml:"SpecialOfferList"`
+	Meals						MealsType				`xml:"Meals"`
+	Availability				AvailabilityType		`xml:"Availability"`
+	WhereToPayList				WhereToPayListType		`xml:"WhereToPayList"`
+}
+
+type AvailabilityType struct {
+	XMLName		xml.Name		`xml:"Availability"`
+	Code		int				`xml:"Code,attr"`
+	Name		string			`xml:"Name,attr"`
+	Allotment	AllotmentType	`xml:"Allotment"`
+}
+
+type AllotmentType struct {
+	XMLName		xml.Name	`xml:"Allotment"`
+	Code		string		`xml:"Code,attr"`
+	Name		string		`xml:"Name,attr"`
+	Rooms		int			`xml:"Rooms,attr"`
+}

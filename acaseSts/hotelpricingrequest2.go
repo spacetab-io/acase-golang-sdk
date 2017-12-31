@@ -234,15 +234,3 @@ type SpecialOfferTypeType struct {
 	Name	string		`xml:"Name,attr"`
 	Id		int			`xml:"Id,attr"`
 }
-
-type AgeRestrictionType struct {
-	AgeTo		int				`xml:"AgeTo,attr"`
-	AgeFrom		int				`xml:"AgeFrom"`
-	UseThisAge	UseThisAgeType	`xml:"UseThisAge"`
-}
-
-type UseThisAgeType struct {
-	XMLName	xml.Name	`xml:"UseThisAge"`
-	Code	int			`xml:"Code,attr"`
-	Name	string		`xml:"Name,attr"`
-}
