@@ -8,7 +8,7 @@ type HotelPricingRequest2Type struct {
 	UserId					string				`xml:"UserId,attr"`
 	Password				string				`xml:"Password,attr"`
 	Language				LanguageTypeEnum	`xml:"Language,attr,omitempty"`
-	Hotel					string				`xml:"Hotel,attr"`
+	Hotel					int					`xml:"Hotel,attr"`
 	ProductCode				int					`xml:"ProductCode,attr"`
 	Currency				int					`xml:"Currency,attr"`
 	WhereToPay				int					`xml:"WhereToPay,attr"`
@@ -233,16 +233,4 @@ type SpecialOfferTypeType struct {
 	Code	int			`xml:"Code,attr"`
 	Name	string		`xml:"Name,attr"`
 	Id		int			`xml:"Id,attr"`
-}
-
-type AgeRestrictionType struct {
-	AgeTo		int				`xml:"AgeTo,attr"`
-	AgeFrom		int				`xml:"AgeFrom"`
-	UseThisAge	UseThisAgeType	`xml:"UseThisAge"`
-}
-
-type UseThisAgeType struct {
-	XMLName	xml.Name	`xml:"UseThisAge"`
-	Code	int			`xml:"Code,attr"`
-	Name	string		`xml:"Name,attr"`
 }

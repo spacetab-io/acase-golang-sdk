@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HotelProductRequest BuyerId="MyCompanyId" UserId="MyUserId" Password="MyPassword" Language="ru" Hotel="800300" Currency="3" WhereToPay="3" ArrivalDate="12.06.2009" DepartureDate="13.06.2009" Id="" AccommodationId="" NumberOfGuests="2" NumberOfExtraBedsAdult="1"/>

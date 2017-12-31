@@ -11,7 +11,7 @@ func TestHotelPricingRequest2_Ok(t *testing.T) {
 	defer gock.Off()
 
 	data, err := acApi.HotelPricingRequest2(0,0,0,0,0,
-		0, 0, 0, "", "", "", "",
+		0, 0, 0, 0, "", "", "",
 		"", "", "")
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
@@ -156,7 +156,7 @@ func TestHotelPricingRequest_Error(t *testing.T) {
 	defer gock.Off()
 
 	_, err := acApi.HotelPricingRequest2(0,0,0,0,0,
-		0, 0, 0, "", "", "", "",
+		0, 0, 0, 0, "", "", "",
 		"", "", "")
 
 	st.Expect(t, err.Code, "9998")
