@@ -622,8 +622,8 @@ func (a *Api) HotelListRequest(hotelCode, countryCode, cityCode, hotelRatingCode
 }
 
 func (a *Api) HotelPricingRequest2(productCode, currency, whereToPay, numberOfGuests, meal, numberOfExtraBedsAdult,
-    numberOfExtraBedsChild, numberOfExtraBedsInfant int,
-	hotel, arrivalDate, departureDate, arrivalTime, departureTime, id, accommodationId string) (*acaseSts.HotelPricingResponse2Type, *AcaseResponseError) {
+    numberOfExtraBedsChild, numberOfExtraBedsInfant, hotel  int,
+	arrivalDate, departureDate, arrivalTime, departureTime, id, accommodationId string) (*acaseSts.HotelPricingResponse2Type, *AcaseResponseError) {
 
 	req := &acaseSts.HotelPricingRequest2Type{
 		Language: a.Language,

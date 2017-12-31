@@ -8,7 +8,7 @@ type HotelPricingRequest2Type struct {
 	UserId					string				`xml:"UserId,attr"`
 	Password				string				`xml:"Password,attr"`
 	Language				LanguageTypeEnum	`xml:"Language,attr,omitempty"`
-	Hotel					string				`xml:"Hotel,attr"`
+	Hotel					int					`xml:"Hotel,attr"`
 	ProductCode				int					`xml:"ProductCode,attr"`
 	Currency				int					`xml:"Currency,attr"`
 	WhereToPay				int					`xml:"WhereToPay,attr"`
