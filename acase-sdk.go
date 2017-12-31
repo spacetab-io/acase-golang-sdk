@@ -620,3 +620,50 @@ func (a *Api) HotelListRequest(hotelCode, countryCode, cityCode, hotelRatingCode
 
 	return resp, nil
 }
+
+func (a *Api) HotelPricingRequest2(productCode, currency, whereToPay, numberOfGuests, meal, numberOfExtraBedsAdult,
+    numberOfExtraBedsChild, numberOfExtraBedsInfant int,
+	hotel, arrivalDate, departureDate, arrivalTime, departureTime, id, accommodationId string) (*acaseSts.HotelPricingResponse2Type, *AcaseResponseError) {
+
+	req := &acaseSts.HotelPricingRequest2Type{
+		Language: a.Language,
+		Password: a.Password,
+		UserId: a.UserId,
+		BuyerId: a.BuyerId,
+		Hotel:hotel,
+		ProductCode:productCode,
+		Currency:currency,
+		WhereToPay:whereToPay,
+		ArrivalDate:arrivalDate,
+		DepartureDate:departureDate,
+		ArrivalTime:arrivalTime,
+		DepartureTime:departureTime,
+		NumberOfGuests:numberOfGuests,
+		NumberOfExtraBedsAdult:numberOfExtraBedsAdult,
+		NumberOfExtraBedsChild:numberOfExtraBedsChild,
+		NumberOfExtraBedsInfant:numberOfExtraBedsInfant,
+		Meal:meal,
+		Id:id,
+		AccommodationId:accommodationId,
+	}
+	bItem, err := xml.Marshal(req)
+	FatalError(err)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+
+	resp := &acaseSts.HotelPricingResponse2Type{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: resp.Error.Code,
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return resp, nil
+}
+

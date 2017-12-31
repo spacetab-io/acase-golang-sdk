@@ -46,7 +46,6 @@ type AlternativeCountryType struct {
 }
 
 type CityType struct {
-//	XMLName		xml.Name			`xml:"City"`
 	Code		int					`xml:"Code,attr"`
 	Name		string				`xml:"Name,attr"`
 	Genitive	string				`xml:"Genitive,attr,omitempty"`
@@ -125,4 +124,9 @@ type PositionType struct {
 	XMLName		xml.Name	`xml:"Position"`
 	Latitude	string		`xml:"Latitude,attr,omitempty"`
 	Longitude	string		`xml:"Longitude,attr,omitempty"`
+}
+
+type YesNoCodeType struct {
+	Code	int		`xml:"Code,attr"`
+	Name	string	`xml:"Name,attr"`
 }
