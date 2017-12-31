@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HotelList>
+	<Success/>
+	<Country Code="9" Name="Россия">
+		<Position Latitude="57.5158" Longitude="82.6172"/>
+		<City Code="2" Name="Москва">
+			<AdmUnit1 Code="1" Name=""/>
+			<AdmUnit2 Code="1" Name="Не определено"/>
+			<TypeOfPlace Code="2" Name="Город"/>
+			<Position Latitude="55.758959" Longitude="37.616272"/>
+			<Hotel Code="900376" Name="Петрово-Дальнее Пансионат" Zip="143422" Address="Московская область, Красногорский район, Петрово-Дальнее село" Underground="Тушинская - Таганско-Краснопресненская линия - 9,5 км" CityCentre="Центр города - 20 км" Description="Музей-усадьба &quot;Архангельское&quot;, Парк Победы на Поклонной Горе" Url="http://images.acase.ru/hotels_images/900376_00.jpg">
+				<Position Latitude="55.746274" Longitude="37.147111"/>
+				<Rating Code="99" Name="-"/>
+				<Type Code="2" Name="Гостиница"/>
+				<Stars Code="3" Name="Уровень 3 из 5" Value="3" Url="http://images.acase.ru/signs_images/Level 3 grey.svg">
+					<OfficialCertificate Code="2" Name="Государственный">
+						<Certificate Code="2" Name="4 звезда" Url="http://images.acase.ru/signs_images/four_stars_hotel.gif" ValidBefore="27.12.2018"/>
+					</OfficialCertificate> 
+				</Stars>
+				<FreeSale Code="2" Name="Нет"/>
+				<Amenities>
+					<HA Code="1"/>
+					<HA Code="2"/>
+					<HA Code="69"/>
+					<HA Code="8"/>
+					<HA Code="9"/>
+					<HA Code="10"/>
+					<HA Code="14"/>
+					<HA Code="16"/>
+					<HA Code="23"/>
+					<HA Code="70"/>
+					<HA Code="93"/>
+					<HA Code="25"/>
+					<HA Code="27"/>
+					<HA Code="30"/>
+					<HA Code="31"/>
+					<HA Code="33"/>
+					<HA Code="34"/>
+					<HA Code="41"/>
+					<HA Code="45"/>
+					<HA Code="73"/>
+					<HA Code="52"/>
+					<HA Code="54"/>
+					<HA Code="80"/>
+					<HA Code="79"/>
+					<HA Code="55"/>
+					<HA Code="98"/>
+					<HA Code="83"/>
+					<HA Code="60"/>
+					<HA Code="67"/>
+				</Amenities>
+			</Hotel>
+		</City>
+	</Country>
+	<AlternativeCountry Code="9" Name="Россия">
+		<Position Latitude="57.5158" Longitude="82.6172"/>
+		<AlternativeCity Code="313" Name="Krasnogorsk">
+			<AdmUnit1 Code="1" Name=""/>
+			<AdmUnit2 Code="1" Name="Не определено"/>
+			<TypeOfPlace Code="2" Name="город"/>
+			<Position Latitude="55.758959" Longitude="37.616272"/>
+			<Hotel Code="900376" Name="Петрово-Дальнее Пансионат" Zip="143422" Address="Московская область, Красногорский район, Петрово-Дальнее село" Underground="Тушинская - Таганско-Краснопресненская линия - 9,5 км" CityCentre="Центр города - 20 км" Description="Музей-усадьба &quot;Архангельское&quot;, Парк Победы на Поклонной Горе" Url="http://images.acase.ru/hotels_images/900376_00.jpg">
+				<Position Latitude="55.746274" Longitude="37.147111"/>
+				<Rating Code="99" Name="-"/>
+				<Type Code="2" Name="Гостиница"/>
+				<Stars Code="3" Name="Уровень 3 из 5" Value="3" Url="http://images.acase.ru/signs_images/Level 3 grey.svg">
+					<OfficialCertificate Code="1" Name="Нет">
+						<Certificate Code="5" Name="1 звезда" Url="http://images.acase.ru/signs_images/one_star_hotel.gif"/>
+					</OfficialCertificate> 
+				</Stars>
+				<FreeSale Code="2" Name="Нет"/>
+				<Amenities>
+					<HA Code="1"/>
+					<HA Code="2"/>
+					<HA Code="69"/>
+					<HA Code="8"/>
+					<HA Code="9"/>
+					<HA Code="10"/>
+					<HA Code="14"/>
+					<HA Code="16"/>
+					<HA Code="23"/>
+					<HA Code="70"/>
+					<HA Code="93"/>
+					<HA Code="25"/>
+					<HA Code="27"/>
+					<HA Code="30"/>
+					<HA Code="31"/>
+					<HA Code="33"/>
+					<HA Code="34"/>
+					<HA Code="41"/>
+					<HA Code="45"/>
+					<HA Code="73"/>
+					<HA Code="52"/>
+					<HA Code="54"/>
+					<HA Code="80"/>
+					<HA Code="79"/>
+					<HA Code="55"/>
+					<HA Code="98"/>
+					<HA Code="83"/>
+					<HA Code="60"/>
+					<HA Code="67"/>
+				</Amenities>
+			</Hotel>
+		</AlternativeCity>
+	</AlternativeCountry>
+</HotelList>

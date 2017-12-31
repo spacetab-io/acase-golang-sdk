@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HotelPricingRequest2 BuyerId="MyCompanyId" UserId="MyUserId" Password="MyPassword" Language="ru" Hotel="9800004" ProductCode="333223" Currency="3" WhereToPay="3" ArrivalDate="12.06.2004" DepartureDate="13.06.2004" ArrivalTime="" DepartureTime="" NumberOfGuests="2" NumberOfExtraBedsAdult="1" Meal="1" Id="" AccommodationId=""/>
