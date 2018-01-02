@@ -668,7 +668,7 @@ func (a *Api) HotelPricingRequest2(productCode, currency, whereToPay, numberOfGu
 }
 
 func (a *Api) HotelProductRequest(currency, whereToPay, numberOfGuests, numberOfExtraBedsAdult,
-numberOfExtraBedsChild, numberOfExtraBedsInfant, hotel  int,
+	numberOfExtraBedsChild, numberOfExtraBedsInfant, hotel  int,
 	arrivalDate, departureDate, id, accommodationId string) (*acaseSts.HotelProductResponseType, *AcaseResponseError) {
 
 	req := &acaseSts.HotelProductRequestType{
@@ -708,3 +708,70 @@ numberOfExtraBedsChild, numberOfExtraBedsInfant, hotel  int,
 
 	return resp, nil
 }
+
+func (a *Api) HotelSearchRequest(arrivalDate, departureDate, options, hotelName, destListCode string,
+	freeSaleOnly, hotelCategory, currency, whereToPay, numberOfGuests, hotelCode, distance, distTypeCode, distCode, guestsAdults, city int,
+	priceFrom, priceTo float64, starCodes, minorAges []int) (*acaseSts.HotelSearchResponseType, *AcaseResponseError) {
+
+	req := &acaseSts.HotelSearchRequestType{
+		Language: a.Language,
+		Password: a.Password,
+		UserId: a.UserId,
+		BuyerId: a.BuyerId,
+		ArrivalDate:arrivalDate,
+		DepartureDate:departureDate,
+		City:city,
+		PriceFrom:priceFrom,
+		PriceTo:priceTo,
+		FreeSaleOnly:freeSaleOnly,
+		HotelCategory:hotelCategory,
+		Currency:currency,
+		WhereToPay:whereToPay,
+		NumberOfGuests:numberOfGuests,
+		Options:options,
+		HotelCode:hotelCode,
+		HotelName:hotelName,
+	}
+	if starCodes != nil && len(starCodes) > 0 {
+		for _, starCode := range starCodes {
+			req.StarList.Items = append(req.StarList.Items, *(&acaseSts.SimpleCodeType{Code:starCode}))
+		}
+	}
+	if destListCode != "" {
+		req.DestinationList.Code = destListCode
+		req.DestinationList.Distance = distance
+		req.DestinationList.TypeCode = acaseSts.DestinationTypeEnum(distTypeCode)
+	} else if distance > 0 {
+		req.Destination.TypeCode = acaseSts.DestinationTypeEnum(distTypeCode)
+		req.Destination.Distance = distance
+		req.Destination.Code = distCode
+	}
+
+	if guestsAdults > 0 && minorAges != nil && len(minorAges) > 0 {
+		req.Guests = &acaseSts.GuestsType{NumberOfAdults:guestsAdults}
+		for _, minorAge := range minorAges {
+			req.Guests.MinorAgeList.Items = append(req.Guests.MinorAgeList.Items, *(&acaseSts.MinorType{Age:minorAge}))
+		}
+	}
+
+	bItem, err := xml.Marshal(req)
+	FatalError(err)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+
+	resp := &acaseSts.HotelSearchResponseType{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: resp.Error.Code,
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return resp, nil
+}
+
