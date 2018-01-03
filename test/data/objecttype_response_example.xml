@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectTypeResponse BuyerId="MyCompanyId" UserId="MyUserId" Password="MyPassword" Language="ru">
+	<Action Name="LIST">
+		<Parameters ObjectTypeCode=""/>
+	</Action>
+	<Success/>
+	<ObjectTypeList>
+		<ObjectType Code="9500001" Name="Hе имеет значения"/>
+		<ObjectType Code="800001" Name="Аэропорт"/>
+		<ObjectType Code="900001" Name="Достопримечательности"/>
+		<ObjectType Code="800104" Name="Метро"/>
+		<ObjectType Code="1000039" Name="Ж/д вокзалы"/>
+		<ObjectType Code="1000040" Name="Морской порт"/>
+		<ObjectType Code="1000041" Name="Речной порт"/>
+		<ObjectType Code="1000042" Name="Центр города"/>
+	</ObjectTypeList>
+</ObjectTypeResponse>
