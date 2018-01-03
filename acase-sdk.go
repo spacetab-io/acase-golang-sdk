@@ -793,9 +793,7 @@ func (a *Api) MealRequest(mealCode, mealTypeCode []int, mealName []string) (*aca
 
 		for i, item := range mealCode {
 			pt := &acaseSts.ParametersType{MealCode:item, MealTypeCode:mealTypeCode[i], MealName:mealName[i]}
-			para := make([]acaseSts.ParametersType, 1)
-			para[0] = *pt
-			at := &acaseSts.ActionType{Name:"LIST", Parameters:para}
+			at := &acaseSts.ActionType{Name:"LIST", Parameters:*pt}
 			req.Action = append(req.Action, *at)
 		}
 	}
@@ -838,9 +836,7 @@ func (a *Api) MealTypeRequest(mealTypeCode []int, mealName []string) (*acaseSts.
 
 		for i, item := range mealTypeCode {
 			pt := &acaseSts.ParametersType{MealTypeCode:item, MealName:mealName[i]}
-			para := make([]acaseSts.ParametersType, 1)
-			para[0] = *pt
-			at := &acaseSts.ActionType{Name:"LIST", Parameters:para}
+			at := &acaseSts.ActionType{Name:"LIST", Parameters:*pt}
 			req.Action = append(req.Action, *at)
 		}
 	}
@@ -865,4 +861,46 @@ func (a *Api) MealTypeRequest(mealTypeCode []int, mealName []string) (*acaseSts.
 	return resp, nil
 }
 
+func (a *Api) ObjectRequest(objectTypeCode, objectSubTypeCode, cityCode []int) (*acaseSts.ObjectResponseType, *AcaseResponseError) {
+	req := &acaseSts.ObjectRequestType{
+		Language: a.Language,
+		Password: a.Password,
+		UserId: a.UserId,
+		BuyerId: a.BuyerId,
+	}
+
+	if objectTypeCode != nil && objectSubTypeCode != nil && cityCode != nil {
+		if len(objectTypeCode) > 0 {
+			if len(objectTypeCode) != len(objectSubTypeCode) &&  len(objectTypeCode) != len(cityCode) {
+				res := &AcaseResponseError{Code:"0", Message:"Length of parameters lists does not match"}
+				return nil, res
+			}
+		}
+
+		for i, item := range objectTypeCode {
+			pt := &acaseSts.ObjectParametersType{ObjectTypeCode:item, ObjectSubTypeCode:objectSubTypeCode[i], CityCode:cityCode[i]}
+			at := &acaseSts.ObjectActionType{Name:"LISTMETROSTYLE", Parameters:*pt}
+			req.Action = append(req.Action, *at)
+		}
+	}
+
+	bItem, err := xml.Marshal(req)
+	FatalError(err)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+	resp := &acaseSts.ObjectResponseType{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: resp.Error.Code,
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return resp, nil
+}
 

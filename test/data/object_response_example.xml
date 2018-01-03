@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectResponse BuyerId="MyCompanyId" UserId="MyUserId" Password="MyPassword" Language="ru">
+	<Action Name="LISTMETROSTYLE">
+		<Parameters ObjectTypeCode="800104" ObjectSubTypeCode="" CityCode="2"/>
+	</Action>
+	<Success/>
+	<Object Code="800229" Name="Авиамоторная">
+		<ObjectSubType Code="1100025" Name="Калининская линия"/>
+	</Object>
+	<Object Code="800113" Name="Автозаводская">
+		<ObjectSubType Code="1100020" Name="Замоскворецкая линия"/>
+	</Object>
+</ObjectResponse>
