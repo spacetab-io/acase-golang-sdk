@@ -820,3 +820,49 @@ func (a *Api) MealRequest(mealCode, mealTypeCode []int, mealName []string) (*aca
 	return resp, nil
 }
 
+func (a *Api) MealTypeRequest(mealTypeCode []int, mealName []string) (*acaseSts.MealTypeResponseType, *AcaseResponseError) {
+	req := &acaseSts.MealTypeRequestType{
+		Language: a.Language,
+		Password: a.Password,
+		UserId: a.UserId,
+		BuyerId: a.BuyerId,
+	}
+
+	if mealTypeCode != nil && mealName != nil {
+		if len(mealTypeCode) > 0 {
+			if len(mealTypeCode) != len(mealName) {
+				res := &AcaseResponseError{Code:"0", Message:"Length of parameters lists does not match"}
+				return nil, res
+			}
+		}
+
+		for i, item := range mealTypeCode {
+			pt := &acaseSts.ParametersType{MealTypeCode:item, MealName:mealName[i]}
+			para := make([]acaseSts.ParametersType, 1)
+			para[0] = *pt
+			at := &acaseSts.ActionType{Name:"LIST", Parameters:para}
+			req.Action = append(req.Action, *at)
+		}
+	}
+
+	bItem, err := xml.Marshal(req)
+	FatalError(err)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+	resp := &acaseSts.MealTypeResponseType{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: resp.Error.Code,
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return resp, nil
+}
+
+

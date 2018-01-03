@@ -19,7 +19,7 @@ type ActionType struct {
 
 type ParametersType struct {
 	XMLName			xml.Name	`xml:"Parameters"`
-	MealCode		int			`xml:"MealCode,attr"`
+	MealCode		int			`xml:"MealCode,attr,omitempty"`
 	MealTypeCode	int			`xml:"MealTypeCode,attr"`
 	MealName		string		`xml:"MealName,attr"`
 }
@@ -42,8 +42,7 @@ type MealListType struct {
 }
 
 type Meal2Type struct {
-	XMLName		xml.Name	`xml:"Meal"`
 	Code		int			`xml:"Code,attr"`
-	TypeCode	int			`xml:"TypeCode,attr"`
+	TypeCode	int			`xml:"TypeCode,attr,omitempty"`
 	Name		string		`xml:"Name,attr"`
 }
