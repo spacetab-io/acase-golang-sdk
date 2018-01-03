@@ -940,4 +940,39 @@ func (a *Api) ObjectSubTypeRequest(objectSubTypeCode []int) (*acaseSts.ObjectSub
 	return resp, nil
 }
 
+func (a *Api) ObjectTypeRequest(objectTypeCode []int) (*acaseSts.ObjectTypeResponseType, *AcaseResponseError) {
+	req := &acaseSts.ObjectTypeRequestType{
+		Language: a.Language,
+		Password: a.Password,
+		UserId: a.UserId,
+		BuyerId: a.BuyerId,
+	}
+
+	if objectTypeCode != nil && len(objectTypeCode) > 0 {
+		for _, item := range objectTypeCode {
+			pt := &acaseSts.ParametersObjType{ObjectTypeCode:item}
+			at := &acaseSts.ObjectTypeActionType{Name:"LIST", Parameters:*pt}
+			req.Action = append(req.Action, *at)
+		}
+	}
+
+	bItem, err := xml.Marshal(req)
+	FatalError(err)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+	resp := &acaseSts.ObjectTypeResponseType{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: resp.Error.Code,
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return resp, nil
+}
 
