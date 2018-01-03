@@ -15,6 +15,13 @@ const (
 	List AdmUnitActionNameEnum = "LIST"
 )
 
+type DestinationTypeEnum int
+const (
+	CITY  = 2
+	HOTEL = 3
+	POI   = 4
+)
+
 type ErrorType struct {
 	XMLName		xml.Name		`xml:"Error"`
 	Type		ErrorTypeType	`xml:"Type,omitempty"`
@@ -33,6 +40,7 @@ type CountryType struct {
 	XMLName		xml.Name		`xml:"Country"`
 	Code		int				`xml:"Code,attr"`
 	Name		string			`xml:"Name,attr"`
+	Ref			string			`xml:"Ref,attr,omitempty"`
 	Position	*PositionType	`xml:"Position,omitempty"`
 	Cities		*[]CityType		`xml:"City,omitempty"`
 }
@@ -63,22 +71,22 @@ type CityType struct {
 }
 
 type HotelType struct {
-	XMLName		xml.Name				`xml:"Hotel"`
-	Code		int						`xml:"Code,attr"`
-	Name		string					`xml:"Name,attr"`
-	Zip			string					`xml:"Zip,attr"`
-	Address		string					`xml:"Address,attr"`
-	Underground	string					`xml:"Underground,attr"`
-	CityCentre	string					`xml:"CityCentre,attr"`
-	Description	string					`xml:"Description,attr"`
-	Url			string					`xml:"Url,attr"`
-	Position	PositionType			`xml:"Position"`
-	Rating		RatingType				`xml:"Rating"`
-	Type		TypeType				`xml:"Type"`
-	Stars		StarsType				`xml:"Stars"`
-	VirtualTour	VirtualTourType			`xml:"VirtualTour"`
-	FreeSale	FreeSaleType			`xml:"FreeSale"`
-	Amenities	HotelAmenitiesListType	`xml:"Amenities"`
+	XMLName			xml.Name				`xml:"Hotel"`
+	Code			int						`xml:"Code,attr"`
+	Name			string					`xml:"Name,attr"`
+	Zip				string					`xml:"Zip,attr"`
+	Address			string					`xml:"Address,attr"`
+	Underground		string					`xml:"Underground,attr"`
+	CityCentre		string					`xml:"CityCentre,attr"`
+	Description		string					`xml:"Description,attr"`
+	Url				string					`xml:"Url,attr"`
+	Position		PositionType			`xml:"Position"`
+	Rating			RatingType				`xml:"Rating"`
+	Type			TypeType				`xml:"Type"`
+	Stars			StarsType				`xml:"Stars"`
+	VirtualTour		VirtualTourType			`xml:"VirtualTour"`
+	FreeSale		FreeSaleType			`xml:"FreeSale"`
+	Amenities		HotelAmenitiesListType	`xml:"Amenities"`
 }
 
 type HotelAmenitiesListType struct {
@@ -121,9 +129,10 @@ type TypeOfPlaceType struct {
 }
 
 type PositionType struct {
-	XMLName		xml.Name	`xml:"Position"`
-	Latitude	string		`xml:"Latitude,attr,omitempty"`
-	Longitude	string		`xml:"Longitude,attr,omitempty"`
+	XMLName			xml.Name	`xml:"Position"`
+	Latitude		string		`xml:"Latitude,attr,omitempty"`
+	Longitude		string		`xml:"Longitude,attr,omitempty"`
+	OptimalGmapZoom	int			`xml:"OptimalGmapZoom,attr,omitempty"`
 }
 
 type YesNoCodeType struct {
@@ -141,4 +150,9 @@ type UseThisAgeType struct {
 	XMLName	xml.Name	`xml:"UseThisAge"`
 	Code	int			`xml:"Code,attr"`
 	Name	string		`xml:"Name,attr"`
+}
+
+type SimpleCodeNameType struct {
+	Code	int		`xml:"Code,attr"`
+	Name	string	`xml:"Name,attr"`
 }
