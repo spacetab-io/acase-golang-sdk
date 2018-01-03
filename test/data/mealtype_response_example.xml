@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MealTypeResponse BuyerId="MyCompanyId" UserId="MyUserId" Password="MyPassword" Language="ru">
+   <Action Name="LIST">
+      <Parameters MealTypeCode="" MealTypeName=""/>
+   </Action>
+   <Success/>
+   <MealTypeList>
+      <MealType Code="1" Name="-"/>
+      <MealType Code="2" Name="Завтрак"/>
+      <MealType Code="3" Name="Обед"/>
+      <MealType Code="4" Name="Ужин"/>
+   </MealTypeList>
+</MealTypeResponse>
