@@ -14,7 +14,7 @@ type MealRequestType struct {
 type ActionType struct {
 	XMLName		xml.Name			`xml:"Action"`
 	Name		string				`xml:"Name,attr"`
-	Parameters	[]ParametersType	`xml:"Parameters"`
+	Parameters	ParametersType	`xml:"Parameters"`
 }
 
 type ParametersType struct {
