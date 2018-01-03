@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ObjTypeListResponse Language="ru" BuyerId="MyCompanyId" UserId="MyUserId" Password="MyPassword">
+   <Success/>
+   <ObjType Code="1" Name="-"/>
+   <ObjType Code="2" Name="Гостиница"/>
+   <ObjType Code="3" Name="Санаторий"/>
+   <ObjType Code="4" Name="Дом отдыха"/>
+   <ObjType Code="5" Name="Хостел"/>
+   <ObjType Code="6" Name="Пансионат"/>
+</ObjTypeListResponse>
