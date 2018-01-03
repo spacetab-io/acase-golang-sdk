@@ -86,20 +86,23 @@ type SimpleCodeType struct {
 }
 
 type HotelSearchResponseType struct {
-	XMLName				xml.Name				`xml:"HotelSearchResponse"`
-	Success				string					`xml:"Success"`
-	Error				ErrorType				`xml:"Error,omitempty"`
-	Language			string					`xml:"Language,attr"`
-	ArrivalDate			string					`xml:"ArrivalDate,attr"`
-	DepartureDate		string					`xml:"DepartureDate,attr"`
-	NumberOfGuests		int						`xml:"NumberOfGuests,attr"`
-	DestinationList		DestListFullType		`xml:"DestinationList"`
-	AvailableHotelsList	AvailableHotelsListType	`xml:"AvailableHotelsList"`
+	XMLName							xml.Name				`xml:"HotelSearchResponse"`
+	Success							string					`xml:"Success"`
+	Error							ErrorType				`xml:"Error,omitempty"`
+	Language						string					`xml:"Language,attr"`
+	ArrivalDate						string					`xml:"ArrivalDate,attr"`
+	DepartureDate					string					`xml:"DepartureDate,attr"`
+	NumberOfGuests					int						`xml:"NumberOfGuests,attr"`
+	DestinationList					DestListFullType		`xml:"DestinationList"`
+	AvailableHotelsList				AvailableHotelsListType	`xml:"AvailableHotelsList"`
+	NoContractAvailableHotelsList	HotelOfferListType 		`xml:"NoContractAvailableHotelsList"`
+	AlternativeHotelsList			HotelOfferListType		`xml:"AlternativeHotelsList"`
+	NoContractAlternativeHotelsList	HotelOfferListType		`xml:"NoContractAlternativeHotelsList"`
 }
 
 type AvailableHotelsListType struct {
 	XMLName	xml.Name		`xml:"AvailableHotelsList"`
-	Items	[]HotelType		`xml:"Hotel"`
+	Items	[]HotelFullType		`xml:"Hotel"`
 }
 
 type HotelFullType struct {
@@ -130,9 +133,6 @@ type HotelFullType struct {
 	Amenities						HotelAmenitiesListType	`xml:"Amenities"`
 	Currency						CurrencyType			`xml:"Currency"`
 	HotelOfferList					HotelOfferListType		`xml:"HotelOfferList"`
-	NoContractAvailableHotelsList	HotelOfferListType 		`xml:"NoContractAvailableHotelsList"`
-	AlternativeHotelsList			HotelOfferListType		`xml:"AlternativeHotelsList"`
-	NoContractAlternativeHotelsList	HotelOfferListType		`xml:"NoContractAlternativeHotelsList"`
 }
 
 type HotelOfferListType struct {

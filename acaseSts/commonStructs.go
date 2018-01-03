@@ -40,6 +40,7 @@ type CountryType struct {
 	XMLName		xml.Name		`xml:"Country"`
 	Code		int				`xml:"Code,attr"`
 	Name		string			`xml:"Name,attr"`
+	Ref			string			`xml:"Ref,attr,omitempty"`
 	Position	*PositionType	`xml:"Position,omitempty"`
 	Cities		*[]CityType		`xml:"City,omitempty"`
 }
@@ -128,9 +129,10 @@ type TypeOfPlaceType struct {
 }
 
 type PositionType struct {
-	XMLName		xml.Name	`xml:"Position"`
-	Latitude	string		`xml:"Latitude,attr,omitempty"`
-	Longitude	string		`xml:"Longitude,attr,omitempty"`
+	XMLName			xml.Name	`xml:"Position"`
+	Latitude		string		`xml:"Latitude,attr,omitempty"`
+	Longitude		string		`xml:"Longitude,attr,omitempty"`
+	OptimalGmapZoom	int			`xml:"OptimalGmapZoom,attr,omitempty"`
 }
 
 type YesNoCodeType struct {
