@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MealResponse BuyerId="MyCompanyId" UserId="MyUserId" Password="MyPassword" Language="ru">
+   <Action Name="LIST">
+      <Parameters MealCode="" MealTypeCode="" MealName="швед"/>
+   </Action>
+   <Success/>
+   <MealList>
+      <Meal Code="3" TypeCode="2" Name="Завтрак &quot;Шведский стол&quot;"/>
+      <Meal Code="8" TypeCode="3" Name="Обед &quot;Шведский стол&quot;"/>
+      <Meal Code="9" TypeCode="4" Name="Ужин &quot;Шведский стол&quot;"/>
+      <Meal Code="12" TypeCode="2" Name="Завтрак &quot;Шведский стол VIP&quot;"/>
+      <Meal Code="14" TypeCode="2" Name="Завтрак &quot;Шведский стол &quot;Космос-Клуб&quot;"/>
+   </MealList>
+</MealResponse>
