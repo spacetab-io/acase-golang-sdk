@@ -1004,3 +1004,41 @@ func (a *Api) ObjTypeListRequest(objTypeCode, objTypeName string) (*acaseSts.Obj
 
 	return resp, nil
 }
+
+func (a *Api) OrderDocRequest(actionName acaseSts.OrderDocActionName, taskId, docId, code int) (*acaseSts.OrderDocsResponseType, *AcaseResponseError) {
+	req := &acaseSts.OrderDocsRequestType{
+		Language: a.Language,
+		Password: a.Password,
+		UserId: a.UserId,
+		BuyerId: a.BuyerId,
+	}
+	req.Action = make([]acaseSts.OrderDocActionType, 1)
+	req.Action[0].Name = string(actionName)
+
+	switch actionName {
+		case acaseSts.TASKADD:
+			req.Action[0].Parameters.DocId = docId
+			req.Action[0].Parameters.DocType = &acaseSts.OrderDocParamsDocType{Code:code}
+		case acaseSts.TASKSTATUS, acaseSts.TASKRESPONSE:
+			req.Action[0].Parameters.TaskId = taskId
+	}
+
+	bItem, err := xml.Marshal(req)
+	FatalError(err)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+	resp := &acaseSts.OrderDocsResponseType{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: resp.Error.Code,
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return resp, nil
+}
