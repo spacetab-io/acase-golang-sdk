@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OrderInfoNotifyRequest ContractNumber="0157/13" ContractDate="01.07.2013" GuaranteeAmount="0.00" NotifierId="Academservice" Password="322223" Language="en" Id="546797" ReferenceNumber="CYXBW" ReferenceNumberName="Ref No" RegistrationDate="16.03.2005" DeadlineDate="15.03.2005" Price="142.00" TravelAgencyCommission="0.00" Penalty="0.00" StartDate="16.03.2005" EndDate="17.03.2005" InvoiceRule="3" InvoiceId="7413250" ConfirmId="">
+	<Currency Code="3" Name="USD" /> 
+	<Autonom Code="1" Name="Автономный"/>
+	<VatLimit Code="1" Name="Без ограничений"/>
+	<TypeContract Code="3" Name="Агентский"/>
+	<WhereToPay Code="3" Name="Оплата Академсервису согласно договору" /> 
+	<SubjectToProcessing Code="1" Name="Да"/>
+	<FinancialCondition Code="1" Name="Не требуется"/>
+	<Status Code="41" Name="Подтвержден" /> 
+	<ContactPerson Name="Смирнов Павел" Phone="" Fax="" Email="smirnov@smirnov.ru" /> 
+	<AccountDetails>
+		<IsGain Code="1" Name="Да"/>
+	</AccountDetails>
+	<Customer FullName="ООО Ромашка" ZipCode="123456" Address="Тестовая ул. д.5/2 оф. 5" PIAddress="Россия, 123456, Москва, Тестовая ул. д.5/2 оф. 5" INN="1234567890" KPP="123456789" Phone="+7 495 123 45 56" Name="Ромашка" Code="1322075">
+		<BuyerType Name="Юридическое лицо" Code="3"/>
+		<Country Name="Россия" Code="9"/>
+		<City Name="Москва" Code="2">
+			<CityType Name="Город" Code="2"/>
+			<AdmUnit1 Name="Не определено" Code="1"/>
+			<AdmUnit2 Name="Не определено" Code="1"/>
+		</City>
+		<Actual Name="Да" Code="1"/>
+		<AllowModify Name="Да" Code="1"/>
+	</Customer>
+	<IsCustomer Name="Yes" Code="1"/>
+	<AccommodationList>
+		<Accommodation Id="738746" ArrivalDate="16.03.2005" ArrivalTime="10:00" DepartureDate="17.03.2005" DepartureTime="17:00" NumberOfNights="1" NumberOfRooms="1" NumberOfGuests="1" AdditionalInfo="" SupplierInfo="" ConfirmationNumber="" Price="142.00" VATIncludedInPrice="0.00" TravelAgencyCommission="0.00" Gain="1212.00" PenaltyGain="270" Penalty="2500.00" DeadlineDate="15.03.2005" DeadlineTimeLoc="15.03.2005 13:00" DeadlineTimeSys="15.03.2005 13:00" DeadlineTimeUTC="15.03.2005 10:00" PossiblePenaltySize="142.00">
+			<ToBeCancelled Code="2" Name="Нет" /> 
+			<ToBeChanged Code="2" Name="Нет" /> 
+			<Hotel Code="300061" Name="Русь (Солнечный)" /> 
+			<ObjType Code="2" Name="Гостиница" NameWhere="гостинице"/>
+			<Country Code="9" Name="Россия" /> 
+			<City Code="2" Name="Москва" /> 
+			<Status Code="41" Name="Подтверждено" /> 
+			<AmendmentRejected Code="2" Name="Нет" /> 
+			<AllowCancel Code="1" Name="Да" /> 
+			<AllowModify Code="1" Name="Да" /> 
+			<AllowSetGain Code="1" Name="Да"/>
+			<Product Code="410167" RoomName="Junior Suite" RoomCode="900153" RateCode="900185" RateName="FIT" RateDescription="" RateGroupCode="4" RateGroupName="FIT">
+				<Allotment Code="500235" Name="РУСЬ-ДЛЯ ВСЕХ" /> 
+			</Product>
+			<Meal Code="0" Name="" /> 
+			<Persons>
+				<Person LastName="ИВАНОВ" FirstName="ИВАН ИВАНОВИЧ">
+					<Category Code="1" Name="Господин" /> 
+					<Citizenship Code="0" Name="" /> 
+				</Person>
+			</Persons>
+			<Penalties>
+				<Penalty Id="1" VATIncludedInPrice="0.00" FullVATInPrice="1" Price="1000.00" Gain="150.00">
+					<Reason Code="3" Name="Штраф за позднее изменение"/>
+					<AllowSetGain Code="1" Name="Да"/>
+				</Penalty>
+				<Penalty Id="2" VATIncludedInPrice="0.00" FullVATInPrice="1" Price="1500.00" Gain="120.00">
+					<Reason Code="3" Name="Штраф за позднее изменение"/>
+					<AllowSetGain Code="1" Name="Да"/>
+				</Penalty>
+			</Penalties> 
+			<IsEarlyCheckIn Code="1" Name="Да"/>
+			<CriticalEarlyCheckIn Code="1" Name="Критично"/>
+			<EarlyCheckInConfirmationStatus Code="2" Name="Не подтвержден"/>
+			<IsHour Code="2" Name="Нет"/>
+			<IsLateCheckOut Code="1" Name="Да"/>
+			<CriticalLateCheckOut Code="2" Name="Некритично"/>
+			<LateCheckOutConfirmationStatus Code="2" Name="Не подтвержден"/>
+		</Accommodation>
+	</AccommodationList>
+</OrderInfoNotifyRequest>
