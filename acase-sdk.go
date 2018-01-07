@@ -1086,3 +1086,45 @@ func (a *Api) OrderInfoAwocNotifyRequest(item *acaseSts.OrderInfoAwocNotifyReque
 	return resp, nil
 }
 
+func (a *Api) OrderListRequest(arrivalDateFrom, arrivalDateTo, departureDateFrom, departureDateTo, deadlineDateFrom,
+	deadlineDateTo, registrationDateFrom, registrationDateTo, accommodationDateFrom, accommodationDateTo, hotelName,
+	lastName string, hotel int) (*acaseSts.OrderListResponseType, *AcaseResponseError) {
+
+	req := &acaseSts.OrderListRequestType{
+		Language: a.Language,
+		Password: a.Password,
+		UserId: a.UserId,
+		BuyerId: a.BuyerId,
+		ArrivalDateFrom:arrivalDateFrom,
+		ArrivalDateTo:arrivalDateTo,
+		DepartureDateFrom:departureDateFrom,
+		DepartureDateTo:departureDateTo,
+		DeadlineDateFrom:deadlineDateFrom,
+		DeadlineDateTo:deadlineDateTo,
+		RegistrationDateFrom:registrationDateFrom,
+		RegistrationDateTo:registrationDateTo,
+		AccommodationDateFrom:accommodationDateFrom,
+		AccommodationDateTo:accommodationDateTo,
+		HotelName:hotelName,
+		LastName:lastName,
+		Hotel:hotel,
+	}
+
+	bItem, err := xml.Marshal(req)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+	resp := &acaseSts.OrderListResponseType{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != "" || resp.Error.Description != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: resp.Error.Code,
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return resp, nil
+}
