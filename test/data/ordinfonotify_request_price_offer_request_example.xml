@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OrderInfoAwocNotifyRequest Id="2736033" ReferenceNumber="" ReferenceNumberName="Ref No" RegistrationDate="12.08.2013" DeadlineDate="30.08.2013" Price="0.00" TravelAgencyCommission="0.00" Penalty="0.00" StartDate="01.09.2013" EndDate="03.09.2013" InvoiceRule="2" InvoiceId="" ConfirmId="">
+	<Success/>
+	<Currency Code="2" Name="RUB"/>
+	<WhereToPay Code="3" Name="Оплата ООО &quot;АКАДЕМСЕРВИС&quot; согласно договору"/>
+	<Status Code="5" Name="Предложение цены"/>
+	<ContactPerson Name="test" Phone="" Fax="" Email="test-mail@mail.ru"/>
+	<Customer FullName="ООО Ромашка" ZipCode="123456" Address="Тестовая ул. д.5/2 оф. 5" PIAddress="Россия, 123456, Москва, Тестовая ул. д.5/2 оф. 5" INN="1234567890" KPP="123456789" Phone="+7 495 123 45 56" Name="Ромашка" Code="1322075">
+		<BuyerType Name="Юридическое лицо" Code="3" /> 
+		<Country Name="Россия" Code="9" /> 
+		<City Name="Москва" Code="2">
+			<CityType Name="Город" Code="2" /> 
+			<AdmUnit1 Name="Не определено" Code="1" /> 
+			<AdmUnit2 Name="Не определено" Code="1" /> 
+		</City>
+		<Actual Name="Да" Code="1" /> 
+		<AllowModify Name="Да" Code="1" /> 
+	</Customer>
+	<IsCustomer Name="Да" Code="1" /> 
+	<AwocList>
+		<Awoc Id="3807880" ParentId="0" Subject="Гостиница Уют (Лапшинка) с 01.09.2013 по 03.09.2013, ПЕТРОВ ИЛЬЯ, ПЕТРОВА ЕЛЕНА" ArrivalDate="01.09.2013" DepartureDate="03.09.2013" NumberOfNights="2" ArrivalTime="12:00" DepartureTime="12:00" Price="7132.00" VATIncludedInPrice="1087.93" TravelAgencyCommission="0.00" DeadlineDate="30.08.2013" PossiblePenaltySize="3105.00" Penalty="0.00" ConfirmationNumber="" ReferenceNumber="" SupplierInfo="">
+			<ToBeCancelled Code="2" Name="Нет"/>
+			<ToBeChanged Code="2" Name="Нет"/>
+			<ToBeSelected Code="2" Name="Нет"/>
+			<Hotel Code="1300725" Name="Уют Внуково МО"/>
+			<Country Code="9" Name="Россия"/>
+			<AdmUnit1 Code="1" Name="Не определено"/>
+			<AdmUnit2 Code="1" Name="Не определено"/>
+			<TypeOfPlace Code="2" Name="Город"/>
+			<City Code="5254" Name="Лапшинка"/>
+			<Status Code="5" Name="Предложение цены"/>
+			<AllowCancel Code="1" Name="Да"/>
+			<AllowModify Code="2" Name="Нет"/>
+			<AllowSelect Code="1" Name="Да"/>
+			<DetailList>
+				<Detail Id="3807881" Subject="Стандартный двухместный номер с большой кроватью." Quantity="1" Duration="2.00" Price="5980.00" TravelAgencyCommission="0.00" VATIncludedInPrice="912.20"/>
+				<Detail Id="3807886" Subject="Завтрак ШС" Quantity="2" Duration="2.00" Price="1152.00" TravelAgencyCommission="0.00" VATIncludedInPrice="175.73"/>
+			</DetailList>
+			<Persons>
+				<Person LastName="ПЕТРОВ" FirstName="ИЛЬЯ" Company="" Position="">
+					<Category Code="1" Name="Господин"/>
+					<Citizenship Code="1" Name="Hе имеет значения"/>
+				</Person>
+				<Person LastName="ПЕТРОВА" FirstName="ЕЛЕНА" Company="" Position="">
+					<Category Code="2" Name="Госпожа"/>
+					<Citizenship Code="1" Name="Hе имеет значения"/>
+				</Person>
+			</Persons>
+			<Penalties/>
+		</Awoc>
+		<Awoc Id="3807882" ParentId="3807880" Subject="Гостиница Уют (Лапшинка) с 01.09.2013 по 03.09.2013, ПЕТРОВ ИЛЬЯ, ПЕТРОВА ЕЛЕНА" ArrivalDate="01.09.2013" DepartureDate="03.09.2013" NumberOfNights="2" ArrivalTime="12:00" DepartureTime="12:00" Price="7708.00" VATIncludedInPrice="1175.79" TravelAgencyCommission="0.00" DeadlineDate="30.08.2013" PossiblePenaltySize="3393.00" Penalty="0.00" ConfirmationNumber="" ReferenceNumber="" SupplierInfo="">
+			<ToBeCancelled Code="2" Name="Нет"/>
+			<ToBeChanged Code="2" Name="Нет"/>
+			<ToBeSelected Code="2" Name="Нет"/>
+			<Hotel Code="1300725" Name="Уют Внуково МО"/>
+			<Country Code="9" Name="Россия"/>
+			<AdmUnit1 Code="1" Name="Не определено"/>
+			<AdmUnit2 Code="1" Name="Не определено"/>
+			<TypeOfPlace Code="2" Name="Город"/>
+			<City Code="5254" Name="Лапшинка"/>
+			<Status Code="5" Name="Предложение цены"/>
+			<AllowCancel Code="1" Name="Да"/>
+			<AllowModify Code="2" Name="Нет"/>
+			<AllowSelect Code="1" Name="Да"/>
+			<DetailList>
+				<Detail Id="3807883" Subject="Улучшенный двухместный номер с большой кроватью." Quantity="1" Duration="2.00" Price="6556.00" TravelAgencyCommission="0.00" VATIncludedInPrice="1000.06"/>
+				<Detail Id="3807887" Subject="Завтрак ШС" Quantity="2" Duration="2.00" Price="1152.00" TravelAgencyCommission="0.00" VATIncludedInPrice="175.73"/>
+			</DetailList>
+			<Persons>
+				<Person LastName="ПЕТРОВ" FirstName="ИЛЬЯ" Company="" Position="">
+					<Category Code="1" Name="Господин"/>
+					<Citizenship Code="1" Name="Hе имеет значения"/>
+				</Person>
+				<Person LastName="ПЕТРОВА" FirstName="ЕЛЕНА" Company="" Position="">
+					<Category Code="2" Name="Госпожа"/>
+					<Citizenship Code="1" Name="Hе имеет значения"/>
+				</Person>
+			</Persons>
+			<Penalties/>
+		</Awoc>
+	</AwocList>
+</OrderInfoAwocNotifyRequest>

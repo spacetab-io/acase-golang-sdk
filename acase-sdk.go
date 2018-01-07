@@ -1042,3 +1042,47 @@ func (a *Api) OrderDocRequest(actionName acaseSts.OrderDocActionName, taskId, do
 
 	return resp, nil
 }
+
+func (a *Api) OrderInfoNotifyRequest(item *acaseSts.OrderInfoNotifyRequestType) (*acaseSts.OrderInfoNotifyResponseType, *AcaseResponseError) {
+	item.Password = a.Password
+	bItem, err := xml.Marshal(item)
+	FatalError(err)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+	resp := &acaseSts.OrderInfoNotifyResponseType{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != "" || resp.Error.Description != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: resp.Error.Code,
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return resp, nil
+}
+
+func (a *Api) OrderInfoAwocNotifyRequest(item *acaseSts.OrderInfoAwocNotifyRequestType) (*acaseSts.OrderInfoNotifyResponseType, *AcaseResponseError) {
+	bItem, err := xml.Marshal(item)
+	FatalError(err)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+	resp := &acaseSts.OrderInfoNotifyResponseType{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != "" || resp.Error.Description != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: resp.Error.Code,
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return resp, nil
+}
+

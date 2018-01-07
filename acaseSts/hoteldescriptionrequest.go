@@ -184,7 +184,8 @@ type AlternativeCityType struct {
 }
 
 type ObjTypeType struct {
-	XMLName	xml.Name	`xml:"ObjType"`
-	Code	int			`xml:"Code,attr"`
-	Name	string		`xml:"Name,attr"`
+	XMLName		xml.Name	`xml:"ObjType"`
+	Code		int			`xml:"Code,attr"`
+	Name		string		`xml:"Name,attr"`
+	NameWhere	string		`xml:"NameWhere,attr,omitempty"`
 }

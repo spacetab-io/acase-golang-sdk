@@ -103,5 +103,6 @@ type AllotmentType struct {
 	XMLName		xml.Name	`xml:"Allotment"`
 	Code		string		`xml:"Code,attr"`
 	Name		string		`xml:"Name,attr"`
-	Rooms		int			`xml:"Rooms,attr"`
+	Rooms		int			`xml:"Rooms,attr,omitempty"`
+	Quantity	string		`xml:"Quantity,attr,omitempty"`
 }
