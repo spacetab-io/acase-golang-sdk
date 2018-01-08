@@ -1322,3 +1322,34 @@ func (a *Api) SpecialOfferTypeRequest(code int, name string) (*acaseSts.SpecialO
 
 	return resp, nil
 }
+
+func (a *Api) StarListRequest(code int, name, options string) (*acaseSts.StarListResponseType, *AcaseResponseError) {
+
+	req := &acaseSts.StarListRequestType{
+		Language: a.Language,
+		Password: a.Password,
+		UserId: a.UserId,
+		BuyerId: a.BuyerId,
+		Code:code,
+		Name:name,
+		Options:options,
+	}
+
+	bItem, err := xml.Marshal(req)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+	resp := &acaseSts.StarListResponseType{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != "" || resp.Error.Description != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: resp.Error.Code,
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return resp, nil
+}
