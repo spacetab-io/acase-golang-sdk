@@ -1180,3 +1180,40 @@ func (a *Api) OrderAwocRequest(item *acaseSts.OrderAwocRequestType) (*acaseSts.O
 
 	return resp, nil
 }
+
+func (a *Api) RateGroupRequest(items []string) (*acaseSts.RateGroupResponseType, *AcaseResponseError) {
+
+	req := &acaseSts.RateGroupRequestType{
+		Language: a.Language,
+		Password: a.Password,
+		UserId: a.UserId,
+		BuyerId: a.BuyerId,
+	}
+
+	if items != nil && len(items) > 0 {
+		req.ActionList.Parameters = make([]acaseSts.RateGroupParameterType, len(items))
+		for i, item := range items {
+			req.ActionList.Parameters[i].Name = item
+		}
+	} else {
+		req.ActionList.Parameters = make([]acaseSts.RateGroupParameterType, 0)
+	}
+
+	bItem, err := xml.Marshal(req)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+	resp := &acaseSts.RateGroupResponseType{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != "" || resp.Error.Description != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: resp.Error.Code,
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return resp, nil
+}
