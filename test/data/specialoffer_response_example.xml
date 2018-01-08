@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SpecialOfferTypeResponse BuyerId="MyCompanyId" UserId="MyUserId" Password="MyPassword" Language="ru">
+   <ActionList>
+      <Parameters Code="" Name=""/>
+   </ActionList>
+   <Success/>
+   <SpecialOfferTypeList>
+      <SpecialOfferType Code="1" Name="-">
+         <IsMultiple Code="2" Name="Нет"/>
+      </SpecialOfferType>
+      <SpecialOfferType Code="5" Name="Бесплатные ночи">
+         <IsMultiple Code="2" Name="Нет"/>
+      </SpecialOfferType>
+      <SpecialOfferType Code="17" Name="Бесплатные ночи">
+         <IsMultiple Code="1" Name="Да"/>
+      </SpecialOfferType>
+   </SpecialOfferTypeList>
+</SpecialOfferTypeResponse>
