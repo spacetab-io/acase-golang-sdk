@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<PenaltyReasonResponse BuyerId="MyCompanyId" UserId="MyUserId" Password="MyPassword" Language="ru">
+<Action Name="LISTPENALTY"/>
+<Success/>
+<PenaltyReason Code="1" Name="-"/>
+<PenaltyReason Code="3" Name="Штраф за позднее изменение"/>
+<PenaltyReason Code="4" Name="Штраф за позднее аннулирование"/>
+<PenaltyReason Code="5" Name="Штраф за невостребование"/>
+</PenaltyReasonResponse>
