@@ -1,0 +1,32 @@
+<StatusListResponse>
+	<Success/>
+	<Status Code="1" Name="Запрос цены"/>
+	<Status Code="5" Name="Предложение цены"/>
+	<Status Code="11" Name="Получен"/>
+	<Status Code="14" Name="Получен"/>
+	<Status Code="18" Name="В работе"/>
+	<Status Code="21" Name="В работе"/>
+	<Status Code="25" Name="Отказан"/>
+	<Status Code="29" Name="Отказан"/>
+	<Status Code="32" Name="Лист ожидания"/>
+	<Status Code="35" Name="Подтвержден"/>
+	<Status Code="41" Name="Подтвержден"/>
+	<Status Code="44" Name="Изменен"/>
+	<Status Code="47" Name="Изменения получены"/>
+	<Status Code="50" Name="В работе"/>
+	<Status Code="53" Name="В работе"/>
+	<Status Code="56" Name="Отказ на изменения"/>
+	<Status Code="59" Name="Отказ на изменения"/>
+	<Status Code="62" Name="Лист ожидания"/>
+	<Status Code="65" Name="Забронирован"/>
+	<Status Code="71" Name="Аннулирован"/>
+	<Status Code="73" Name="Аннулирован без штрафа"/>
+	<Status Code="75" Name="Аннулирован без штрафа"/>
+	<Status Code="77" Name="Аннулирован со штрафом"/>
+	<Status Code="79" Name="Аннулирован со штрафом"/>
+	<Status Code="80" Name="Востребован"/>
+	<Status Code="83" Name="Востребован"/>
+	<Status Code="86" Name="Востребован"/>
+	<Status Code="89" Name="Востребован"/>
+	<Status Code="92" Name="Не востребован"/>
+</StatusListResponse>
