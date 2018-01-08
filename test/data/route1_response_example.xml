@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RouteResponse BuyerId="MyCompanyId" UserId="MyUserId" Password="MyPassword" Language="ru">
+	<Action Name="LIST">
+		<Parameters>
+			<StartPoint Name="Моск" Type="" Code=""/>
+			<EndPoint Name="" Type="" Code=""/>
+		</Parameters>
+	</Action>
+	<Success/>
+	<TransferPointList>
+		<TransferPoint Code="2">
+			<TransferPointType Code="1" Name="Город"/>
+			<Country Code="9" Name="Россия"/>
+			<AdmUnit1 Code="1" Name="Не определено"/>
+			<AdmUnit2 Code="1" Name="Не определено"/>
+			<TypeOfPlace Code="2" Name="Город"/>
+			<City Code="2" Name="Москва"/>
+		</TransferPoint>
+		<TransferPoint Code="100115">
+			 <TransferPointType Code="2" Name="Гостиница"/>
+			 <Country Code="9" Name="Россия"/>
+			 <AdmUnit1 Code="23" Name="Калининградская область"/>
+			 <AdmUnit2 Code="1" Name="Не определено"/>
+			 <TypeOfPlace Code="2" Name="Город"/>
+			 <City Code="19" Name="Калининград"/>
+			 <Hotel Code="100115" Name="Москва"/>
+		</TransferPoint>
+		<TransferPoint Code="1000411">
+			 <TransferPointType Code="4" Name="Ж/д вокзалы"/>
+			 <Country Code="9" Name="Россия"/>
+			 <AdmUnit1 Code="1" Name="Не определено"/>
+			 <AdmUnit2 Code="1" Name="Не определено"/>
+			 <TypeOfPlace Code="2" Name="Город"/>
+			 <City Code="3" Name="Санкт-Петербург"/>
+			 <Object Code="1000411" Name="Московский"/>
+			 <ObjectSubType Code="9500001" Name="Не имеет значения"/>
+			 <ObjectType Code="1000039" Name="Ж/д вокзалы"/>
+		</TransferPoint>
+		<TransferPoint Code="1000391">
+			 <TransferPointType Code="4" Name="Ж/д вокзалы"/>
+			 <Country Code="9" Name="Россия"/>
+			 <AdmUnit1 Code="26" Name="Нижегородская область"/>
+			 <AdmUnit2 Code="1" Name="Не определено"/>
+			 <TypeOfPlace Code="2" Name="Город"/>
+			 <City Code="20" Name="Нижний Новгород"/>
+			 <Object Code="1000391" Name="Нижний Новгород-Московский"/>
+			 <ObjectSubType Code="9500001" Name="Не имеет значения"/>
+			 <ObjectType Code="1000039" Name="Ж/д вокзалы"/>
+		</TransferPoint>
+	</TransferPointList>
+</RouteResponse>
