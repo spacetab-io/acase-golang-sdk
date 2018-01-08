@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TypeOfPlaceResponse BuyerId="MyCompanyId" UserId="MyUserId" Password="MyPassword" Language="ru">
+   <Action Name="LIST">
+      <Parameters TypeOfPlaceCode="" TypeOfPlaceName=""/>
+   </Action>
+   <Success/>
+   <TypeOfPlaceList>
+      <TypeOfPlace Code="1" Name="Не определено"/>
+      <TypeOfPlace Code="2" Name="город"/>
+   </TypeOfPlaceList>
+</TypeOfPlaceResponse>
