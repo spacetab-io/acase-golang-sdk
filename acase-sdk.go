@@ -1217,3 +1217,45 @@ func (a *Api) RateGroupRequest(items []string) (*acaseSts.RateGroupResponseType,
 
 	return resp, nil
 }
+
+func (a *Api) RouteRequest(fromName, toName string, fromCode, toCode, fromTypeCode, toTypeCode int) (*acaseSts.RouteResponseType, *AcaseResponseError) {
+
+	req := &acaseSts.RouteRequestType{
+		Language: a.Language,
+		Password: a.Password,
+		UserId: a.UserId,
+		BuyerId: a.BuyerId,
+	}
+	req.Action.Name = "LIST"
+	if fromName != "" {
+		if toCode > 0 && toTypeCode > 0 {
+			req.Action.Parameters.EndPoint.Code = toCode
+			req.Action.Parameters.EndPoint.Type = toTypeCode
+		}
+		req.Action.Parameters.StartPoint.Name = fromName
+	} else if toName != "" {
+		if fromCode > 0 && fromTypeCode > 0 {
+			req.Action.Parameters.StartPoint.Code = toCode
+			req.Action.Parameters.StartPoint.Type = toTypeCode
+		}
+		req.Action.Parameters.EndPoint.Name = toName
+	}
+
+	bItem, err := xml.Marshal(req)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+	resp := &acaseSts.RouteResponseType{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != "" || resp.Error.Description != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: resp.Error.Code,
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return resp, nil
+}
