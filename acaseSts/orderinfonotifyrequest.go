@@ -23,7 +23,7 @@ type OrderInfoNotifyRequestType struct {
 	InvoiceRule				int						`xml:"InvoiceRule,attr"`
 	InvoiceId				int						`xml:"InvoiceId,attr"`
 	ConfirmId				int						`xml:"ConfirmId,attr"`
-	Currency				CurrencyType			`xml:"Currency"`
+	Currency				SimpleCodeNameType		`xml:"Currency"`
 	Autonom					SimpleCodeNameType		`xml:"Autonom"`
 	VatLimit				SimpleCodeNameType		`xml:"VatLimit"`
 	TypeContract			SimpleCodeNameType		`xml:"TypeContract"`
@@ -98,9 +98,8 @@ type PenaltiesType struct {
 }
 
 type PenaltyType struct {
+	SimpleCodeNameType
 	XMLName				xml.Name			`xml:"Penalty"`
-	Code				int					`xml:"Code,attr,omitempty"`
-	Name				string				`xml:"Name,attr,omitempty"`
 	Gain				float64				`xml:"Gain,attr"`
 	FullVATInPrice		int					`xml:"FullVATInPrice,attr"`
 	Id					int					`xml:"Id,attr"`
@@ -152,7 +151,6 @@ type ContactPersonType struct {
 }
 
 type OrderInfoNotifyResponseType struct {
+	BaseResponse
 	XMLName	xml.Name	`xml:"OrderInfoNotifyResponse"`
-	Success	string		`xml:"Success"`
-	Error	ErrorType	`xml:"Error,omitempty"`
 }

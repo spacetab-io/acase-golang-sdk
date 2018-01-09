@@ -3,11 +3,8 @@ package acaseSts
 import "encoding/xml"
 
 type ObjectTypeRequestType struct {
+	Credentials
 	XMLName		xml.Name				`xml:"ObjectTypeRequest"`
-	BuyerId		string					`xml:"BuyerId,attr"`
-	UserId		string					`xml:"UserId,attr"`
-	Password	string					`xml:"Password,attr"`
-	Language	LanguageTypeEnum		`xml:"Language,attr,omitempty"`
 	Action		[]ObjectTypeActionType	`xml:"Action"`
 }
 
@@ -23,13 +20,9 @@ type ParametersObjType struct {
 }
 
 type ObjectTypeResponseType struct {
+	Credentials
+	BaseResponse
 	XMLName			xml.Name			`xml:"ObjectTypeResponse"`
-	BuyerId			string				`xml:"BuyerId,attr"`
-	UserId			string				`xml:"UserId,attr"`
-	Password		string				`xml:"Password,attr"`
-	Language		string				`xml:"Language,attr,omitempty"`
-	Success			string				`xml:"Success"`
-	Error			ErrorType			`xml:"Error,omitempty"`
 	Action			[]ObjectActionType	`xml:"Action"`
 	ObjectTypeList	ObjectTypeListType	`xml:"ObjectTypeList"`
 }

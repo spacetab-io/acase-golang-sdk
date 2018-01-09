@@ -18,7 +18,7 @@ type OrderInfoAwocNotifyRequestType struct {
 	InvoiceId				int					`xml:"InvoiceId,attr"`
 	ConfirmId				int					`xml:"ConfirmId,attr"`
 	Success					string				`xml:"Success"`
-	Currency				CurrencyType		`xml:"Currency"`
+	Currency				SimpleCodeNameType	`xml:"Currency"`
 	WhereToPay				SimpleCodeNameType	`xml:"WhereToPay"`
 	Status					SimpleCodeNameType	`xml:"Status"`
 	ContactPerson			ContactPersonType	`xml:"ContactPerson"`
@@ -56,7 +56,7 @@ type AwocType struct {
 	ToBeSelected			YesNoCodeType		`xml:"ToBeSelected"`
 	Hotel					SimpleCodeNameType	`xml:"Hotel"`
 	Country					SimpleCodeNameType	`xml:"Country"`
-	AdmUnit1				AdmUnit1Type		`xml:"AdmUnit1"`
+	AdmUnit1				SimpleCodeNameType	`xml:"AdmUnit1"`
 	AdmUnit2				AdmUnit2Type		`xml:"AdmUnit2"`
 	TypeOfPlace				SimpleCodeNameType	`xml:"TypeOfPlace"`
 	City					SimpleCodeNameType	`xml:"City"`

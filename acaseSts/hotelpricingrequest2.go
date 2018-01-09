@@ -3,11 +3,8 @@ package acaseSts
 import "encoding/xml"
 
 type HotelPricingRequest2Type struct {
+	Credentials
 	XMLName					xml.Name			`xml:"HotelPricingRequest2"`
-	BuyerId					string				`xml:"BuyerId,attr"`
-	UserId					string				`xml:"UserId,attr"`
-	Password				string				`xml:"Password,attr"`
-	Language				LanguageTypeEnum	`xml:"Language,attr,omitempty"`
 	Hotel					int					`xml:"Hotel,attr"`
 	ProductCode				int					`xml:"ProductCode,attr"`
 	Currency				int					`xml:"Currency,attr"`
@@ -26,12 +23,10 @@ type HotelPricingRequest2Type struct {
 }
 
 type HotelPricingResponse2Type struct {
+	BaseResponse
+	SimpleCodeNameType
 	XMLName					xml.Name					`xml:"HotelPricingResponse2"`
-	Success					string						`xml:"Success"`
-	Error					ErrorType					`xml:"Error,omitempty"`
 	Country					CountryType					`xml:"Country"`
-	Code					int							`xml:"Code,attr"`
-	Name					string						`xml:"Name,attr"`
 	StartDate				string						`xml:"StartDate,attr"`
 	EndDate					string						`xml:"EndDate,attr"`
 	NumberOfGuests			int							`xml:"NumberOfGuests,attr"`
@@ -39,13 +34,13 @@ type HotelPricingResponse2Type struct {
 	NumberOfExtraBedsChild	int							`xml:"NumberOfExtraBedsChild,attr,omitempty"`
 	NumberOfExtraBedsInfant	int							`xml:"NumberOfExtraBedsInfant,attr,omitempty"`
 	SpecialRequirements		string						`xml:"SpecialRequirements,attr"`
-	AdmUnit1				AdmUnit1Type				`xml:"AdmUnit1"`
+	AdmUnit1				SimpleCodeNameType			`xml:"AdmUnit1"`
 	AdmUnit2				AdmUnit2Type				`xml:"AdmUnit2"`
-	TypeOfPlace				TypeOfPlaceType				`xml:"TypeOfPlace"`
+	TypeOfPlace				SimpleCodeNameType			`xml:"TypeOfPlace"`
 	City					CityType					`xml:"City"`
 	ObjType					ObjTypeType					`xml:"ObjType"`
 	Position				PositionType				`xml:"Position"`
-	Currency				CurrencyType				`xml:"Currency"`
+	Currency				SimpleCodeNameType			`xml:"Currency"`
 	Infants					AgeRestrictionType			`xml:"Infants"`
 	Children				AgeRestrictionType			`xml:"Children"`
 	SpecialRequirementList	SpecialRequirementListType	`xml:"SpecialRequirementList"`
@@ -60,12 +55,12 @@ type LateCheckOutListType struct {
 }
 
 type LateCheckOutType struct {
-	XMLName							xml.Name							`xml:"LateCheckOut"`
-	Time							string								`xml:"Time,attr"`
-	Price							float64								`xml:"Price,attr"`
-	Text							string								`xml:"Text,attr"`
-	Guaranteed						GuaranteedType						`xml:"Guaranteed"`
-	EarlyCheckInLateCheckOutRule	EarlyCheckInLateCheckOutRuleType	`xml:"EarlyCheckInLateCheckOutRule"`
+	XMLName							xml.Name			`xml:"LateCheckOut"`
+	Time							string				`xml:"Time,attr"`
+	Price							float64				`xml:"Price,attr"`
+	Text							string				`xml:"Text,attr"`
+	Guaranteed						SimpleCodeNameType	`xml:"Guaranteed"`
+	EarlyCheckInLateCheckOutRule	SimpleCodeNameType	`xml:"EarlyCheckInLateCheckOutRule"`
 }
 
 type EarlyCheckInListType struct {
@@ -74,24 +69,12 @@ type EarlyCheckInListType struct {
 }
 
 type EarlyCheckInType struct {
-	XMLName							xml.Name							`xml:"EarlyCheckIn"`
-	Time							string								`xml:"Time,attr"`
-	Price							float64								`xml:"Price,attr"`
-	Text							string								`xml:"Text,attr"`
-	Guaranteed						GuaranteedType						`xml:"Guaranteed"`
-	EarlyCheckInLateCheckOutRule	EarlyCheckInLateCheckOutRuleType	`xml:"EarlyCheckInLateCheckOutRule"`
-}
-
-type EarlyCheckInLateCheckOutRuleType struct {
-	XMLName	xml.Name	`xml:"EarlyCheckInLateCheckOutRule"`
-	Code	int			`xml:"Code,attr"`
-	Name	string		`xml:"Name,attr"`
-}
-
-type GuaranteedType struct {
-	XMLName	xml.Name	`xml:"Guaranteed"`
-	Code	int			`xml:"Code,attr"`
-	Name	string		`xml:"Name,attr"`
+	XMLName							xml.Name			`xml:"EarlyCheckIn"`
+	Time							string				`xml:"Time,attr"`
+	Price							float64				`xml:"Price,attr"`
+	Text							string				`xml:"Text,attr"`
+	Guaranteed						SimpleCodeNameType	`xml:"Guaranteed"`
+	EarlyCheckInLateCheckOutRule	SimpleCodeNameType	`xml:"EarlyCheckInLateCheckOutRule"`
 }
 
 type HotelPricingDetailType struct {
@@ -177,14 +160,8 @@ type EarlierCheckInPriceType struct {
 }
 
 type WhereToPayListType struct {
-	XMLName	xml.Name			`xml:"WhereToPayList"`
-	Items	[]WhereToPayType	`xml:"WhereToPay"`
-}
-
-type WhereToPayType struct {
-	XMLName	xml.Name	`xml:"WhereToPay"`
-	Code	int			`xml:"Code,attr"`
-	Name	string		`xml:"Name,attr"`
+	XMLName	xml.Name				`xml:"WhereToPayList"`
+	Items	[]SimpleCodeNameType	`xml:"WhereToPay"`
 }
 
 type PenaltyRuleListType struct {
@@ -207,9 +184,8 @@ type MealsType struct {
 }
 
 type MealType struct {
+	SimpleCodeNameType
 	XMLName 			xml.Name 		`xml:"Meal"`
-	Code				int				`xml:"Code,attr"`
-	Name				string			`xml:"Name,attr"`
 	Price				float64			`xml:"Price,attr"`
 	MinimumRetailPrice	float64			`xml:"MinimumRetailPrice,attr"`
 	IncludedInPrice		YesNoCodeType	`xml:"IncludedInPrice"`
@@ -229,8 +205,7 @@ type SpecialOfferType struct {
 }
 
 type SpecialOfferTypeType struct {
+	SimpleCodeNameType
 	XMLName	xml.Name	`xml:"SpecialOfferType"`
-	Code	int			`xml:"Code,attr"`
-	Name	string		`xml:"Name,attr"`
 	Id		int			`xml:"Id,attr"`
 }

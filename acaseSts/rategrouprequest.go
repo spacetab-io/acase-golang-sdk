@@ -3,11 +3,8 @@ package acaseSts
 import "encoding/xml"
 
 type RateGroupRequestType struct {
+	Credentials
 	XMLName		xml.Name				`xml:"RateGroupRequest"`
-	BuyerId		string					`xml:"BuyerId,attr"`
-	UserId		string					`xml:"UserId,attr"`
-	Password	string					`xml:"Password,attr"`
-	Language	LanguageTypeEnum		`xml:"Language,attr,omitempty"`
 	ActionList	RateGroupActionListType	`xml:"ActionList"`
 }
 
@@ -22,13 +19,9 @@ type RateGroupParameterType struct {
 }
 
 type RateGroupResponseType struct {
+	Credentials
+	BaseResponse
 	XMLName		xml.Name				`xml:"RateGroupResponse"`
-	BuyerId		string					`xml:"BuyerId,attr"`
-	UserId		string					`xml:"UserId,attr"`
-	Password	string					`xml:"Password,attr"`
-	Language	string					`xml:"Language,attr,omitempty"`
-	Success		SuccessType				`xml:"Success"`
-	Error		ErrorType				`xml:"Error,omitempty"`
 	ActionList	RateGroupActionListType	`xml:"ActionList"`
 	RateGroup	[]SimpleCodeNameType	`xml:"RateGroup"`
 }
