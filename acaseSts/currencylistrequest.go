@@ -23,5 +23,5 @@ type CurrencyListResponseType struct {
 type CurrencyType struct {
 	XMLName	xml.Name	`xml:"Currency"`
 	Code	int			`xml:"Code,attr"`
-	Name	string		`xml:"Name,attr"`
+	Name	string		`xml:"Name,attr,omitempty"`
 }

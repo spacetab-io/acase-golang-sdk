@@ -54,6 +54,7 @@ type AccommodationType struct {
 	NumberOfRooms					int					`xml:"NumberOfRooms,attr"`
 	NumberOfGuests					int					`xml:"NumberOfGuests,attr"`
 	AdditionalInfo					string				`xml:"AdditionalInfo,attr"`
+	ReferenceNumber					string				`xml:"ReferenceNumber,attr,omitempty"`
 	SupplierInfo					string				`xml:"SupplierInfo,attr"`
 	ConfirmationNumber				string				`xml:"ConfirmationNumber,attr"`
 	Price							float64				`xml:"Price,attr"`

@@ -1128,3 +1128,55 @@ func (a *Api) OrderListRequest(arrivalDateFrom, arrivalDateTo, departureDateFrom
 
 	return resp, nil
 }
+
+func (a *Api) OrderRequest(item *acaseSts.OrderRequestType) (*acaseSts.OrderResponseType, *AcaseResponseError) {
+
+	item.Language = a.Language
+	item.Password = a.Password
+	item.UserId = a.UserId
+	item.BuyerId = a.BuyerId
+
+	bItem, err := xml.Marshal(item)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+	resp := &acaseSts.OrderResponseType{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != "" || resp.Error.Description != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: resp.Error.Code,
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return resp, nil
+}
+
+func (a *Api) OrderAwocRequest(item *acaseSts.OrderAwocRequestType) (*acaseSts.OrderResponseType, *AcaseResponseError) {
+
+	item.Language = a.Language
+	item.Password = a.Password
+	item.UserId = a.UserId
+	item.BuyerId = a.BuyerId
+
+	bItem, err := xml.Marshal(item)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+	resp := &acaseSts.OrderResponseType{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != "" || resp.Error.Description != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: resp.Error.Code,
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return resp, nil
+}
