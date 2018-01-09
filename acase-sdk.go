@@ -1289,3 +1289,36 @@ func (a *Api) PenaltyReasonRequest() (*acaseSts.PenaltyReasonResponseType, *Acas
 	return resp, nil
 }
 
+func (a *Api) SpecialOfferTypeRequest(code int, name string) (*acaseSts.SpecialOfferTypeResponseType, *AcaseResponseError) {
+
+	req := &acaseSts.SpecialOfferTypeRequestType{
+		Language: a.Language,
+		Password: a.Password,
+		UserId: a.UserId,
+		BuyerId: a.BuyerId,
+	}
+	if code > 0 {
+		req.ActionList.Parameters.Code = code
+	}
+	if name != "" {
+		req.ActionList.Parameters.Name = name
+	}
+
+	bItem, err := xml.Marshal(req)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+	resp := &acaseSts.SpecialOfferTypeResponseType{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != "" || resp.Error.Description != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: resp.Error.Code,
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return resp, nil
+}
