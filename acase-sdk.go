@@ -1382,3 +1382,33 @@ func (a *Api) StatusListRequest() (*acaseSts.StatusListResponseType, *AcaseRespo
 	return resp, nil
 }
 
+func (a *Api) TypeOfPlaceRequest(typeOfPlaceCode int, typeOfPlaceName string) (*acaseSts.TypeOfPlaceResponseType, *AcaseResponseError) {
+
+	req := &acaseSts.TypeOfPlaceRequestType{
+		Language: a.Language,
+		Password: a.Password,
+		UserId: a.UserId,
+		BuyerId: a.BuyerId,
+	}
+	req.Action.Name = "LIST"
+	req.Action.Parameters.TypeOfPlaceCode = typeOfPlaceCode
+	req.Action.Parameters.TypeOfPlaceName = typeOfPlaceName
+
+	bItem, err := xml.Marshal(req)
+	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
+	FatalError(err)
+	resp := &acaseSts.TypeOfPlaceResponseType{}
+	err = xml.Unmarshal(respData, resp)
+	FatalError(err)
+	if resp.Error.Code != "" || resp.Error.Description != "" {
+		rError := make([]RespError, 1)
+		rError[0] = RespError{
+			Code: resp.Error.Code,
+			Message: resp.Error.Description,
+		}
+		res := ErrorResponse(rError)
+		return nil, &res[0]
+	}
+
+	return resp, nil
+}
