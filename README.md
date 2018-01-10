@@ -1,7 +1,7 @@
-Unofficial golang SDK for integration with hotels reservation API, powered by "Academ service" provider.
+# Unofficial golang SDK for integration with hotels reservation API, powered by "Academ service" provider.
 
 [![develop](https://circleci.com/gh/tmconsulting/acase-golang-sdk/tree/develop.svg?style=shield)](https://circleci.com/gh/tmconsulting/acase-golang-sdk/tree/develop)
-
+[![MIT Licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/tmconsulting/acase-golang-sdk/blob/develop/LICENSE)
 ---------------
 
 This SDK is used to connect to the Academservice and use it methods for a 3-rd party API.
