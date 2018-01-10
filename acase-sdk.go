@@ -78,14 +78,15 @@ func (a *Api) processRequest(item interface{}, res interface{}) *AcaseResponseEr
 	return nil
 }
 
+func (a *Api) fillCredentials(item *acaseSts.Credentials) {
+	item.BuyerId = a.BuyerId
+	item.UserId = a.UserId
+	item.Password = a.Password
+	item.Language = a.Language
+}
+
 func (a *Api) AdmUnit1Request(countryCode int, admUnitCode, admUnitName string) (*acaseSts.AdmUnit1ListType, *AcaseResponseError) {
 	req := &acaseSts.AdmUnit1RequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
 		Action: acaseSts.AdmUnit1ActionType{
 			Name: acaseSts.List,
 			Parameters: acaseSts.AdmUnit1ActionTypeParameters{
@@ -95,6 +96,7 @@ func (a *Api) AdmUnit1Request(countryCode int, admUnitCode, admUnitName string) 
 			},
 		},
 	}
+	a.fillCredentials(&req.Credentials)
 	resp := &acaseSts.AdmUnit1ResponseType{}
 	err := a.processRequest(req, resp)
 	if err != nil {
@@ -109,12 +111,6 @@ func (a *Api) AdmUnit1Request(countryCode int, admUnitCode, admUnitName string) 
 
 func (a *Api) AdmUnit2Request(countryCode int, admUnit1Code, admUnit1Name, admUnit2Code, admUnit2Name string) (*acaseSts.AdmUnit2ListType, *AcaseResponseError) {
 	req := &acaseSts.AdmUnit2RequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
 		Action: acaseSts.AdmUnit2ActionType{
 			Name: acaseSts.List,
 			Parameters: acaseSts.AdmUnit2ActionTypeParameters{
@@ -126,7 +122,7 @@ func (a *Api) AdmUnit2Request(countryCode int, admUnit1Code, admUnit1Name, admUn
 			},
 		},
 	}
-
+	a.fillCredentials(&req.Credentials)
 	resp := &acaseSts.AdmUnit2ResponseType{}
 	err := a.processRequest(req, resp)
 	if err != nil {
@@ -141,14 +137,8 @@ func (a *Api) AdmUnit2Request(countryCode int, admUnit1Code, admUnit1Name, admUn
 }
 
 func (a *Api) CitizenshipListRequest() (*acaseSts.CitizenshipListType, *AcaseResponseError) {
-	req := &acaseSts.CitizenshipListRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
-	}
+	req := &acaseSts.CitizenshipListRequestType{}
+	a.fillCredentials(&req.Credentials)
 	resp := &acaseSts.CitizenshipListType{}
 	err := a.processRequest(req, resp)
 	if err != nil {
@@ -164,14 +154,9 @@ func (a *Api) CitizenshipListRequest() (*acaseSts.CitizenshipListType, *AcaseRes
 
 func (a *Api) CityDescriptionRequest(cityCode string) (*acaseSts.CityDescriptionType, *AcaseResponseError) {
 	req := &acaseSts.CityDescriptionRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
 		CityCode: cityCode,
 	}
+	a.fillCredentials(&req.Credentials)
 	resp := &acaseSts.CityDescriptionType{}
 	err := a.processRequest(req, resp)
 	if err != nil {
@@ -187,17 +172,12 @@ func (a *Api) CityDescriptionRequest(cityCode string) (*acaseSts.CityDescription
 
 func (a *Api) CityListRequest(countryCode, countryName, cityName string, cityCode int) (*acaseSts.CityListType, *AcaseResponseError) {
 	req := &acaseSts.CityListRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
 		CountryCode: countryCode,
 		CountryName: countryName,
 		CityCode: cityCode,
 		CityName: cityName,
 	}
+	a.fillCredentials(&req.Credentials)
 	resp := &acaseSts.CityListType{}
 	err := a.processRequest(req, resp)
 	if err != nil {
@@ -213,14 +193,9 @@ func (a *Api) CityListRequest(countryCode, countryName, cityName string, cityCod
 
 func (a *Api) CountryDescriptionRequest(countryCode int) (*acaseSts.CountryDescriptionType, *AcaseResponseError) {
 	req := &acaseSts.CountryDescriptionRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
 		CountryCode: countryCode,
 	}
+	a.fillCredentials(&req.Credentials)
 	resp := &acaseSts.CountryDescriptionType{}
 	err := a.processRequest(req, resp)
 	if err != nil {
@@ -236,15 +211,10 @@ func (a *Api) CountryDescriptionRequest(countryCode int) (*acaseSts.CountryDescr
 
 func (a *Api) ClientCategoryListRequest(categoryCode int, categoryName string) (*acaseSts.ClientCategoryListType, *AcaseResponseError) {
 	req := &acaseSts.ClientCategoryListRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
 		ClientCategoryCode: categoryCode,
 		ClientCategoryName: categoryName,
 	}
+	a.fillCredentials(&req.Credentials)
 	resp := &acaseSts.ClientCategoryListType{}
 	err := a.processRequest(req, resp)
 	if err != nil {
@@ -260,15 +230,10 @@ func (a *Api) ClientCategoryListRequest(categoryCode int, categoryName string) (
 
 func (a *Api) CountryListRequest(countryCode int, countryName string) (*acaseSts.CountryListType, *AcaseResponseError) {
 	req := &acaseSts.CountryListRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
 		CountryCode: countryCode,
 		CountryName: countryName,
 	}
+	a.fillCredentials(&req.Credentials)
 	resp := &acaseSts.CountryListType{}
 	err := a.processRequest(req, resp)
 	if err != nil {
@@ -284,15 +249,10 @@ func (a *Api) CountryListRequest(countryCode int, countryName string) (*acaseSts
 
 func (a *Api) CurrencyListRequest(currencyCode int, currencyName, options string) (*acaseSts.CurrencyListResponseType, *AcaseResponseError) {
 	req := &acaseSts.CurrencyListRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
 		Code: currencyCode,
 		Name: currencyName,
 	}
+	a.fillCredentials(&req.Credentials)
 	resp := &acaseSts.CurrencyListResponseType{}
 	err := a.processRequest(req, resp)
 	if err != nil {
@@ -310,12 +270,6 @@ func (a *Api) CustomerRequestCreate(fullName, zipCode, address, piAddress, inn, 
 	countryName, cityName string, buyerTypeCode, countryCode, cityCode int) (*acaseSts.CustomerResponseCreateType, *AcaseResponseError) {
 
 	req := &acaseSts.CustomerRequestCreateType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
 		ActionCreate: acaseSts.ActionCreateType{
 			Parameters:acaseSts.CustomerRequestParametersType{
 				Customer:&acaseSts.CustomerType{
@@ -343,6 +297,7 @@ func (a *Api) CustomerRequestCreate(fullName, zipCode, address, piAddress, inn, 
 			},
 		},
 	}
+	a.fillCredentials(&req.Credentials)
 	resp := &acaseSts.CustomerResponseCreateType{}
 	err := a.processRequest(req, resp)
 	if err != nil {
@@ -360,12 +315,6 @@ func (a *Api) CustomerRequestUpdate(fullName, zipCode, address, piAddress, inn, 
 	countryName, cityName string, customerCode, buyerTypeCode, countryCode, cityCode int) (*acaseSts.CustomerResponseUpdateType, *AcaseResponseError) {
 
 	req := &acaseSts.CustomerRequestUpdateType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
 		ActionUpdate: acaseSts.ActionUpdateType{
 			Parameters:acaseSts.CustomerRequestParametersType{
 				Customer:&acaseSts.CustomerType{
@@ -394,6 +343,7 @@ func (a *Api) CustomerRequestUpdate(fullName, zipCode, address, piAddress, inn, 
 			},
 		},
 	}
+	a.fillCredentials(&req.Credentials)
 	resp := &acaseSts.CustomerResponseUpdateType{}
 	err := a.processRequest(req, resp)
 	if err != nil {
@@ -410,12 +360,6 @@ func (a *Api) CustomerRequestUpdate(fullName, zipCode, address, piAddress, inn, 
 func (a *Api) CustomerRequestDelete(customerCode int) (*acaseSts.CustomerResponseDeleteType, *AcaseResponseError) {
 
 	req := &acaseSts.CustomerRequestDeleteType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
 		ActionDelete: acaseSts.ActionDeleteType{
 			Parameters:acaseSts.CustomerRequestParametersType{
 				Customer:&acaseSts.CustomerType{
@@ -424,6 +368,7 @@ func (a *Api) CustomerRequestDelete(customerCode int) (*acaseSts.CustomerRespons
 			},
 		},
 	}
+	a.fillCredentials(&req.Credentials)
 	resp := &acaseSts.CustomerResponseDeleteType{}
 	err := a.processRequest(req, resp)
 	if err != nil {
@@ -439,12 +384,6 @@ func (a *Api) CustomerRequestDelete(customerCode int) (*acaseSts.CustomerRespons
 
 func (a *Api) CustomerRequestList(sort, actualOnly int) (*acaseSts.CustomerResponseListType, *AcaseResponseError) {
 	req := &acaseSts.CustomerRequestListType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
 		ActionList: acaseSts.ActionListType{
 			Parameters:acaseSts.CustomerRequestParametersType{
 				Sort:sort,
@@ -452,6 +391,7 @@ func (a *Api) CustomerRequestList(sort, actualOnly int) (*acaseSts.CustomerRespo
 			},
 		},
 	}
+	a.fillCredentials(&req.Credentials)
 	resp := &acaseSts.CustomerResponseListType{}
 	err := a.processRequest(req, resp)
 	if err != nil {
@@ -467,18 +407,13 @@ func (a *Api) CustomerRequestList(sort, actualOnly int) (*acaseSts.CustomerRespo
 
 func (a *Api) CustomerRequestInfo(customerCode int) (*acaseSts.CustomerResponseInfoType, *AcaseResponseError) {
 	req := &acaseSts.CustomerRequestInfoType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
 		ActionInfo: acaseSts.ActionInfoType{
 			Parameters:acaseSts.CustomerRequestParametersType{
 				CustomerCode:customerCode,
 			},
 		},
 	}
+	a.fillCredentials(&req.Credentials)
 	resp := &acaseSts.CustomerResponseInfoType{}
 	err := a.processRequest(req, resp)
 	if err != nil {
@@ -494,15 +429,10 @@ func (a *Api) CustomerRequestInfo(customerCode int) (*acaseSts.CustomerResponseI
 
 func (a *Api) HotelAmenityListRequest(hotelAmenityCode int, hotelAmenityName string) (*acaseSts.HotelAmenityListResponseType, *AcaseResponseError) {
 	req := &acaseSts.HotelAmenityListRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
 		HotelAmenityCode:hotelAmenityCode,
 		HotelAmenityName:hotelAmenityName,
 	}
+	a.fillCredentials(&req.Credentials)
 	resp := &acaseSts.HotelAmenityListResponseType{}
 	err := a.processRequest(req, resp)
 	if err != nil {
@@ -518,15 +448,10 @@ func (a *Api) HotelAmenityListRequest(hotelAmenityCode int, hotelAmenityName str
 
 func (a *Api) HotelDescriptionRequest(hotelCode, currencyCode int) (*acaseSts.HotelDescriptionResponseType, *AcaseResponseError) {
 	req := &acaseSts.HotelDescriptionRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
 		HotelCode:hotelCode,
 		CurrencyCode:currencyCode,
 	}
+	a.fillCredentials(&req.Credentials)
 	resp := &acaseSts.HotelDescriptionResponseType{}
 	err := a.processRequest(req, resp)
 	if err != nil {
@@ -542,12 +467,6 @@ func (a *Api) HotelDescriptionRequest(hotelCode, currencyCode int) (*acaseSts.Ho
 
 func (a *Api) HotelListRequest(hotelCode, countryCode, cityCode, hotelRatingCode int, hotelName, options string) (*acaseSts.HotelListResponseType, *AcaseResponseError) {
 	req := &acaseSts.HotelListRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
 		HotelCode:hotelCode,
 		HotelName:hotelName,
 		CountryCode:countryCode,
@@ -555,6 +474,7 @@ func (a *Api) HotelListRequest(hotelCode, countryCode, cityCode, hotelRatingCode
 		HotelRatingCode:hotelRatingCode,
 		Options:options,
 	}
+	a.fillCredentials(&req.Credentials)
 	resp := &acaseSts.HotelListResponseType{}
 	err := a.processRequest(req, resp)
 	if err != nil {
@@ -573,12 +493,6 @@ func (a *Api) HotelPricingRequest2(productCode, currency, whereToPay, numberOfGu
 	arrivalDate, departureDate, arrivalTime, departureTime, id, accommodationId string) (*acaseSts.HotelPricingResponse2Type, *AcaseResponseError) {
 
 	req := &acaseSts.HotelPricingRequest2Type{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
 		Hotel:hotel,
 		ProductCode:productCode,
 		Currency:currency,
@@ -595,6 +509,7 @@ func (a *Api) HotelPricingRequest2(productCode, currency, whereToPay, numberOfGu
 		Id:id,
 		AccommodationId:accommodationId,
 	}
+	a.fillCredentials(&req.Credentials)
 	resp := &acaseSts.HotelPricingResponse2Type{}
 	err := a.processRequest(req, resp)
 	if err != nil {
@@ -613,12 +528,6 @@ func (a *Api) HotelProductRequest(currency, whereToPay, numberOfGuests, numberOf
 	arrivalDate, departureDate, id, accommodationId string) (*acaseSts.HotelProductResponseType, *AcaseResponseError) {
 
 	req := &acaseSts.HotelProductRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
 		Hotel:hotel,
 		Currency:currency,
 		WhereToPay:whereToPay,
@@ -631,6 +540,7 @@ func (a *Api) HotelProductRequest(currency, whereToPay, numberOfGuests, numberOf
 		NumberOfExtraBedsChild:numberOfExtraBedsChild,
 		NumberOfExtraBedsInfant:numberOfExtraBedsInfant,
 	}
+	a.fillCredentials(&req.Credentials)
 	resp := &acaseSts.HotelProductResponseType{}
 	err := a.processRequest(req, resp)
 	if err != nil {
@@ -649,12 +559,6 @@ func (a *Api) HotelSearchRequest(arrivalDate, departureDate, options, hotelName,
 	priceFrom, priceTo float64, starCodes, minorAges []int) (*acaseSts.HotelSearchResponseType, *AcaseResponseError) {
 
 	req := &acaseSts.HotelSearchRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
 		ArrivalDate:arrivalDate,
 		DepartureDate:departureDate,
 		City:city,
@@ -669,6 +573,7 @@ func (a *Api) HotelSearchRequest(arrivalDate, departureDate, options, hotelName,
 		HotelCode:hotelCode,
 		HotelName:hotelName,
 	}
+	a.fillCredentials(&req.Credentials)
 	if starCodes != nil && len(starCodes) > 0 {
 		for _, starCode := range starCodes {
 			req.StarList.Items = append(req.StarList.Items, *(&acaseSts.SimpleCodeType{Code:starCode}))
@@ -705,13 +610,8 @@ func (a *Api) HotelSearchRequest(arrivalDate, departureDate, options, hotelName,
 
 func (a *Api) MealRequest(mealCode, mealTypeCode []int, mealName []string) (*acaseSts.MealResponseType, *AcaseResponseError) {
 	req := &acaseSts.MealRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
 	}
+	a.fillCredentials(&req.Credentials)
 
 	if mealCode != nil && mealTypeCode != nil && mealName != nil {
 		if len(mealCode) > 0 {
@@ -741,14 +641,8 @@ func (a *Api) MealRequest(mealCode, mealTypeCode []int, mealName []string) (*aca
 }
 
 func (a *Api) MealTypeRequest(mealTypeCode []int, mealName []string) (*acaseSts.MealTypeResponseType, *AcaseResponseError) {
-	req := &acaseSts.MealTypeRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
-	}
+	req := &acaseSts.MealTypeRequestType{}
+	a.fillCredentials(&req.Credentials)
 
 	if mealTypeCode != nil && mealName != nil {
 		if len(mealTypeCode) > 0 {
@@ -778,14 +672,8 @@ func (a *Api) MealTypeRequest(mealTypeCode []int, mealName []string) (*acaseSts.
 }
 
 func (a *Api) ObjectRequest(objectTypeCode, objectSubTypeCode, cityCode []int) (*acaseSts.ObjectResponseType, *AcaseResponseError) {
-	req := &acaseSts.ObjectRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
-	}
+	req := &acaseSts.ObjectRequestType{}
+	a.fillCredentials(&req.Credentials)
 
 	if objectTypeCode != nil && objectSubTypeCode != nil && cityCode != nil {
 		if len(objectTypeCode) > 0 {
@@ -815,14 +703,8 @@ func (a *Api) ObjectRequest(objectTypeCode, objectSubTypeCode, cityCode []int) (
 }
 
 func (a *Api) ObjectSubTypeRequest(objectSubTypeCode []int) (*acaseSts.ObjectSubTypeResponseType, *AcaseResponseError) {
-	req := &acaseSts.ObjectSubTypeRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
-	}
+	req := &acaseSts.ObjectSubTypeRequestType{}
+	a.fillCredentials(&req.Credentials)
 
 	if objectSubTypeCode != nil && len(objectSubTypeCode) > 0 {
 		for _, item := range objectSubTypeCode {
@@ -845,14 +727,8 @@ func (a *Api) ObjectSubTypeRequest(objectSubTypeCode []int) (*acaseSts.ObjectSub
 }
 
 func (a *Api) ObjectTypeRequest(objectTypeCode []int) (*acaseSts.ObjectTypeResponseType, *AcaseResponseError) {
-	req := &acaseSts.ObjectTypeRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
-	}
+	req := &acaseSts.ObjectTypeRequestType{}
+	a.fillCredentials(&req.Credentials)
 
 	if objectTypeCode != nil && len(objectTypeCode) > 0 {
 		for _, item := range objectTypeCode {
@@ -876,15 +752,10 @@ func (a *Api) ObjectTypeRequest(objectTypeCode []int) (*acaseSts.ObjectTypeRespo
 
 func (a *Api) ObjTypeListRequest(objTypeCode, objTypeName string) (*acaseSts.ObjTypeListResponseType, *AcaseResponseError) {
 	req := &acaseSts.ObjTypeListRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
 		Code:objTypeCode,
 		Name:objTypeName,
 	}
+	a.fillCredentials(&req.Credentials)
 	resp := &acaseSts.ObjTypeListResponseType{}
 	err := a.processRequest(req, resp)
 	if err != nil {
@@ -899,14 +770,8 @@ func (a *Api) ObjTypeListRequest(objTypeCode, objTypeName string) (*acaseSts.Obj
 }
 
 func (a *Api) OrderDocRequest(actionName acaseSts.OrderDocActionName, taskId, docId, code int) (*acaseSts.OrderDocsResponseType, *AcaseResponseError) {
-	req := &acaseSts.OrderDocsRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
-	}
+	req := &acaseSts.OrderDocsRequestType{}
+	a.fillCredentials(&req.Credentials)
 	req.Action = make([]acaseSts.OrderDocActionType, 1)
 	req.Action[0].Name = string(actionName)
 
@@ -964,12 +829,6 @@ func (a *Api) OrderListRequest(arrivalDateFrom, arrivalDateTo, departureDateFrom
 	lastName string, hotel int) (*acaseSts.OrderListResponseType, *AcaseResponseError) {
 
 	req := &acaseSts.OrderListRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
 		ArrivalDateFrom:arrivalDateFrom,
 		ArrivalDateTo:arrivalDateTo,
 		DepartureDateFrom:departureDateFrom,
@@ -984,6 +843,7 @@ func (a *Api) OrderListRequest(arrivalDateFrom, arrivalDateTo, departureDateFrom
 		LastName:lastName,
 		Hotel:hotel,
 	}
+	a.fillCredentials(&req.Credentials)
 	resp := &acaseSts.OrderListResponseType{}
 	err := a.processRequest(req, resp)
 	if err != nil {
@@ -999,11 +859,7 @@ func (a *Api) OrderListRequest(arrivalDateFrom, arrivalDateTo, departureDateFrom
 
 func (a *Api) OrderRequest(item *acaseSts.OrderRequestType) (*acaseSts.OrderResponseType, *AcaseResponseError) {
 
-	item.Language = a.Language
-	item.Password = a.Password
-	item.UserId = a.UserId
-	item.BuyerId = a.BuyerId
-
+	a.fillCredentials(&item.Credentials)
 	resp := &acaseSts.OrderResponseType{}
 	err := a.processRequest(item, resp)
 	if err != nil {
@@ -1019,11 +875,7 @@ func (a *Api) OrderRequest(item *acaseSts.OrderRequestType) (*acaseSts.OrderResp
 
 func (a *Api) OrderAwocRequest(item *acaseSts.OrderAwocRequestType) (*acaseSts.OrderResponseType, *AcaseResponseError) {
 
-	item.Language = a.Language
-	item.Password = a.Password
-	item.UserId = a.UserId
-	item.BuyerId = a.BuyerId
-
+	a.fillCredentials(&item.Credentials)
 	resp := &acaseSts.OrderResponseType{}
 	err := a.processRequest(item, resp)
 	if err != nil {
@@ -1039,14 +891,8 @@ func (a *Api) OrderAwocRequest(item *acaseSts.OrderAwocRequestType) (*acaseSts.O
 
 func (a *Api) RateGroupRequest(items []string) (*acaseSts.RateGroupResponseType, *AcaseResponseError) {
 
-	req := &acaseSts.RateGroupRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
-	}
+	req := &acaseSts.RateGroupRequestType{}
+	a.fillCredentials(&req.Credentials)
 
 	if items != nil && len(items) > 0 {
 		req.ActionList.Parameters = make([]acaseSts.RateGroupParameterType, len(items))
@@ -1071,14 +917,8 @@ func (a *Api) RateGroupRequest(items []string) (*acaseSts.RateGroupResponseType,
 
 func (a *Api) RouteRequest(fromName, toName string, fromCode, toCode, fromTypeCode, toTypeCode int) (*acaseSts.RouteResponseType, *AcaseResponseError) {
 
-	req := &acaseSts.RouteRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
-	}
+	req := &acaseSts.RouteRequestType{}
+	a.fillCredentials(&req.Credentials)
 	req.Action.Name = "LIST"
 	if fromName != "" {
 		if toCode > 0 && toTypeCode > 0 {
@@ -1108,14 +948,8 @@ func (a *Api) RouteRequest(fromName, toName string, fromCode, toCode, fromTypeCo
 
 func (a *Api) PenaltyReasonRequest() (*acaseSts.PenaltyReasonResponseType, *AcaseResponseError) {
 
-	req := &acaseSts.PenaltyReasonRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
-	}
+	req := &acaseSts.PenaltyReasonRequestType{}
+	a.fillCredentials(&req.Credentials)
 	req.Action.Name = "LISTPENALTY"
 	resp := &acaseSts.PenaltyReasonResponseType{}
 	err := a.processRequest(req, resp)
@@ -1132,14 +966,8 @@ func (a *Api) PenaltyReasonRequest() (*acaseSts.PenaltyReasonResponseType, *Acas
 
 func (a *Api) SpecialOfferTypeRequest(code int, name string) (*acaseSts.SpecialOfferTypeResponseType, *AcaseResponseError) {
 
-	req := &acaseSts.SpecialOfferTypeRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
-	}
+	req := &acaseSts.SpecialOfferTypeRequestType{}
+	a.fillCredentials(&req.Credentials)
 	if code > 0 {
 		req.ActionList.Parameters.Code = code
 	}
@@ -1162,18 +990,13 @@ func (a *Api) SpecialOfferTypeRequest(code int, name string) (*acaseSts.SpecialO
 func (a *Api) StarListRequest(code int, name, options string) (*acaseSts.StarListResponseType, *AcaseResponseError) {
 
 	req := &acaseSts.StarListRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
 		SimpleCodeNameType:acaseSts.SimpleCodeNameType{
 			Code:code,
 			Name:name,
 		},
 		Options:options,
 	}
+	a.fillCredentials(&req.Credentials)
 	resp := &acaseSts.StarListResponseType{}
 	err := a.processRequest(req, resp)
 	if err != nil {
@@ -1189,14 +1012,8 @@ func (a *Api) StarListRequest(code int, name, options string) (*acaseSts.StarLis
 
 func (a *Api) StatusListRequest() (*acaseSts.StatusListResponseType, *AcaseResponseError) {
 
-	req := &acaseSts.StatusListRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
-	}
+	req := &acaseSts.StatusListRequestType{}
+	a.fillCredentials(&req.Credentials)
 	resp := &acaseSts.StatusListResponseType{}
 	err := a.processRequest(req, resp)
 	if err != nil {
@@ -1212,14 +1029,8 @@ func (a *Api) StatusListRequest() (*acaseSts.StatusListResponseType, *AcaseRespo
 
 func (a *Api) TypeOfPlaceRequest(typeOfPlaceCode int, typeOfPlaceName string) (*acaseSts.TypeOfPlaceResponseType, *AcaseResponseError) {
 
-	req := &acaseSts.TypeOfPlaceRequestType{
-		Credentials:acaseSts.Credentials{
-			Language: a.Language,
-			Password: a.Password,
-			UserId: a.UserId,
-			BuyerId: a.BuyerId,
-		},
-	}
+	req := &acaseSts.TypeOfPlaceRequestType{}
+	a.fillCredentials(&req.Credentials)
 	req.Action.Name = "LIST"
 	req.Action.Parameters.TypeOfPlaceCode = typeOfPlaceCode
 	req.Action.Parameters.TypeOfPlaceName = typeOfPlaceName
