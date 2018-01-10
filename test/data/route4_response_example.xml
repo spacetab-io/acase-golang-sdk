@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RouteResponse BuyerId="MyCompanyId" UserId="MyUserId" Password="MyPassword" Language="ru">
+	<Action Name="LIST">
+		<Parameters>
+			<StartPoint Name="Шере" Type="" Code=""/>
+			<EndPoint Name="" Type="1" Code="2"/>
+		</Parameters>
+	</Action>
+	<Success/>
+	<TransferPointList>
+		<TransferPoint Code="1200089">
+			 <TransferPointType Code="3" Name="Аэропорт"/>
+			 <Country Code="9" Name="Россия"/>
+			 <AdmUnit1 Code="1" Name="Не определено"/>
+			 <AdmUnit2 Code="1" Name="Не определено"/>
+			 <TypeOfPlace Code="2" Name="Город"/>
+			 <City Code="2" Name="Москва"/>
+			 <Object Code="1200089" Name="Шереметьево B"/>
+			 <ObjectSubType Code="9500001" Name="Не имеет значения"/>
+			 <ObjectType Code="800001" Name="Аэропорт"/>
+		</TransferPoint>
+		<TransferPoint Code="1200090">
+			 <TransferPointType Code="3" Name="Аэропорт"/>
+			 <Country Code="9" Name="Россия"/>
+			 <AdmUnit1 Code="1" Name="Не определено"/>
+			 <AdmUnit2 Code="1" Name="Не определено"/>
+			 <TypeOfPlace Code="2" Name="Город"/>
+			 <City Code="2" Name="Москва"/>
+			 <Object Code="1200090" Name="Шереметьево C"/>
+			 <ObjectSubType Code="9500001" Name="Не имеет значения"/>
+			 <ObjectType Code="800001" Name="Аэропорт"/>
+		</TransferPoint>
+		<TransferPoint Code="1200091">
+			 <TransferPointType Code="3" Name="Аэропорт"/>
+			 <Country Code="9" Name="Россия"/>
+			 <AdmUnit1 Code="1" Name="Не определено"/>
+			 <AdmUnit2 Code="1" Name="Не определено"/>
+			 <TypeOfPlace Code="2" Name="Город"/>
+			 <City Code="2" Name="Москва"/>
+			 <Object Code="1200091" Name="Шереметьево D"/>
+			 <ObjectSubType Code="9500001" Name="Не имеет значения"/>
+			 <ObjectType Code="800001" Name="Аэропорт"/>
+		</TransferPoint>
+		<TransferPoint Code="1200092">
+			 <TransferPointType Code="3" Name="Аэропорт"/>
+			 <Country Code="9" Name="Россия"/>
+			 <AdmUnit1 Code="1" Name="Не определено"/>
+			 <AdmUnit2 Code="1" Name="Не определено"/>
+			 <TypeOfPlace Code="2" Name="Город"/>
+			 <City Code="2" Name="Москва"/>
+			 <Object Code="1200092" Name="Шереметьево E"/>
+			 <ObjectSubType Code="9500001" Name="Не имеет значения"/>
+			 <ObjectType Code="800001" Name="Аэропорт"/>
+		</TransferPoint>
+		<TransferPoint Code="1200093">
+			 <TransferPointType Code="3" Name="Аэропорт"/>
+			 <Country Code="9" Name="Россия"/>
+			 <AdmUnit1 Code="1" Name="Не определено"/>
+			 <AdmUnit2 Code="1" Name="Не определено"/>
+			 <TypeOfPlace Code="2" Name="Город"/>
+			 <City Code="2" Name="Москва"/>
+			 <Object Code="1200093" Name="Шереметьево F"/>
+			 <ObjectSubType Code="9500001" Name="Не имеет значения"/>
+			 <ObjectType Code="800001" Name="Аэропорт"/>
+		</TransferPoint>
+	</TransferPointList>
+</RouteResponse>

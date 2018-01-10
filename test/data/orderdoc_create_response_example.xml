@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OrderDocsResponse BuyerId="MyCompanyId" UserId="MyUserId" Password="MyPassword" Language="ru">
+   <Action Name="TaskAdd">
+	   <Parameters DocId="2835883">
+	      <DocType Code="7"/>
+		</Parameters>
+	</Action>
+   <Success/>
+   <TaskInfo Code="25749">
+      <TaskStatus Code="1" Name="New"/>
+   </TaskInfo>
+</OrderDocsResponse>

@@ -2,24 +2,67 @@ package acaseSts
 
 import "encoding/xml"
 
-type CustomerRequestCreateType struct {
+type CustomerRequestInfoType struct {
+	Credentials
+	XMLName		xml.Name			`xml:"CustomerRequest"`
+	ActionInfo	ActionInfoType		`xml:"ActionInfo"`
+}
+
+type ActionInfoType struct {
+	XMLName		xml.Name						`xml:"ActionInfo"`
+	Parameters	CustomerRequestParametersType	`xml:"Parameters"`
+}
+
+type CustomerRequestListType struct {
+	Credentials
+	XMLName		xml.Name			`xml:"CustomerRequest"`
+	ActionList	ActionListType		`xml:"ActionList"`
+}
+
+type ActionListType struct {
+	XMLName		xml.Name						`xml:"ActionList"`
+	Parameters	CustomerRequestParametersType	`xml:"Parameters"`
+}
+
+type CustomerRequestDeleteType struct {
+	Credentials
 	XMLName			xml.Name			`xml:"CustomerRequest"`
-	BuyerId			string				`xml:"BuyerId,attr"`
-	UserId			string				`xml:"UserId,attr"`
-	Password		string				`xml:"Password,attr"`
-	Language		LanguageTypeEnum	`xml:"Language,attr,omitempty"`
+	ActionDelete	ActionDeleteType	`xml:"ActionDelete"`
+}
+
+type ActionDeleteType struct {
+	XMLName		xml.Name						`xml:"ActionDelete"`
+	Parameters	CustomerRequestParametersType	`xml:"Parameters"`
+}
+
+type CustomerRequestCreateType struct {
+	Credentials
+	XMLName			xml.Name			`xml:"CustomerRequest"`
 	ActionCreate	ActionCreateType	`xml:"ActionCreate"`
 }
 
 type ActionCreateType struct {
 	XMLName		xml.Name						`xml:"ActionCreate"`
-	Parameters	CustomerReqCreateParametersType	`xml:"Parameters"`
+	Parameters	CustomerRequestParametersType	`xml:"Parameters"`
 }
 
-type CustomerReqCreateParametersType struct {
+type CustomerRequestUpdateType struct {
+	Credentials
+	XMLName			xml.Name			`xml:"CustomerRequest"`
+	ActionUpdate	ActionUpdateType	`xml:"ActionUpdate"`
+}
+
+type ActionUpdateType struct {
+	XMLName		xml.Name						`xml:"ActionUpdate"`
+	Parameters	CustomerRequestParametersType	`xml:"Parameters"`
+}
+
+type CustomerRequestParametersType struct {
 	XMLName			xml.Name		`xml:"Parameters"`
-	CustomerCode	string			`xml:"CustomerCode,attr"`
-	Customer		CustomerType	`xml:"Customer"`
+	Sort			int				`xml:"Sort,attr,omitempty"`
+	ShowActualOnly	int				`xml:"ShowActualOnly,attr,omitempty"`
+	CustomerCode	int				`xml:"CustomerCode,attr,omitempty"`
+	Customer		*CustomerType	`xml:"Customer,omitempty"`
 }
 
 type CustomerType struct {
@@ -33,39 +76,54 @@ type CustomerType struct {
 	Phone		string				`xml:"Phone,attr"`
 	Code		int					`xml:"Code,attr,omitempty"`
 	Name		string				`xml:"Name,attr"`
-	BuyerType	BuyerTypeType		`xml:"BuyerType"`
+	BuyerType	SimpleCodeNameType	`xml:"BuyerType"`
 	Country		CountryType			`xml:"Country"`
 	City		CityType			`xml:"City"`
-	Actual		*ActualType			`xml:"Actual,omitempty"`
-	AllowModify	*AllowModifyType	`xml:"AllowModify,omitempty"`
+	Actual		*YesNoCodeType		`xml:"Actual,omitempty"`
+	AllowModify	*YesNoCodeType		`xml:"AllowModify,omitempty"`
 }
 
-type AllowModifyType struct {
-	XMLName	xml.Name	`xml:"AllowModify"`
-	Code	int			`xml:"Code,attr,omitempty"`
-	Name	string		`xml:"Name,attr,omitempty"`
-}
-
-type ActualType struct {
-	XMLName	xml.Name	`xml:"Actual"`
-	Code	int			`xml:"Code,attr,omitempty"`
-	Name	string		`xml:"Name,attr,omitempty"`
-}
-
-type BuyerTypeType struct {
-	XMLName	xml.Name	`xml:"BuyerType"`
-	Code	int			`xml:"Code,attr"`
-	Name	string		`xml:"Name,attr"`
+type CustomerResponseDeleteType struct {
+	Credentials
+	BaseResponse
+	XMLName			xml.Name			`xml:"CustomerResponse"`
+	ActionDelete	ActionDeleteType	`xml:"ActionDelete"`
+	Customer		*CustomerType		`xml:"Customer,omitempty"`
 }
 
 type CustomerResponseCreateType struct {
+	Credentials
+	BaseResponse
 	XMLName			xml.Name			`xml:"CustomerResponse"`
-	BuyerId			string				`xml:"BuyerId,attr"`
-	UserId			string				`xml:"UserId,attr"`
-	Password		string				`xml:"Password,attr"`
-	Language		LanguageTypeEnum	`xml:"Language,attr,omitempty"`
 	ActionCreate	ActionCreateType	`xml:"ActionCreate"`
-	Success			string				`xml:"Success"`
-	Error			ErrorType			`xml:"Error,omitempty"`
+	Customer		CustomerType		`xml:"Customer"`
+}
+
+type CustomerResponseUpdateType struct {
+	Credentials
+	BaseResponse
+	XMLName			xml.Name			`xml:"CustomerResponse"`
+	ActionUpdate	ActionUpdateType	`xml:"ActionUpdate"`
+	Customer		CustomerType		`xml:"Customer"`
+}
+
+type CustomerResponseListType struct {
+	Credentials
+	BaseResponse
+	XMLName			xml.Name			`xml:"CustomerResponse"`
+	ActionList		ActionListType		`xml:"ActionList"`
+	CustomerList	CustomerListType	`xml:"CustomerList"`
+}
+
+type CustomerListType struct {
+	XMLName		xml.Name		`xml:"CustomerList"`
+	Customers	[]CustomerType	`xml:"Customer"`
+}
+
+type CustomerResponseInfoType struct {
+	Credentials
+	BaseResponse
+	XMLName			xml.Name			`xml:"CustomerResponse"`
+	ActionInfo		ActionInfoType		`xml:"ActionInfo"`
 	Customer		CustomerType		`xml:"Customer"`
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OrderListResponse>
+   <Success /> 
+   <IsThatAll Code="1" Name="Да"/>
+   <Orders>
+      <Order Id="495780" ReferenceNumber="CYXBW" RegistrationDate="07.10.2004" DeadlineDate="12.10.2004" Price="198.00" TravelAgencyCommission="0.00" Penalty="0.00" StartDate="13.10.2004" EndDate="15.10.2004">
+         <Currency Code="3" Name="USD" /> 
+         <Status Code="65" Name="Забронирован" /> 
+         <ContactPerson Name="Смирнов Павел" Phone="" Fax="" Email="smirnov@smirnov.ru" /> 
+      </Order>
+   </Orders>
+</OrderListResponse>

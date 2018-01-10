@@ -16,7 +16,7 @@ var (
 		Password: "Password",
 		Language: "Language",
 	}
-	acApi = acaseSdk.NewApi(*au)
+	acApi = acaseSdk.NewApi(*au, "http://test-www.acase.ru/xml/form.jsp")
 )
 
 func getXml(filename string) ([]byte, error) {

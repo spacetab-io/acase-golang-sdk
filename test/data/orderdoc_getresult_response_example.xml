@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OrderDocsResponse BuyerId="MyCompanyId" UserId="MyUserId" Password="MyPassword" Language="ru">
+	<Action Name="TaskResponse">
+		<Parameters TaskId="25729"/>
+	</Action>
+   <Success/>
+   <TaskInfo Code="25729">
+      <TaskStatus Code="5" Name="Success"/>
+   </TaskInfo>
+   <File type="xsd:base64Binary" ContentType="PDF">ЙЦУКЕН</File>
+</OrderDocsResponse>

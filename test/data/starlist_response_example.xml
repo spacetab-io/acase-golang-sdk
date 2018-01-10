@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StarListResponse Language="ru" BuyerId="MyCompanyId" UserId="MyUserId" Password="MyPassword">
+<Success />
+<Star Code="1" Name="Уровень 5 из 5" Value="5"/>
+<Star Code="2" Name="Уровень 4 из 5" Value="4"/>
+<Star Code="3" Name="Уровень 3 из 5" Value="3"/>
+<Star Code="4" Name="Уровень 2 из 5" Value="2"/>
+<Star Code="5" Name="Уровень 1 из 5" Value="1"/>
+<Star Code="6" Name="-" Value="-"/>
+<Star Code="99" Name="-" Value="-"/>
+</StarListResponse>

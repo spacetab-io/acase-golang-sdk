@@ -5,22 +5,12 @@ import (
 )
 
 type CitizenshipListRequestType struct {
+	Credentials
 	XMLName		xml.Name			`xml:"CitizenshipListRequest"`
-	BuyerId		string				`xml:"BuyerId,attr"`
-	UserId		string				`xml:"UserId,attr"`
-	Password	string				`xml:"Password,attr"`
-	Language	LanguageTypeEnum	`xml:"Language,attr,omitempty"`
 }
 
 type CitizenshipListType struct {
-	XMLName		xml.Name			`xml:"CitizenshipList"`
-	Success		string				`xml:"Success"`
-	Error		ErrorType			`xml:"Error,omitempty"`
-	Citizenship	[]CitizenshipType	`xml:"Citizenship"`
-}
-
-type CitizenshipType struct {
-	XMLName	xml.Name	`xml:"Citizenship"`
-	Code	int			`xml:"Code,attr"`
-	Name	string		`xml:"Name,attr"`
+	BaseResponse
+	XMLName		xml.Name				`xml:"CitizenshipList"`
+	Citizenship	[]SimpleCodeNameType	`xml:"Citizenship"`
 }

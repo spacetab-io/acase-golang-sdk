@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HotelSearchResponse Language="ru" ArrivalDate="17.08.2017" DepartureDate="18.08.2017" NumberOfGuests="1">
+	<Success/>
+	<DestinationList>
+		<Destination Code="800300" Name="Аквариум Отель">
+			<DestinationType Code="3" Name="Отель"/>
+			<ObjType Code="9500001" Name=" Hе имеет значения"/>
+			<HotelType Code="2" Name="Гостиница"/>
+			<Position Latitude="55.828133" Longitude="37.389736" OptimalGmapZoom="15"/>
+		</Destination>
+		<Destination Code="9800019" Name="Волга Апарт-Отель">
+			<DestinationType Code="3" Name="Отель"/>
+			<ObjType Code="9500001" Name=" Hе имеет значения"/>
+			<HotelType Code="2" Name="Гостиница"/>
+			<Position Latitude="55.7744" Longitude="37.6421" OptimalGmapZoom="15"/>
+		</Destination>
+		<Destination Code="9800031" Name="Протон Бизнес-Отель">
+			<DestinationType Code="3" Name="Отель"/>
+			<ObjType Code="9500001" Name=" Hе имеет значения"/>
+			<HotelType Code="2" Name="Гостиница"/>
+			<Position Latitude="55.7533" Longitude="37.486" OptimalGmapZoom="15"/>
+		</Destination>
+		<Destination Code="9900032" Name="Метрополь">
+			<DestinationType Code="3" Name="Отель"/>
+			<ObjType Code="9500001" Name=" Hе имеет значения"/>
+			<HotelType Code="2" Name="Гостиница"/>
+			<Position Latitude="55.7584" Longitude="37.6215" OptimalGmapZoom="15"/>
+		</Destination>
+	</DestinationList>
+	<AvailableHotelsList>
+		<Hotel Code="800300" Name="Аквариум Отель" Zip="143402" Address="Международная улица, 20" CityCentre="Центр города - 21 км" Airport="Шереметьево - 22 км, Внуково - 31 км, Остафьево - 44 км, Быково - 59 км, Домодедово - 66 км" RailwayStation="Белорусский - 31 км" Underground="Мякинино - Арбатско-Покровская линия - 0,5 км" Description="Международный Выставочный Центр Крокус Экспо - 0,53 км" Url="http://images.acase.ru/hotels_images/800300_00.jpg" Ref="aquarium-hotel" DistanceToDestination="0" DefaultCheckOutTime="12:00" DefaultCheckInTime="14:00">
+			<ObjType Code="2" Name="Гостиница"/>
+			<City Code="2" Name="Москва" Ref="moscow">
+				<Position Latitude="55.755773" Longitude="37.617815"/>
+			</City>
+			<AdmUnit1 Code="1" Name="Не определено"/>
+			<AdmUnit2 Code="1" Name=" Не определено"/>
+			<TypeOfPlace Code="2" Name="Город"/>
+			<Country Code="9" Name="Россия" Ref="russia">
+				<Position Latitude="57.5158" Longitude="82.6172"/>
+			</Country>
+			<Position Latitude="55.828133" Longitude="37.389736"/>
+			<Rating Code="99" Name="-"/>
+			<Stars Code="3" Name="Уровень 3 из 5" Value="3" Url="http://images.acase.ru/signs_images/Level 3 grey.svg">
+				<OfficialCertificate Code="2" Name="Государственный">
+					<Certificate Code="3" Name="3 звезды" Url="http://images.acase.ru/signs_images/three_stars_hotel.gif" ValidBefore="22.06.2019"/>
+				</OfficialCertificate>
+			</Stars>
+			<Amenities/>
+			<Currency Code="2" Name="RUB"/>
+			<HotelOfferList>
+				<HotelOfferDetail Code="900460" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" IsHourRate="2" MaxHours="0" TotalPrice="2980.00" VATIncludedInPrice="454.58" FullVATInPrice="1" TravelAgencyCommission="298.00" RoomCode="900250" RoomName="Стандартный номер (вид на павильон)" RateCode="900092" RateName="" RateDescription="" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="2682.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="3" Name="Завтрак Шведский стол"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1477869+9500001+2" Name="" Rooms="5"/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="900461" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" IsHourRate="2" MaxHours="0" TotalPrice="3890.00" VATIncludedInPrice="593.39" FullVATInPrice="1" TravelAgencyCommission="389.00" RoomCode="900251" RoomName="Стандартный (с видом на реку)" RateCode="900092" RateName="" RateDescription="" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="3501.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="3" Name="Завтрак Шведский стол"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1477870+9500001+2" Name="" Rooms="2"/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1326105" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" IsHourRate="2" MaxHours="0" TotalPrice="4000.00" VATIncludedInPrice="610.17" FullVATInPrice="1" TravelAgencyCommission="400.00" RoomCode="1313292" RoomName="Студия" RateCode="900092" RateName="" RateDescription="" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="3600.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="3" Name="Завтрак Шведский стол"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1477871+9500001+2" Name="" Rooms="3"/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="900459" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" IsHourRate="2" MaxHours="0" TotalPrice="6000.00" VATIncludedInPrice="915.25" FullVATInPrice="1" TravelAgencyCommission="600.00" RoomCode="900254" RoomName="Люкс" RateCode="900092" RateName="" RateDescription="" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="5400.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="3" Name="Завтрак Шведский стол"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1477868+9500001+2" Name="" Rooms="1"/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+			</HotelOfferList>
+		</Hotel>
+		<Hotel Code="9900032" Name="Метрополь" Zip="109012" Address="Театральный проезд, 2" CityCentre="Центр города - 0,6 км" Airport="Шереметьево - 30,5 км, Внуково - 32 км, Остафьево - 33 км, Быково - 39 км, Домодедово - 45 км" RailwayStation="Белорусский - 4,5 км" Underground="Театральная - Замоскворецкая линия - 0,2 км, Охотный Ряд - Сокольническая линия - 0,2 км, Площадь Революции - Арбатско-Покровская линия - 0,2 км" Description="Большой Театр - 0,26 км, Государственная Дума РФ - 0,36 км, Кремль - 0,8 км" Url="http://images.acase.ru/hotels_images/9900032_00.jpg" Ref="metropol" DistanceToDestination="0" DefaultCheckOutTime="12:00" DefaultCheckInTime="15:00">
+			<ObjType Code="2" Name="Гостиница"/>
+			<City Code="2" Name="Москва" Ref="moscow">
+				<Position Latitude="55.755773" Longitude="37.617815"/>
+			</City>
+			<AdmUnit1 Code="1" Name="Не определено"/>
+			<AdmUnit2 Code="1" Name=" Не определено"/>
+			<TypeOfPlace Code="2" Name="Город"/>
+			<Country Code="9" Name="Россия" Ref="russia">
+				<Position Latitude="57.5158" Longitude="82.6172"/>
+			</Country>
+			<Position Latitude="55.7584" Longitude="37.6215"/>
+			<Rating Code="99" Name="-"/>
+			<Stars Code="1" Name="Уровень 5 из 5" Value="5" Url="http://images.acase.ru/signs_images/Level 5 grey.svg">
+				<OfficialCertificate Code="2" Name="Государственный">
+					<Certificate Code="1" Name="5 звезд" Url="http://images.acase.ru/signs_images/five_stars_hotel.gif" ValidBefore="18.02.2018"/>
+				</OfficialCertificate>
+			</Stars>
+			<VirtualTour Code="186"/>
+			<Amenities/>
+			<Currency Code="2" Name="RUB"/>
+			<HotelOfferList>
+				<HotelOfferDetail Code="1474504" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="11254.84" IsHourRate="2" MaxHours="0" TotalPrice="9400.00" VATIncludedInPrice="1433.90" FullVATInPrice="1" TravelAgencyCommission="940.00" RoomCode="1308612" RoomName="Одноместный стандарт" RateCode="1326746" RateName="Без завтрака /ПАКЕТ" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="8460.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="1" Name="-"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1474493+9500001+2" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1489051" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="11254.84" IsHourRate="2" MaxHours="0" TotalPrice="9400.00" VATIncludedInPrice="1433.90" FullVATInPrice="1" TravelAgencyCommission="940.00" RoomCode="1308612" RoomName="Одноместный стандарт" RateCode="1329106" RateName="ПРОМО ПАКЕТ /без завтрака" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="8460.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="1" Name="-"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1489034+9500001+2" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1517351" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" IsHourRate="2" MaxHours="0" TotalPrice="9400.00" VATIncludedInPrice="1433.90" FullVATInPrice="1" TravelAgencyCommission="940.00" RoomCode="1308612" RoomName="Одноместный стандарт" RateCode="1333731" RateName="Каждая 3-я ночь беспл.ПАКЕТ /без завтр." RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="8460.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="1" Name="-"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1517310+9500001+2" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1474501" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="12345.16" IsHourRate="2" MaxHours="0" TotalPrice="10310.00" VATIncludedInPrice="1572.71" FullVATInPrice="1" TravelAgencyCommission="1031.00" RoomCode="1236" RoomName="Standard (King Size)" RateCode="1326746" RateName="Без завтрака /ПАКЕТ" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="9279.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="1" Name="-"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1474491+9500001+2" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1489048" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="12345.16" IsHourRate="2" MaxHours="0" TotalPrice="10310.00" VATIncludedInPrice="1572.71" FullVATInPrice="1" TravelAgencyCommission="1031.00" RoomCode="1236" RoomName="Standard (King Size)" RateCode="1329106" RateName="ПРОМО ПАКЕТ /без завтрака" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="9279.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="1" Name="-"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1489032+9500001+2" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1517348" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" IsHourRate="2" MaxHours="0" TotalPrice="10310.00" VATIncludedInPrice="1572.71" FullVATInPrice="1" TravelAgencyCommission="1031.00" RoomCode="1236" RoomName="Standard (King Size)" RateCode="1333731" RateName="Каждая 3-я ночь беспл.ПАКЕТ /без завтр." RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="9279.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="1" Name="-"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1517308+9500001+2" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1443727" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="12525.70" IsHourRate="2" MaxHours="0" TotalPrice="10460.00" VATIncludedInPrice="1595.59" FullVATInPrice="1" TravelAgencyCommission="1046.00" RoomCode="1308612" RoomName="Одноместный стандарт" RateCode="1321761" RateName="ПАКЕТ" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; завтрак шведский стол; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="9414.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="3" Name="Завтрак Шведский стол"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1443716+9500001+2" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1443752" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="12525.70" IsHourRate="2" MaxHours="0" TotalPrice="10460.00" VATIncludedInPrice="1595.59" FullVATInPrice="1" TravelAgencyCommission="1046.00" RoomCode="1308612" RoomName="Одноместный стандарт" RateCode="1321758" RateName="ПРОМО ПАКЕТ" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; завтрак шведский стол; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="9414.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="3" Name="Завтрак Шведский стол"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1443705+9500001+2" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1517345" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="10615.00" IsHourRate="2" MaxHours="0" TotalPrice="10460.00" VATIncludedInPrice="1595.59" FullVATInPrice="1" TravelAgencyCommission="1046.00" RoomCode="1308612" RoomName="Одноместный стандарт" RateCode="1333726" RateName="Каждая 3-я ночь бесплатна Пакет" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; завтрак шведский стол; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="9414.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="3" Name="Завтрак Шведский стол"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1517304+9500001+2" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1443724" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="13614.84" IsHourRate="2" MaxHours="0" TotalPrice="11370.00" VATIncludedInPrice="1734.41" FullVATInPrice="1" TravelAgencyCommission="1137.00" RoomCode="1236" RoomName="Standard (King Size)" RateCode="1321761" RateName="ПАКЕТ" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; завтрак шведский стол; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="10233.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="3" Name="Завтрак Шведский стол"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1443714+9500001+2" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1443749" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="13614.84" IsHourRate="2" MaxHours="0" TotalPrice="11370.00" VATIncludedInPrice="1734.41" FullVATInPrice="1" TravelAgencyCommission="1137.00" RoomCode="1236" RoomName="Standard (King Size)" RateCode="1321758" RateName="ПРОМО ПАКЕТ" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; завтрак шведский стол; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="10233.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="3" Name="Завтрак Шведский стол"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1443703+9500001+2" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1517342" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="11538.00" IsHourRate="2" MaxHours="0" TotalPrice="11370.00" VATIncludedInPrice="1734.41" FullVATInPrice="1" TravelAgencyCommission="1137.00" RoomCode="1236" RoomName="Standard (King Size)" RateCode="1333726" RateName="Каждая 3-я ночь бесплатна Пакет" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; завтрак шведский стол; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="10233.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="3" Name="Завтрак Шведский стол"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1517302+9500001+2" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1474505" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="15430.86" IsHourRate="2" MaxHours="0" TotalPrice="12880.00" VATIncludedInPrice="1964.75" FullVATInPrice="1" TravelAgencyCommission="1288.00" RoomCode="100132" RoomName="Супериор" RateCode="1326746" RateName="Без завтрака /ПАКЕТ" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="11592.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="1" Name="-"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1474494+9500001+2" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1489052" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="15430.86" IsHourRate="2" MaxHours="0" TotalPrice="12880.00" VATIncludedInPrice="1964.75" FullVATInPrice="1" TravelAgencyCommission="1288.00" RoomCode="100132" RoomName="Супериор" RateCode="1329106" RateName="ПРОМО ПАКЕТ /без завтрака" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="11592.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="1" Name="-"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1489035+9500001+2" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1517352" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" IsHourRate="2" MaxHours="0" TotalPrice="12880.00" VATIncludedInPrice="1964.75" FullVATInPrice="1" TravelAgencyCommission="1288.00" RoomCode="100132" RoomName="Супериор" RateCode="1333731" RateName="Каждая 3-я ночь беспл.ПАКЕТ /без завтр." RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="11592.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="1" Name="-"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1517311+9500001+2" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1443728" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="16701.72" IsHourRate="2" MaxHours="0" TotalPrice="13950.00" VATIncludedInPrice="2127.97" FullVATInPrice="1" TravelAgencyCommission="1395.00" RoomCode="100132" RoomName="Супериор" RateCode="1321761" RateName="ПАКЕТ" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; завтрак шведский стол; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="12555.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="3" Name="Завтрак Шведский стол"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1443717+9500001+2" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1443753" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="16701.72" IsHourRate="2" MaxHours="0" TotalPrice="13950.00" VATIncludedInPrice="2127.97" FullVATInPrice="1" TravelAgencyCommission="1395.00" RoomCode="100132" RoomName="Супериор" RateCode="1321758" RateName="ПРОМО ПАКЕТ" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; завтрак шведский стол; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="12555.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="3" Name="Завтрак Шведский стол"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1443706+9500001+2" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1517346" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="14154.00" IsHourRate="2" MaxHours="0" TotalPrice="13950.00" VATIncludedInPrice="2127.97" FullVATInPrice="1" TravelAgencyCommission="1395.00" RoomCode="100132" RoomName="Супериор" RateCode="1333726" RateName="Каждая 3-я ночь бесплатна Пакет" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; завтрак шведский стол; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="12555.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="3" Name="Завтрак Шведский стол"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1517305+9500001+2" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1474503" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="26867.42" IsHourRate="2" MaxHours="0" TotalPrice="22430.00" VATIncludedInPrice="3421.53" FullVATInPrice="1" TravelAgencyCommission="2243.00" RoomCode="1219612" RoomName="Полулюкс" RateCode="1326746" RateName="Без завтрака /ПАКЕТ" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="20187.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="1" Name="-"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1474490+9500001+2" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1489050" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="26867.42" IsHourRate="2" MaxHours="0" TotalPrice="22430.00" VATIncludedInPrice="3421.53" FullVATInPrice="1" TravelAgencyCommission="2243.00" RoomCode="1219612" RoomName="Полулюкс" RateCode="1329106" RateName="ПРОМО ПАКЕТ /без завтрака" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="20187.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="1" Name="-"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1489031+9500001+2" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1517350" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" IsHourRate="2" MaxHours="0" TotalPrice="22430.00" VATIncludedInPrice="3421.53" FullVATInPrice="1" TravelAgencyCommission="2243.00" RoomCode="1219612" RoomName="Полулюкс" RateCode="1333731" RateName="Каждая 3-я ночь беспл.ПАКЕТ /без завтр." RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="20187.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="1" Name="-"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1517307+9500001+2" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1443726" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="28138.28" IsHourRate="2" MaxHours="0" TotalPrice="23490.00" VATIncludedInPrice="3583.22" FullVATInPrice="1" TravelAgencyCommission="2349.00" RoomCode="1219612" RoomName="Полулюкс" RateCode="1321761" RateName="ПАКЕТ" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; завтрак шведский стол; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="21141.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="3" Name="Завтрак Шведский стол"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1443713+9500001+2" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1443751" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="27713.48" IsHourRate="2" MaxHours="0" TotalPrice="23490.00" VATIncludedInPrice="3583.22" FullVATInPrice="1" TravelAgencyCommission="2349.00" RoomCode="1219612" RoomName="Полулюкс" RateCode="1321758" RateName="ПРОМО ПАКЕТ" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; завтрак шведский стол; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="21141.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="3" Name="Завтрак Шведский стол"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1443742+9500001+2" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1517344" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="23486.00" IsHourRate="2" MaxHours="0" TotalPrice="23490.00" VATIncludedInPrice="3583.22" FullVATInPrice="1" TravelAgencyCommission="2349.00" RoomCode="1219612" RoomName="Полулюкс" RateCode="1333726" RateName="Каждая 3-я ночь бесплатна Пакет" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; завтрак шведский стол; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="21141.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="3" Name="Завтрак Шведский стол"/>
+					<Availability Code="2" Name="Свободная продажа">
+						<Allotment Code="9500001+1517301+9500001+2" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1517353" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" IsHourRate="2" MaxHours="0" TotalPrice="10310.00" VATIncludedInPrice="1572.71" FullVATInPrice="1" TravelAgencyCommission="1031.00" RoomCode="100100" RoomName="Standard (Twin Beds)" RateCode="1333731" RateName="Каждая 3-я ночь беспл.ПАКЕТ /без завтр." RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="9279.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="1" Name="-"/>
+					<Availability Code="4" Name="Продажа по запросу">
+						<Allotment Code="9500001+1517309+9500001+4" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1517347" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="11538.00" IsHourRate="2" MaxHours="0" TotalPrice="11370.00" VATIncludedInPrice="1734.41" FullVATInPrice="1" TravelAgencyCommission="1137.00" RoomCode="100100" RoomName="Standard (Twin Beds)" RateCode="1333726" RateName="Каждая 3-я ночь бесплатна Пакет" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; завтрак шведский стол; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="9279.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="3" Name="Завтрак Шведский стол"/>
+					<Availability Code="4" Name="Продажа по запросу">
+						<Allotment Code="9500001+1517303+9500001+4" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1474502" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="38485.70" IsHourRate="2" MaxHours="0" TotalPrice="32130.00" VATIncludedInPrice="4901.19" FullVATInPrice="1" TravelAgencyCommission="3213.00" RoomCode="101094" RoomName="Люкс Экзекьютив" RateCode="1326746" RateName="Без завтрака /ПАКЕТ" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="28917.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="1" Name="-"/>
+					<Availability Code="4" Name="Продажа по запросу">
+						<Allotment Code="9500001+1474489+9500001+4" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1489049" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="38485.70" IsHourRate="2" MaxHours="0" TotalPrice="32130.00" VATIncludedInPrice="4901.19" FullVATInPrice="1" TravelAgencyCommission="3213.00" RoomCode="101094" RoomName="Люкс Экзекьютив" RateCode="1329106" RateName="ПРОМО ПАКЕТ /без завтрака" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="28917.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="1" Name="-"/>
+					<Availability Code="4" Name="Продажа по запросу">
+						<Allotment Code="9500001+1489030+9500001+4" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1517349" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" IsHourRate="2" MaxHours="0" TotalPrice="32130.00" VATIncludedInPrice="4901.19" FullVATInPrice="1" TravelAgencyCommission="3213.00" RoomCode="101094" RoomName="Люкс Экзекьютив" RateCode="1333731" RateName="Каждая 3-я ночь беспл.ПАКЕТ /без завтр." RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="28917.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="1" Name="-"/>
+					<Availability Code="4" Name="Продажа по запросу">
+						<Allotment Code="9500001+1517306+9500001+4" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1443725" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="41572.58" IsHourRate="2" MaxHours="0" TotalPrice="34700.00" VATIncludedInPrice="5293.22" FullVATInPrice="1" TravelAgencyCommission="3470.00" RoomCode="101094" RoomName="Люкс Экзекьютив" RateCode="1321761" RateName="ПАКЕТ" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; завтрак шведский стол; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="31230.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="3" Name="Завтрак Шведский стол"/>
+					<Availability Code="4" Name="Продажа по запросу">
+						<Allotment Code="9500001+1443712+9500001+4" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1443750" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="41572.58" IsHourRate="2" MaxHours="0" TotalPrice="34700.00" VATIncludedInPrice="5293.22" FullVATInPrice="1" TravelAgencyCommission="3470.00" RoomCode="101094" RoomName="Люкс Экзекьютив" RateCode="1321758" RateName="ПРОМО ПАКЕТ" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; завтрак шведский стол; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="31230.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="3" Name="Завтрак Шведский стол"/>
+					<Availability Code="4" Name="Продажа по запросу">
+						<Allotment Code="9500001+1443702+9500001+4" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1517343" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" MinimumRetailPrice="35231.00" IsHourRate="2" MaxHours="0" TotalPrice="34700.00" VATIncludedInPrice="5293.22" FullVATInPrice="1" TravelAgencyCommission="3470.00" RoomCode="101094" RoomName="Люкс Экзекьютив" RateCode="1333726" RateName="Каждая 3-я ночь бесплатна Пакет" RateDescription="Данная цена является пакетной. В стоимость пакета входит: проживание; завтрак шведский стол; визовая поддержка; посещение фитнес-центра; бесплатный Wi-Fi; бутылка минеральной воды;" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="31230.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="3" Name="Завтрак Шведский стол"/>
+					<Availability Code="4" Name="Продажа по запросу">
+						<Allotment Code="9500001+1517300+9500001+4" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+			</HotelOfferList>
+		</Hotel>
+		<Hotel Code="9800031" Name="Протон Бизнес-Отель" Zip="121087" Address="Новозаводская улица, 22" CityCentre="Центр города - 9,2 км" Airport="Внуково - 28 км, Шереметьево - 32,5 км, Остафьево - 38 км, Быково - 47 км, Домодедово - 50 км" RailwayStation="Киевский - 6,5 км" Underground="Багратионовская - Филевская линия - 1,4 км" Description="Космический Научно-производственный Центр им. М.Хруничева - 0,36 км, Филевский Парк - 0,73 км, Парк Победы на Поклонной Горе - 2,73 км" Url="http://images.acase.ru/hotels_images/9800031_00.jpg" Ref="proton-business-hotel" DistanceToDestination="0" DefaultCheckOutTime="12:00" DefaultCheckInTime="14:00">
+			<ObjType Code="2" Name="Гостиница"/>
+			<City Code="2" Name="Москва" Ref="moscow">
+				<Position Latitude="55.755773" Longitude="37.617815"/>
+			</City>
+			<AdmUnit1 Code="1" Name="Не определено"/>
+			<AdmUnit2 Code="1" Name=" Не определено"/>
+			<TypeOfPlace Code="2" Name="Город"/>
+			<Country Code="9" Name="Россия" Ref="russia">
+				<Position Latitude="57.5158" Longitude="82.6172"/>
+			</Country>
+			<Position Latitude="55.7533" Longitude="37.486"/>
+			<Rating Code="99" Name="-"/>
+			<Stars Code="2" Name="Уровень 4 из 5" Value="4" Url="http://images.acase.ru/signs_images/Level 4 grey.svg">
+				<OfficialCertificate Code="1" Name="Нет">
+					<Certificate Code="99" Name="Отсутствует" Url="http://images.acase.ru/signs_images/no_stars_hotel.gif"/>
+				</OfficialCertificate>
+			</Stars>
+			<VirtualTour Code="403"/>
+			<Amenities/>
+			<Currency Code="2" Name="RUB"/>
+			<HotelOfferList>
+				<HotelOfferDetail Code="1449347" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" IsHourRate="2" MaxHours="0" TotalPrice="3600.00" VATIncludedInPrice="549.15" FullVATInPrice="1" TravelAgencyCommission="360.00" RoomCode="200062" RoomName="Стандарт (1 кровать)" RateCode="1322716" RateName="Без завтрака" RateDescription="" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="3240.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="1" Name="-"/>
+					<Availability Code="4" Name="Продажа по запросу">
+						<Allotment Code="9500001+1449338+9500001+4" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1449349" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" IsHourRate="2" MaxHours="0" TotalPrice="3600.00" VATIncludedInPrice="549.15" FullVATInPrice="1" TravelAgencyCommission="360.00" RoomCode="200063" RoomName="Стандарт (2 кровати)" RateCode="1322716" RateName="Без завтрака" RateDescription="" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="3240.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="1" Name="-"/>
+					<Availability Code="4" Name="Продажа по запросу">
+						<Allotment Code="9500001+1449340+9500001+4" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="902866" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" IsHourRate="2" MaxHours="0" TotalPrice="4630.00" VATIncludedInPrice="706.27" FullVATInPrice="1" TravelAgencyCommission="463.00" RoomCode="200062" RoomName="Стандарт (1 кровать)" RateCode="900534" RateName="" RateDescription="" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="4167.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="3" Name="Завтрак Шведский стол"/>
+					<Availability Code="4" Name="Продажа по запросу">
+						<Allotment Code="9500001+700060+9500001+4" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="902870" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" IsHourRate="2" MaxHours="0" TotalPrice="4630.00" VATIncludedInPrice="706.27" FullVATInPrice="1" TravelAgencyCommission="463.00" RoomCode="200063" RoomName="Стандарт (2 кровати)" RateCode="900534" RateName="" RateDescription="" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="4167.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="3" Name="Завтрак Шведский стол"/>
+					<Availability Code="4" Name="Продажа по запросу">
+						<Allotment Code="9500001+700061+9500001+4" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1469034" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" IsHourRate="2" MaxHours="0" TotalPrice="5140.00" VATIncludedInPrice="784.07" FullVATInPrice="1" TravelAgencyCommission="514.00" RoomCode="200837" RoomName="Люкс" RateCode="1322716" RateName="Без завтрака" RateDescription="" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="4626.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="1" Name="-"/>
+					<Availability Code="4" Name="Продажа по запросу">
+						<Allotment Code="9500001+1469032+9500001+4" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="902867" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" IsHourRate="2" MaxHours="0" TotalPrice="6170.00" VATIncludedInPrice="941.19" FullVATInPrice="1" TravelAgencyCommission="617.00" RoomCode="200837" RoomName="Люкс" RateCode="900534" RateName="" RateDescription="" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="5553.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="3" Name="Завтрак Шведский стол"/>
+					<Availability Code="4" Name="Продажа по запросу">
+						<Allotment Code="9500001+700058+9500001+4" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="1449348" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" IsHourRate="2" MaxHours="0" TotalPrice="10920.00" VATIncludedInPrice="1665.76" FullVATInPrice="1" TravelAgencyCommission="1092.00" RoomCode="200836" RoomName="Сюит" RateCode="1322716" RateName="Без завтрака" RateDescription="" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="10700.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="1" Name="-"/>
+					<Availability Code="4" Name="Продажа по запросу">
+						<Allotment Code="9500001+1449342+9500001+4" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+				<HotelOfferDetail Code="902869" NumberOfGuests="1" NumberOfExtraBedAdult="0" NumberOfExtraBedChild="0" NumberOfExtraBedInfant="0" IsHourRate="2" MaxHours="0" TotalPrice="11950.00" VATIncludedInPrice="1822.88" FullVATInPrice="1" TravelAgencyCommission="1195.00" RoomCode="200836" RoomName="Сюит" RateCode="900534" RateName="" RateDescription="" RateGroupCode="2" RateGroupName="Агенты УК" DeadlineDate="16.08.2017" DeadlineTimeLoc="16.08.2017 13:00" DeadlineTimeSys="16.08.2017 13:00" DeadlineTimeUTC="16.08.2017 10:00" PenaltySize="10755.00">
+					<SpecialOfferList>
+						<SpecialOffer>
+							<SpecialOfferType Code="0" Id="0"/>
+						</SpecialOffer>
+					</SpecialOfferList>
+					<MealIncludedInPrice Code="3" Name="Завтрак Шведский стол"/>
+					<Availability Code="4" Name="Продажа по запросу">
+						<Allotment Code="9500001+700059+9500001+4" Name="" Rooms=""/>
+					</Availability>
+					<WhereToPay Code="3" Name="Оплата ООО АКАДЕМСЕРВИС согласно договору"/>
+				</HotelOfferDetail>
+			</HotelOfferList>
+		</Hotel>
+	</AvailableHotelsList>
+	<NoContractAvailableHotelsList/>
+	<AlternativeHotelsList/>
+	<NoContractAlternativeHotelsList/>
+</HotelSearchResponse>

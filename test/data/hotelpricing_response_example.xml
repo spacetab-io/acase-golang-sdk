@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HotelPricingResponse2 Code="1100577" Name="Авеню Парк Отель" StartDate="20.10.2011" EndDate="25.10.2011" NumberOfGuests="2" NumberOfExtraBedsAdult="1" NumberOfExtraBedsChild="0" NumberOfExtraBedsInfant="0" SpecialRequirements="1. Гостиница имеет право взимать регистрационный сбор или депозит за дополнительные услуги при размещении. Размер регистрационного сбора гостиница устанавливает самостоятельно..">
+	<Success/>
+	<Country Code="9" Name="Россия">
+		<Position Latitude="57.5158" Longitude="82.6172"/>
+	</Country>
+	<AdmUnit1 Code="1" Name="Не определено"/>
+	<AdmUnit2 Code="1" Name="Не определено"/>
+	<TypeOfPlace Code="1" Name="город"/>
+	<City Code="2" Name="Москва">
+		<Position Latitude="55.758959" Longitude="37.616272"/>
+	</City>
+	<ObjType Name="Гостиница" Code="2"/>
+	<Position Latitude="55.781619" Longitude="37.750605"/>
+	<Currency Code="2" Name="RUB"/>
+	<Infants AgeTo="2" AgeFrom="0">
+		<UseThisAge Code="1" Name="Да"/>
+	</Infants>
+	<Children >
+		<UseThisAge Code="2" Name="Нет"/>
+	</Children>
+	<SpecialRequirementList>
+		<SpecialRequirement Code="595" Text="Гостиница имеет право взимать регистрационный сбор или депозит за дополнительные услуги при размещении. Размер регистрационного сбора гостиница устанавливает самостоятельно."/>
+	</SpecialRequirementList>
+	<HotelPricingDetail Code="1120501" RoomName="Стандарт 2-местный (2 кровати)" RoomCode="900250" RateCode="900092" RateName="FIT" RateDescription="" RateGroupCode="4" RateGroupName="FIT" IsHourRate="2" MaxHours="0" StartTime="" EndTime="" MinimumRetailPrice="12000.00" Price="8280.00" TravelAgencyCommission="0.00" FullVATInPrice="1" VATIncludedInPrice="1263.05" DeadlineDate="19.10.2011" DeadlineTimeLoc="19.10.2011 13:00" DeadlineTimeSys="19.10.2011 13:00" DeadlineTimeUTC="19.10.2011 10:00" PenaltySize="2760.00" DefaultCheckInTime="14:00" DefaultCheckOutTime="12:00" CheckInTime="14:00" CheckOutTime="12:00" MaxNumberOfGuests="2" MaxNumberOfExtraBeds="1" MaxNumberOfExtraBedsAdult="1" MaxNumberOfExtraBedsChild="0" MaxNumberOfExtraBedsInfant="0">
+		<SpecialOfferList>
+			<SpecialOffer StayNights="5" PayNights="4">
+				<SpecialOfferType Code="17" Name="Бесплатные ночи" Id="3"/>
+				<IsMultiple Code="2" Name="Нет"/>
+			</SpecialOffer>
+		</SpecialOfferList>
+		<AllowEarlierCheckIn Code="1" Name="Да"/>
+		<AllowLateCheckOut Code="1" Name="Да"/>
+		<AllowToAmendBookings Code="1" Name="Да"/>
+		<AllowToAmendGuestNames Code="1" Name="Да"/>
+		<AllGuestNamesRequired Code="2" Name="Нет"/>
+		<GuestCitizenshipRequired Code="2" Name="Нет"/>
+		<Meals>
+			<Meal Code="1101889" Name="Завтрак &quot;Континентальный&quot;" Price="180.00" MinimumRetailPrice="350.00">
+				<IncludedInPrice Code="2" Name="Нет"/>
+			</Meal>
+		</Meals>
+		<PenaltyRuleList>
+			<PenaltyRule HoursFrom="0" HoursTo="24" Value="100.0" CalculationRuleCode="2" CalculationRuleName="% от стоимости размещ. за 1 ночь"/>
+		</PenaltyRuleList>
+		<WhereToPayList>
+			<WhereToPay Code="3" Name="Оплата ООО &quot;АКАДЕМСЕРВИС&quot; согласно договору"/>
+		</WhereToPayList>
+		<PriceDescription>
+			<EarlierCheckInPrice Price="0.00" TravelAgencyCommission="0.00"/>
+			<LateCheckOutPrice Price="0.00" TravelAgencyCommission="0.00"/>
+			<Days>
+				<Day Date="20.10.2011" MinimumRetailPrice="3000.00" Price="2070.00" TravelAgencyCommission="0.00" AdditionalMeal="0.00" ExtraBedsAdultPrice="0.00" ExtraBedsChildPrice="0.00" ExtraBedsInfantPrice="0.00"/>
+				<Day Date="21.10.2011" MinimumRetailPrice="3000.00" Price="2070.00" TravelAgencyCommission="0.00" AdditionalMeal="0.00" ExtraBedsAdultPrice="0.00" ExtraBedsChildPrice="0.00" ExtraBedsInfantPrice="0.00"/>
+				<Day Date="22.10.2011" MinimumRetailPrice="3000.00" Price="2070.00" TravelAgencyCommission="0.00" AdditionalMeal="0.00" ExtraBedsAdultPrice="0.00" ExtraBedsChildPrice="0.00" ExtraBedsInfantPrice="0.00"/>
+				<Day Date="23.10.2011" MinimumRetailPrice="3000.00" Price="2070.00" TravelAgencyCommission="0.00" AdditionalMeal="0.00" ExtraBedsAdultPrice="0.00" ExtraBedsChildPrice="0.00" ExtraBedsInfantPrice="0.00"/>
+				<Day Date="24.10.2011" MinimumRetailPrice="0.00" Price="0.00" TravelAgencyCommission="0.00" AdditionalMeal="0.00" ExtraBedsAdultPrice="0.00" ExtraBedsChildPrice="0.00" ExtraBedsInfantPrice="0.00"/>
+			</Days>
+		</PriceDescription>
+	</HotelPricingDetail>
+	<EarlyCheckInList>
+		<EarlyCheckIn Time="10:00" Price="3450.00" Text="">
+			<Guaranteed Code="1" Name="Да"/>
+			<EarlyCheckInLateCheckOutRule Code="2" Name="Доплата"/>
+		</EarlyCheckIn>
+		<EarlyCheckIn Time="10:30" Price="3450.00" Text="">
+			<Guaranteed Code="1" Name="Да"/>
+			<EarlyCheckInLateCheckOutRule Code="2" Name="Доплата"/>
+		</EarlyCheckIn>
+		<EarlyCheckIn Time="11:00" Price="3450.00" Text="">
+			<Guaranteed Code="1" Name="Да"/>
+			<EarlyCheckInLateCheckOutRule Code="2" Name="Доплата"/>
+		</EarlyCheckIn>
+		<EarlyCheckIn Time="11:30" Price="3450.00" Text="">
+			<Guaranteed Code="1" Name="Да"/>
+			<EarlyCheckInLateCheckOutRule Code="2" Name="Доплата"/>
+		</EarlyCheckIn>
+		<EarlyCheckIn Time="12:00" Price="3450.00" Text="">
+			<Guaranteed Code="1" Name="Да"/>
+			<EarlyCheckInLateCheckOutRule Code="2" Name="Доплата"/>
+		</EarlyCheckIn>
+		<EarlyCheckIn Time="12:30" Price="0.00" Text="">
+			<Guaranteed Code="1" Name="Да"/>
+			<EarlyCheckInLateCheckOutRule Code="1" Name="Бесплатно"/>
+		</EarlyCheckIn>
+		<EarlyCheckIn Time="13:00 - 13:30" Price="0.00" Text="Заранее не бронируется. Бесплатно при наличии мест в гостинице">
+			<Guaranteed Code="2" Name="Нет"/>
+			<EarlyCheckInLateCheckOutRule Code="3" Name="Не определено"/>
+		</EarlyCheckIn>
+	</EarlyCheckInList>
+	<LateCheckOutList>
+		<LateCheckOut Time="12:30 - 14:00" Price="0.00" Text="Заранее не бронируется. Бесплатно при наличии мест в гостинице">
+			<Guaranteed Code="2" Name="Нет"/>
+			<EarlyCheckInLateCheckOutRule Code="3" Name="Не определено"/>
+		</LateCheckOut>
+		<LateCheckOut Time="14:30" Price="0.00" Text="">
+			<Guaranteed Code="1" Name="Да"/>
+			<EarlyCheckInLateCheckOutRule Code="1" Name="Бесплатно"/>
+		</LateCheckOut>
+		<LateCheckOut Time="15:00" Price="3450.00" Text="">
+			<Guaranteed Code="1" Name="Да"/>
+			<EarlyCheckInLateCheckOutRule Code="2" Name="Доплата"/>
+		</LateCheckOut>
+		<LateCheckOut Time="15:30" Price="3450.00" Text="">
+			<Guaranteed Code="1" Name="Да"/>
+			<EarlyCheckInLateCheckOutRule Code="2" Name="Доплата"/>
+		</LateCheckOut>
+	</LateCheckOutList>
+</HotelPricingResponse2>

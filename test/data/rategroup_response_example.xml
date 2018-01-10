@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<RateGroupResponse BuyerId="MyCompanyId" UserId="MyUserId" Password="MyPassword" Language="ru">
+	<ActionList>
+		<Parameters Name="Агент"/>
+	</ActionList>
+	<Success/>
+	<RateGroup Code="60" Name="Агенты Hot Key"/>
+	<RateGroup Code="2" Name="Агенты УК"/>
+</RateGroupResponse>

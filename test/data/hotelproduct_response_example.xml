@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HotelProductResponse Code="800300" Name="Аквариум Отель (Крокус Экспо)" StartDate="12.06.2009" EndDate="13.06.2009" NumberOfGuests="2" NumberOfExtraBedsAdult="1" NumberOfExtraBedsChild="0" NumberOfExtraBedsInfant="0" SpecialRequirements="1. Гостиница имеет право взимать регистрационный сбор или депозит за дополнительные услуги при размещении. Размер регистрационного сбора гостиница устанавливает самостоятельно.." BuyerId="MyCompanyId" UserId="MyUserId" Password="MyPassword" Language="ru">
+    <Success/>
+    <Country Code="9" Name="Россия">
+        <Position Latitude="57.5158" Longitude="82.6172"/>
+    </Country>
+    <AdmUnit1 Code="1" Name="Не определено"/>
+    <AdmUnit2 Code="1" Name="Не определено"/>
+    <TypeOfPlace Code="2" Name="город"/>
+    <City Code="2" Name="Москва">
+        <Position Latitude="55.724" Longitude="37.7628"/>
+    </City>
+    <Position Latitude="55.828133" Longitude="37.389736"/>
+	<ObjType Name="Гостиница" Code="2"/>
+    <Currency Code="3" Name="USD"/>
+    <Infants AgeTo="2" AgeFrom="0">
+        <UseThisAge Code="1" Name="Да"/>
+    </Infants>
+    <Children >
+        <UseThisAge Code="2" Name="Нет"/>
+    </Children>
+	<SpecialRequirementList>
+		<SpecialRequirement Code="595" Text="Гостиница имеет право взимать регистрационный сбор или депозит за дополнительные услуги при размещении. Размер регистрационного сбора гостиница устанавливает самостоятельно."/>
+	</SpecialRequirementList>
+    <HotelProductList>
+        <HotelProductDetail Code="900457" RoomName="Studio /Double" RoomCode="900252" RateCode="900092" RateName="" RateDescription="" IsHourRate="2" MaxHours="0" StartTime="" EndTime="" RateGroupCode="4" RateGroupName="FIT" MinimumRetailPrice="250.00" Price="216.00" TravelAgencyCommission="0.00" FullVATInPrice="1" VATIncludedInPrice="32.95" DeadlineDate="11.06.2009" DeadlineTimeLoc="11.06.2009 13:00" DeadlineTimeSys="11.06.2009 13:00" DeadlineTimeUTC="11.06.2009 10:00" PenaltySize="216.00" MaxNumberOfGuests="2" MaxNumberOfExtraBeds="1" MaxNumberOfExtraBedsAdult="1" MaxNumberOfExtraBedsChild="0" MaxNumberOfExtraBedsInfant="0">
+			<SpecialOfferList>
+				<SpecialOffer StayNights="5" PayNights="4">
+					<SpecialOfferType Code="17" Name="Бесплатные ночи" Id="3"/>
+					<IsMultiple Code="2" Name="Нет"/>
+				</SpecialOffer>
+			</SpecialOfferList>
+			<Meals>
+				<Meal Code="0" Name="Завтрак &quot;Шведский стол&quot;" Price="0.00">
+					<IncludedInPrice Code="1" Name="Да"/>
+				</Meal>
+			</Meals>
+			<Availability Code="2" Name="Свободная продажа">
+				<Allotment Code="9500001+900392+9500001+2" Name="" Rooms=""/>
+			</Availability>
+			<WhereToPayList>
+				<WhereToPay Code="3" Name="Оплата Академсервису согласно договору"/>
+			</WhereToPayList>
+		</HotelProductDetail>
+		<HotelProductDetail Code="900458" RoomName="Studio /Twin" RoomCode="900253"  RateCode="900092" RateName="" RateDescription="" RateGroupCode="4" RateGroupName="FIT" IsHourRate="2" MaxHours="0" StartTime="" EndTime="" MinimumRetailPrice="250.00" Price="216.00" TravelAgencyCommission="0.00" FullVATInPrice="1" VATIncludedInPrice="32.95"  DeadlineDate="11.06.2009" DeadlineTimeLoc="11.06.2009 13:00" DeadlineTimeSys="11.06.2009 13:00" DeadlineTimeUTC="11.06.2009 10:00" PenaltySize="216.00" MaxNumberOfGuests="2" MaxNumberOfExtraBeds="1" MaxNumberOfExtraBedsAdult="1" MaxNumberOfExtraBedsChild="0" MaxNumberOfExtraBedsInfant="0">
+			<SpecialOfferList>
+				<SpecialOffer StayNights="5" PayNights="4">
+					<SpecialOfferType Code="17" Name="Бесплатные ночи" Id="3"/>
+					<IsMultiple Code="2" Name="Нет"/>
+				</SpecialOffer>
+			</SpecialOfferList>
+			<Meals>
+				<Meal Code="0" Name="Завтрак &quot;Шведский стол&quot;" Price="0.00">
+					<IncludedInPrice Code="1" Name="Да"/>
+				</Meal>
+			</Meals>
+			<Availability Code="2" Name="Свободная продажа">
+				<Allotment Code="9500001+900428+9500001+2" Name="" Rooms=""/>
+			</Availability>
+			<WhereToPayList>
+				<WhereToPay Code="3" Name="Оплата Академсервису согласно договору"/>
+			</WhereToPayList>
+        </HotelProductDetail>
+        <HotelProductDetail Code="900459" RoomName="Suite" RoomCode="900254" RateCode="900092" RateName="" RateDescription="" RateGroupCode="4" RateGroupName="FIT" IsHourRate="2" MaxHours="0" StartTime="" EndTime="" MinimumRetailPrice="280.00" Price="268.00" TravelAgencyCommission="0.00" FullVATInPrice="1" VATIncludedInPrice="40.88" DeadlineDate="11.06.2009" DeadlineTimeLoc="11.06.2009 13:00" DeadlineTimeSys="11.06.2009 13:00" DeadlineTimeUTC="11.06.2009 10:00" PenaltySize="268.00" MaxNumberOfGuests="2" MaxNumberOfExtraBeds="1" MaxNumberOfExtraBedsAdult="1" MaxNumberOfExtraBedsChild="0" MaxNumberOfExtraBedsInfant="0">
+			<SpecialOfferList>
+				<SpecialOffer>
+					<SpecialOfferType Code="0" Id="0" /> 
+				</SpecialOffer>
+			</SpecialOfferList>
+            <Meals>
+                <Meal Code="0" Name="Завтрак &quot;Шведский стол&quot;" Price="0.00">
+                    <IncludedInPrice Code="1" Name="Да"/>
+                </Meal>
+            </Meals>
+            <Availability Code="2" Name="Свободная продажа">
+                <Allotment Code="9500001+900389+9500001+2" Name="" Rooms=""/>
+            </Availability>
+            <WhereToPayList>
+                <WhereToPay Code="3" Name="Оплата Академсервису согласно договору"/>
+            </WhereToPayList>
+        </HotelProductDetail>
+		<HotelProductDetail Code="900477" RoomName="Suite" RoomCode="900254" RateCode="900093" RateName="4 часа" IsHourRate="1" MaxHours="4" StartTime="" EndTime=""  RateDescription="Проживание не более 4 часов. Заезд в любое время" RateGroupCode="4" RateGroupName="FIT" MinimumRetailPrice="250.00" Price="210.00" TravelAgencyCommission="0.00" FullVATInPrice="1" VATIncludedInPrice="40.88" DeadlineDate="11.06.2009" DeadlineTimeLoc="11.06.2009 13:00" DeadlineTimeSys="11.06.2009 13:00" DeadlineTimeUTC="11.06.2009 10:00" PenaltySize="268.00" MaxNumberOfGuests="2" MaxNumberOfExtraBeds="1" MaxNumberOfExtraBedsAdult="1" MaxNumberOfExtraBedsChild="0" MaxNumberOfExtraBedsInfant="0">
+			<SpecialOfferList>
+				<SpecialOffer>
+					<SpecialOfferType Code="0" Id="0" /> 
+				</SpecialOffer>
+			</SpecialOfferList>
+            <Meals>
+                <Meal Code="0" Name="Завтрак &quot;Шведский стол&quot;" Price="0.00">
+                    <IncludedInPrice Code="1" Name="Да"/>
+                </Meal>
+            </Meals>
+            <Availability Code="2" Name="Свободная продажа">
+                <Allotment Code="9500001+900389+9500001+2" Name="" Rooms=""/>
+            </Availability>
+            <WhereToPayList>
+                <WhereToPay Code="3" Name="Оплата Академсервису согласно договору"/>
+            </WhereToPayList>
+        </HotelProductDetail>
+		<HotelProductDetail Code="900478" RoomName="Suite" RoomCode="900254" RateCode="900094" RateName="12 часа" IsHourRate="1" MaxHours="12" StartTime="20:00" EndTime="23:00"  RateDescription="Проживание не более 12 часов." RateGroupCode="4" RateGroupName="FIT" MinimumRetailPrice="240.00" Price="200.00" TravelAgencyCommission="0.00" FullVATInPrice="1" VATIncludedInPrice="40.88" DeadlineDate="11.06.2009" DeadlineTimeLoc="11.06.2009 13:00" DeadlineTimeSys="11.06.2009 13:00" DeadlineTimeUTC="11.06.2009 10:00" PenaltySize="268.00" MaxNumberOfGuests="2" MaxNumberOfExtraBeds="1" MaxNumberOfExtraBedsAdult="1" MaxNumberOfExtraBedsChild="0" MaxNumberOfExtraBedsInfant="0">
+			<SpecialOfferList>
+				<SpecialOffer>
+					<SpecialOfferType Code="0" Id="0" /> 
+				</SpecialOffer>
+			</SpecialOfferList>
+            <Meals>
+                <Meal Code="0" Name="Завтрак &quot;Шведский стол&quot;" Price="0.00">
+                    <IncludedInPrice Code="1" Name="Да"/>
+                </Meal>
+            </Meals>
+            <Availability Code="2" Name="Свободная продажа">
+                <Allotment Code="9500001+900389+9500001+2" Name="" Rooms=""/>
+            </Availability>
+            <WhereToPayList>
+                <WhereToPay Code="3" Name="Оплата Академсервису согласно договору"/>
+            </WhereToPayList>
+        </HotelProductDetail>
+        <HotelProductDetail Code="900460" RoomName="Twin" RoomCode="900250" RateCode="900092" RateName="" RateDescription="" RateGroupCode="4" RateGroupName="FIT" IsHourRate="2" MaxHours="0" StartTime="" EndTime=""  MinimumRetailPrice="200.00" Price="181.00" TravelAgencyCommission="0.00" FullVATInPrice="1" VATIncludedInPrice="27.61" DeadlineDate="11.06.2009" DeadlineTimeLoc="11.06.2009 13:00" DeadlineTimeSys="11.06.2009 13:00" DeadlineTimeUTC="11.06.2009 10:00" PenaltySize="181.00" MaxNumberOfGuests="2" MaxNumberOfExtraBeds="1" MaxNumberOfExtraBedsAdult="1" MaxNumberOfExtraBedsChild="0" MaxNumberOfExtraBedsInfant="0">
+			<SpecialOfferList>
+				<SpecialOffer StayNights="5" PayNights="4">
+					<SpecialOfferType Code="17" Name="Бесплатные ночи" Id="3"/>
+					<IsMultiple Code="2" Name="Нет"/>
+				</SpecialOffer>
+			</SpecialOfferList>
+            <Meals>
+                <Meal Code="0" Name="Завтрак &quot;Шведский стол&quot;" Price="0.00">
+                    <IncludedInPrice Code="1" Name="Да"/>
+                </Meal>
+            </Meals>
+            <Availability Code="2" Name="Свободная продажа">
+                <Allotment Code="9500001+900390+9500001+2" Name="" Rooms=""/>
+            </Availability>
+            <WhereToPayList>
+                <WhereToPay Code="3" Name="Оплата Академсервису согласно договору"/>
+            </WhereToPayList>
+        </HotelProductDetail>
+        <HotelProductDetail Code="900461" RoomName="Twin with river view" RoomCode="900251" RateCode="900092" RateName="" RateDescription="" RateGroupCode="4" RateGroupName="FIT" IsHourRate="2" MaxHours="0" StartTime="" EndTime=""  MinimumRetailPrice="210.00" Price="198.00" TravelAgencyCommission="0.00" FullVATInPrice="1" VATIncludedInPrice="20.20" DeadlineDate="11.06.2009" DeadlineTimeLoc="11.06.2009 13:00" DeadlineTimeSys="11.06.2009 13:00" DeadlineTimeUTC="11.06.2009 10:00" PenaltySize="198.00" MaxNumberOfGuests="2" MaxNumberOfExtraBeds="1" MaxNumberOfExtraBedsAdult="1" MaxNumberOfExtraBedsChild="0" MaxNumberOfExtraBedsInfant="0">
+			<SpecialOfferList>
+				<SpecialOffer StayNights="5" PayNights="4">
+					<SpecialOfferType Code="17" Name="Бесплатные ночи" Id="3"/>
+					<IsMultiple Code="2" Name="Нет"/>
+				</SpecialOffer>
+			</SpecialOfferList>
+            <Meals>
+                <Meal Code="0" Name="Завтрак &quot;Шведский стол&quot;" Price="0.00">
+                    <IncludedInPrice Code="1" Name="Да"/>
+                </Meal>
+            </Meals>
+            <Availability Code="2" Name="Свободная продажа">
+                <Allotment Code="9500001+900391+9500001+2" Name="" Rooms=""/>
+            </Availability>
+            <WhereToPayList>
+                <WhereToPay Code="3" Name="Оплата Академсервису согласно договору"/>
+            </WhereToPayList>
+        </HotelProductDetail>
+    </HotelProductList>
+</HotelProductResponse>
