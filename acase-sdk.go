@@ -7,18 +7,18 @@ import (
 	"net/http"
 
 	"github.com/tmconsulting/acase-golang-sdk/acaseSts"
+	"log"
 )
 
-const apiUrl = "http://test-www.acase.ru/xml/form.jsp"
-
 type Api struct {
-	BuyerId  string
-	UserId   string
-	Password string
-	Language acaseSts.LanguageTypeEnum
+	BuyerId		string
+	UserId		string
+	Password	string
+	Language	acaseSts.LanguageTypeEnum
+	ApiUrl		string
 }
 
-func NewApi(auth Auth) *Api {
+func NewApi(auth Auth, apiUrl string) *Api {
 	var	lang acaseSts.LanguageTypeEnum
 	if auth.Language == "RU" {
 		lang = acaseSts.Ru
@@ -26,32 +26,66 @@ func NewApi(auth Auth) *Api {
 		lang = acaseSts.En
 	}
 	return &Api{
-		BuyerId:  auth.BuyerId,
-		UserId:   auth.UserId,
-		Password: auth.Password,
-		Language: lang,
+		BuyerId:auth.BuyerId,
+		UserId:auth.UserId,
+		Password:auth.Password,
+		Language:lang,
+		ApiUrl:apiUrl,
 	}
 }
 
-func requestInternal(data []byte) ([]byte, error) {
-	req, err := http.NewRequest("POST", apiUrl, bytes.NewBuffer([]byte(data)))
-	FatalError(err)
+func (a *Api) requestInternal(data []byte) (*[]byte, error) {
+	req, err := http.NewRequest("POST", a.ApiUrl, bytes.NewBuffer([]byte(data)))
+	if err != nil {
+		log.Print(err)
+		return nil, err
+	}
 	req.Header.Add("Content-Type", "application/xml")
-
 	client := &http.Client{}
 	resp, err := client.Do(req)
-	FatalError(err)
+	if err != nil {
+		log.Print(err)
+		return nil, err
+	}
 	defer resp.Body.Close()
 
-	return ioutil.ReadAll(resp.Body)
+	res, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Print(err)
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (a *Api) processRequest(item interface{}, res interface{}) *AcaseResponseError {
+	bItem, err := xml.Marshal(item)
+	respData, err := a.requestInternal([]byte(xml.Header + string(bItem)))
+	if err != nil {
+		log.Print(err)
+		return &AcaseResponseError{
+			Code:"Unknown",
+			Message:err.Error(),
+		}
+	}
+	err = xml.Unmarshal(*respData, res)
+	if err != nil {
+		log.Print(err)
+		return &AcaseResponseError{
+			Code:"Unknown",
+			Message:err.Error(),
+		}
+	}
+	return nil
 }
 
 func (a *Api) AdmUnit1Request(countryCode int, admUnitCode, admUnitName string) (*acaseSts.AdmUnit1ListType, *AcaseResponseError) {
 	req := &acaseSts.AdmUnit1RequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 		Action: acaseSts.AdmUnit1ActionType{
 			Name: acaseSts.List,
 			Parameters: acaseSts.AdmUnit1ActionTypeParameters{
@@ -61,32 +95,26 @@ func (a *Api) AdmUnit1Request(countryCode int, admUnitCode, admUnitName string) 
 			},
 		},
 	}
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.AdmUnit1ResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
 	}
-
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
+	}
 	return &resp.AdmUnit1List, nil
 }
 
 func (a *Api) AdmUnit2Request(countryCode int, admUnit1Code, admUnit1Name, admUnit2Code, admUnit2Name string) (*acaseSts.AdmUnit2ListType, *AcaseResponseError) {
 	req := &acaseSts.AdmUnit2RequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 		Action: acaseSts.AdmUnit2ActionType{
 			Name: acaseSts.List,
 			Parameters: acaseSts.AdmUnit2ActionTypeParameters{
@@ -98,21 +126,15 @@ func (a *Api) AdmUnit2Request(countryCode int, admUnit1Code, admUnit1Name, admUn
 			},
 		},
 	}
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
+
 	resp := &acaseSts.AdmUnit2ResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return &resp.AdmUnit2List, nil
@@ -120,26 +142,21 @@ func (a *Api) AdmUnit2Request(countryCode int, admUnit1Code, admUnit1Name, admUn
 
 func (a *Api) CitizenshipListRequest() (*acaseSts.CitizenshipListType, *AcaseResponseError) {
 	req := &acaseSts.CitizenshipListRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 	}
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.CitizenshipListType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -147,27 +164,22 @@ func (a *Api) CitizenshipListRequest() (*acaseSts.CitizenshipListType, *AcaseRes
 
 func (a *Api) CityDescriptionRequest(cityCode string) (*acaseSts.CityDescriptionType, *AcaseResponseError) {
 	req := &acaseSts.CityDescriptionRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 		CityCode: cityCode,
 	}
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.CityDescriptionType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -175,30 +187,25 @@ func (a *Api) CityDescriptionRequest(cityCode string) (*acaseSts.CityDescription
 
 func (a *Api) CityListRequest(countryCode, countryName, cityName string, cityCode int) (*acaseSts.CityListType, *AcaseResponseError) {
 	req := &acaseSts.CityListRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 		CountryCode: countryCode,
 		CountryName: countryName,
 		CityCode: cityCode,
 		CityName: cityName,
 	}
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.CityListType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -206,27 +213,22 @@ func (a *Api) CityListRequest(countryCode, countryName, cityName string, cityCod
 
 func (a *Api) CountryDescriptionRequest(countryCode int) (*acaseSts.CountryDescriptionType, *AcaseResponseError) {
 	req := &acaseSts.CountryDescriptionRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 		CountryCode: countryCode,
 	}
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.CountryDescriptionType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -234,28 +236,23 @@ func (a *Api) CountryDescriptionRequest(countryCode int) (*acaseSts.CountryDescr
 
 func (a *Api) ClientCategoryListRequest(categoryCode int, categoryName string) (*acaseSts.ClientCategoryListType, *AcaseResponseError) {
 	req := &acaseSts.ClientCategoryListRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 		ClientCategoryCode: categoryCode,
 		ClientCategoryName: categoryName,
 	}
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.ClientCategoryListType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -263,28 +260,23 @@ func (a *Api) ClientCategoryListRequest(categoryCode int, categoryName string) (
 
 func (a *Api) CountryListRequest(countryCode int, countryName string) (*acaseSts.CountryListType, *AcaseResponseError) {
 	req := &acaseSts.CountryListRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 		CountryCode: countryCode,
 		CountryName: countryName,
 	}
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.CountryListType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -292,28 +284,23 @@ func (a *Api) CountryListRequest(countryCode int, countryName string) (*acaseSts
 
 func (a *Api) CurrencyListRequest(currencyCode int, currencyName, options string) (*acaseSts.CurrencyListResponseType, *AcaseResponseError) {
 	req := &acaseSts.CurrencyListRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 		Code: currencyCode,
 		Name: currencyName,
 	}
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.CurrencyListResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -323,10 +310,12 @@ func (a *Api) CustomerRequestCreate(fullName, zipCode, address, piAddress, inn, 
 	countryName, cityName string, buyerTypeCode, countryCode, cityCode int) (*acaseSts.CustomerResponseCreateType, *AcaseResponseError) {
 
 	req := &acaseSts.CustomerRequestCreateType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 		ActionCreate: acaseSts.ActionCreateType{
 			Parameters:acaseSts.CustomerRequestParametersType{
 				Customer:&acaseSts.CustomerType{
@@ -338,7 +327,7 @@ func (a *Api) CustomerRequestCreate(fullName, zipCode, address, piAddress, inn, 
 					KPP:kpp,
 					Phone:phone,
 					Name:name,
-					BuyerType:acaseSts.BuyerTypeType{
+					BuyerType:acaseSts.SimpleCodeNameType{
 						Name:buyerTypeName,
 						Code:buyerTypeCode,
 					},
@@ -354,21 +343,14 @@ func (a *Api) CustomerRequestCreate(fullName, zipCode, address, piAddress, inn, 
 			},
 		},
 	}
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.CustomerResponseCreateType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -378,10 +360,12 @@ func (a *Api) CustomerRequestUpdate(fullName, zipCode, address, piAddress, inn, 
 	countryName, cityName string, customerCode, buyerTypeCode, countryCode, cityCode int) (*acaseSts.CustomerResponseUpdateType, *AcaseResponseError) {
 
 	req := &acaseSts.CustomerRequestUpdateType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 		ActionUpdate: acaseSts.ActionUpdateType{
 			Parameters:acaseSts.CustomerRequestParametersType{
 				Customer:&acaseSts.CustomerType{
@@ -394,7 +378,7 @@ func (a *Api) CustomerRequestUpdate(fullName, zipCode, address, piAddress, inn, 
 					KPP:kpp,
 					Phone:phone,
 					Name:name,
-					BuyerType:acaseSts.BuyerTypeType{
+					BuyerType:acaseSts.SimpleCodeNameType{
 						Name:buyerTypeName,
 						Code:buyerTypeCode,
 					},
@@ -410,21 +394,14 @@ func (a *Api) CustomerRequestUpdate(fullName, zipCode, address, piAddress, inn, 
 			},
 		},
 	}
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.CustomerResponseUpdateType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -433,10 +410,12 @@ func (a *Api) CustomerRequestUpdate(fullName, zipCode, address, piAddress, inn, 
 func (a *Api) CustomerRequestDelete(customerCode int) (*acaseSts.CustomerResponseDeleteType, *AcaseResponseError) {
 
 	req := &acaseSts.CustomerRequestDeleteType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 		ActionDelete: acaseSts.ActionDeleteType{
 			Parameters:acaseSts.CustomerRequestParametersType{
 				Customer:&acaseSts.CustomerType{
@@ -445,21 +424,14 @@ func (a *Api) CustomerRequestDelete(customerCode int) (*acaseSts.CustomerRespons
 			},
 		},
 	}
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.CustomerResponseDeleteType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -467,10 +439,12 @@ func (a *Api) CustomerRequestDelete(customerCode int) (*acaseSts.CustomerRespons
 
 func (a *Api) CustomerRequestList(sort, actualOnly int) (*acaseSts.CustomerResponseListType, *AcaseResponseError) {
 	req := &acaseSts.CustomerRequestListType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 		ActionList: acaseSts.ActionListType{
 			Parameters:acaseSts.CustomerRequestParametersType{
 				Sort:sort,
@@ -478,21 +452,14 @@ func (a *Api) CustomerRequestList(sort, actualOnly int) (*acaseSts.CustomerRespo
 			},
 		},
 	}
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.CustomerResponseListType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -500,31 +467,26 @@ func (a *Api) CustomerRequestList(sort, actualOnly int) (*acaseSts.CustomerRespo
 
 func (a *Api) CustomerRequestInfo(customerCode int) (*acaseSts.CustomerResponseInfoType, *AcaseResponseError) {
 	req := &acaseSts.CustomerRequestInfoType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 		ActionInfo: acaseSts.ActionInfoType{
 			Parameters:acaseSts.CustomerRequestParametersType{
 				CustomerCode:customerCode,
 			},
 		},
 	}
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.CustomerResponseInfoType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -532,28 +494,23 @@ func (a *Api) CustomerRequestInfo(customerCode int) (*acaseSts.CustomerResponseI
 
 func (a *Api) HotelAmenityListRequest(hotelAmenityCode int, hotelAmenityName string) (*acaseSts.HotelAmenityListResponseType, *AcaseResponseError) {
 	req := &acaseSts.HotelAmenityListRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 		HotelAmenityCode:hotelAmenityCode,
 		HotelAmenityName:hotelAmenityName,
 	}
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.HotelAmenityListResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -561,28 +518,23 @@ func (a *Api) HotelAmenityListRequest(hotelAmenityCode int, hotelAmenityName str
 
 func (a *Api) HotelDescriptionRequest(hotelCode, currencyCode int) (*acaseSts.HotelDescriptionResponseType, *AcaseResponseError) {
 	req := &acaseSts.HotelDescriptionRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 		HotelCode:hotelCode,
 		CurrencyCode:currencyCode,
 	}
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.HotelDescriptionResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -590,10 +542,12 @@ func (a *Api) HotelDescriptionRequest(hotelCode, currencyCode int) (*acaseSts.Ho
 
 func (a *Api) HotelListRequest(hotelCode, countryCode, cityCode, hotelRatingCode int, hotelName, options string) (*acaseSts.HotelListResponseType, *AcaseResponseError) {
 	req := &acaseSts.HotelListRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 		HotelCode:hotelCode,
 		HotelName:hotelName,
 		CountryCode:countryCode,
@@ -601,21 +555,14 @@ func (a *Api) HotelListRequest(hotelCode, countryCode, cityCode, hotelRatingCode
 		HotelRatingCode:hotelRatingCode,
 		Options:options,
 	}
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.HotelListResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -626,10 +573,12 @@ func (a *Api) HotelPricingRequest2(productCode, currency, whereToPay, numberOfGu
 	arrivalDate, departureDate, arrivalTime, departureTime, id, accommodationId string) (*acaseSts.HotelPricingResponse2Type, *AcaseResponseError) {
 
 	req := &acaseSts.HotelPricingRequest2Type{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 		Hotel:hotel,
 		ProductCode:productCode,
 		Currency:currency,
@@ -646,22 +595,14 @@ func (a *Api) HotelPricingRequest2(productCode, currency, whereToPay, numberOfGu
 		Id:id,
 		AccommodationId:accommodationId,
 	}
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
-
 	resp := &acaseSts.HotelPricingResponse2Type{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -672,10 +613,12 @@ func (a *Api) HotelProductRequest(currency, whereToPay, numberOfGuests, numberOf
 	arrivalDate, departureDate, id, accommodationId string) (*acaseSts.HotelProductResponseType, *AcaseResponseError) {
 
 	req := &acaseSts.HotelProductRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 		Hotel:hotel,
 		Currency:currency,
 		WhereToPay:whereToPay,
@@ -688,22 +631,14 @@ func (a *Api) HotelProductRequest(currency, whereToPay, numberOfGuests, numberOf
 		NumberOfExtraBedsChild:numberOfExtraBedsChild,
 		NumberOfExtraBedsInfant:numberOfExtraBedsInfant,
 	}
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
-
 	resp := &acaseSts.HotelProductResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -714,10 +649,12 @@ func (a *Api) HotelSearchRequest(arrivalDate, departureDate, options, hotelName,
 	priceFrom, priceTo float64, starCodes, minorAges []int) (*acaseSts.HotelSearchResponseType, *AcaseResponseError) {
 
 	req := &acaseSts.HotelSearchRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 		ArrivalDate:arrivalDate,
 		DepartureDate:departureDate,
 		City:city,
@@ -753,23 +690,14 @@ func (a *Api) HotelSearchRequest(arrivalDate, departureDate, options, hotelName,
 			req.Guests.MinorAgeList.Items = append(req.Guests.MinorAgeList.Items, *(&acaseSts.MinorType{Age:minorAge}))
 		}
 	}
-
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
-
 	resp := &acaseSts.HotelSearchResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -777,10 +705,12 @@ func (a *Api) HotelSearchRequest(arrivalDate, departureDate, options, hotelName,
 
 func (a *Api) MealRequest(mealCode, mealTypeCode []int, mealName []string) (*acaseSts.MealResponseType, *AcaseResponseError) {
 	req := &acaseSts.MealRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 	}
 
 	if mealCode != nil && mealTypeCode != nil && mealName != nil {
@@ -797,22 +727,14 @@ func (a *Api) MealRequest(mealCode, mealTypeCode []int, mealName []string) (*aca
 			req.Action = append(req.Action, *at)
 		}
 	}
-
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.MealResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -820,10 +742,12 @@ func (a *Api) MealRequest(mealCode, mealTypeCode []int, mealName []string) (*aca
 
 func (a *Api) MealTypeRequest(mealTypeCode []int, mealName []string) (*acaseSts.MealTypeResponseType, *AcaseResponseError) {
 	req := &acaseSts.MealTypeRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 	}
 
 	if mealTypeCode != nil && mealName != nil {
@@ -840,22 +764,14 @@ func (a *Api) MealTypeRequest(mealTypeCode []int, mealName []string) (*acaseSts.
 			req.Action = append(req.Action, *at)
 		}
 	}
-
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.MealTypeResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -863,10 +779,12 @@ func (a *Api) MealTypeRequest(mealTypeCode []int, mealName []string) (*acaseSts.
 
 func (a *Api) ObjectRequest(objectTypeCode, objectSubTypeCode, cityCode []int) (*acaseSts.ObjectResponseType, *AcaseResponseError) {
 	req := &acaseSts.ObjectRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 	}
 
 	if objectTypeCode != nil && objectSubTypeCode != nil && cityCode != nil {
@@ -883,22 +801,14 @@ func (a *Api) ObjectRequest(objectTypeCode, objectSubTypeCode, cityCode []int) (
 			req.Action = append(req.Action, *at)
 		}
 	}
-
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.ObjectResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -906,10 +816,12 @@ func (a *Api) ObjectRequest(objectTypeCode, objectSubTypeCode, cityCode []int) (
 
 func (a *Api) ObjectSubTypeRequest(objectSubTypeCode []int) (*acaseSts.ObjectSubTypeResponseType, *AcaseResponseError) {
 	req := &acaseSts.ObjectSubTypeRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 	}
 
 	if objectSubTypeCode != nil && len(objectSubTypeCode) > 0 {
@@ -919,22 +831,14 @@ func (a *Api) ObjectSubTypeRequest(objectSubTypeCode []int) (*acaseSts.ObjectSub
 			req.Action = append(req.Action, *at)
 		}
 	}
-
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.ObjectSubTypeResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -942,10 +846,12 @@ func (a *Api) ObjectSubTypeRequest(objectSubTypeCode []int) (*acaseSts.ObjectSub
 
 func (a *Api) ObjectTypeRequest(objectTypeCode []int) (*acaseSts.ObjectTypeResponseType, *AcaseResponseError) {
 	req := &acaseSts.ObjectTypeRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 	}
 
 	if objectTypeCode != nil && len(objectTypeCode) > 0 {
@@ -955,22 +861,14 @@ func (a *Api) ObjectTypeRequest(objectTypeCode []int) (*acaseSts.ObjectTypeRespo
 			req.Action = append(req.Action, *at)
 		}
 	}
-
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.ObjectTypeResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -978,28 +876,23 @@ func (a *Api) ObjectTypeRequest(objectTypeCode []int) (*acaseSts.ObjectTypeRespo
 
 func (a *Api) ObjTypeListRequest(objTypeCode, objTypeName string) (*acaseSts.ObjTypeListResponseType, *AcaseResponseError) {
 	req := &acaseSts.ObjTypeListRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 		Code:objTypeCode,
 		Name:objTypeName,
 	}
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.ObjTypeListResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -1007,10 +900,12 @@ func (a *Api) ObjTypeListRequest(objTypeCode, objTypeName string) (*acaseSts.Obj
 
 func (a *Api) OrderDocRequest(actionName acaseSts.OrderDocActionName, taskId, docId, code int) (*acaseSts.OrderDocsResponseType, *AcaseResponseError) {
 	req := &acaseSts.OrderDocsRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 	}
 	req.Action = make([]acaseSts.OrderDocActionType, 1)
 	req.Action[0].Name = string(actionName)
@@ -1022,22 +917,14 @@ func (a *Api) OrderDocRequest(actionName acaseSts.OrderDocActionName, taskId, do
 		case acaseSts.TASKSTATUS, acaseSts.TASKRESPONSE:
 			req.Action[0].Parameters.TaskId = taskId
 	}
-
-	bItem, err := xml.Marshal(req)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.OrderDocsResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -1045,42 +932,28 @@ func (a *Api) OrderDocRequest(actionName acaseSts.OrderDocActionName, taskId, do
 
 func (a *Api) OrderInfoNotifyRequest(item *acaseSts.OrderInfoNotifyRequestType) (*acaseSts.OrderInfoNotifyResponseType, *AcaseResponseError) {
 	item.Password = a.Password
-	bItem, err := xml.Marshal(item)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.OrderInfoNotifyResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" || resp.Error.Description != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(item, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
 }
 
 func (a *Api) OrderInfoAwocNotifyRequest(item *acaseSts.OrderInfoAwocNotifyRequestType) (*acaseSts.OrderInfoNotifyResponseType, *AcaseResponseError) {
-	bItem, err := xml.Marshal(item)
-	FatalError(err)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.OrderInfoNotifyResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" || resp.Error.Description != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(item, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -1091,10 +964,12 @@ func (a *Api) OrderListRequest(arrivalDateFrom, arrivalDateTo, departureDateFrom
 	lastName string, hotel int) (*acaseSts.OrderListResponseType, *AcaseResponseError) {
 
 	req := &acaseSts.OrderListRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 		ArrivalDateFrom:arrivalDateFrom,
 		ArrivalDateTo:arrivalDateTo,
 		DepartureDateFrom:departureDateFrom,
@@ -1109,21 +984,14 @@ func (a *Api) OrderListRequest(arrivalDateFrom, arrivalDateTo, departureDateFrom
 		LastName:lastName,
 		Hotel:hotel,
 	}
-
-	bItem, err := xml.Marshal(req)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.OrderListResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" || resp.Error.Description != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -1136,20 +1004,14 @@ func (a *Api) OrderRequest(item *acaseSts.OrderRequestType) (*acaseSts.OrderResp
 	item.UserId = a.UserId
 	item.BuyerId = a.BuyerId
 
-	bItem, err := xml.Marshal(item)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.OrderResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" || resp.Error.Description != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(item, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -1162,20 +1024,14 @@ func (a *Api) OrderAwocRequest(item *acaseSts.OrderAwocRequestType) (*acaseSts.O
 	item.UserId = a.UserId
 	item.BuyerId = a.BuyerId
 
-	bItem, err := xml.Marshal(item)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.OrderResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" || resp.Error.Description != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(item, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -1184,10 +1040,12 @@ func (a *Api) OrderAwocRequest(item *acaseSts.OrderAwocRequestType) (*acaseSts.O
 func (a *Api) RateGroupRequest(items []string) (*acaseSts.RateGroupResponseType, *AcaseResponseError) {
 
 	req := &acaseSts.RateGroupRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 	}
 
 	if items != nil && len(items) > 0 {
@@ -1198,21 +1056,14 @@ func (a *Api) RateGroupRequest(items []string) (*acaseSts.RateGroupResponseType,
 	} else {
 		req.ActionList.Parameters = make([]acaseSts.RateGroupParameterType, 0)
 	}
-
-	bItem, err := xml.Marshal(req)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.RateGroupResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" || resp.Error.Description != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -1221,10 +1072,12 @@ func (a *Api) RateGroupRequest(items []string) (*acaseSts.RateGroupResponseType,
 func (a *Api) RouteRequest(fromName, toName string, fromCode, toCode, fromTypeCode, toTypeCode int) (*acaseSts.RouteResponseType, *AcaseResponseError) {
 
 	req := &acaseSts.RouteRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 	}
 	req.Action.Name = "LIST"
 	if fromName != "" {
@@ -1240,21 +1093,14 @@ func (a *Api) RouteRequest(fromName, toName string, fromCode, toCode, fromTypeCo
 		}
 		req.Action.Parameters.EndPoint.Name = toName
 	}
-
-	bItem, err := xml.Marshal(req)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.RouteResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" || resp.Error.Description != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -1263,27 +1109,22 @@ func (a *Api) RouteRequest(fromName, toName string, fromCode, toCode, fromTypeCo
 func (a *Api) PenaltyReasonRequest() (*acaseSts.PenaltyReasonResponseType, *AcaseResponseError) {
 
 	req := &acaseSts.PenaltyReasonRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 	}
 	req.Action.Name = "LISTPENALTY"
-
-	bItem, err := xml.Marshal(req)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.PenaltyReasonResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" || resp.Error.Description != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -1292,10 +1133,12 @@ func (a *Api) PenaltyReasonRequest() (*acaseSts.PenaltyReasonResponseType, *Acas
 func (a *Api) SpecialOfferTypeRequest(code int, name string) (*acaseSts.SpecialOfferTypeResponseType, *AcaseResponseError) {
 
 	req := &acaseSts.SpecialOfferTypeRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 	}
 	if code > 0 {
 		req.ActionList.Parameters.Code = code
@@ -1303,21 +1146,14 @@ func (a *Api) SpecialOfferTypeRequest(code int, name string) (*acaseSts.SpecialO
 	if name != "" {
 		req.ActionList.Parameters.Name = name
 	}
-
-	bItem, err := xml.Marshal(req)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.SpecialOfferTypeResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" || resp.Error.Description != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -1326,29 +1162,26 @@ func (a *Api) SpecialOfferTypeRequest(code int, name string) (*acaseSts.SpecialO
 func (a *Api) StarListRequest(code int, name, options string) (*acaseSts.StarListResponseType, *AcaseResponseError) {
 
 	req := &acaseSts.StarListRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
-		Code:code,
-		Name:name,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
+		SimpleCodeNameType:acaseSts.SimpleCodeNameType{
+			Code:code,
+			Name:name,
+		},
 		Options:options,
 	}
-
-	bItem, err := xml.Marshal(req)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.StarListResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" || resp.Error.Description != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -1357,26 +1190,21 @@ func (a *Api) StarListRequest(code int, name, options string) (*acaseSts.StarLis
 func (a *Api) StatusListRequest() (*acaseSts.StatusListResponseType, *AcaseResponseError) {
 
 	req := &acaseSts.StatusListRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 	}
-
-	bItem, err := xml.Marshal(req)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.StatusListResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" || resp.Error.Description != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil
@@ -1385,29 +1213,24 @@ func (a *Api) StatusListRequest() (*acaseSts.StatusListResponseType, *AcaseRespo
 func (a *Api) TypeOfPlaceRequest(typeOfPlaceCode int, typeOfPlaceName string) (*acaseSts.TypeOfPlaceResponseType, *AcaseResponseError) {
 
 	req := &acaseSts.TypeOfPlaceRequestType{
-		Language: a.Language,
-		Password: a.Password,
-		UserId: a.UserId,
-		BuyerId: a.BuyerId,
+		Credentials:acaseSts.Credentials{
+			Language: a.Language,
+			Password: a.Password,
+			UserId: a.UserId,
+			BuyerId: a.BuyerId,
+		},
 	}
 	req.Action.Name = "LIST"
 	req.Action.Parameters.TypeOfPlaceCode = typeOfPlaceCode
 	req.Action.Parameters.TypeOfPlaceName = typeOfPlaceName
-
-	bItem, err := xml.Marshal(req)
-	respData, err := requestInternal([]byte(xml.Header + string(bItem)))
-	FatalError(err)
 	resp := &acaseSts.TypeOfPlaceResponseType{}
-	err = xml.Unmarshal(respData, resp)
-	FatalError(err)
-	if resp.Error.Code != "" || resp.Error.Description != "" {
-		rError := make([]RespError, 1)
-		rError[0] = RespError{
-			Code: resp.Error.Code,
-			Message: resp.Error.Description,
-		}
-		res := ErrorResponse(rError)
-		return nil, &res[0]
+	err := a.processRequest(req, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
 	}
 
 	return resp, nil

@@ -3,22 +3,17 @@ package acaseSts
 import "encoding/xml"
 
 type HotelDescriptionRequestType struct {
+	Credentials
 	XMLName			xml.Name			`xml:"HotelDescription"`
-	BuyerId			string				`xml:"BuyerId,attr"`
-	UserId			string				`xml:"UserId,attr"`
-	Password		string				`xml:"Password,attr"`
-	Language		LanguageTypeEnum	`xml:"Language,attr,omitempty"`
 	HotelCode		int					`xml:"HotelCode,attr"`
 	CurrencyCode	int					`xml:"CurrencyCode,attr,omitempty"`
 	Options			string				`xml:"Opt,attr,omitempty"`
 }
 
 type HotelDescriptionResponseType struct {
+	BaseResponse
+	SimpleCodeNameType
 	XMLName					xml.Name					`xml:"HotelDescription"`
-	Success					string						`xml:"Success"`
-	Error					ErrorType					`xml:"Error,omitempty"`
-	Code					int							`xml:"Code,attr"`
-	Name					string						`xml:"Name,attr"`
 	Zip						string						`xml:"Zip,attr"`
 	Address					string						`xml:"Address,attr"`
 	Story					string						`xml:"Story,attr"`
@@ -39,12 +34,12 @@ type HotelDescriptionResponseType struct {
 	ObjType					ObjTypeType					`xml:"ObjType"`
 	City					CityType					`xml:"City"`
 	AlternativeCities		AlternativeCitiesType		`xml:"AlternativeCities"`
-	AdmUnit1				AdmUnit1Type				`xml:"AdmUnit1"`
+	AdmUnit1				SimpleCodeNameType			`xml:"AdmUnit1"`
 	AdmUnit2				AdmUnit2Type				`xml:"AdmUnit2"`
-	TypeOfPlace				TypeOfPlaceType				`xml:"TypeOfPlace"`
+	TypeOfPlace				SimpleCodeNameType			`xml:"TypeOfPlace"`
 	Country					CountryType					`xml:"Country"`
 	Position				PositionType				`xml:"Position"`
-	Rating					RatingType					`xml:"Rating"`
+	Rating					SimpleCodeNameType			`xml:"Rating"`
 	Stars					StarsType					`xml:"Stars"`
 	TimeCheck				TimeCheckType				`xml:"TimeCheck"`
 	Images					ImagesType					`xml:"Images"`
@@ -61,25 +56,12 @@ type ObjectsType struct {
 }
 
 type ObjectType struct {
+	SimpleCodeNameType
 	XMLName			xml.Name			`xml:"Object"`
-	Code			int					`xml:"Code,attr"`
-	Name			string				`xml:"Name,attr"`
 	Distance		float64				`xml:"Distance,attr"`
-	ObjectType		ObjectTypeType		`xml:"ObjectType"`
-	ObjectSubType	ObjectSubTypeType	`xml:"ObjectSubType"`
+	ObjectType		SimpleCodeNameType	`xml:"ObjectType"`
+	ObjectSubType	SimpleCodeNameType	`xml:"ObjectSubType"`
 	City			CityType			`xml:"City"`
-}
-
-type ObjectSubTypeType struct {
-	XMLName	xml.Name	`xml:"ObjectSubType"`
-	Code	int			`xml:"Code,attr"`
-	Name	string		`xml:"Name,attr"`
-}
-
-type ObjectTypeType struct {
-	XMLName	xml.Name	`xml:"ObjectType"`
-	Code	int			`xml:"Code,attr"`
-	Name	string		`xml:"Name,attr"`
 }
 
 type SpecialRequirementListType struct {
@@ -99,9 +81,8 @@ type RoomsListType struct {
 }
 
 type RoomType struct {
+	SimpleCodeNameType
 	XMLName						xml.Name	`xml:"Room"`
-	Code						int			`xml:"Code,attr"`
-	Name						string		`xml:"Name,attr"`
 	Description					string		`xml:"Description,attr"`
 	MaxNumberOfGuests			int			`xml:"MaxNumberOfGuests,attr"`
 	MaxNumberOfExtraBeds		int			`xml:"MaxNumberOfExtraBeds,attr"`
@@ -116,9 +97,8 @@ type AmenitiesType struct {
 }
 
 type AmenityType struct {
+	SimpleCodeNameType
 	XMLName	xml.Name	`xml:"Amenity"`
-	Code	int			`xml:"Code,attr"`
-	Name	string		`xml:"Name,attr"`
 	Url		string		`xml:"Url,attr,omitempty"`
 }
 
@@ -139,33 +119,24 @@ type TimeCheckType struct {
 }
 
 type StarsType struct {
+	SimpleCodeNameType
 	XMLName				xml.Name				`xml:"Stars"`
-	Code				int						`xml:"Code,attr"`
-	Name				string					`xml:"Name,attr"`
 	Value				string					`xml:"Value,attr"`
 	Url					string					`xml:"Url,attr"`
 	OfficialCertificate	OfficialCertificateType	`xml:"OfficialCertificate"`
 }
 
 type OfficialCertificateType struct {
+	SimpleCodeNameType
 	XMLName		xml.Name		`xml:"OfficialCertificate"`
-	Code		int				`xml:"Code,attr"`
-	Name		string			`xml:"Name,attr"`
 	Certificate	CertificateType	`xml:"Certificate"`
 }
 
 type CertificateType struct {
+	SimpleCodeNameType
 	XMLName		xml.Name	`xml:"Certificate"`
-	Code		int			`xml:"Code,attr"`
-	Name		string		`xml:"Name,attr"`
 	ValidBefore	string		`xml:"ValidBefore,attr"`
 	Url			string		`xml:"Url,attr"`
-}
-
-type RatingType struct {
-	XMLName	xml.Name	`xml:"Rating"`
-	Code	int			`xml:"Code,attr"`
-	Name	string		`xml:"Name,attr"`
 }
 
 type AlternativeCitiesType struct {
@@ -174,18 +145,16 @@ type AlternativeCitiesType struct {
 }
 
 type AlternativeCityType struct {
-	XMLName		xml.Name		`xml:"AlternativeCity"`
-	Code		int				`xml:"Code,attr"`
-	Name		string			`xml:"Name,attr"`
-	Country		CountryType		`xml:"Country"`
-	AdmUnit1	AdmUnit1Type	`xml:"AdmUnit1"`
-	AdmUnit2	AdmUnit2Type	`xml:"AdmUnit2"`
-	TypeOfPlace	TypeOfPlaceType	`xml:"TypeOfPlace"`
+	SimpleCodeNameType
+	XMLName		xml.Name			`xml:"AlternativeCity"`
+	Country		CountryType			`xml:"Country"`
+	AdmUnit1	SimpleCodeNameType	`xml:"AdmUnit1"`
+	AdmUnit2	AdmUnit2Type		`xml:"AdmUnit2"`
+	TypeOfPlace	SimpleCodeNameType	`xml:"TypeOfPlace"`
 }
 
 type ObjTypeType struct {
+	SimpleCodeNameType
 	XMLName		xml.Name	`xml:"ObjType"`
-	Code		int			`xml:"Code,attr"`
-	Name		string		`xml:"Name,attr"`
 	NameWhere	string		`xml:"NameWhere,attr,omitempty"`
 }

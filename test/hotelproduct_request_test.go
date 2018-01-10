@@ -26,7 +26,7 @@ func TestHotelProductRequest_Ok(t *testing.T) {
 	st.Expect(t, data.BuyerId, "MyCompanyId")
 	st.Expect(t, data.UserId, "MyUserId")
 	st.Expect(t, data.Password, "MyPassword")
-	st.Expect(t, data.Language, "ru")
+	st.Expect(t, string(data.Language), "ru")
 	st.Expect(t, data.Country.Code, 9)
 	st.Expect(t, data.Country.Name, "Россия")
 	st.Expect(t, data.Country.Position.Latitude, "57.5158")

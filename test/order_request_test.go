@@ -153,7 +153,7 @@ func TestOrderAwocRequest_Ok(t *testing.T) {
 	data, err := acApi.OrderAwocRequest(item)
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
-	st.Expect(t, data.Success.Id, 496446)
+	st.Expect(t, data.BaseResponse.Success.Id, 496446)
 }
 
 func TestOrderRequest_AgencyAgreementsWithAdditionalBenefits_Ok(t *testing.T) {
@@ -164,7 +164,7 @@ func TestOrderRequest_AgencyAgreementsWithAdditionalBenefits_Ok(t *testing.T) {
 	data, err := acApi.OrderRequest(item)
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
-	st.Expect(t, data.Success.Id, 496446)
+	st.Expect(t, data.BaseResponse.Success.Id, 496446)
 }
 
 func TestOrderRequest_AccommodationAndTransfers_Ok(t *testing.T) {
@@ -175,7 +175,7 @@ func TestOrderRequest_AccommodationAndTransfers_Ok(t *testing.T) {
 	data, err := acApi.OrderRequest(item)
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
-	st.Expect(t, data.Success.Id, 496446)
+	st.Expect(t, data.BaseResponse.Success.Id, 496446)
 }
 
 func TestOrderRequest_Error(t *testing.T) {

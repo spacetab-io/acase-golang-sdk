@@ -3,22 +3,15 @@ package acaseSts
 import "encoding/xml"
 
 type MealTypeRequestType struct {
+	Credentials
 	XMLName		xml.Name			`xml:"MealTypeRequest"`
-	BuyerId		string				`xml:"BuyerId,attr"`
-	UserId		string				`xml:"UserId,attr"`
-	Password	string				`xml:"Password,attr"`
-	Language	LanguageTypeEnum	`xml:"Language,attr,omitempty"`
 	Action		[]ActionType		`xml:"Action"`
 }
 
 type MealTypeResponseType struct {
+	Credentials
+	BaseResponse
 	XMLName			xml.Name			`xml:"MealTypeResponse"`
-	BuyerId			string				`xml:"BuyerId,attr"`
-	UserId			string				`xml:"UserId,attr"`
-	Password		string				`xml:"Password,attr"`
-	Language		string				`xml:"Language,attr,omitempty"`
-	Success			string				`xml:"Success"`
-	Error			ErrorType			`xml:"Error,omitempty"`
 	Action			[]ActionType		`xml:"Action"`
 	MealTypeList	MealTypeListType	`xml:"MealTypeList"`
 }

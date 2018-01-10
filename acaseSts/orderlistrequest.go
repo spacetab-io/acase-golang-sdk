@@ -3,11 +3,8 @@ package acaseSts
 import "encoding/xml"
 
 type OrderListRequestType struct {
+	Credentials
 	XMLName					xml.Name			`xml:"OrderListRequest"`
-	BuyerId					string				`xml:"BuyerId,attr"`
-	UserId					string				`xml:"UserId,attr"`
-	Password				string				`xml:"Password,attr"`
-	Language				LanguageTypeEnum	`xml:"Language,attr,omitempty"`
 	ArrivalDateFrom			string				`xml:"ArrivalDateFrom,attr"`
 	ArrivalDateTo			string				`xml:"ArrivalDateTo,attr"`
 	DepartureDateFrom		string				`xml:"DepartureDateFrom,attr"`
@@ -24,9 +21,8 @@ type OrderListRequestType struct {
 }
 
 type OrderListResponseType struct {
+	BaseResponse
 	XMLName		xml.Name		`xml:"OrderListResponse"`
-	Success		string			`xml:"Success"`
-	Error		ErrorType		`xml:"Error,omitempty"`
 	IsThatAll	YesNoCodeType	`xml:"IsThatAll"`
 	Orders		OrdersType		`xml:"Orders"`
 }
@@ -47,7 +43,7 @@ type OrderType struct {
 	Penalty					float64				`xml:"Penalty,attr"`
 	StartDate				string				`xml:"StartDate,attr"`
 	EndDate					string				`xml:"EndDate,attr"`
-	Currency				CurrencyType		`xml:"Currency"`
+	Currency				SimpleCodeNameType	`xml:"Currency"`
 	Status					SimpleCodeNameType	`xml:"Status"`
 	ContactPerson			ContactPersonType	`xml:"ContactPerson"`
 }

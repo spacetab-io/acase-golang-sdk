@@ -3,11 +3,8 @@ package acaseSts
 import "encoding/xml"
 
 type HotelProductRequestType struct {
+	Credentials
 	XMLName					xml.Name			`xml:"HotelProductRequest"`
-	BuyerId					string				`xml:"BuyerId,attr"`
-	UserId					string				`xml:"UserId,attr"`
-	Password				string				`xml:"Password,attr"`
-	Language				LanguageTypeEnum	`xml:"Language,attr,omitempty"`
 	Hotel					int					`xml:"Hotel,attr"`
 	Currency				int					`xml:"Currency,attr"`
 	WhereToPay				int					`xml:"WhereToPay,attr"`
@@ -22,15 +19,10 @@ type HotelProductRequestType struct {
 }
 
 type HotelProductResponseType struct {
+	Credentials
+	BaseResponse
+	SimpleCodeNameType
 	XMLName					xml.Name					`xml:"HotelProductResponse"`
-	Success					string						`xml:"Success"`
-	Error					ErrorType					`xml:"Error,omitempty"`
-	BuyerId					string						`xml:"BuyerId,attr"`
-	UserId					string						`xml:"UserId,attr"`
-	Password				string						`xml:"Password,attr"`
-	Language				string						`xml:"Language,attr,omitempty"`
-	Code					int							`xml:"Code,attr"`
-	Name					string						`xml:"Name,attr"`
 	StartDate				string						`xml:"StartDate,attr"`
 	EndDate					string						`xml:"EndDate,attr"`
 	NumberOfGuests			int							`xml:"NumberOfGuests,attr"`
@@ -39,13 +31,13 @@ type HotelProductResponseType struct {
 	NumberOfExtraBedsInfant	int							`xml:"NumberOfExtraBedsInfant,attr,omitempty"`
 	SpecialRequirements		string						`xml:"SpecialRequirements,attr"`
 	Country					CountryType					`xml:"Country"`
-	AdmUnit1				AdmUnit1Type				`xml:"AdmUnit1"`
+	AdmUnit1				SimpleCodeNameType			`xml:"AdmUnit1"`
 	AdmUnit2				AdmUnit2Type				`xml:"AdmUnit2"`
-	TypeOfPlace				TypeOfPlaceType				`xml:"TypeOfPlace"`
+	TypeOfPlace				SimpleCodeNameType			`xml:"TypeOfPlace"`
 	City					CityType					`xml:"City"`
 	Position				PositionType				`xml:"Position"`
 	ObjType					ObjTypeType					`xml:"ObjType"`
-	Currency				CurrencyType				`xml:"Currency"`
+	Currency				SimpleCodeNameType			`xml:"Currency"`
 	Infants					AgeRestrictionType			`xml:"Infants"`
 	Children				AgeRestrictionType			`xml:"Children"`
 	SpecialRequirementList	SpecialRequirementListType	`xml:"SpecialRequirementList"`
@@ -93,9 +85,8 @@ type HotelProductDetailType struct {
 }
 
 type AvailabilityType struct {
+	SimpleCodeNameType
 	XMLName		xml.Name		`xml:"Availability"`
-	Code		int				`xml:"Code,attr"`
-	Name		string			`xml:"Name,attr"`
 	Allotment	AllotmentType	`xml:"Allotment"`
 }
 

@@ -10,11 +10,8 @@ const (
 )
 
 type OrderDocsRequestType struct {
+	Credentials
 	XMLName		xml.Name				`xml:"OrderDocsRequest"`
-	BuyerId		string					`xml:"BuyerId,attr"`
-	UserId		string					`xml:"UserId,attr"`
-	Password	string					`xml:"Password,attr"`
-	Language	LanguageTypeEnum		`xml:"Language,attr,omitempty"`
 	Action		[]OrderDocActionType	`xml:"Action"`
 }
 
@@ -37,13 +34,9 @@ type OrderDocParamsDocType struct {
 }
 
 type OrderDocsResponseType struct {
+	Credentials
+	BaseResponse
 	XMLName		xml.Name				`xml:"OrderDocsResponse"`
-	BuyerId		string					`xml:"BuyerId,attr"`
-	UserId		string					`xml:"UserId,attr"`
-	Password	string					`xml:"Password,attr"`
-	Language	string					`xml:"Language,attr,omitempty"`
-	Success		string					`xml:"Success"`
-	Error		ErrorType				`xml:"Error,omitempty"`
 	Action		[]OrderDocActionType	`xml:"Action"`
 	TaskInfo	[]TaskInfoType			`xml:"TaskInfo"`
 	File		*OrderDocFileType		`xml:"File,omitempty"`

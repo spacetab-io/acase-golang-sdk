@@ -3,11 +3,8 @@ package acaseSts
 import "encoding/xml"
 
 type TypeOfPlaceRequestType struct {
+	Credentials
 	XMLName		xml.Name						`xml:"TypeOfPlaceRequest"`
-	BuyerId		string							`xml:"BuyerId,attr"`
-	UserId		string							`xml:"UserId,attr"`
-	Password	string							`xml:"Password,attr"`
-	Language	LanguageTypeEnum				`xml:"Language,attr,omitempty"`
 	Action		TypeOfPlaceRequestActionType	`xml:"Action"`
 }
 
@@ -24,13 +21,9 @@ type TypeOfPlaceParamType struct {
 }
 
 type TypeOfPlaceResponseType struct {
+	Credentials
+	BaseResponse
 	XMLName			xml.Name						`xml:"TypeOfPlaceResponse"`
-	BuyerId			string							`xml:"BuyerId,attr"`
-	UserId			string							`xml:"UserId,attr"`
-	Password		string							`xml:"Password,attr"`
-	Language		string							`xml:"Language,attr,omitempty"`
-	Success			SuccessType						`xml:"Success"`
-	Error			ErrorType						`xml:"Error,omitempty"`
 	Action			TypeOfPlaceRequestActionType	`xml:"Action"`
 	TypeOfPlaceList	TypeOfPlaceListType				`xml:"TypeOfPlaceList"`
 }

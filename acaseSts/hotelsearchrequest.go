@@ -3,11 +3,8 @@ package acaseSts
 import "encoding/xml"
 
 type HotelSearchRequestType struct {
+	Credentials
 	XMLName			xml.Name				`xml:"HotelSearchRequest"`
-	BuyerId			string					`xml:"BuyerId,attr"`
-	UserId			string					`xml:"UserId,attr"`
-	Password		string					`xml:"Password,attr"`
-	Language		LanguageTypeEnum		`xml:"Language,attr,omitempty"`
 	ArrivalDate		string					`xml:"ArrivalDate,attr"`
 	DepartureDate	string					`xml:"DepartureDate,attr"`
 	City			int						`xml:"City,attr,omitempty"`
@@ -81,14 +78,9 @@ type StarListType struct {
 	Items	[]SimpleCodeType	`xml:"Star"`
 }
 
-type SimpleCodeType struct {
-	Code	int	`xml:"Code,attr"`
-}
-
 type HotelSearchResponseType struct {
+	BaseResponse
 	XMLName							xml.Name				`xml:"HotelSearchResponse"`
-	Success							string					`xml:"Success"`
-	Error							ErrorType				`xml:"Error,omitempty"`
 	Language						string					`xml:"Language,attr"`
 	ArrivalDate						string					`xml:"ArrivalDate,attr"`
 	DepartureDate					string					`xml:"DepartureDate,attr"`
@@ -106,9 +98,8 @@ type AvailableHotelsListType struct {
 }
 
 type HotelFullType struct {
+	SimpleCodeNameType
 	XMLName							xml.Name				`xml:"Hotel"`
-	Code							int						`xml:"Code,attr"`
-	Name							string					`xml:"Name,attr"`
 	Zip								string					`xml:"Zip,attr"`
 	Address							string					`xml:"Address,attr"`
 	CityCentre						string					`xml:"CityCentre,attr"`
@@ -123,15 +114,15 @@ type HotelFullType struct {
 	DefaultCheckInTime				string					`xml:"DefaultCheckInTime,attr"`
 	ObjType							ObjTypeType				`xml:"ObjType"`
 	City							CityType				`xml:"City"`
-	AdmUnit1						AdmUnit1Type			`xml:"AdmUnit1"`
+	AdmUnit1						SimpleCodeNameType		`xml:"AdmUnit1"`
 	AdmUnit2						AdmUnit2Type			`xml:"AdmUnit2"`
-	TypeOfPlace						TypeOfPlaceType			`xml:"TypeOfPlace"`
+	TypeOfPlace						SimpleCodeNameType		`xml:"TypeOfPlace"`
 	Country							CountryType				`xml:"Country"`
 	Position						PositionType			`xml:"Position"`
-	Rating							RatingType				`xml:"Rating"`
+	Rating							SimpleCodeNameType		`xml:"Rating"`
 	Stars							StarsType				`xml:"Stars"`
 	Amenities						HotelAmenitiesListType	`xml:"Amenities"`
-	Currency						CurrencyType			`xml:"Currency"`
+	Currency						SimpleCodeNameType		`xml:"Currency"`
 	HotelOfferList					HotelOfferListType		`xml:"HotelOfferList"`
 }
 
@@ -176,9 +167,8 @@ type DestListFullType struct {
 }
 
 type DestFullType struct {
+	SimpleCodeNameType
 	XMLName			xml.Name			`xml:"Destination"`
-	Code			int					`xml:"Code,attr"`
-	Name			string				`xml:"Name,attr"`
 	DestinationType	SimpleCodeNameType	`xml:"DestinationType"`
 	ObjType			SimpleCodeNameType	`xml:"ObjType"`
 	HotelType		SimpleCodeNameType	`xml:"HotelType"`
