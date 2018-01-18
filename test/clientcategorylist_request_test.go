@@ -4,12 +4,11 @@ import (
 	"testing"
 
 	"github.com/nbio/st"
-	"gopkg.in/h2non/gock.v1"
 )
 
 func TestClientCategoryListRequest_Ok(t *testing.T)  {
-	testRequest("ccatrequest_example.xml")
-	defer gock.Off()
+	testRequest("clientcategorylist_response_example.xml", true)
+	defer gockOff()
 
 	data, err := acApi.ClientCategoryListRequest(0,"")
 	er := getCustomErrorType()
@@ -26,8 +25,8 @@ func TestClientCategoryListRequest_Ok(t *testing.T)  {
 }
 
 func TestClientCategoryListRequest_Error(t *testing.T) {
-	testRequest("ccaterror_example.xml")
-	defer gock.Off()
+	testRequest("clientcategorylist_error_example.xml", false)
+	defer gockOff()
 
 	_, err := acApi.ClientCategoryListRequest(0,"")
 

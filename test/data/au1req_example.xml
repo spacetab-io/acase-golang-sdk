@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<AdmUnit1Request BuyerId="MyCompanyId" UserId="MyUserId" Password="MyPassword" Language="ru">
-   <Action Name="LIST">
-      <Parameters CountryCode="9" AdmUnit1Code="" AdmUnit1Name="обл"/>
-   </Action>
-</AdmUnit1Request>

@@ -4,14 +4,13 @@ import (
 	"testing"
 
 	"github.com/nbio/st"
-	"gopkg.in/h2non/gock.v1"
 )
 
 func TestAdmUnit2Request_Ok(t *testing.T) {
-	testRequest("au2resp_example.xml")
-	defer gock.Off()
+	testRequest("admunit2_response_example.xml", false)
+	defer gockOff()
 
-	data, err := acApi.AdmUnit2Request(9, "3", "", "", "")
+	data, err := acApi.AdmUnit2Request(9, 3, 0, "", "")
 
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
@@ -27,10 +26,10 @@ func TestAdmUnit2Request_Ok(t *testing.T) {
 }
 
 func TestAdmUnit2Request_Error(t *testing.T) {
-	testRequest("au2error_example.xml")
-	defer gock.Off()
+	testRequest("admunit2_error_example.xml", true)
+	defer gockOff()
 
-	_, err := acApi.AdmUnit2Request(9, "3", "", "", "")
+	_, err := acApi.AdmUnit2Request(0, 3, 9, "", "")
 
 	st.Expect(t, err.Code, "9998")
 	st.Expect(t, err.Message, "Доступ запрещен !")

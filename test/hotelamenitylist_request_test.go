@@ -4,14 +4,13 @@ import (
 	"testing"
 
 	"github.com/nbio/st"
-	"gopkg.in/h2non/gock.v1"
 )
 
 func TestHotelAmenityListRequest_Ok(t *testing.T)  {
-	testRequest("hotelamenitylist_response_example.xml")
-	defer gock.Off()
+	testRequest("hotelamenitylist_response_example.xml", false)
+	defer gockOff()
 
-	data, err := acApi.HotelAmenityListRequest(0, "")
+	data, err := acApi.HotelAmenityListRequest(7, "")
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
 	st.Expect(t, len(data.HotelAmenity), 90)
@@ -48,8 +47,8 @@ func TestHotelAmenityListRequest_Ok(t *testing.T)  {
 }
 
 func TestHotelAmenityListRequest_Error(t *testing.T) {
-	testRequest("hotelamenitylist_error_example.xml")
-	defer gock.Off()
+	testRequest("hotelamenitylist_error_example.xml", true)
+	defer gockOff()
 
 	_, err := acApi.HotelAmenityListRequest(0, "")
 

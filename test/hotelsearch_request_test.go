@@ -2,16 +2,15 @@ package test
 
 import (
 	"testing"
-	"gopkg.in/h2non/gock.v1"
 	"github.com/nbio/st"
 )
 
 func TestSearchProductRequest_Ok(t *testing.T)  {
-	testRequest("hotelsearch_by_hotellist_response_example.xml")
-	defer gock.Off()
+	testRequest("hotelsearch_by_hotellist_response_example.xml", false)
+	defer gockOff()
 
-	data, err := acApi.HotelSearchRequest("","","","","",
-		0, 0, 0, 0, 0, 0, 0,0,0,
+	data, err := acApi.HotelSearchRequest("01.02.2018","12.02.2018","","","",
+		2, 0, 2, 0, 0, 0, 0,0,0,
 		0,0,0.00,0.00,nil,nil)
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
@@ -123,8 +122,8 @@ func TestSearchProductRequest_Ok(t *testing.T)  {
 }
 
 func TestHotelSearchRequest_Error(t *testing.T) {
-	testRequest("hotelsearch_error_example.xml")
-	defer gock.Off()
+	testRequest("hotelsearch_error_example.xml", true)
+	defer gockOff()
 
 	_, err := acApi.HotelSearchRequest("","","","","",
 		0, 0, 0, 0, 0, 0, 0,0,0,

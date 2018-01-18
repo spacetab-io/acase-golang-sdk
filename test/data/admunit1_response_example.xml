@@ -5,7 +5,7 @@
    </Action>
    <Success/>
    <AdmUnit1List>
-      <AdmUnit1 Code="2" Name="Калужская область"/>
-      <AdmUnit1 Code="21" Name="Тверская область"/>
+      <AdmUnit1 Code="4" Name="Адыгея республика"/>
+      <AdmUnit1 Code="5" Name="Алтай республика"/>
    </AdmUnit1List>
 </AdmUnit1Response>

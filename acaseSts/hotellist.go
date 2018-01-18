@@ -4,7 +4,7 @@ import "encoding/xml"
 
 type HotelListRequestType struct {
 	Credentials
-	XMLName			xml.Name			`xml:"HotelList"`
+	XMLName			xml.Name			`xml:"HotelListRequest"`
 	HotelCode		int					`xml:"HotelCode,attr,omitempty"`
 	HotelName		string				`xml:"HotelName,attr,omitempty"`
 	CountryCode		int					`xml:"CountryCode,attr,omitempty"`

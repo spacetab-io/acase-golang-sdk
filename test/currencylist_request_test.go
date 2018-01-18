@@ -4,14 +4,13 @@ import (
 	"testing"
 
 	"github.com/nbio/st"
-	"gopkg.in/h2non/gock.v1"
 )
 
 func TestCurrencyListRequest_Ok(t *testing.T)  {
-	testRequest("currencylistresp_example.xml")
-	defer gock.Off()
+	testRequest("currencylist_response_example.xml", false)
+	defer gockOff()
 
-	data, err := acApi.CurrencyListRequest(0, "","")
+	data, err := acApi.CurrencyListRequest(22, "","")
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
 	st.Expect(t, len(data.Currency), 3)
@@ -24,8 +23,8 @@ func TestCurrencyListRequest_Ok(t *testing.T)  {
 }
 
 func TestCurrencyListRequest_Error(t *testing.T) {
-	testRequest("currencylisterror_example.xml")
-	defer gock.Off()
+	testRequest("currencylist_error_example.xml", true)
+	defer gockOff()
 
 	_, err := acApi.CurrencyListRequest(0, "","")
 

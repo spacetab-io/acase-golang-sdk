@@ -2,13 +2,12 @@ package test
 
 import (
 	"testing"
-	"gopkg.in/h2non/gock.v1"
 	"github.com/nbio/st"
 )
 
 func TestOrderListRequest_Ok(t *testing.T) {
-	testRequest("orderlist_response_example.xml")
-	defer gock.Off()
+	testRequest("orderlist_response_example.xml", false)
+	defer gockOff()
 
 	data, err := acApi.OrderListRequest("","","","","",
 		"","","","","","",
@@ -39,8 +38,8 @@ func TestOrderListRequest_Ok(t *testing.T) {
 }
 
 func TestOrderListRequest_Error(t *testing.T) {
-	testRequest("orderlist_error_example.xml")
-	defer gock.Off()
+	testRequest("orderlist_error_example.xml", true)
+	defer gockOff()
 
 	_, err := acApi.OrderListRequest("","","","","",
 		"","","","","","",

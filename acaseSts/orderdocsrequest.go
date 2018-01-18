@@ -11,8 +11,8 @@ const (
 
 type OrderDocsRequestType struct {
 	Credentials
-	XMLName		xml.Name				`xml:"OrderDocsRequest"`
-	Action		[]OrderDocActionType	`xml:"Action"`
+	XMLName		xml.Name			`xml:"OrderDocsRequest"`
+	Action		OrderDocActionType	`xml:"Action"`
 }
 
 type OrderDocActionType struct {
@@ -37,7 +37,7 @@ type OrderDocsResponseType struct {
 	Credentials
 	BaseResponse
 	XMLName		xml.Name				`xml:"OrderDocsResponse"`
-	Action		[]OrderDocActionType	`xml:"Action"`
+	Action		OrderDocActionType		`xml:"Action"`
 	TaskInfo	[]TaskInfoType			`xml:"TaskInfo"`
 	File		*OrderDocFileType		`xml:"File,omitempty"`
 }

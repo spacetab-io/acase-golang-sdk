@@ -3,11 +3,16 @@ package acaseSdk
 import (
 	"bytes"
 	"encoding/xml"
+	"errors"
 	"io/ioutil"
+	"log"
 	"net/http"
+	"net/url"
+	"reflect"
+	"strconv"
+	"strings"
 
 	"github.com/tmconsulting/acase-golang-sdk/acaseSts"
-	"log"
 )
 
 type Api struct {
@@ -20,7 +25,7 @@ type Api struct {
 
 func NewApi(auth Auth, apiUrl string) *Api {
 	var	lang acaseSts.LanguageTypeEnum
-	if auth.Language == "RU" {
+	if auth.Language == "RU" || auth.Language == "ru" {
 		lang = acaseSts.Ru
 	} else {
 		lang = acaseSts.En
@@ -34,13 +39,31 @@ func NewApi(auth Auth, apiUrl string) *Api {
 	}
 }
 
-func (a *Api) requestInternal(data []byte) (*[]byte, error) {
-	req, err := http.NewRequest("POST", a.ApiUrl, bytes.NewBuffer([]byte(data)))
+func getTypeName(item interface{}) (string, error) {
+	t := reflect.TypeOf(item)
+	if t.Kind() == reflect.Ptr {
+		t = t.Elem()
+	}
+	f, ext := t.FieldByName("XMLName")
+	if !ext {
+		return "", errors.New("XMLName property not found")
+	}
+	vl, ok := f.Tag.Lookup("xml")
+	if !ok || len(vl) == 0 {
+		return "", errors.New("XML tag not found")
+	}
+	vl = strings.Split(vl, ",")[0]
+	return vl, nil
+}
+
+func (a *Api) requestInternal(body string) (*[]byte, error) {
+	req, err := http.NewRequest("POST", a.ApiUrl, bytes.NewBuffer([]byte(body)))
 	if err != nil {
 		log.Print(err)
 		return nil, err
 	}
-	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+	req.Header.Add("Content-Length", string(len(body)))
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
@@ -57,9 +80,19 @@ func (a *Api) requestInternal(data []byte) (*[]byte, error) {
 	return &res, nil
 }
 
-func (a *Api) processRequest(item interface{}, res interface{}) *AcaseResponseError {
-	bItem, err := xml.Marshal(item)
-	respData, err := a.requestInternal([]byte(xml.Header + string(bItem)))
+func (a * Api) formValuesRequest(requestName string, items map[string]string, res interface{}) *AcaseResponseError {
+	v := url.Values{}
+	v.Set("RequestName", requestName)
+	v.Add("CompanyId", a.BuyerId)
+	v.Add("UserId", a.UserId)
+	v.Add("Password", a.Password)
+	v.Add("Language", string(a.Language))
+	for key, value := range items {
+		v.Add(key, value)
+	}
+	//vl := v.Encode()
+	//log.Print(vl)
+	respData, err := a.requestInternal(v.Encode())
 	if err != nil {
 		log.Print(err)
 		return &AcaseResponseError{
@@ -67,6 +100,7 @@ func (a *Api) processRequest(item interface{}, res interface{}) *AcaseResponseEr
 			Message:err.Error(),
 		}
 	}
+	//log.Print(string(*respData))
 	err = xml.Unmarshal(*respData, res)
 	if err != nil {
 		log.Print(err)
@@ -78,6 +112,28 @@ func (a *Api) processRequest(item interface{}, res interface{}) *AcaseResponseEr
 	return nil
 }
 
+func (a *Api) processRequest(item interface{}, res interface{}) *AcaseResponseError {
+	requestName, er := getTypeName(item)
+	if er != nil {
+		log.Print(er)
+		return &AcaseResponseError{
+			Code:"Unknown",
+			Message:er.Error(),
+		}
+	}
+	bItem, err := xml.Marshal(item)
+	if err != nil {
+		log.Print(err)
+		return &AcaseResponseError{
+			Code:"Unknown",
+			Message:err.Error(),
+		}
+	}
+	body := make(map[string]string, 1)
+	body["XML"] = string(bItem)
+	return a.formValuesRequest(requestName, body, res)
+}
+
 func (a *Api) fillCredentials(item *acaseSts.Credentials) {
 	item.BuyerId = a.BuyerId
 	item.UserId = a.UserId
@@ -86,7 +142,7 @@ func (a *Api) fillCredentials(item *acaseSts.Credentials) {
 }
 
 func (a *Api) AdmUnit1Request(countryCode int, admUnitCode, admUnitName string) (*acaseSts.AdmUnit1ListType, *AcaseResponseError) {
-	req := &acaseSts.AdmUnit1RequestType{
+	request := &acaseSts.AdmUnit1RequestType{
 		Action: acaseSts.AdmUnit1ActionType{
 			Name: acaseSts.List,
 			Parameters: acaseSts.AdmUnit1ActionTypeParameters{
@@ -96,9 +152,9 @@ func (a *Api) AdmUnit1Request(countryCode int, admUnitCode, admUnitName string) 
 			},
 		},
 	}
-	a.fillCredentials(&req.Credentials)
+	a.fillCredentials(&request.Credentials)
 	resp := &acaseSts.AdmUnit1ResponseType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -109,22 +165,22 @@ func (a *Api) AdmUnit1Request(countryCode int, admUnitCode, admUnitName string) 
 	return &resp.AdmUnit1List, nil
 }
 
-func (a *Api) AdmUnit2Request(countryCode int, admUnit1Code, admUnit1Name, admUnit2Code, admUnit2Name string) (*acaseSts.AdmUnit2ListType, *AcaseResponseError) {
-	req := &acaseSts.AdmUnit2RequestType{
+func (a *Api) AdmUnit2Request(countryCode, admUnit1Code, admUnit2Code int, admUnit1Name, admUnit2Name string) (*acaseSts.AdmUnit2ListType, *AcaseResponseError) {
+	request := &acaseSts.AdmUnit2RequestType{
 		Action: acaseSts.AdmUnit2ActionType{
 			Name: acaseSts.List,
 			Parameters: acaseSts.AdmUnit2ActionTypeParameters{
 				CountryCode: countryCode,
 				AdmUnit1Code: admUnit1Code,
-				AdmUnit1Name: admUnit1Code,
+				AdmUnit1Name: admUnit1Name,
 				AdmUnit2Code: admUnit2Code,
 				AdmUnit2Name: admUnit2Name,
 			},
 		},
 	}
-	a.fillCredentials(&req.Credentials)
+	a.fillCredentials(&request.Credentials)
 	resp := &acaseSts.AdmUnit2ResponseType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -132,15 +188,14 @@ func (a *Api) AdmUnit2Request(countryCode int, admUnit1Code, admUnit1Name, admUn
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return &resp.AdmUnit2List, nil
 }
 
 func (a *Api) CitizenshipListRequest() (*acaseSts.CitizenshipListType, *AcaseResponseError) {
-	req := &acaseSts.CitizenshipListRequestType{}
-	a.fillCredentials(&req.Credentials)
+	request := &acaseSts.CitizenshipListRequestType{}
+	a.fillCredentials(&request.Credentials)
 	resp := &acaseSts.CitizenshipListType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -148,17 +203,14 @@ func (a *Api) CitizenshipListRequest() (*acaseSts.CitizenshipListType, *AcaseRes
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
-func (a *Api) CityDescriptionRequest(cityCode string) (*acaseSts.CityDescriptionType, *AcaseResponseError) {
-	req := &acaseSts.CityDescriptionRequestType{
-		CityCode: cityCode,
-	}
-	a.fillCredentials(&req.Credentials)
+func (a *Api) CityDescriptionRequest(cityCode int64) (*acaseSts.CityDescriptionType, *AcaseResponseError) {
+	request := make(map[string]string, 1)
+	request["CityCode"] = strconv.FormatInt(cityCode, 10)
 	resp := &acaseSts.CityDescriptionType{}
-	err := a.processRequest(req, resp)
+	err := a.formValuesRequest("CityDescriptionRequest", request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -166,20 +218,25 @@ func (a *Api) CityDescriptionRequest(cityCode string) (*acaseSts.CityDescription
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
-func (a *Api) CityListRequest(countryCode, countryName, cityName string, cityCode int) (*acaseSts.CityListType, *AcaseResponseError) {
-	req := &acaseSts.CityListRequestType{
-		CountryCode: countryCode,
-		CountryName: countryName,
-		CityCode: cityCode,
-		CityName: cityName,
+func (a *Api) CityListRequest(countryName, cityName string, countryCode, cityCode int64) (*acaseSts.CityListType, *AcaseResponseError) {
+	request := make(map[string]string)
+	if countryName != "" {
+		request["CountryName"] = countryName
 	}
-	a.fillCredentials(&req.Credentials)
+	if cityName != "" {
+		request["CityName"] = cityName
+	}
+	if countryCode > 0 {
+		request["CountryCode"] = strconv.FormatInt(countryCode, 10)
+	}
+	if cityCode > 0 {
+		request["CityCode"] = strconv.FormatInt(cityCode, 10)
+	}
 	resp := &acaseSts.CityListType{}
-	err := a.processRequest(req, resp)
+	err := a.formValuesRequest("CityListRequest", request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -187,17 +244,14 @@ func (a *Api) CityListRequest(countryCode, countryName, cityName string, cityCod
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
-func (a *Api) CountryDescriptionRequest(countryCode int) (*acaseSts.CountryDescriptionType, *AcaseResponseError) {
-	req := &acaseSts.CountryDescriptionRequestType{
-		CountryCode: countryCode,
-	}
-	a.fillCredentials(&req.Credentials)
+func (a *Api) CountryDescriptionRequest(countryCode int64) (*acaseSts.CountryDescriptionType, *AcaseResponseError) {
+	request := make(map[string]string, 1)
+	request["CountryCode"] = strconv.FormatInt(countryCode, 10)
 	resp := &acaseSts.CountryDescriptionType{}
-	err := a.processRequest(req, resp)
+	err := a.formValuesRequest("CountryDescriptionRequest", request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -205,18 +259,17 @@ func (a *Api) CountryDescriptionRequest(countryCode int) (*acaseSts.CountryDescr
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
 func (a *Api) ClientCategoryListRequest(categoryCode int, categoryName string) (*acaseSts.ClientCategoryListType, *AcaseResponseError) {
-	req := &acaseSts.ClientCategoryListRequestType{
+	request := &acaseSts.ClientCategoryListRequestType{
 		ClientCategoryCode: categoryCode,
 		ClientCategoryName: categoryName,
 	}
-	a.fillCredentials(&req.Credentials)
+	a.fillCredentials(&request.Credentials)
 	resp := &acaseSts.ClientCategoryListType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -224,18 +277,19 @@ func (a *Api) ClientCategoryListRequest(categoryCode int, categoryName string) (
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
-func (a *Api) CountryListRequest(countryCode int, countryName string) (*acaseSts.CountryListType, *AcaseResponseError) {
-	req := &acaseSts.CountryListRequestType{
-		CountryCode: countryCode,
-		CountryName: countryName,
+func (a *Api) CountryListRequest(countryCode int64, countryName string) (*acaseSts.CountryListType, *AcaseResponseError) {
+	request := make(map[string]string)
+	if countryCode > 0 {
+		request["CountryCode"] = strconv.FormatInt(countryCode, 10)
 	}
-	a.fillCredentials(&req.Credentials)
+	if countryName != "" {
+		request["CountryName"] = countryName
+	}
 	resp := &acaseSts.CountryListType{}
-	err := a.processRequest(req, resp)
+	err := a.formValuesRequest("CountryListRequest", request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -243,18 +297,17 @@ func (a *Api) CountryListRequest(countryCode int, countryName string) (*acaseSts
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
 func (a *Api) CurrencyListRequest(currencyCode int, currencyName, options string) (*acaseSts.CurrencyListResponseType, *AcaseResponseError) {
-	req := &acaseSts.CurrencyListRequestType{
+	request := &acaseSts.CurrencyListRequestType{
 		Code: currencyCode,
 		Name: currencyName,
 	}
-	a.fillCredentials(&req.Credentials)
+	a.fillCredentials(&request.Credentials)
 	resp := &acaseSts.CurrencyListResponseType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -262,14 +315,13 @@ func (a *Api) CurrencyListRequest(currencyCode int, currencyName, options string
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
 func (a *Api) CustomerRequestCreate(fullName, zipCode, address, piAddress, inn, kpp, phone, name, buyerTypeName,
 	countryName, cityName string, buyerTypeCode, countryCode, cityCode int) (*acaseSts.CustomerResponseCreateType, *AcaseResponseError) {
 
-	req := &acaseSts.CustomerRequestCreateType{
+	request := &acaseSts.CustomerRequestCreateType{
 		ActionCreate: acaseSts.ActionCreateType{
 			Parameters:acaseSts.CustomerRequestParametersType{
 				Customer:&acaseSts.CustomerType{
@@ -297,9 +349,9 @@ func (a *Api) CustomerRequestCreate(fullName, zipCode, address, piAddress, inn, 
 			},
 		},
 	}
-	a.fillCredentials(&req.Credentials)
+	a.fillCredentials(&request.Credentials)
 	resp := &acaseSts.CustomerResponseCreateType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -307,14 +359,13 @@ func (a *Api) CustomerRequestCreate(fullName, zipCode, address, piAddress, inn, 
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
 func (a *Api) CustomerRequestUpdate(fullName, zipCode, address, piAddress, inn, kpp, phone, name, buyerTypeName,
 	countryName, cityName string, customerCode, buyerTypeCode, countryCode, cityCode int) (*acaseSts.CustomerResponseUpdateType, *AcaseResponseError) {
 
-	req := &acaseSts.CustomerRequestUpdateType{
+	request := &acaseSts.CustomerRequestUpdateType{
 		ActionUpdate: acaseSts.ActionUpdateType{
 			Parameters:acaseSts.CustomerRequestParametersType{
 				Customer:&acaseSts.CustomerType{
@@ -343,9 +394,9 @@ func (a *Api) CustomerRequestUpdate(fullName, zipCode, address, piAddress, inn, 
 			},
 		},
 	}
-	a.fillCredentials(&req.Credentials)
+	a.fillCredentials(&request.Credentials)
 	resp := &acaseSts.CustomerResponseUpdateType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -353,13 +404,12 @@ func (a *Api) CustomerRequestUpdate(fullName, zipCode, address, piAddress, inn, 
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
 func (a *Api) CustomerRequestDelete(customerCode int) (*acaseSts.CustomerResponseDeleteType, *AcaseResponseError) {
 
-	req := &acaseSts.CustomerRequestDeleteType{
+	request := &acaseSts.CustomerRequestDeleteType{
 		ActionDelete: acaseSts.ActionDeleteType{
 			Parameters:acaseSts.CustomerRequestParametersType{
 				Customer:&acaseSts.CustomerType{
@@ -368,9 +418,9 @@ func (a *Api) CustomerRequestDelete(customerCode int) (*acaseSts.CustomerRespons
 			},
 		},
 	}
-	a.fillCredentials(&req.Credentials)
+	a.fillCredentials(&request.Credentials)
 	resp := &acaseSts.CustomerResponseDeleteType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -378,12 +428,11 @@ func (a *Api) CustomerRequestDelete(customerCode int) (*acaseSts.CustomerRespons
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
 func (a *Api) CustomerRequestList(sort, actualOnly int) (*acaseSts.CustomerResponseListType, *AcaseResponseError) {
-	req := &acaseSts.CustomerRequestListType{
+	request := &acaseSts.CustomerRequestListType{
 		ActionList: acaseSts.ActionListType{
 			Parameters:acaseSts.CustomerRequestParametersType{
 				Sort:sort,
@@ -391,9 +440,9 @@ func (a *Api) CustomerRequestList(sort, actualOnly int) (*acaseSts.CustomerRespo
 			},
 		},
 	}
-	a.fillCredentials(&req.Credentials)
+	a.fillCredentials(&request.Credentials)
 	resp := &acaseSts.CustomerResponseListType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -401,21 +450,20 @@ func (a *Api) CustomerRequestList(sort, actualOnly int) (*acaseSts.CustomerRespo
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
 func (a *Api) CustomerRequestInfo(customerCode int) (*acaseSts.CustomerResponseInfoType, *AcaseResponseError) {
-	req := &acaseSts.CustomerRequestInfoType{
+	request := &acaseSts.CustomerRequestInfoType{
 		ActionInfo: acaseSts.ActionInfoType{
 			Parameters:acaseSts.CustomerRequestParametersType{
 				CustomerCode:customerCode,
 			},
 		},
 	}
-	a.fillCredentials(&req.Credentials)
+	a.fillCredentials(&request.Credentials)
 	resp := &acaseSts.CustomerResponseInfoType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -423,18 +471,19 @@ func (a *Api) CustomerRequestInfo(customerCode int) (*acaseSts.CustomerResponseI
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
-func (a *Api) HotelAmenityListRequest(hotelAmenityCode int, hotelAmenityName string) (*acaseSts.HotelAmenityListResponseType, *AcaseResponseError) {
-	req := &acaseSts.HotelAmenityListRequestType{
-		HotelAmenityCode:hotelAmenityCode,
-		HotelAmenityName:hotelAmenityName,
+func (a *Api) HotelAmenityListRequest(hotelAmenityCode int64, hotelAmenityName string) (*acaseSts.HotelAmenityListResponseType, *AcaseResponseError) {
+	request := make(map[string]string)
+	if hotelAmenityCode > 0 {
+		request["HotelAmenityCode"] = strconv.FormatInt(hotelAmenityCode, 10)
 	}
-	a.fillCredentials(&req.Credentials)
+	if hotelAmenityName != "" {
+		request["HotelAmenityName"] = hotelAmenityName
+	}
 	resp := &acaseSts.HotelAmenityListResponseType{}
-	err := a.processRequest(req, resp)
+	err := a.formValuesRequest("HotelAmenityListRequest", request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -442,18 +491,20 @@ func (a *Api) HotelAmenityListRequest(hotelAmenityCode int, hotelAmenityName str
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
-func (a *Api) HotelDescriptionRequest(hotelCode, currencyCode int) (*acaseSts.HotelDescriptionResponseType, *AcaseResponseError) {
-	req := &acaseSts.HotelDescriptionRequestType{
-		HotelCode:hotelCode,
-		CurrencyCode:currencyCode,
+func (a *Api) HotelDescriptionRequest(hotelCode, currencyCode int64) (*acaseSts.HotelDescriptionResponseType, *AcaseResponseError) {
+	request := make(map[string]string)
+	if hotelCode <= 0 {
+		return nil, &AcaseResponseError{Code:"0", Message:"Hotel code must be set"}
 	}
-	a.fillCredentials(&req.Credentials)
+	request["HotelCode"] = strconv.FormatInt(hotelCode, 10)
+	if currencyCode > 0 {
+		request["CurrencyCode"] = strconv.FormatInt(currencyCode, 10)
+	}
 	resp := &acaseSts.HotelDescriptionResponseType{}
-	err := a.processRequest(req, resp)
+	err := a.formValuesRequest("HotelDescriptionRequest", request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -461,22 +512,31 @@ func (a *Api) HotelDescriptionRequest(hotelCode, currencyCode int) (*acaseSts.Ho
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
-func (a *Api) HotelListRequest(hotelCode, countryCode, cityCode, hotelRatingCode int, hotelName, options string) (*acaseSts.HotelListResponseType, *AcaseResponseError) {
-	req := &acaseSts.HotelListRequestType{
-		HotelCode:hotelCode,
-		HotelName:hotelName,
-		CountryCode:countryCode,
-		CityCode:cityCode,
-		HotelRatingCode:hotelRatingCode,
-		Options:options,
+func (a *Api) HotelListRequest(hotelCode, countryCode, cityCode, hotelRatingCode int64, hotelName, options string) (*acaseSts.HotelListResponseType, *AcaseResponseError) {
+	request := make(map[string]string)
+	if hotelCode > 0 {
+		request["HotelCode"] = strconv.FormatInt(hotelCode, 10)
 	}
-	a.fillCredentials(&req.Credentials)
+	if countryCode > 0 {
+		request["CountryCode"] = strconv.FormatInt(countryCode, 10)
+	}
+	if cityCode > 0 {
+		request["CityCode"] = strconv.FormatInt(cityCode, 10)
+	}
+	if hotelRatingCode > 0 {
+		request["HotelRatingCode"] = strconv.FormatInt(hotelRatingCode, 10)
+	}
+	if hotelName != "" {
+		request["HotelName"] = hotelName
+	}
+	if options != "" {
+		request["Opt"] = options
+	}
 	resp := &acaseSts.HotelListResponseType{}
-	err := a.processRequest(req, resp)
+	err := a.formValuesRequest("HotelListRequest", request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -484,7 +544,6 @@ func (a *Api) HotelListRequest(hotelCode, countryCode, cityCode, hotelRatingCode
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
@@ -492,7 +551,7 @@ func (a *Api) HotelPricingRequest2(productCode, currency, whereToPay, numberOfGu
     numberOfExtraBedsChild, numberOfExtraBedsInfant, hotel  int,
 	arrivalDate, departureDate, arrivalTime, departureTime, id, accommodationId string) (*acaseSts.HotelPricingResponse2Type, *AcaseResponseError) {
 
-	req := &acaseSts.HotelPricingRequest2Type{
+	request := &acaseSts.HotelPricingRequest2Type{
 		Hotel:hotel,
 		ProductCode:productCode,
 		Currency:currency,
@@ -509,9 +568,9 @@ func (a *Api) HotelPricingRequest2(productCode, currency, whereToPay, numberOfGu
 		Id:id,
 		AccommodationId:accommodationId,
 	}
-	a.fillCredentials(&req.Credentials)
+	a.fillCredentials(&request.Credentials)
 	resp := &acaseSts.HotelPricingResponse2Type{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -519,7 +578,6 @@ func (a *Api) HotelPricingRequest2(productCode, currency, whereToPay, numberOfGu
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
@@ -527,7 +585,7 @@ func (a *Api) HotelProductRequest(currency, whereToPay, numberOfGuests, numberOf
 	numberOfExtraBedsChild, numberOfExtraBedsInfant, hotel  int,
 	arrivalDate, departureDate, id, accommodationId string) (*acaseSts.HotelProductResponseType, *AcaseResponseError) {
 
-	req := &acaseSts.HotelProductRequestType{
+	request := &acaseSts.HotelProductRequestType{
 		Hotel:hotel,
 		Currency:currency,
 		WhereToPay:whereToPay,
@@ -540,9 +598,9 @@ func (a *Api) HotelProductRequest(currency, whereToPay, numberOfGuests, numberOf
 		NumberOfExtraBedsChild:numberOfExtraBedsChild,
 		NumberOfExtraBedsInfant:numberOfExtraBedsInfant,
 	}
-	a.fillCredentials(&req.Credentials)
+	a.fillCredentials(&request.Credentials)
 	resp := &acaseSts.HotelProductResponseType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -550,7 +608,6 @@ func (a *Api) HotelProductRequest(currency, whereToPay, numberOfGuests, numberOf
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
@@ -558,7 +615,7 @@ func (a *Api) HotelSearchRequest(arrivalDate, departureDate, options, hotelName,
 	freeSaleOnly, hotelCategory, currency, whereToPay, numberOfGuests, hotelCode, distance, distTypeCode, distCode, guestsAdults, city int,
 	priceFrom, priceTo float64, starCodes, minorAges []int) (*acaseSts.HotelSearchResponseType, *AcaseResponseError) {
 
-	req := &acaseSts.HotelSearchRequestType{
+	request := &acaseSts.HotelSearchRequestType{
 		ArrivalDate:arrivalDate,
 		DepartureDate:departureDate,
 		City:city,
@@ -573,30 +630,29 @@ func (a *Api) HotelSearchRequest(arrivalDate, departureDate, options, hotelName,
 		HotelCode:hotelCode,
 		HotelName:hotelName,
 	}
-	a.fillCredentials(&req.Credentials)
+	a.fillCredentials(&request.Credentials)
 	if starCodes != nil && len(starCodes) > 0 {
 		for _, starCode := range starCodes {
-			req.StarList.Items = append(req.StarList.Items, *(&acaseSts.SimpleCodeType{Code:starCode}))
+			request.StarList.Items = append(request.StarList.Items, *(&acaseSts.SimpleCodeType{Code:starCode}))
 		}
 	}
 	if destListCode != "" {
-		req.DestinationList.Code = destListCode
-		req.DestinationList.Distance = distance
-		req.DestinationList.TypeCode = acaseSts.DestinationTypeEnum(distTypeCode)
+		request.DestinationList.Code = destListCode
+		request.DestinationList.Distance = distance
+		request.DestinationList.TypeCode = acaseSts.DestinationTypeEnum(distTypeCode)
 	} else if distance > 0 {
-		req.Destination.TypeCode = acaseSts.DestinationTypeEnum(distTypeCode)
-		req.Destination.Distance = distance
-		req.Destination.Code = distCode
+		request.Destination.TypeCode = acaseSts.DestinationTypeEnum(distTypeCode)
+		request.Destination.Distance = distance
+		request.Destination.Code = distCode
 	}
-
 	if guestsAdults > 0 && minorAges != nil && len(minorAges) > 0 {
-		req.Guests = &acaseSts.GuestsType{NumberOfAdults:guestsAdults}
+		request.Guests = &acaseSts.GuestsType{NumberOfAdults:guestsAdults}
 		for _, minorAge := range minorAges {
-			req.Guests.MinorAgeList.Items = append(req.Guests.MinorAgeList.Items, *(&acaseSts.MinorType{Age:minorAge}))
+			request.Guests.MinorAgeList.Items = append(request.Guests.MinorAgeList.Items, *(&acaseSts.MinorType{Age:minorAge}))
 		}
 	}
 	resp := &acaseSts.HotelSearchResponseType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -604,31 +660,26 @@ func (a *Api) HotelSearchRequest(arrivalDate, departureDate, options, hotelName,
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
-func (a *Api) MealRequest(mealCode, mealTypeCode []int, mealName []string) (*acaseSts.MealResponseType, *AcaseResponseError) {
-	req := &acaseSts.MealRequestType{
+func (a *Api) MealRequest(mealCode, mealTypeCode int64, mealName string) (*acaseSts.MealResponseType, *AcaseResponseError) {
+	request := &acaseSts.MealRequestType{}
+	a.fillCredentials(&request.Credentials)
+	request.Action.Name = "LIST"
+	request.Action.Parameters.MealName = mealName
+	if mealTypeCode > 0 {
+		request.Action.Parameters.MealTypeCode = strconv.FormatInt(mealTypeCode, 10)
+	} else {
+		request.Action.Parameters.MealTypeCode = ""
 	}
-	a.fillCredentials(&req.Credentials)
-
-	if mealCode != nil && mealTypeCode != nil && mealName != nil {
-		if len(mealCode) > 0 {
-			if len(mealCode) != len(mealTypeCode) && len(mealCode) != len(mealName) {
-				res := &AcaseResponseError{Code:"0", Message:"Length of parameters lists does not match"}
-				return nil, res
-			}
-		}
-
-		for i, item := range mealCode {
-			pt := &acaseSts.ParametersType{MealCode:item, MealTypeCode:mealTypeCode[i], MealName:mealName[i]}
-			at := &acaseSts.ActionType{Name:"LIST", Parameters:*pt}
-			req.Action = append(req.Action, *at)
-		}
+	if mealCode > 0 {
+		request.Action.Parameters.MealCode = strconv.FormatInt(mealCode, 10)
+	} else {
+		request.Action.Parameters.MealCode = ""
 	}
 	resp := &acaseSts.MealResponseType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -636,30 +687,21 @@ func (a *Api) MealRequest(mealCode, mealTypeCode []int, mealName []string) (*aca
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
-func (a *Api) MealTypeRequest(mealTypeCode []int, mealName []string) (*acaseSts.MealTypeResponseType, *AcaseResponseError) {
-	req := &acaseSts.MealTypeRequestType{}
-	a.fillCredentials(&req.Credentials)
-
-	if mealTypeCode != nil && mealName != nil {
-		if len(mealTypeCode) > 0 {
-			if len(mealTypeCode) != len(mealName) {
-				res := &AcaseResponseError{Code:"0", Message:"Length of parameters lists does not match"}
-				return nil, res
-			}
-		}
-
-		for i, item := range mealTypeCode {
-			pt := &acaseSts.ParametersType{MealTypeCode:item, MealName:mealName[i]}
-			at := &acaseSts.ActionType{Name:"LIST", Parameters:*pt}
-			req.Action = append(req.Action, *at)
-		}
+func (a *Api) MealTypeRequest(mealTypeCode int64, mealName string) (*acaseSts.MealTypeResponseType, *AcaseResponseError) {
+	request := &acaseSts.MealTypeRequestType{}
+	request.Action.Name = "LIST"
+	if mealTypeCode > 0 {
+		request.Action.Parameters.MealTypeCode = strconv.FormatInt(mealTypeCode, 10)
+	} else {
+		request.Action.Parameters.MealTypeCode = ""
 	}
+	request.Action.Parameters.MealTypeName = mealName
+	a.fillCredentials(&request.Credentials)
 	resp := &acaseSts.MealTypeResponseType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -667,30 +709,30 @@ func (a *Api) MealTypeRequest(mealTypeCode []int, mealName []string) (*acaseSts.
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
-func (a *Api) ObjectRequest(objectTypeCode, objectSubTypeCode, cityCode []int) (*acaseSts.ObjectResponseType, *AcaseResponseError) {
-	req := &acaseSts.ObjectRequestType{}
-	a.fillCredentials(&req.Credentials)
-
-	if objectTypeCode != nil && objectSubTypeCode != nil && cityCode != nil {
-		if len(objectTypeCode) > 0 {
-			if len(objectTypeCode) != len(objectSubTypeCode) &&  len(objectTypeCode) != len(cityCode) {
-				res := &AcaseResponseError{Code:"0", Message:"Length of parameters lists does not match"}
-				return nil, res
-			}
-		}
-
-		for i, item := range objectTypeCode {
-			pt := &acaseSts.ObjectParametersType{ObjectTypeCode:item, ObjectSubTypeCode:objectSubTypeCode[i], CityCode:cityCode[i]}
-			at := &acaseSts.ObjectActionType{Name:"LISTMETROSTYLE", Parameters:*pt}
-			req.Action = append(req.Action, *at)
-		}
+func (a *Api) ObjectRequest(objectTypeCode, objectSubTypeCode, cityCode int64) (*acaseSts.ObjectResponseType, *AcaseResponseError) {
+	request := &acaseSts.ObjectRequestType{}
+	a.fillCredentials(&request.Credentials)
+	request.Action.Name = "LISTMETROSTYLE"
+	if objectTypeCode > 0 {
+		request.Action.Parameters.ObjectTypeCode = strconv.FormatInt(objectTypeCode, 10)
+	} else {
+		request.Action.Parameters.ObjectTypeCode = ""
+	}
+	if objectSubTypeCode > 0 {
+		request.Action.Parameters.ObjectSubTypeCode = strconv.FormatInt(objectSubTypeCode, 10)
+	} else {
+		request.Action.Parameters.ObjectSubTypeCode = ""
+	}
+	if cityCode > 0 {
+		request.Action.Parameters.CityCode = strconv.FormatInt(cityCode, 10)
+	} else {
+		request.Action.Parameters.CityCode = ""
 	}
 	resp := &acaseSts.ObjectResponseType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -698,23 +740,20 @@ func (a *Api) ObjectRequest(objectTypeCode, objectSubTypeCode, cityCode []int) (
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
-func (a *Api) ObjectSubTypeRequest(objectSubTypeCode []int) (*acaseSts.ObjectSubTypeResponseType, *AcaseResponseError) {
-	req := &acaseSts.ObjectSubTypeRequestType{}
-	a.fillCredentials(&req.Credentials)
-
-	if objectSubTypeCode != nil && len(objectSubTypeCode) > 0 {
-		for _, item := range objectSubTypeCode {
-			pt := &acaseSts.ObjSubTypeParamType{ObjectTypeCode:item}
-			at := &acaseSts.ObjSubTypeActionType{Name:"LIST", Parameters:*pt}
-			req.Action = append(req.Action, *at)
-		}
+func (a *Api) ObjectSubTypeRequest(objectTypeCode int64) (*acaseSts.ObjectSubTypeResponseType, *AcaseResponseError) {
+	request := &acaseSts.ObjectSubTypeRequestType{}
+	a.fillCredentials(&request.Credentials)
+	request.Action.Name = "LIST"
+	if objectTypeCode > 0 {
+		request.Action.Parameters.ObjectTypeCode = strconv.FormatInt(objectTypeCode, 10)
+	} else {
+		request.Action.Parameters.ObjectTypeCode = ""
 	}
 	resp := &acaseSts.ObjectSubTypeResponseType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -722,23 +761,20 @@ func (a *Api) ObjectSubTypeRequest(objectSubTypeCode []int) (*acaseSts.ObjectSub
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
-func (a *Api) ObjectTypeRequest(objectTypeCode []int) (*acaseSts.ObjectTypeResponseType, *AcaseResponseError) {
-	req := &acaseSts.ObjectTypeRequestType{}
-	a.fillCredentials(&req.Credentials)
-
-	if objectTypeCode != nil && len(objectTypeCode) > 0 {
-		for _, item := range objectTypeCode {
-			pt := &acaseSts.ParametersObjType{ObjectTypeCode:item}
-			at := &acaseSts.ObjectTypeActionType{Name:"LIST", Parameters:*pt}
-			req.Action = append(req.Action, *at)
-		}
+func (a *Api) ObjectTypeRequest(objectTypeCode int64) (*acaseSts.GeoObjectTypeResponseType, *AcaseResponseError) {
+	request := &acaseSts.ObjectTypeRequestType{}
+	a.fillCredentials(&request.Credentials)
+	request.Action.Name = "LIST"
+	if objectTypeCode > 0 {
+		request.Action.Parameters.ObjectTypeCode = strconv.FormatInt(objectTypeCode, 10)
+	} else {
+		request.Action.Parameters.ObjectTypeCode = ""
 	}
-	resp := &acaseSts.ObjectTypeResponseType{}
-	err := a.processRequest(req, resp)
+	resp := &acaseSts.GeoObjectTypeResponseType{}
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -746,18 +782,17 @@ func (a *Api) ObjectTypeRequest(objectTypeCode []int) (*acaseSts.ObjectTypeRespo
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
 func (a *Api) ObjTypeListRequest(objTypeCode, objTypeName string) (*acaseSts.ObjTypeListResponseType, *AcaseResponseError) {
-	req := &acaseSts.ObjTypeListRequestType{
+	request := &acaseSts.ObjTypeListRequestType{
 		Code:objTypeCode,
 		Name:objTypeName,
 	}
-	a.fillCredentials(&req.Credentials)
+	a.fillCredentials(&request.Credentials)
 	resp := &acaseSts.ObjTypeListResponseType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -765,25 +800,23 @@ func (a *Api) ObjTypeListRequest(objTypeCode, objTypeName string) (*acaseSts.Obj
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
 func (a *Api) OrderDocRequest(actionName acaseSts.OrderDocActionName, taskId, docId, code int) (*acaseSts.OrderDocsResponseType, *AcaseResponseError) {
-	req := &acaseSts.OrderDocsRequestType{}
-	a.fillCredentials(&req.Credentials)
-	req.Action = make([]acaseSts.OrderDocActionType, 1)
-	req.Action[0].Name = string(actionName)
+	request := &acaseSts.OrderDocsRequestType{}
+	a.fillCredentials(&request.Credentials)
+	request.Action.Name = string(actionName)
 
 	switch actionName {
 		case acaseSts.TASKADD:
-			req.Action[0].Parameters.DocId = docId
-			req.Action[0].Parameters.DocType = &acaseSts.OrderDocParamsDocType{Code:code}
+			request.Action.Parameters.DocId = docId
+			request.Action.Parameters.DocType = &acaseSts.OrderDocParamsDocType{Code:code}
 		case acaseSts.TASKSTATUS, acaseSts.TASKRESPONSE:
-			req.Action[0].Parameters.TaskId = taskId
+			request.Action.Parameters.TaskId = taskId
 	}
 	resp := &acaseSts.OrderDocsResponseType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -791,7 +824,6 @@ func (a *Api) OrderDocRequest(actionName acaseSts.OrderDocActionName, taskId, do
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
@@ -806,7 +838,6 @@ func (a *Api) OrderInfoNotifyRequest(item *acaseSts.OrderInfoNotifyRequestType) 
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
@@ -820,7 +851,6 @@ func (a *Api) OrderInfoAwocNotifyRequest(item *acaseSts.OrderInfoAwocNotifyReque
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
@@ -828,7 +858,7 @@ func (a *Api) OrderListRequest(arrivalDateFrom, arrivalDateTo, departureDateFrom
 	deadlineDateTo, registrationDateFrom, registrationDateTo, accommodationDateFrom, accommodationDateTo, hotelName,
 	lastName string, hotel int) (*acaseSts.OrderListResponseType, *AcaseResponseError) {
 
-	req := &acaseSts.OrderListRequestType{
+	request := &acaseSts.OrderListRequestType{
 		ArrivalDateFrom:arrivalDateFrom,
 		ArrivalDateTo:arrivalDateTo,
 		DepartureDateFrom:departureDateFrom,
@@ -843,9 +873,9 @@ func (a *Api) OrderListRequest(arrivalDateFrom, arrivalDateTo, departureDateFrom
 		LastName:lastName,
 		Hotel:hotel,
 	}
-	a.fillCredentials(&req.Credentials)
+	a.fillCredentials(&request.Credentials)
 	resp := &acaseSts.OrderListResponseType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -853,14 +883,13 @@ func (a *Api) OrderListRequest(arrivalDateFrom, arrivalDateTo, departureDateFrom
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
-func (a *Api) OrderRequest(item *acaseSts.OrderRequestType) (*acaseSts.OrderResponseType, *AcaseResponseError) {
+func (a *Api) OrderRequest(item *acaseSts.OrderRequestType) (*acaseSts.OrderListResponseType, *AcaseResponseError) {
 
 	a.fillCredentials(&item.Credentials)
-	resp := &acaseSts.OrderResponseType{}
+	resp := &acaseSts.OrderListResponseType{}
 	err := a.processRequest(item, resp)
 	if err != nil {
 		return nil, err
@@ -869,14 +898,13 @@ func (a *Api) OrderRequest(item *acaseSts.OrderRequestType) (*acaseSts.OrderResp
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
-func (a *Api) OrderAwocRequest(item *acaseSts.OrderAwocRequestType) (*acaseSts.OrderResponseType, *AcaseResponseError) {
+func (a *Api) OrderAwocRequest(item *acaseSts.OrderAwocRequestType) (*acaseSts.OrderListResponseType, *AcaseResponseError) {
 
 	a.fillCredentials(&item.Credentials)
-	resp := &acaseSts.OrderResponseType{}
+	resp := &acaseSts.OrderListResponseType{}
 	err := a.processRequest(item, resp)
 	if err != nil {
 		return nil, err
@@ -885,25 +913,24 @@ func (a *Api) OrderAwocRequest(item *acaseSts.OrderAwocRequestType) (*acaseSts.O
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
 func (a *Api) RateGroupRequest(items []string) (*acaseSts.RateGroupResponseType, *AcaseResponseError) {
 
-	req := &acaseSts.RateGroupRequestType{}
-	a.fillCredentials(&req.Credentials)
+	request := &acaseSts.RateGroupRequestType{}
+	a.fillCredentials(&request.Credentials)
 
 	if items != nil && len(items) > 0 {
-		req.ActionList.Parameters = make([]acaseSts.RateGroupParameterType, len(items))
+		request.ActionList.Parameters = make([]acaseSts.RateGroupParameterType, len(items))
 		for i, item := range items {
-			req.ActionList.Parameters[i].Name = item
+			request.ActionList.Parameters[i].Name = item
 		}
 	} else {
-		req.ActionList.Parameters = make([]acaseSts.RateGroupParameterType, 0)
+		request.ActionList.Parameters = make([]acaseSts.RateGroupParameterType, 0)
 	}
 	resp := &acaseSts.RateGroupResponseType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -911,30 +938,29 @@ func (a *Api) RateGroupRequest(items []string) (*acaseSts.RateGroupResponseType,
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
 func (a *Api) RouteRequest(fromName, toName string, fromCode, toCode, fromTypeCode, toTypeCode int) (*acaseSts.RouteResponseType, *AcaseResponseError) {
 
-	req := &acaseSts.RouteRequestType{}
-	a.fillCredentials(&req.Credentials)
-	req.Action.Name = "LIST"
+	request := &acaseSts.RouteRequestType{}
+	a.fillCredentials(&request.Credentials)
+	request.Action.Name = "LIST"
 	if fromName != "" {
 		if toCode > 0 && toTypeCode > 0 {
-			req.Action.Parameters.EndPoint.Code = toCode
-			req.Action.Parameters.EndPoint.Type = toTypeCode
+			request.Action.Parameters.EndPoint.Code = toCode
+			request.Action.Parameters.EndPoint.Type = toTypeCode
 		}
-		req.Action.Parameters.StartPoint.Name = fromName
+		request.Action.Parameters.StartPoint.Name = fromName
 	} else if toName != "" {
 		if fromCode > 0 && fromTypeCode > 0 {
-			req.Action.Parameters.StartPoint.Code = toCode
-			req.Action.Parameters.StartPoint.Type = toTypeCode
+			request.Action.Parameters.StartPoint.Code = toCode
+			request.Action.Parameters.StartPoint.Type = toTypeCode
 		}
-		req.Action.Parameters.EndPoint.Name = toName
+		request.Action.Parameters.EndPoint.Name = toName
 	}
 	resp := &acaseSts.RouteResponseType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -942,17 +968,16 @@ func (a *Api) RouteRequest(fromName, toName string, fromCode, toCode, fromTypeCo
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
 func (a *Api) PenaltyReasonRequest() (*acaseSts.PenaltyReasonResponseType, *AcaseResponseError) {
 
-	req := &acaseSts.PenaltyReasonRequestType{}
-	a.fillCredentials(&req.Credentials)
-	req.Action.Name = "LISTPENALTY"
+	request := &acaseSts.PenaltyReasonRequestType{}
+	a.fillCredentials(&request.Credentials)
+	request.Action.Name = "LISTPENALTY"
 	resp := &acaseSts.PenaltyReasonResponseType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -960,22 +985,21 @@ func (a *Api) PenaltyReasonRequest() (*acaseSts.PenaltyReasonResponseType, *Acas
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
 func (a *Api) SpecialOfferTypeRequest(code int, name string) (*acaseSts.SpecialOfferTypeResponseType, *AcaseResponseError) {
 
-	req := &acaseSts.SpecialOfferTypeRequestType{}
-	a.fillCredentials(&req.Credentials)
+	request := &acaseSts.SpecialOfferTypeRequestType{}
+	a.fillCredentials(&request.Credentials)
 	if code > 0 {
-		req.ActionList.Parameters.Code = code
+		request.ActionList.Parameters.Code = code
 	}
 	if name != "" {
-		req.ActionList.Parameters.Name = name
+		request.ActionList.Parameters.Name = name
 	}
 	resp := &acaseSts.SpecialOfferTypeResponseType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -983,22 +1007,23 @@ func (a *Api) SpecialOfferTypeRequest(code int, name string) (*acaseSts.SpecialO
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
-func (a *Api) StarListRequest(code int, name, options string) (*acaseSts.StarListResponseType, *AcaseResponseError) {
+func (a *Api) StarListRequest(code int64, name, options string) (*acaseSts.StarListResponseType, *AcaseResponseError) {
 
-	req := &acaseSts.StarListRequestType{
-		SimpleCodeNameType:acaseSts.SimpleCodeNameType{
-			Code:code,
-			Name:name,
-		},
+	request := &acaseSts.StarListRequestType{
+		Name:name,
 		Options:options,
 	}
-	a.fillCredentials(&req.Credentials)
+	if code > 0 {
+		request.Code = strconv.FormatInt(code, 10)
+	} else {
+		request.Code = ""
+	}
+	a.fillCredentials(&request.Credentials)
 	resp := &acaseSts.StarListResponseType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -1006,16 +1031,15 @@ func (a *Api) StarListRequest(code int, name, options string) (*acaseSts.StarLis
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
 func (a *Api) StatusListRequest() (*acaseSts.StatusListResponseType, *AcaseResponseError) {
 
-	req := &acaseSts.StatusListRequestType{}
-	a.fillCredentials(&req.Credentials)
+	request := &acaseSts.StatusListRequestType{}
+	a.fillCredentials(&request.Credentials)
 	resp := &acaseSts.StatusListResponseType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -1023,19 +1047,22 @@ func (a *Api) StatusListRequest() (*acaseSts.StatusListResponseType, *AcaseRespo
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }
 
-func (a *Api) TypeOfPlaceRequest(typeOfPlaceCode int, typeOfPlaceName string) (*acaseSts.TypeOfPlaceResponseType, *AcaseResponseError) {
+func (a *Api) TypeOfPlaceRequest(typeOfPlaceCode int64, typeOfPlaceName string) (*acaseSts.TypeOfPlaceResponseType, *AcaseResponseError) {
 
-	req := &acaseSts.TypeOfPlaceRequestType{}
-	a.fillCredentials(&req.Credentials)
-	req.Action.Name = "LIST"
-	req.Action.Parameters.TypeOfPlaceCode = typeOfPlaceCode
-	req.Action.Parameters.TypeOfPlaceName = typeOfPlaceName
+	request := &acaseSts.TypeOfPlaceRequestType{}
+	a.fillCredentials(&request.Credentials)
+	request.Action.Name = "LIST"
+	if typeOfPlaceCode > 0 {
+		request.Action.Parameters.TypeOfPlaceCode = strconv.FormatInt(typeOfPlaceCode, 10)
+	} else {
+		request.Action.Parameters.TypeOfPlaceCode = ""
+	}
+	request.Action.Parameters.TypeOfPlaceName = typeOfPlaceName
 	resp := &acaseSts.TypeOfPlaceResponseType{}
-	err := a.processRequest(req, resp)
+	err := a.processRequest(request, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -1043,6 +1070,5 @@ func (a *Api) TypeOfPlaceRequest(typeOfPlaceCode int, typeOfPlaceName string) (*
 	if acsErr != nil {
 		return nil, acsErr
 	}
-
 	return resp, nil
 }

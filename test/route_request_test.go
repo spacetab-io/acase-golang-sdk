@@ -2,13 +2,12 @@ package test
 
 import (
 	"testing"
-	"gopkg.in/h2non/gock.v1"
 	"github.com/nbio/st"
 )
 
 func TestRoute1Request_Ok(t *testing.T) {
-	testRequest("route1_response_example.xml")
-	defer gock.Off()
+	testRequest("route1_response_example.xml", false)
+	defer gockOff()
 
 	data, err := acApi.RouteRequest("Моск","",0,0,0,0)
 	er := getCustomErrorType()
@@ -85,8 +84,8 @@ func TestRoute1Request_Ok(t *testing.T) {
 }
 
 func TestRoute4Request_Ok(t *testing.T) {
-	testRequest("route4_response_example.xml")
-	defer gock.Off()
+	testRequest("route4_response_example.xml", false)
+	defer gockOff()
 
 	data, err := acApi.RouteRequest("Шере","",0,2,0,1)
 	er := getCustomErrorType()
@@ -194,8 +193,8 @@ func TestRoute4Request_Ok(t *testing.T) {
 }
 
 func TestRouteRequest_Error(t *testing.T) {
-	testRequest("route_error_example.xml")
-	defer gock.Off()
+	testRequest("route_error_example.xml", true)
+	defer gockOff()
 
 	_, err := acApi.RouteRequest("","",0,0,0,0)
 

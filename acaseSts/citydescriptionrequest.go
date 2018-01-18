@@ -4,8 +4,8 @@ import "encoding/xml"
 
 type CityDescriptionRequestType struct {
 	Credentials
-	XMLName		xml.Name			`xml:"CityDescriptionRequest"`
-	CityCode	string				`xml:"CityCode,attr"`
+	XMLName		xml.Name	`xml:"CityDescriptionRequest"`
+	CityCode	int			`xml:"CityCode,attr"`
 }
 
 type CityDescriptionType struct {

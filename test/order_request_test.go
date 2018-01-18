@@ -2,7 +2,6 @@ package test
 
 import (
 	"testing"
-	"gopkg.in/h2non/gock.v1"
 	"github.com/nbio/st"
 	"github.com/tmconsulting/acase-golang-sdk/acaseSts"
 )
@@ -146,8 +145,8 @@ func getOrderAwocRequestObject() *acaseSts.OrderAwocRequestType {
 }
 
 func TestOrderAwocRequest_Ok(t *testing.T) {
-	testRequest("orderrequest_response_example.xml")
-	defer gock.Off()
+	testRequest("orderrequest_response_example.xml", false)
+	defer gockOff()
 
 	item := getOrderAwocRequestObject()
 	data, err := acApi.OrderAwocRequest(item)
@@ -157,8 +156,8 @@ func TestOrderAwocRequest_Ok(t *testing.T) {
 }
 
 func TestOrderRequest_AgencyAgreementsWithAdditionalBenefits_Ok(t *testing.T) {
-	testRequest("orderrequest_response_example.xml")
-	defer gock.Off()
+	testRequest("orderrequest_response_example.xml", false)
+	defer gockOff()
 
 	item := getOrderRequestAgencyAgreementsWithAdditionalBenefitsObject()
 	data, err := acApi.OrderRequest(item)
@@ -168,8 +167,8 @@ func TestOrderRequest_AgencyAgreementsWithAdditionalBenefits_Ok(t *testing.T) {
 }
 
 func TestOrderRequest_AccommodationAndTransfers_Ok(t *testing.T) {
-	testRequest("orderrequest_response_example.xml")
-	defer gock.Off()
+	testRequest("orderrequest_response_example.xml", false)
+	defer gockOff()
 
 	item := getOrderRequestObject()
 	data, err := acApi.OrderRequest(item)
@@ -179,8 +178,8 @@ func TestOrderRequest_AccommodationAndTransfers_Ok(t *testing.T) {
 }
 
 func TestOrderRequest_Error(t *testing.T) {
-	testRequest("orderrequest_error_example.xml")
-	defer gock.Off()
+	testRequest("orderrequest_error_example.xml", true)
+	defer gockOff()
 
 	item := getOrderRequestObject()
 	_, err := acApi.OrderRequest(item)

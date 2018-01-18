@@ -2,13 +2,12 @@ package test
 
 import (
 	"testing"
-	"gopkg.in/h2non/gock.v1"
 	"github.com/nbio/st"
 )
 
 func TestHotelPricingRequest2_Ok(t *testing.T) {
-	testRequest("hotelpricing_response_example.xml")
-	defer gock.Off()
+	testRequest("hotelpricing_response_example.xml", false)
+	defer gockOff()
 
 	data, err := acApi.HotelPricingRequest2(0,0,0,0,0,
 		0, 0, 0, 0, "", "", "",
@@ -152,8 +151,8 @@ func TestHotelPricingRequest2_Ok(t *testing.T) {
 }
 
 func TestHotelPricingRequest_Error(t *testing.T) {
-	testRequest("hotelpricing_error_example.xml")
-	defer gock.Off()
+	testRequest("hotelpricing_error_example.xml", true)
+	defer gockOff()
 
 	_, err := acApi.HotelPricingRequest2(0,0,0,0,0,
 		0, 0, 0, 0, "", "", "",
