@@ -16,10 +16,10 @@ type AdmUnit2ActionType struct {
 
 type AdmUnit2ActionTypeParameters struct {
 	CountryCode		int		`xml:"CountryCode,attr"`
-	AdmUnit1Code	string	`xml:"AdmUnit1Code,attr"`
-	AdmUnit1Name	string	`xml:"AdmUnit1Name,attr"`
-	AdmUnit2Code	string	`xml:"AdmUnit2Code,attr"`
-	AdmUnit2Name	string	`xml:"AdmUnit2Name,attr"`
+	AdmUnit1Code	int		`xml:"AdmUnit1Code,attr,omitempty"`
+	AdmUnit1Name	string	`xml:"AdmUnit1Name,attr,omitempty"`
+	AdmUnit2Code	int		`xml:"AdmUnit2Code,attr,omitempty"`
+	AdmUnit2Name	string	`xml:"AdmUnit2Name,attr,omitempty"`
 }
 
 type AdmUnit2ResponseType struct {

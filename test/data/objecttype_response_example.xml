@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ObjectTypeResponse BuyerId="MyCompanyId" UserId="MyUserId" Password="MyPassword" Language="ru">
+<GeoObjectTypeResponse BuyerId="MyCompanyId" UserId="MyUserId" Password="MyPassword" Language="ru">
 	<Action Name="LIST">
 		<Parameters ObjectTypeCode=""/>
 	</Action>
@@ -14,4 +14,4 @@
 		<ObjectType Code="1000041" Name="Речной порт"/>
 		<ObjectType Code="1000042" Name="Центр города"/>
 	</ObjectTypeList>
-</ObjectTypeResponse>
+</GeoObjectTypeResponse>

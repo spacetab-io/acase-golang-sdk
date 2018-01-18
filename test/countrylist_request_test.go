@@ -4,12 +4,11 @@ import (
 	"testing"
 
 	"github.com/nbio/st"
-	"gopkg.in/h2non/gock.v1"
 )
 
 func TestCountryListRequest_Ok(t *testing.T)  {
-	testRequest("countrylistreq_example.xml")
-	defer gock.Off()
+	testRequest("countrylist_response_example.xml", false)
+	defer gockOff()
 
 	data, err := acApi.CountryListRequest(0,"")
 	er := getCustomErrorType()
@@ -70,8 +69,8 @@ func TestCountryListRequest_Ok(t *testing.T)  {
 }
 
 func TestCountryListRequest_Error(t *testing.T) {
-	testRequest("countrylisterror_example.xml")
-	defer gock.Off()
+	testRequest("countrylist_error_example.xml", true)
+	defer gockOff()
 
 	_, err := acApi.CountryListRequest(0,"")
 

@@ -3,12 +3,11 @@ package test
 import (
 	"github.com/nbio/st"
 	"testing"
-	"gopkg.in/h2non/gock.v1"
 )
 
 func TestStatusListRequest_Ok(t *testing.T) {
-	testRequest("statuslist_response_example.xml")
-	defer gock.Off()
+	testRequest("statuslist_response_example.xml", false)
+	defer gockOff()
 
 	data, err := acApi.StatusListRequest()
 	er := getCustomErrorType()
@@ -37,8 +36,8 @@ func TestStatusListRequest_Ok(t *testing.T) {
 }
 
 func TestStatusListRequest_Error(t *testing.T) {
-	testRequest("statuslist_error_example.xml")
-	defer gock.Off()
+	testRequest("statuslist_error_example.xml", true)
+	defer gockOff()
 
 	_, err := acApi.StatusListRequest()
 

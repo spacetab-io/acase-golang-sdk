@@ -5,7 +5,7 @@ import "encoding/xml"
 type CityListRequestType struct {
 	Credentials
 	XMLName		xml.Name			`xml:"CityListRequest"`
-	CountryCode	string				`xml:"CountryCode,attr,omitempty"`
+	CountryCode	int					`xml:"CountryCode,attr,omitempty"`
 	CountryName	string				`xml:"CountryName,attr,omitempty"`
 	CityCode	int					`xml:"CityCode,attr,omitempty"`
 	CityName	string				`xml:"CityName,attr,omitempty"`

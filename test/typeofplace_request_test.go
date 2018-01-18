@@ -2,13 +2,12 @@ package test
 
 import (
 	"testing"
-	"gopkg.in/h2non/gock.v1"
 	"github.com/nbio/st"
 )
 
 func TestTypeOfPlaceRequest_Ok(t *testing.T) {
-	testRequest("typeofplace_response_example.xml")
-	defer gock.Off()
+	testRequest("typeofplace_response_example.xml", false)
+	defer gockOff()
 
 	data, err := acApi.TypeOfPlaceRequest(0, "")
 	er := getCustomErrorType()
@@ -22,8 +21,8 @@ func TestTypeOfPlaceRequest_Ok(t *testing.T) {
 }
 
 func TestTypeOfPlaceRequest_Error(t *testing.T) {
-	testRequest("typeofplace_error_example.xml")
-	defer gock.Off()
+	testRequest("typeofplace_error_example.xml", true)
+	defer gockOff()
 
 	_, err := acApi.TypeOfPlaceRequest(0, "")
 

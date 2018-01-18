@@ -2,13 +2,12 @@ package test
 
 import (
 	"testing"
-	"gopkg.in/h2non/gock.v1"
 	"github.com/nbio/st"
 )
 
 func TestObjTypeListRequest_Ok(t *testing.T) {
-	testRequest("objtypelist_response_example.xml")
-	defer gock.Off()
+	testRequest("objtypelist_response_example.xml", false)
+	defer gockOff()
 
 	data, err := acApi.ObjTypeListRequest("", "")
 	er := getCustomErrorType()
@@ -29,8 +28,8 @@ func TestObjTypeListRequest_Ok(t *testing.T) {
 }
 
 func TestObjTypeListRequest_Error(t *testing.T) {
-	testRequest("objtypelist_error_example.xml")
-	defer gock.Off()
+	testRequest("objtypelist_error_example.xml", true)
+	defer gockOff()
 
 	_, err := acApi.ObjTypeListRequest("", "")
 

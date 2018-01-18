@@ -14,9 +14,10 @@ var (
 		BuyerId: "BuyerId",
 		UserId: "UserId",
 		Password: "Password",
-		Language: "Language",
+		Language: "ru",
 	}
 	acApi = acaseSdk.NewApi(*au, "http://test-www.acase.ru/xml/form.jsp")
+	isMock = true
 )
 
 func getXml(filename string) ([]byte, error) {
@@ -30,17 +31,23 @@ func getXml(filename string) ([]byte, error) {
 }
 
 func getCustomErrorType() *acaseSdk.AcaseResponseError {
-	var er *acaseSdk.AcaseResponseError
+	er := &acaseSdk.AcaseResponseError{}
 	er = nil
 	return er
 }
 
-func testRequest(filename string) error {
-	data, err := getXml(filename)
-	if err != nil {
-		return err
+func gockOff() {
+	gock.Off()
+}
+
+func testRequest(filename string, isError bool) error {
+	if isMock || isError {
+		data, err := getXml(filename)
+		if err != nil {
+			return err
+		}
+		gock.New("http://test-www.acase.ru").Post("/xml/form.jsp").Reply(200).XML(data)
 	}
-	gock.New("http://test-www.acase.ru").Post("/xml/form.jsp").Reply(200).XML(data)
 	return nil
 }
 

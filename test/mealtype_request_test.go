@@ -2,21 +2,19 @@ package test
 
 import (
 	"testing"
-	"gopkg.in/h2non/gock.v1"
 	"github.com/nbio/st"
 )
 
 func TestMealTypeRequest_Ok(t *testing.T) {
-	testRequest("mealtype_response_example.xml")
-	defer gock.Off()
+	testRequest("mealtype_response_example.xml", false)
+	defer gockOff()
 
-	data, err := acApi.MealTypeRequest(nil,nil)
+	data, err := acApi.MealTypeRequest(0,"")
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
-	st.Expect(t, len(data.Action), 1)
-	st.Expect(t, data.Action[0].Name, "LIST")
-	st.Expect(t, data.Action[0].Parameters.MealTypeCode, 0)
-	st.Expect(t, data.Action[0].Parameters.MealName, "")
+	st.Expect(t, data.Action.Name, "LIST")
+	st.Expect(t, data.Action.Parameters.MealTypeCode, "")
+	st.Expect(t, data.Action.Parameters.MealTypeName, "")
 	st.Expect(t, len(data.MealTypeList.Items), 4)
 	st.Expect(t, data.MealTypeList.Items[0].Code, 1)
 	st.Expect(t, data.MealTypeList.Items[0].Name, "-")
@@ -25,10 +23,10 @@ func TestMealTypeRequest_Ok(t *testing.T) {
 }
 
 func TestMealTypeRequest_Error(t *testing.T) {
-	testRequest("mealtype_error_example.xml")
-	defer gock.Off()
+	testRequest("mealtype_error_example.xml", true)
+	defer gockOff()
 
-	_, err := acApi.MealTypeRequest(nil,nil)
+	_, err := acApi.MealTypeRequest(0,"")
 
 	st.Expect(t, err.Code, "9998")
 	st.Expect(t, err.Message, "Доступ запрещен !")

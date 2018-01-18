@@ -2,13 +2,12 @@ package test
 
 import (
 	"testing"
-	"gopkg.in/h2non/gock.v1"
 	"github.com/nbio/st"
 )
 
 func TestRateGroupRequest_Ok(t *testing.T) {
-	testRequest("rategroup_response_example.xml")
-	defer gock.Off()
+	testRequest("rategroup_response_example.xml", false)
+	defer gockOff()
 	pItem := make([]string, 1)
 	pItem[0] = "Агент"
 	data, err := acApi.RateGroupRequest(pItem)
@@ -24,8 +23,8 @@ func TestRateGroupRequest_Ok(t *testing.T) {
 }
 
 func TestRateGroupRequest_Error(t *testing.T) {
-	testRequest("rategroup_error_example.xml")
-	defer gock.Off()
+	testRequest("rategroup_error_example.xml", true)
+	defer gockOff()
 
 	_, err := acApi.RateGroupRequest(nil)
 

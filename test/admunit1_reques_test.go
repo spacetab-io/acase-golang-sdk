@@ -4,55 +4,34 @@ import (
 	"testing"
 
 	"github.com/nbio/st"
-	"gopkg.in/h2non/gock.v1"
 )
 
 func TestAdmUnit1Request_Ok(t *testing.T) {
-	testRequest("au1resp_example.xml")
-	defer gock.Off()
+	testRequest("admunit1_response_example.xml", false)
+	defer gockOff()
 
 	data, err := acApi.AdmUnit1Request(9, "", "обл")
 
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
-	st.Expect(t, len(data.AdmUnit1), 2)
-	st.Expect(t, data.AdmUnit1[0].Code, 2)
-	st.Expect(t, data.AdmUnit1[0].Name, "Калужская область")
-	st.Expect(t, data.AdmUnit1[1].Code, 21)
-	st.Expect(t, data.AdmUnit1[1].Name, "Тверская область")
+	if isMock {
+		st.Expect(t, len(data.AdmUnit1), 2)
+	} else {
+		st.Expect(t, len(data.AdmUnit1), 88)
+	}
+
+	st.Expect(t, data.AdmUnit1[0].Code, 4)
+	st.Expect(t, data.AdmUnit1[0].Name, "Адыгея республика")
+	st.Expect(t, data.AdmUnit1[1].Code, 5)
+	st.Expect(t, data.AdmUnit1[1].Name, "Алтай республика")
 }
 
 func TestAdmUnit1Request_Error(t *testing.T) {
-	testRequest("au1error_example.xml")
-	defer gock.Off()
+	testRequest("admunit1_error_example.xml", true)
+	defer gockOff()
 
 	_, err := acApi.AdmUnit1Request(9, "", "обл")
 
 	st.Expect(t, err.Code, "9998")
 	st.Expect(t, err.Message, "Доступ запрещен !")
 }
-
-/*
-func TestSerializationRequest(t *testing.T) {
-	req := &acaseStructs.AdmUnit1RequestType{
-		Language: acaseStructs.Ru,
-		Password: "Password",
-		UserId: "UserId",
-		BuyerId: "MyCompanyId",
-		Action: acaseStructs.AdmUnit1ActionType{
-			Name: acaseStructs.List,
-			Parameters: acaseStructs.AdmUnit1ActionTypeParameters{
-				CountryCode: 9,
-				AdmUnit1Code: "",
-				AdmUnit1Name: "обл",
-			},
-		},
-	}
-	bItem, err := xml.Marshal(req)
-	if err != nil {
-		t.Error(err)
-	}
-	t.Log(xml.Header + string(bItem))
-	t.Log("TestSerializationRequest: Ok")
-}
-*/

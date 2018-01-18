@@ -16,7 +16,7 @@ type TypeOfPlaceRequestActionType struct {
 
 type TypeOfPlaceParamType struct {
 	XMLName			xml.Name	`xml:"Parameters"`
-	TypeOfPlaceCode	int			`xml:"TypeOfPlaceCode,attr"`
+	TypeOfPlaceCode	string		`xml:"TypeOfPlaceCode,attr"`
 	TypeOfPlaceName	string		`xml:"TypeOfPlaceName,attr"`
 }
 

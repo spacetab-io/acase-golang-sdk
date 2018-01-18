@@ -4,12 +4,11 @@ import (
 	"testing"
 
 	"github.com/nbio/st"
-	"gopkg.in/h2non/gock.v1"
 )
 
 func TestCountryDescriptionRequest_Ok(t *testing.T)  {
-	testRequest("codreq_example.xml")
-	defer gock.Off()
+	testRequest("countrydescription_response_example.xml", false)
+	defer gockOff()
 
 	data, err := acApi.CountryDescriptionRequest(9)
 	er := getCustomErrorType()
@@ -22,8 +21,8 @@ func TestCountryDescriptionRequest_Ok(t *testing.T)  {
 }
 
 func TestCountryDescriptionRequest_Error(t *testing.T) {
-	testRequest("coderror_example.xml")
-	defer gock.Off()
+	testRequest("countrydescription_error_example.xml", true)
+	defer gockOff()
 
 	_, err := acApi.CountryDescriptionRequest(9)
 

@@ -4,9 +4,10 @@ import "encoding/xml"
 
 type StarListRequestType struct {
 	Credentials
-	SimpleCodeNameType
-	XMLName		xml.Name			`xml:"StarListRequest"`
-	Options		string				`xml:"Options,attr"`
+	XMLName		xml.Name	`xml:"StarListRequest"`
+	Code		string		`xml:"Code,attr"`
+	Name		string		`xml:"Name,attr"`
+	Options		string		`xml:"Options,attr"`
 }
 
 type StarListResponseType struct {

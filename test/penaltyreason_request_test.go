@@ -2,13 +2,12 @@ package test
 
 import (
 	"testing"
-	"gopkg.in/h2non/gock.v1"
 	"github.com/nbio/st"
 )
 
 func TestPenaltyReasonRequest_Ok(t *testing.T) {
-	testRequest("penaltyreason_response_example.xml")
-	defer gock.Off()
+	testRequest("penaltyreason_response_example.xml", false)
+	defer gockOff()
 
 	data, err := acApi.PenaltyReasonRequest()
 	er := getCustomErrorType()
@@ -26,8 +25,8 @@ func TestPenaltyReasonRequest_Ok(t *testing.T) {
 }
 
 func TestPenaltyReasonRequest_Error(t *testing.T) {
-	testRequest("penaltyreason_error_example.xml")
-	defer gock.Off()
+	testRequest("penaltyreason_error_example.xml", true)
+	defer gockOff()
 
 	_, err := acApi.PenaltyReasonRequest()
 

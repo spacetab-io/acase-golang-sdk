@@ -4,8 +4,8 @@ import "encoding/xml"
 
 type ObjectSubTypeRequestType struct {
 	Credentials
-	XMLName		xml.Name				`xml:"ObjectRequest"`
-	Action		[]ObjSubTypeActionType	`xml:"Action"`
+	XMLName		xml.Name				`xml:"ObjectSubTypeRequest"`
+	Action		ObjSubTypeActionType	`xml:"Action"`
 }
 
 type ObjSubTypeActionType struct {
@@ -16,14 +16,14 @@ type ObjSubTypeActionType struct {
 
 type ObjSubTypeParamType struct {
 	XMLName			xml.Name	`xml:"Parameters"`
-	ObjectTypeCode	int			`xml:"ObjectTypeCode,attr"`
+	ObjectTypeCode	string		`xml:"ObjectTypeCode,attr,omitempty"`
 }
 
 type ObjectSubTypeResponseType struct {
 	Credentials
 	BaseResponse
 	XMLName		xml.Name				`xml:"ObjectSubTypeResponse"`
-	Action		[]ObjSubTypeActionType	`xml:"Action"`
+	Action		ObjSubTypeActionType	`xml:"Action"`
 	ObjectType	[]ObjectTypeSubType		`xml:"ObjectType"`
 }
 

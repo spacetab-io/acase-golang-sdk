@@ -2,10 +2,8 @@ package test
 
 import (
 	"testing"
-	"gopkg.in/h2non/gock.v1"
 	"github.com/tmconsulting/acase-golang-sdk/acaseSts"
 	"github.com/nbio/st"
-	"encoding/xml"
 )
 
 func getAccommodationAndTransfersRequestObject() *acaseSts.OrderInfoNotifyRequestType {
@@ -340,6 +338,7 @@ func getAgencyAgreementsWithAdditionalBenefitsRequestObject() *acaseSts.OrderInf
 	return res
 }
 
+/*
 func TestGenerateXml_AccommodationAndTransfers_Ok(t *testing.T) {
 	item := getAccommodationAndTransfersRequestObject()
 	bItem, err := xml.MarshalIndent(item, "", "    ")
@@ -348,10 +347,11 @@ func TestGenerateXml_AccommodationAndTransfers_Ok(t *testing.T) {
 	}
 	t.Log(xml.Header + string(bItem))
 }
+*/
 
 func TestOrderNotifyRequest_AccommodationAndTransfers_Ok(t *testing.T) {
-	testRequest("ordinfonotify_accommtransfers_response_example.xml")
-	defer gock.Off()
+	testRequest("ordinfonotify_accommtransfers_response_example.xml", false)
+	defer gockOff()
 
 	item := getAccommodationAndTransfersRequestObject()
 	_, err := acApi.OrderInfoNotifyRequest(item)
@@ -360,8 +360,8 @@ func TestOrderNotifyRequest_AccommodationAndTransfers_Ok(t *testing.T) {
 }
 
 func TestOrderNotifyRequest_AgencyAgreementsWithAdditionalBenefits_Ok(t *testing.T) {
-	testRequest("orderinfonotify_agencyagreements_response_example.xml")
-	defer gock.Off()
+	testRequest("orderinfonotify_agencyagreements_response_example.xml", false)
+	defer gockOff()
 
 	item := getAgencyAgreementsWithAdditionalBenefitsRequestObject()
 	_, err := acApi.OrderInfoNotifyRequest(item)
@@ -370,8 +370,8 @@ func TestOrderNotifyRequest_AgencyAgreementsWithAdditionalBenefits_Ok(t *testing
 }
 
 func TestOrderNotifyRequest_Error(t *testing.T) {
-	testRequest("orderinfonotify_error_example.xml")
-	defer gock.Off()
+	testRequest("orderinfonotify_error_example.xml", true)
+	defer gockOff()
 
 	item := getAgencyAgreementsWithAdditionalBenefitsRequestObject()
 	_, err := acApi.OrderInfoNotifyRequest(item)

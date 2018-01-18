@@ -5,7 +5,7 @@ import "encoding/xml"
 type ObjectRequestType struct {
 	Credentials
 	XMLName		xml.Name			`xml:"ObjectRequest"`
-	Action		[]ObjectActionType	`xml:"Action"`
+	Action		ObjectActionType	`xml:"Action"`
 }
 
 type ObjectActionType struct {
@@ -16,17 +16,17 @@ type ObjectActionType struct {
 
 type ObjectParametersType struct {
 	XMLName				xml.Name	`xml:"Parameters"`
-	ObjectTypeCode		int			`xml:"ObjectTypeCode,attr"`
-	ObjectSubTypeCode	int			`xml:"ObjectSubTypeCode,attr"`
-	CityCode			int			`xml:"CityCode,attr"`
+	ObjectTypeCode		string		`xml:"ObjectTypeCode,attr"`
+	ObjectSubTypeCode	string		`xml:"ObjectSubTypeCode,attr"`
+	CityCode			string		`xml:"CityCode,attr"`
 }
 
 type ObjectResponseType struct {
 	Credentials
 	BaseResponse
-	XMLName		xml.Name				`xml:"ObjectResponse"`
-	Action		[]ObjectActionType		`xml:"Action"`
-	Object		[]ObjRespType			`xml:"Object"`
+	XMLName		xml.Name			`xml:"ObjectResponse"`
+	Action		ObjectActionType	`xml:"Action"`
+	Object		[]ObjRespType		`xml:"Object"`
 }
 
 type ObjRespType struct {

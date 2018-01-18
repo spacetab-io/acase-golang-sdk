@@ -2,7 +2,6 @@ package test
 
 import (
 	"testing"
-	"gopkg.in/h2non/gock.v1"
 	"github.com/tmconsulting/acase-golang-sdk/acaseSts"
 	"github.com/nbio/st"
 )
@@ -572,8 +571,8 @@ func TestGenerateXml_AwocNotify_Ok(t *testing.T) {
 }
 */
 func TestOrderNotifyRequest_RequestReservation_Ok(t *testing.T) {
-	testRequest("ordernotify_hotelswrates_response.xml")
-	defer gock.Off()
+	testRequest("ordernotify_hotelswrates_response.xml", false)
+	defer gockOff()
 
 	item := getRequestReservationRequestObject()
 	_, err := acApi.OrderInfoAwocNotifyRequest(item)
@@ -582,8 +581,8 @@ func TestOrderNotifyRequest_RequestReservation_Ok(t *testing.T) {
 }
 
 func TestOrderNotifyRequest_RequestPriceRequest_Ok(t *testing.T) {
-	testRequest("ordernotify_hotelswrates_response.xml")
-	defer gock.Off()
+	testRequest("ordernotify_hotelswrates_response.xml", false)
+	defer gockOff()
 
 	item := getRequestPriceRequestObject()
 	_, err := acApi.OrderInfoAwocNotifyRequest(item)
@@ -593,8 +592,8 @@ func TestOrderNotifyRequest_RequestPriceRequest_Ok(t *testing.T) {
 
 
 func TestOrderNotifyRequest_RequestPriceOffer_Ok(t *testing.T) {
-	testRequest("ordernotify_hotelswrates_response.xml")
-	defer gock.Off()
+	testRequest("ordernotify_hotelswrates_response.xml", false)
+	defer gockOff()
 
 	item := getRequestPriceOfferRequestObject()
 	_, err := acApi.OrderInfoAwocNotifyRequest(item)
@@ -603,8 +602,8 @@ func TestOrderNotifyRequest_RequestPriceOffer_Ok(t *testing.T) {
 }
 
 func TestOrderAwocNotifyRequest_Error(t *testing.T) {
-	testRequest("orderinfonotify_error_example.xml")
-	defer gock.Off()
+	testRequest("orderinfonotify_error_example.xml", true)
+	defer gockOff()
 
 	item := getRequestPriceOfferRequestObject()
 	_, err := acApi.OrderInfoAwocNotifyRequest(item)

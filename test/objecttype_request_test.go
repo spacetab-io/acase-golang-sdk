@@ -2,20 +2,18 @@ package test
 
 import (
 	"testing"
-	"gopkg.in/h2non/gock.v1"
 	"github.com/nbio/st"
 )
 
 func TestObjectTypeRequest_Ok(t *testing.T) {
-	testRequest("objecttype_response_example.xml")
-	defer gock.Off()
+	testRequest("objecttype_response_example.xml", false)
+	defer gockOff()
 
-	data, err := acApi.ObjectTypeRequest(nil)
+	data, err := acApi.ObjectTypeRequest(0)
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
-	st.Expect(t, len(data.Action), 1)
-	st.Expect(t, data.Action[0].Name, "LIST")
-	st.Expect(t, data.Action[0].Parameters.ObjectTypeCode, 0)
+	st.Expect(t, data.Action.Name, "LIST")
+	st.Expect(t, data.Action.Parameters.ObjectTypeCode, "")
 	st.Expect(t, len(data.ObjectTypeList.Items), 8)
 	st.Expect(t, data.ObjectTypeList.Items[0].Code, 9500001)
 	st.Expect(t, data.ObjectTypeList.Items[0].Name, "Hе имеет значения")
@@ -36,10 +34,10 @@ func TestObjectTypeRequest_Ok(t *testing.T) {
 }
 
 func TestObjectTypeRequest_Error(t *testing.T) {
-	testRequest("objecttype_error_example.xml")
-	defer gock.Off()
+	testRequest("objecttype_error_example.xml", true)
+	defer gockOff()
 
-	_, err := acApi.ObjectTypeRequest(nil)
+	_, err := acApi.ObjectTypeRequest(0)
 
 	st.Expect(t, err.Code, "9998")
 	st.Expect(t, err.Message, "Доступ запрещен !")

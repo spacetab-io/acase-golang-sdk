@@ -2,13 +2,12 @@ package test
 
 import (
 	"testing"
-	"gopkg.in/h2non/gock.v1"
 	"github.com/nbio/st"
 )
 
 func TestSpecialOfferRequest_Ok(t *testing.T) {
-	testRequest("specialoffer_response_example.xml")
-	defer gock.Off()
+	testRequest("specialoffer_response_example.xml", false)
+	defer gockOff()
 
 	data, err := acApi.SpecialOfferTypeRequest(0, "")
 	er := getCustomErrorType()
@@ -29,8 +28,8 @@ func TestSpecialOfferRequest_Ok(t *testing.T) {
 }
 
 func TestSpecialOfferRequest_Error(t *testing.T) {
-	testRequest("specialoffer_error_example.xml")
-	defer gock.Off()
+	testRequest("specialoffer_error_example.xml", true)
+	defer gockOff()
 
 	_, err := acApi.SpecialOfferTypeRequest(0, "")
 

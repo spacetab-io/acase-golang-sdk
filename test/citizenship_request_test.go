@@ -2,14 +2,12 @@ package test
 
 import (
 	"testing"
-
 	"github.com/nbio/st"
-	"gopkg.in/h2non/gock.v1"
 )
 
 func TestCitizenshipListRequest_Ok(t *testing.T)  {
-	testRequest("csresp_example.xml")
-	defer gock.Off()
+	testRequest("citizenshiplist_response_example.xml", false)
+	defer gockOff()
 
 	data, err := acApi.CitizenshipListRequest()
 	er := getCustomErrorType()
@@ -18,8 +16,8 @@ func TestCitizenshipListRequest_Ok(t *testing.T)  {
 }
 
 func TestCitizenshipListRequest_Error(t *testing.T) {
-	testRequest("cserror_example.xml")
-	defer gock.Off()
+	testRequest("citizenshiplist_error_example.xml", true)
+	defer gockOff()
 
 	_, err := acApi.CitizenshipListRequest()
 

@@ -4,14 +4,13 @@ import (
 	"testing"
 
 	"github.com/nbio/st"
-	"gopkg.in/h2non/gock.v1"
 )
 
 func TestCityDescriptionRequest_Ok(t *testing.T)  {
-	testRequest("cdresp_example.xml")
-	defer gock.Off()
+	testRequest("citydescription_response_example.xml", false)
+	defer gockOff()
 
-	data, err := acApi.CityDescriptionRequest("2")
+	data, err := acApi.CityDescriptionRequest(2)
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
 	st.Expect(t, data.Code, "2")
@@ -33,10 +32,10 @@ func TestCityDescriptionRequest_Ok(t *testing.T)  {
 }
 
 func TestCityDescriptionRequest_Error(t *testing.T) {
-	testRequest("cderror_example.xml")
-	defer gock.Off()
+	testRequest("citydescription_error_example.xml", true)
+	defer gockOff()
 
-	_, err := acApi.CityDescriptionRequest("2")
+	_, err := acApi.CityDescriptionRequest(2)
 
 	st.Expect(t, err.Code, "9998")
 	st.Expect(t, err.Message, "Доступ запрещен !")

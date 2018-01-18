@@ -4,12 +4,11 @@ import (
 	"testing"
 
 	"github.com/nbio/st"
-	"gopkg.in/h2non/gock.v1"
 )
 
 func TestCustomerCreateRequest_Ok(t *testing.T)  {
-	testRequest("customer_create_response_example.xml")
-	defer gock.Off()
+	testRequest("customer_create_response_example.xml", false)
+	defer gockOff()
 
 	data, err := acApi.CustomerRequestCreate("Международный клуб Ромашка", "123456",
 		"Тестовая ул. д.5/2 кв.5","","123456789","","+371 1 222 333",
@@ -59,8 +58,8 @@ func TestCustomerCreateRequest_Ok(t *testing.T)  {
 }
 
 func TestCustomerRequest_Error(t *testing.T) {
-	testRequest("customer_request_error_example.xml")
-	defer gock.Off()
+	testRequest("customer_error_example.xml", true)
+	defer gockOff()
 
 	_, err := acApi.CustomerRequestCreate("Международный клуб Ромашка", "123456",
 		"Тестовая ул. д.5/2 кв.5","","123456789","","+371 1 222 333",
@@ -72,8 +71,8 @@ func TestCustomerRequest_Error(t *testing.T) {
 }
 
 func TestCustomerUpdateRequest_Ok(t *testing.T)  {
-	testRequest("customer_update_response_example.xml")
-	defer gock.Off()
+	testRequest("customer_update_response_example.xml", false)
+	defer gockOff()
 
 	data, err := acApi.CustomerRequestUpdate("Международный клуб Ромашка", "123457",
 		"Тестовая ул. д.5/2 кв.5","Латвия, 123457, Рига, Тестовая ул. д.5/2 кв.5",
@@ -124,8 +123,8 @@ func TestCustomerUpdateRequest_Ok(t *testing.T)  {
 }
 
 func TestCustomerDeleteRequest_Ok(t *testing.T)  {
-	testRequest("customer_delete_response_example.xml")
-	defer gock.Off()
+	testRequest("customer_delete_response_example.xml", false)
+	defer gockOff()
 
 	data, err := acApi.CustomerRequestDelete(1322076)
 	er := getCustomErrorType()
@@ -134,8 +133,8 @@ func TestCustomerDeleteRequest_Ok(t *testing.T)  {
 }
 
 func TestCustomerListRequest_Ok(t *testing.T)  {
-	testRequest("customer_list_response_example.xml")
-	defer gock.Off()
+	testRequest("customer_list_response_example.xml", false)
+	defer gockOff()
 
 	data, err := acApi.CustomerRequestList(1,1)
 	er := getCustomErrorType()
@@ -189,8 +188,8 @@ func TestCustomerListRequest_Ok(t *testing.T)  {
 }
 
 func TestCustomerInfoRequest_Ok(t *testing.T)  {
-	testRequest("customer_info_response_example.xml")
-	defer gock.Off()
+	testRequest("customer_info_response_example.xml", false)
+	defer gockOff()
 
 	data, err := acApi.CustomerRequestInfo(1322076)
 	er := getCustomErrorType()
