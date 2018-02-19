@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<OrderInfoResponse Language="ru" Password="MyPassword" Id="2054859" ReferenceNumber="1583920" ReferenceNumberName="Ref No" RegistrationDate="03.12.2011" DeadlineDate="04.12.2011" Price="4550.00" TravelAgencyCommission="0.00" Penalty="0.00" StartDate="05.12.2011" EndDate="06.12.2011" InvoiceRule="2" InvoiceId="3669998" ConfirmId="9341805" ContractNumber="0157/13" ContractDate="01.07.2013" GuaranteeAmount="0.00">
+    <Success/>
+    <Currency Code="2" Name="RUB"/>
+    <Autonom Code="1" Name="Автономный"/>
+    <VatLimit Code="1" Name="Без ограничений"/>
+    <TypeContract Code="3" Name="Агентский"/>
+    <WhereToPay Code="3" Name="Оплата ООО &quot;АКАДЕМСЕРВИС&quot; согласно договору"/>
+    <SubjectToProcessing Code="1" Name="Да"/>
+    <FinancialCondition Code="1" Name="Не требуется"/>
+    <Status Code="65" Name="Забронирован"/>
+    <ContactPerson Name="XML" Phone="" Fax="" Email="test@test.ru"/>
+    <AccountDetails>
+        <IsGain Code="3" Name="-"/>
+    </AccountDetails>
+    <Customer FullName="ООО Ромашка" ZipCode="123456" Address="Тестовая ул. д.5/2 оф. 5" PIAddress="Россия, 123456, Москва, Тестовая ул. д.5/2 оф. 5" INN="1234567890" KPP="123456789" Phone="+7 495 123 45 56" Name="Ромашка" Code="1322075">
+        <BuyerType Name="Юридическое лицо" Code="3"/>
+        <Country Name="Россия" Code="9"/>
+        <City Name="Москва" Code="2">
+            <CityType Name="Город" Code="2"/>
+            <AdmUnit1 Name="Не определено" Code="1"/>
+            <AdmUnit2 Name="Не определено" Code="1"/>
+        </City>
+        <Actual Name="Да" Code="1"/>
+        <AllowModify Name="Да" Code="1"/>
+    </Customer>
+    <IsCustomer Name="Да" Code="1"/>
+    <AccommodationList>
+        <Accommodation Id="2835883" ArrivalDate="05.12.2011" ArrivalTime="10:00" DepartureDate="06.12.2011" DepartureTime="17:00" NumberOfNights="1" NumberOfRooms="1" NumberOfGuests="1" NumberOfExtraBedsAdult="0" NumberOfExtraBedsChild="0" NumberOfExtraBedsInfant="0" AdditionalInfo="" SupplierInfo="" ConfirmationNumber="154041" Price="4550.00" VATIncludedInPrice="694.07" TravelAgencyCommission="0.00" Penalty="0.00" DeadlineDate="04.12.2011" DeadlineTimeLoc="04.12.2011 13:00" DeadlineTimeSys="04.12.2011 13:00" DeadlineTimeUTC="04.12.2011 10:00" PossiblePenaltySize="4550.00" VoucherId="2835883" ReferenceNumber="12345">
+            <ToBeCancelled Code="2" Name="Нет"/>
+            <ToBeChanged Code="2" Name="Нет"/>
+            <Hotel Code="500040" Name="Оксана"/>
+            <ObjType Code="2" Name="Гостиница" NameWhere="гостинице"/>
+            <Country Code="9" Name="Россия"/>
+            <AdmUnit1 Code="1" Name="Не определено"/>
+            <AdmUnit2 Code="1" Name="Не определено"/>
+            <TypeOfPlace Code="2" Name=""/>
+            <City Code="2" Name="Москва"/>
+            <Status Code="65" Name="Забронировано"/>
+            <AmendmentRejected Code="2" Name="Нет"/>
+            <AllowCancel Code="2" Name="Нет"/>
+            <AllowModify Code="2" Name="Нет"/>
+            <Product Code="932734" RoomName="Студио двухместный (две кровати)" RoomCode="900123" RateCode="900055" RateName="FIT" RateDescription="" RateGroupCode="4" RateGroupName="FIT">
+                <Allotment Code="9500001+1103690+1100604+2" Name=""/>
+            </Product>
+            <Meal Code="0" Name="Завтрак &quot;Континентальный&quot;"/>
+            <Persons>
+                <Person LastName="KOLESIN" FirstName="URIY">
+                    <Category Code="1" Name="Господин"/>
+                    <Citizenship Code="1" Name="Hе имеет значения"/>
+                </Person>
+            </Persons>
+            <Penalties></Penalties>
+            <IsEarlyCheckIn Code="1" Name="Да"/>
+            <CriticalEarlyCheckIn Code="1" Name="Критично"/>
+            <EarlyCheckInConfirmationStatus Code="2" Name="Не подтвержден"/>
+            <IsHour Code="2" Name="Нет"/>
+            <IsLateCheckOut Code="1" Name="Да"/>
+            <CriticalLateCheckOut Code="2" Name="Некритично"/>
+            <LateCheckOutConfirmationStatus Code="2" Name="Не подтвержден"/>
+        </Accommodation>
+    </AccommodationList>
+</OrderInfoResponse>

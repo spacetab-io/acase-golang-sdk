@@ -53,6 +53,9 @@ type AccommodationType struct {
 	NumberOfNights					int					`xml:"NumberOfNights,attr"`
 	NumberOfRooms					int					`xml:"NumberOfRooms,attr"`
 	NumberOfGuests					int					`xml:"NumberOfGuests,attr"`
+	NumberOfExtraBedsAdult			int					`xml:"NumberOfExtraBedsAdult,attr,omitempty"`
+	NumberOfExtraBedsChild			int					`xml:"NumberOfExtraBedsChild,attr,omitempty"`
+	NumberOfExtraBedsInfant			int					`xml:"NumberOfExtraBedsInfant,attr,omitempty"`
 	AdditionalInfo					string				`xml:"AdditionalInfo,attr"`
 	ReferenceNumber					string				`xml:"ReferenceNumber,attr,omitempty"`
 	SupplierInfo					string				`xml:"SupplierInfo,attr"`
@@ -66,6 +69,7 @@ type AccommodationType struct {
 	DeadlineTimeSys					string				`xml:"DeadlineTimeSys,attr"`
 	DeadlineTimeUTC					string				`xml:"DeadlineTimeUTC,attr"`
 	PossiblePenaltySize				float64				`xml:"PossiblePenaltySize,attr"`
+	VoucherId						int					`xml:"VoucherId,attr,omitempty"`
 	Gain							float64				`xml:"Gain,attr,omitempty"`
 	PenaltyGain						float64				`xml:"PenaltyGain,attr,omitempty"`
 	ToBeCancelled					YesNoCodeType		`xml:"ToBeCancelled"`
@@ -73,6 +77,9 @@ type AccommodationType struct {
 	Hotel							SimpleCodeNameType	`xml:"Hotel"`
 	ObjType							ObjTypeType			`xml:"ObjType"`
 	Country							SimpleCodeNameType	`xml:"Country"`
+	AdmUnit1						*SimpleCodeNameType	`xml:"AdmUnit1,omitempty"`
+	AdmUnit2						*SimpleCodeNameType	`xml:"AdmUnit2,omitempty"`
+	TypeOfPlace						*SimpleCodeNameType	`xml:"TypeOfPlace,omitempty"`
 	City							SimpleCodeNameType	`xml:"City"`
 	Status							SimpleCodeNameType	`xml:"Status"`
 	AmendmentRejected				YesNoCodeType		`xml:"AmendmentRejected"`
