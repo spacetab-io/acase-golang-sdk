@@ -827,6 +827,20 @@ func (a *Api) OrderDocRequest(actionName acaseSts.OrderDocActionName, taskId, do
 	return resp, nil
 }
 
+func (a *Api) OrderInfoRequest(item *acaseSts.OrderInfoRequestType) (*acaseSts.OrderInfoResponseType, *AcaseResponseError) {
+	a.fillCredentials(&item.Credentials)
+	resp := &acaseSts.OrderInfoResponseType{}
+	err := a.processRequest(item, resp)
+	if err != nil {
+		return nil, err
+	}
+	acsErr := ResponseError(resp.BaseResponse)
+	if acsErr != nil {
+		return nil, acsErr
+	}
+	return resp, nil
+}
+
 func (a *Api) OrderInfoNotifyRequest(item *acaseSts.OrderInfoNotifyRequestType) (*acaseSts.OrderInfoNotifyResponseType, *AcaseResponseError) {
 	item.Password = a.Password
 	resp := &acaseSts.OrderInfoNotifyResponseType{}
