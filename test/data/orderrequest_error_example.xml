@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<OrderListResponse>
+<OrderResponse>
    <Error Code="9998" Description="Доступ запрещен !">
       <Type Code="1" Name="Фатальная" /> 
    </Error>
-</OrderListResponse>
+</OrderResponse>

@@ -8,8 +8,8 @@ type HotelSearchRequestType struct {
 	ArrivalDate		string					`xml:"ArrivalDate,attr"`
 	DepartureDate	string					`xml:"DepartureDate,attr"`
 	City			int						`xml:"City,attr,omitempty"`
-	PriceFrom		float64					`xml:"PriceFrom,attr"`
-	PriceTo			float64					`xml:"PriceTo,attr"`
+	PriceFrom		string					`xml:"PriceFrom,attr"`
+	PriceTo			string					`xml:"PriceTo,attr"`
 	FreeSaleOnly	int						`xml:"FreeSaleOnly,attr"`
 	HotelCategory	int						`xml:"HotelCategory,attr"`
 	Currency		int						`xml:"Currency,attr"`

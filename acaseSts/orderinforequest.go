@@ -5,7 +5,7 @@ import "encoding/xml"
 type OrderInfoRequestType struct {
 	Credentials
 	XMLName			xml.Name	`xml:"OrderInfoRequest"`
-	Id				string		`xml:"Id"`
+	Id				string		`xml:"Id,attr"`
 }
 
 type OrderInfoResponseType struct {

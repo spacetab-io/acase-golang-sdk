@@ -615,12 +615,21 @@ func (a *Api) HotelSearchRequest(arrivalDate, departureDate, options, hotelName,
 	freeSaleOnly, hotelCategory, currency, whereToPay, numberOfGuests, hotelCode, distance, distTypeCode, distCode, guestsAdults, city int,
 	priceFrom, priceTo float64, starCodes, minorAges []int) (*acaseSts.HotelSearchResponseType, *AcaseResponseError) {
 
+	prFrom := ""
+	prTo := ""
+	if priceFrom > 0 {
+		prFrom = strconv.FormatFloat(priceFrom, 'f', 2, 64)
+	}
+	if priceTo > 0 {
+		prTo = strconv.FormatFloat(priceTo, 'f', 2, 64)
+	}
+
 	request := &acaseSts.HotelSearchRequestType{
 		ArrivalDate:arrivalDate,
 		DepartureDate:departureDate,
 		City:city,
-		PriceFrom:priceFrom,
-		PriceTo:priceTo,
+		PriceFrom:prFrom,
+		PriceTo:prTo,
 		FreeSaleOnly:freeSaleOnly,
 		HotelCategory:hotelCategory,
 		Currency:currency,
@@ -900,10 +909,10 @@ func (a *Api) OrderListRequest(arrivalDateFrom, arrivalDateTo, departureDateFrom
 	return resp, nil
 }
 
-func (a *Api) OrderRequest(item *acaseSts.OrderRequestType) (*acaseSts.OrderListResponseType, *AcaseResponseError) {
+func (a *Api) OrderRequest(item *acaseSts.OrderRequestType) (*acaseSts.OrderResponseType, *AcaseResponseError) {
 
 	a.fillCredentials(&item.Credentials)
-	resp := &acaseSts.OrderListResponseType{}
+	resp := &acaseSts.OrderResponseType{}
 	err := a.processRequest(item, resp)
 	if err != nil {
 		return nil, err
@@ -915,10 +924,10 @@ func (a *Api) OrderRequest(item *acaseSts.OrderRequestType) (*acaseSts.OrderList
 	return resp, nil
 }
 
-func (a *Api) OrderAwocRequest(item *acaseSts.OrderAwocRequestType) (*acaseSts.OrderListResponseType, *AcaseResponseError) {
+func (a *Api) OrderAwocRequest(item *acaseSts.OrderAwocRequestType) (*acaseSts.OrderResponseType, *AcaseResponseError) {
 
 	a.fillCredentials(&item.Credentials)
-	resp := &acaseSts.OrderListResponseType{}
+	resp := &acaseSts.OrderResponseType{}
 	err := a.processRequest(item, resp)
 	if err != nil {
 		return nil, err
