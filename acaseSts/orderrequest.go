@@ -4,9 +4,9 @@ import "encoding/xml"
 
 type OrderRequestType struct {
 	Credentials
-	XMLName				xml.Name				`xml:"OrderListRequest"`
+	XMLName				xml.Name				`xml:"OrderRequest"`
 	Id					int						`xml:"Id,attr"`
-	ReferenceNumber		string					`xml:"String20Type,attr"`
+	ReferenceNumber		string					`xml:"ReferenceNumber,attr"`
 	Currency			SimpleCodeNameType		`xml:"Currency"`
 	WhereToPay			SimpleCodeNameType		`xml:"WhereToPay"`
 	Customer			CustomerType			`xml:"Customer"`
@@ -15,9 +15,9 @@ type OrderRequestType struct {
 
 type OrderAwocRequestType struct {
 	Credentials
-	XMLName			xml.Name			`xml:"OrderListRequest"`
+	XMLName			xml.Name			`xml:"OrderRequest"`
 	Id				int					`xml:"Id,attr"`
-	ReferenceNumber	string				`xml:"String20Type,attr"`
+	ReferenceNumber	string				`xml:"ReferenceNumber,attr"`
 	Currency		SimpleCodeNameType	`xml:"Currency"`
 	WhereToPay		SimpleCodeNameType	`xml:"WhereToPay"`
 	Customer		CustomerType		`xml:"Customer"`
