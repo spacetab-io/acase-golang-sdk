@@ -6,11 +6,11 @@ import (
 
 type CitizenshipListRequestType struct {
 	Credentials
-	XMLName		xml.Name			`xml:"CitizenshipListRequest"`
+	XMLName xml.Name `xml:"CitizenshipListRequest"`
 }
 
 type CitizenshipListType struct {
 	BaseResponse
-	XMLName		xml.Name				`xml:"CitizenshipList"`
-	Citizenship	[]SimpleCodeNameType	`xml:"Citizenship"`
+	XMLName     xml.Name             `xml:"CitizenshipList"`
+	Citizenship []SimpleCodeNameType `xml:"Citizenship"`
 }

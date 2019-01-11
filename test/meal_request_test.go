@@ -1,7 +1,9 @@
 package test
 
 import (
+	"context"
 	"testing"
+
 	"github.com/nbio/st"
 )
 
@@ -9,7 +11,7 @@ func TestMealRequest_Ok(t *testing.T) {
 	testRequest("meal_response_example.xml", false)
 	defer gockOff()
 
-	data, err := acApi.MealRequest(0,0,"швед")
+	data, err := acApi.MealRequest(context.Background(), 0, 0, "швед")
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
 	st.Expect(t, data.Action.Name, "LIST")
@@ -26,9 +28,8 @@ func TestMealRequest_Error(t *testing.T) {
 	testRequest("meal_error_example.xml", true)
 	defer gockOff()
 
-	_, err := acApi.MealRequest(0,0,"швед")
+	_, err := acApi.MealRequest(context.Background(), 0, 0, "швед")
 
 	st.Expect(t, err.Code, "9998")
 	st.Expect(t, err.Message, "Доступ запрещен !")
 }
-

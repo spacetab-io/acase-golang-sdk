@@ -1,7 +1,9 @@
 package test
 
 import (
+	"context"
 	"testing"
+
 	"github.com/nbio/st"
 	"github.com/tmconsulting/acase-golang-sdk/acaseSts"
 )
@@ -10,7 +12,7 @@ func TestOrderDocRequest_Create_Ok(t *testing.T) {
 	testRequest("orderdoc_create_response_example.xml", false)
 	defer gockOff()
 
-	data, err := acApi.OrderDocRequest(acaseSts.TASKADD, 0,2835883,7)
+	data, err := acApi.OrderDocRequest(context.Background(), acaseSts.TASKADD, 0, 2835883, 7)
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
 	st.Expect(t, data.Action.Name, "TaskAdd")
@@ -26,7 +28,7 @@ func TestOrderDocRequest_CheckStatus_Ok(t *testing.T) {
 	testRequest("orderdoc_checkstatus_response_example.xml", false)
 	defer gockOff()
 
-	data, err := acApi.OrderDocRequest(acaseSts.TASKSTATUS, 25729,0,0)
+	data, err := acApi.OrderDocRequest(context.Background(), acaseSts.TASKSTATUS, 25729, 0, 0)
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
 	st.Expect(t, data.Action.Name, "TaskStatus")
@@ -41,7 +43,7 @@ func TestOrderDocRequest_GetResult_Ok(t *testing.T) {
 	testRequest("orderdoc_getresult_response_example.xml", false)
 	defer gockOff()
 
-	data, err := acApi.OrderDocRequest(acaseSts.TASKRESPONSE, 25729,0,0)
+	data, err := acApi.OrderDocRequest(context.Background(), acaseSts.TASKRESPONSE, 25729, 0, 0)
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
 	st.Expect(t, data.Action.Name, "TaskResponse")
@@ -61,9 +63,8 @@ func TestOrderDocRequest_Error(t *testing.T) {
 	testRequest("orderdoc_error_example.xml", true)
 	defer gockOff()
 
-	_, err := acApi.OrderDocRequest(acaseSts.TASKADD, 0,2835883,7)
+	_, err := acApi.OrderDocRequest(context.Background(), acaseSts.TASKADD, 0, 2835883, 7)
 
 	st.Expect(t, err.Code, "9998")
 	st.Expect(t, err.Message, "Доступ запрещен !")
 }
-

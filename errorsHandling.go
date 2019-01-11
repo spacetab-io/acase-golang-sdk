@@ -5,8 +5,8 @@ import (
 )
 
 type AcaseResponseError struct {
-	Message	string
-	Code	string
+	Message string
+	Code    string
 }
 
 func (ar *AcaseResponseError) Error() string {
@@ -20,7 +20,7 @@ func (ar *AcaseResponseError) ErrorCode() string {
 func ResponseError(item acaseSts.BaseResponse) *AcaseResponseError {
 	if item.Error != nil {
 		return &AcaseResponseError{
-			Code: item.Error.Code,
+			Code:    item.Error.Code,
 			Message: item.Error.Description,
 		}
 	}

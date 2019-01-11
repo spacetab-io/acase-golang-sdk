@@ -11,12 +11,12 @@ import (
 
 var (
 	au = &acaseSdk.Auth{
-		BuyerId: "BuyerId",
-		UserId: "UserId",
+		BuyerId:  "BuyerId",
+		UserId:   "UserId",
 		Password: "Password",
 		Language: "ru",
 	}
-	acApi = acaseSdk.NewApi(*au, "http://test-www.acase.ru/xml/form.jsp")
+	acApi  = acaseSdk.NewApi(*au, "http://test-www.acase.ru/xml/form.jsp")
 	isMock = true
 )
 
@@ -50,5 +50,3 @@ func testRequest(filename string, isError bool) error {
 	}
 	return nil
 }
-
-

@@ -3,19 +3,26 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:a8a06f19fc5f364b93fa63ecafe8f84407f1cfb73a61bc6832ded06e724c6f62"
   name = "github.com/nbio/st"
   packages = ["."]
+  pruneopts = ""
   revision = "e9e8d9816f3268def6dcbd2dea03301f40e9de94"
 
 [[projects]]
+  digest = "1:74b8ec98e377c15e61f0c72a1beab7e7557679e04b88aac5840e11f8951aff5b"
   name = "gopkg.in/h2non/gock.v1"
   packages = ["."]
+  pruneopts = ""
   revision = "26775f23aa9da4cbd47bc2600a57ac07bbf3bd20"
   version = "v1.0.7"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "1e826edc880bb4b1de54cb0ea3d0fe1f566a7618309b5f85bc18d0b3f36e8d82"
+  input-imports = [
+    "github.com/nbio/st",
+    "gopkg.in/h2non/gock.v1",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1

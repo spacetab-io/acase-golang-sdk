@@ -1,15 +1,17 @@
 package test
 
 import (
+	"context"
 	"testing"
+
 	"github.com/nbio/st"
 )
 
-func TestHotelListRequest_Ok(t *testing.T)  {
+func TestHotelListRequest_Ok(t *testing.T) {
 	testRequest("hotellist_response_example.xml", false)
 	defer gockOff()
 
-	data, err := acApi.HotelListRequest(0,68,0,0,"","")
+	data, err := acApi.HotelListRequest(context.Background(), 0, 68, 0, 0, "", "")
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
 	st.Expect(t, len(data.Country), 1)
@@ -113,9 +115,8 @@ func TestHotelListRequest_Error(t *testing.T) {
 	testRequest("hotellist_error_example.xml", true)
 	defer gockOff()
 
-	_, err := acApi.HotelListRequest(0,0,0,0,"","")
+	_, err := acApi.HotelListRequest(context.Background(), 0, 0, 0, 0, "", "")
 
 	st.Expect(t, err.Code, "9998")
 	st.Expect(t, err.Message, "Доступ запрещен !")
 }
-

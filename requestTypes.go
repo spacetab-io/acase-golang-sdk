@@ -8,6 +8,6 @@ type Auth struct {
 }
 
 type RespError struct {
-	Message	string
-	Code	string
+	Message string
+	Code    string
 }

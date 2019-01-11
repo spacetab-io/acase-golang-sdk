@@ -1,7 +1,9 @@
 package test
 
 import (
+	"context"
 	"testing"
+
 	"github.com/nbio/st"
 )
 
@@ -9,10 +11,10 @@ func TestStarListRequest_Ok(t *testing.T) {
 	testRequest("starlist_response_example.xml", false)
 	defer gockOff()
 
-	data, err := acApi.StarListRequest(0,"","")
+	data, err := acApi.StarListRequest(context.Background(), 0, "", "")
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
-	st.Expect(t, len(data.Star) , 7)
+	st.Expect(t, len(data.Star), 7)
 	st.Expect(t, data.Star[0].Code, 1)
 	st.Expect(t, data.Star[0].Name, "Уровень 5 из 5")
 	st.Expect(t, data.Star[0].Value, "5")
@@ -40,9 +42,8 @@ func TestStarListRequest_Error(t *testing.T) {
 	testRequest("starlist_error_example.xml", true)
 	defer gockOff()
 
-	_, err := acApi.StarListRequest(0,"","")
+	_, err := acApi.StarListRequest(context.Background(), 0, "", "")
 
 	st.Expect(t, err.Code, "9998")
 	st.Expect(t, err.Message, "Доступ запрещен !")
 }
-

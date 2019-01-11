@@ -1,19 +1,20 @@
 package test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/nbio/st"
 )
 
-func TestCustomerCreateRequest_Ok(t *testing.T)  {
+func TestCustomerCreateRequest_Ok(t *testing.T) {
 	testRequest("customer_create_response_example.xml", false)
 	defer gockOff()
 
-	data, err := acApi.CustomerRequestCreate("Международный клуб Ромашка", "123456",
-		"Тестовая ул. д.5/2 кв.5","","123456789","","+371 1 222 333",
-		"Ромашка","Юридическое лицо","Латвия","Рига",
-		3,30,24)
+	data, err := acApi.CustomerRequestCreate(context.Background(), "Международный клуб Ромашка", "123456",
+		"Тестовая ул. д.5/2 кв.5", "", "123456789", "", "+371 1 222 333",
+		"Ромашка", "Юридическое лицо", "Латвия", "Рига",
+		3, 30, 24)
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
 	st.Expect(t, data.ActionCreate.Parameters.Customer.FullName, "Международный клуб Ромашка")
@@ -61,23 +62,23 @@ func TestCustomerRequest_Error(t *testing.T) {
 	testRequest("customer_error_example.xml", true)
 	defer gockOff()
 
-	_, err := acApi.CustomerRequestCreate("Международный клуб Ромашка", "123456",
-		"Тестовая ул. д.5/2 кв.5","","123456789","","+371 1 222 333",
-		"Ромашка","Юридическое лицо","Латвия","Рига",
-		3,30,24)
+	_, err := acApi.CustomerRequestCreate(context.Background(), "Международный клуб Ромашка", "123456",
+		"Тестовая ул. д.5/2 кв.5", "", "123456789", "", "+371 1 222 333",
+		"Ромашка", "Юридическое лицо", "Латвия", "Рига",
+		3, 30, 24)
 
 	st.Expect(t, err.Code, "9998")
 	st.Expect(t, err.Message, "Доступ запрещен !")
 }
 
-func TestCustomerUpdateRequest_Ok(t *testing.T)  {
+func TestCustomerUpdateRequest_Ok(t *testing.T) {
 	testRequest("customer_update_response_example.xml", false)
 	defer gockOff()
 
-	data, err := acApi.CustomerRequestUpdate("Международный клуб Ромашка", "123457",
-		"Тестовая ул. д.5/2 кв.5","Латвия, 123457, Рига, Тестовая ул. д.5/2 кв.5",
-		"123456789","","+371 1 22555 333","Ромашка","Юридическое лицо","Латвия","Рига",
-		1322076,3,30,24)
+	data, err := acApi.CustomerRequestUpdate(context.Background(), "Международный клуб Ромашка", "123457",
+		"Тестовая ул. д.5/2 кв.5", "Латвия, 123457, Рига, Тестовая ул. д.5/2 кв.5",
+		"123456789", "", "+371 1 22555 333", "Ромашка", "Юридическое лицо", "Латвия", "Рига",
+		1322076, 3, 30, 24)
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
 	st.Expect(t, data.ActionUpdate.Parameters.CustomerCode, 1322076)
@@ -122,21 +123,21 @@ func TestCustomerUpdateRequest_Ok(t *testing.T)  {
 	st.Expect(t, data.Customer.AllowModify.Name, "Да")
 }
 
-func TestCustomerDeleteRequest_Ok(t *testing.T)  {
+func TestCustomerDeleteRequest_Ok(t *testing.T) {
 	testRequest("customer_delete_response_example.xml", false)
 	defer gockOff()
 
-	data, err := acApi.CustomerRequestDelete(1322076)
+	data, err := acApi.CustomerRequestDelete(context.Background(), 1322076)
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
 	st.Expect(t, data.ActionDelete.Parameters.CustomerCode, 1322076)
 }
 
-func TestCustomerListRequest_Ok(t *testing.T)  {
+func TestCustomerListRequest_Ok(t *testing.T) {
 	testRequest("customer_list_response_example.xml", false)
 	defer gockOff()
 
-	data, err := acApi.CustomerRequestList(1,1)
+	data, err := acApi.CustomerRequestList(context.Background(), 1, 1)
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
 	st.Expect(t, data.ActionList.Parameters.Sort, 1)
@@ -187,11 +188,11 @@ func TestCustomerListRequest_Ok(t *testing.T)  {
 	st.Expect(t, data.CustomerList.Customers[1].AllowModify.Name, "Да")
 }
 
-func TestCustomerInfoRequest_Ok(t *testing.T)  {
+func TestCustomerInfoRequest_Ok(t *testing.T) {
 	testRequest("customer_info_response_example.xml", false)
 	defer gockOff()
 
-	data, err := acApi.CustomerRequestInfo(1322076)
+	data, err := acApi.CustomerRequestInfo(context.Background(), 1322076)
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
 	st.Expect(t, data.ActionInfo.Parameters.CustomerCode, 1322076)

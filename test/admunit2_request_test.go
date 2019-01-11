@@ -1,6 +1,7 @@
 package test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/nbio/st"
@@ -10,7 +11,7 @@ func TestAdmUnit2Request_Ok(t *testing.T) {
 	testRequest("admunit2_response_example.xml", false)
 	defer gockOff()
 
-	data, err := acApi.AdmUnit2Request(9, 3, 0, "", "")
+	data, err := acApi.AdmUnit2Request(context.Background(), 9, 3, 0, "", "")
 
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
@@ -29,9 +30,8 @@ func TestAdmUnit2Request_Error(t *testing.T) {
 	testRequest("admunit2_error_example.xml", true)
 	defer gockOff()
 
-	_, err := acApi.AdmUnit2Request(0, 3, 9, "", "")
+	_, err := acApi.AdmUnit2Request(context.Background(), 0, 3, 9, "", "")
 
 	st.Expect(t, err.Code, "9998")
 	st.Expect(t, err.Message, "Доступ запрещен !")
 }
-

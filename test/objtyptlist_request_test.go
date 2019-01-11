@@ -1,7 +1,9 @@
 package test
 
 import (
+	"context"
 	"testing"
+
 	"github.com/nbio/st"
 )
 
@@ -9,7 +11,7 @@ func TestObjTypeListRequest_Ok(t *testing.T) {
 	testRequest("objtypelist_response_example.xml", false)
 	defer gockOff()
 
-	data, err := acApi.ObjTypeListRequest("", "")
+	data, err := acApi.ObjTypeListRequest(context.Background(), "", "")
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
 	st.Expect(t, len(data.ObjType), 6)
@@ -31,9 +33,8 @@ func TestObjTypeListRequest_Error(t *testing.T) {
 	testRequest("objtypelist_error_example.xml", true)
 	defer gockOff()
 
-	_, err := acApi.ObjTypeListRequest("", "")
+	_, err := acApi.ObjTypeListRequest(context.Background(), "", "")
 
 	st.Expect(t, err.Code, "9998")
 	st.Expect(t, err.Message, "Доступ запрещен !")
 }
-

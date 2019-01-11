@@ -1,16 +1,17 @@
 package test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/nbio/st"
 )
 
-func TestCityDescriptionRequest_Ok(t *testing.T)  {
+func TestCityDescriptionRequest_Ok(t *testing.T) {
 	testRequest("citydescription_response_example.xml", false)
 	defer gockOff()
 
-	data, err := acApi.CityDescriptionRequest(2)
+	data, err := acApi.CityDescriptionRequest(context.Background(), 2)
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
 	st.Expect(t, data.Code, "2")
@@ -35,9 +36,8 @@ func TestCityDescriptionRequest_Error(t *testing.T) {
 	testRequest("citydescription_error_example.xml", true)
 	defer gockOff()
 
-	_, err := acApi.CityDescriptionRequest(2)
+	_, err := acApi.CityDescriptionRequest(context.Background(), 2)
 
 	st.Expect(t, err.Code, "9998")
 	st.Expect(t, err.Message, "Доступ запрещен !")
 }
-
