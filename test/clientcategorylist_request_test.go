@@ -1,16 +1,17 @@
 package test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/nbio/st"
 )
 
-func TestClientCategoryListRequest_Ok(t *testing.T)  {
+func TestClientCategoryListRequest_Ok(t *testing.T) {
 	testRequest("clientcategorylist_response_example.xml", true)
 	defer gockOff()
 
-	data, err := acApi.ClientCategoryListRequest(0,"")
+	data, err := acApi.ClientCategoryListRequest(context.Background(), 0, "")
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
 	st.Expect(t, len(data.ClientCategories), 4)
@@ -28,7 +29,7 @@ func TestClientCategoryListRequest_Error(t *testing.T) {
 	testRequest("clientcategorylist_error_example.xml", false)
 	defer gockOff()
 
-	_, err := acApi.ClientCategoryListRequest(0,"")
+	_, err := acApi.ClientCategoryListRequest(context.Background(), 0, "")
 
 	st.Expect(t, err.Code, "9998")
 	st.Expect(t, err.Message, "Доступ запрещен !")

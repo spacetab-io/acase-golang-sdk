@@ -1,7 +1,9 @@
 package test
 
 import (
+	"context"
 	"testing"
+
 	"github.com/nbio/st"
 )
 
@@ -9,12 +11,12 @@ func TestRoute1Request_Ok(t *testing.T) {
 	testRequest("route1_response_example.xml", false)
 	defer gockOff()
 
-	data, err := acApi.RouteRequest("Моск","",0,0,0,0)
+	data, err := acApi.RouteRequest(context.Background(), "Моск", "", 0, 0, 0, 0)
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
 	st.Expect(t, data.Action.Name, "LIST")
 	st.Expect(t, data.Action.Parameters.StartPoint.Name, "Моск")
-	st.Expect(t, len(data.TransferPointList.TransferPoint) , 4)
+	st.Expect(t, len(data.TransferPointList.TransferPoint), 4)
 	st.Expect(t, data.TransferPointList.TransferPoint[0].Code, 2)
 	st.Expect(t, data.TransferPointList.TransferPoint[0].TransferPointType.Code, 1)
 	st.Expect(t, data.TransferPointList.TransferPoint[0].TransferPointType.Name, "Город")
@@ -87,14 +89,14 @@ func TestRoute4Request_Ok(t *testing.T) {
 	testRequest("route4_response_example.xml", false)
 	defer gockOff()
 
-	data, err := acApi.RouteRequest("Шере","",0,2,0,1)
+	data, err := acApi.RouteRequest(context.Background(), "Шере", "", 0, 2, 0, 1)
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
 	st.Expect(t, data.Action.Name, "LIST")
 	st.Expect(t, data.Action.Parameters.StartPoint.Name, "Шере")
 	st.Expect(t, data.Action.Parameters.EndPoint.Code, 2)
 	st.Expect(t, data.Action.Parameters.EndPoint.Type, 1)
-	st.Expect(t, len(data.TransferPointList.TransferPoint) , 5)
+	st.Expect(t, len(data.TransferPointList.TransferPoint), 5)
 	st.Expect(t, data.TransferPointList.TransferPoint[0].Code, 1200089)
 	st.Expect(t, data.TransferPointList.TransferPoint[0].TransferPointType.Code, 3)
 	st.Expect(t, data.TransferPointList.TransferPoint[0].TransferPointType.Name, "Аэропорт")
@@ -196,9 +198,8 @@ func TestRouteRequest_Error(t *testing.T) {
 	testRequest("route_error_example.xml", true)
 	defer gockOff()
 
-	_, err := acApi.RouteRequest("","",0,0,0,0)
+	_, err := acApi.RouteRequest(context.Background(), "", "", 0, 0, 0, 0)
 
 	st.Expect(t, err.Code, "9998")
 	st.Expect(t, err.Message, "Доступ запрещен !")
 }
-

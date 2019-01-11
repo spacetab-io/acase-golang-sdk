@@ -1,32 +1,34 @@
 package test
 
 import (
+	"context"
 	"testing"
-	"github.com/tmconsulting/acase-golang-sdk/acaseSts"
+
 	"github.com/nbio/st"
+	"github.com/tmconsulting/acase-golang-sdk/acaseSts"
 )
 
 func getAccommodationAndTransfersRequestObject() *acaseSts.OrderInfoNotifyRequestType {
 	res := &acaseSts.OrderInfoNotifyRequestType{
-		ContractNumber: "0157/13",
-		ContractDate: "01.07.2013",
-		GuaranteeAmount: 0.00,
-		NotifierId: "Academservice",
-		Password: "322223",
-		Language: "en",
-		Id: 546797,
-		ReferenceNumber: "CYXBW",
-		ReferenceNumberName: "Ref No",
-		RegistrationDate: "16.03.2005",
-		DeadlineDate: "15.03.2005",
-		Price: 142.00,
+		ContractNumber:         "0157/13",
+		ContractDate:           "01.07.2013",
+		GuaranteeAmount:        0.00,
+		NotifierId:             "Academservice",
+		Password:               "322223",
+		Language:               "en",
+		Id:                     546797,
+		ReferenceNumber:        "CYXBW",
+		ReferenceNumberName:    "Ref No",
+		RegistrationDate:       "16.03.2005",
+		DeadlineDate:           "15.03.2005",
+		Price:                  142.00,
 		TravelAgencyCommission: 0.00,
-		Penalty: 0.00,
-		StartDate: "16.03.2005",
-		EndDate: "17.03.2005",
-		InvoiceRule: 3,
-		InvoiceId: 7413250,
-		ConfirmId: 0,
+		Penalty:                0.00,
+		StartDate:              "16.03.2005",
+		EndDate:                "17.03.2005",
+		InvoiceRule:            3,
+		InvoiceId:              7413250,
+		ConfirmId:              0,
 	}
 	res.Currency.Code = 3
 	res.Currency.Name = "USD"
@@ -103,85 +105,85 @@ func getAccommodationAndTransfersRequestObject() *acaseSts.OrderInfoNotifyReques
 	res.AccommodationList.Accommodation[0].DeadlineTimeSys = "15.03.2005 13:00"
 	res.AccommodationList.Accommodation[0].DeadlineTimeUTC = "15.03.2005 10:00"
 	res.AccommodationList.Accommodation[0].PossiblePenaltySize = 142.00
-	res.AccommodationList.Accommodation[0].ToBeCancelled.Code=2
-	res.AccommodationList.Accommodation[0].ToBeCancelled.Name="Нет"
-	res.AccommodationList.Accommodation[0].ToBeChanged.Code=2
-	res.AccommodationList.Accommodation[0].ToBeChanged.Name="Нет"
-	res.AccommodationList.Accommodation[0].Hotel.Code=300061
-	res.AccommodationList.Accommodation[0].Hotel.Name="Русь (Солнечный)"
-	res.AccommodationList.Accommodation[0].ObjType.Code=2
-	res.AccommodationList.Accommodation[0].ObjType.Name="Гостиница"
-	res.AccommodationList.Accommodation[0].ObjType.NameWhere="гостинице"
-	res.AccommodationList.Accommodation[0].Country.Code=9
-	res.AccommodationList.Accommodation[0].Country.Name="Россия"
-	res.AccommodationList.Accommodation[0].City.Code=2
-	res.AccommodationList.Accommodation[0].City.Name="Москва"
-	res.AccommodationList.Accommodation[0].Status.Code=41
-	res.AccommodationList.Accommodation[0].Status.Name="Подтверждено"
-	res.AccommodationList.Accommodation[0].AmendmentRejected.Code=2
-	res.AccommodationList.Accommodation[0].AmendmentRejected.Name="Нет"
-	res.AccommodationList.Accommodation[0].AllowCancel.Code=1
-	res.AccommodationList.Accommodation[0].AllowCancel.Name="Да"
-	res.AccommodationList.Accommodation[0].AllowModify.Code=1
-	res.AccommodationList.Accommodation[0].AllowModify.Name="Да"
-	res.AccommodationList.Accommodation[0].Product.Code=410167
-	res.AccommodationList.Accommodation[0].Product.RoomName="Junior Suite"
-	res.AccommodationList.Accommodation[0].Product.RoomCode=900153
-	res.AccommodationList.Accommodation[0].Product.RateCode=900185
-	res.AccommodationList.Accommodation[0].Product.RateName="FIT"
-	res.AccommodationList.Accommodation[0].Product.RateDescription=""
-	res.AccommodationList.Accommodation[0].Product.RateGroupCode=4
-	res.AccommodationList.Accommodation[0].Product.RateGroupName="FIT"
-	res.AccommodationList.Accommodation[0].Product.Allotment.Code="500235"
-	res.AccommodationList.Accommodation[0].Product.Allotment.Name="РУСЬ-ДЛЯ ВСЕХ"
-	res.AccommodationList.Accommodation[0].Meal.Code=0
-	res.AccommodationList.Accommodation[0].Meal.Name=""
+	res.AccommodationList.Accommodation[0].ToBeCancelled.Code = 2
+	res.AccommodationList.Accommodation[0].ToBeCancelled.Name = "Нет"
+	res.AccommodationList.Accommodation[0].ToBeChanged.Code = 2
+	res.AccommodationList.Accommodation[0].ToBeChanged.Name = "Нет"
+	res.AccommodationList.Accommodation[0].Hotel.Code = 300061
+	res.AccommodationList.Accommodation[0].Hotel.Name = "Русь (Солнечный)"
+	res.AccommodationList.Accommodation[0].ObjType.Code = 2
+	res.AccommodationList.Accommodation[0].ObjType.Name = "Гостиница"
+	res.AccommodationList.Accommodation[0].ObjType.NameWhere = "гостинице"
+	res.AccommodationList.Accommodation[0].Country.Code = 9
+	res.AccommodationList.Accommodation[0].Country.Name = "Россия"
+	res.AccommodationList.Accommodation[0].City.Code = 2
+	res.AccommodationList.Accommodation[0].City.Name = "Москва"
+	res.AccommodationList.Accommodation[0].Status.Code = 41
+	res.AccommodationList.Accommodation[0].Status.Name = "Подтверждено"
+	res.AccommodationList.Accommodation[0].AmendmentRejected.Code = 2
+	res.AccommodationList.Accommodation[0].AmendmentRejected.Name = "Нет"
+	res.AccommodationList.Accommodation[0].AllowCancel.Code = 1
+	res.AccommodationList.Accommodation[0].AllowCancel.Name = "Да"
+	res.AccommodationList.Accommodation[0].AllowModify.Code = 1
+	res.AccommodationList.Accommodation[0].AllowModify.Name = "Да"
+	res.AccommodationList.Accommodation[0].Product.Code = 410167
+	res.AccommodationList.Accommodation[0].Product.RoomName = "Junior Suite"
+	res.AccommodationList.Accommodation[0].Product.RoomCode = 900153
+	res.AccommodationList.Accommodation[0].Product.RateCode = 900185
+	res.AccommodationList.Accommodation[0].Product.RateName = "FIT"
+	res.AccommodationList.Accommodation[0].Product.RateDescription = ""
+	res.AccommodationList.Accommodation[0].Product.RateGroupCode = 4
+	res.AccommodationList.Accommodation[0].Product.RateGroupName = "FIT"
+	res.AccommodationList.Accommodation[0].Product.Allotment.Code = "500235"
+	res.AccommodationList.Accommodation[0].Product.Allotment.Name = "РУСЬ-ДЛЯ ВСЕХ"
+	res.AccommodationList.Accommodation[0].Meal.Code = 0
+	res.AccommodationList.Accommodation[0].Meal.Name = ""
 	res.AccommodationList.Accommodation[0].Persons.Items = make([]acaseSts.PersonType, 1)
-	res.AccommodationList.Accommodation[0].Persons.Items[0].LastName="ИВАНОВ"
-	res.AccommodationList.Accommodation[0].Persons.Items[0].FirstName="ИВАН ИВАНОВИЧ"
-	res.AccommodationList.Accommodation[0].Persons.Items[0].Category.Code=1
-	res.AccommodationList.Accommodation[0].Persons.Items[0].Category.Name="Господин"
-	res.AccommodationList.Accommodation[0].Persons.Items[0].Citizenship.Code=0
-	res.AccommodationList.Accommodation[0].Persons.Items[0].Citizenship.Name=""
-	res.AccommodationList.Accommodation[0].IsEarlyCheckIn.Code=1
-	res.AccommodationList.Accommodation[0].IsEarlyCheckIn.Name="Да"
-	res.AccommodationList.Accommodation[0].CriticalEarlyCheckIn.Code=1
-	res.AccommodationList.Accommodation[0].CriticalEarlyCheckIn.Name="Критично"
-	res.AccommodationList.Accommodation[0].EarlyCheckInConfirmationStatus.Code=2
-	res.AccommodationList.Accommodation[0].EarlyCheckInConfirmationStatus.Name="Не подтвержден"
-	res.AccommodationList.Accommodation[0].IsHour.Code=2
-	res.AccommodationList.Accommodation[0].IsHour.Name="Нет"
-	res.AccommodationList.Accommodation[0].IsLateCheckOut.Code=1
-	res.AccommodationList.Accommodation[0].IsLateCheckOut.Name="Да"
-	res.AccommodationList.Accommodation[0].CriticalLateCheckOut.Code=2
-	res.AccommodationList.Accommodation[0].CriticalLateCheckOut.Name="Некритично"
-	res.AccommodationList.Accommodation[0].LateCheckOutConfirmationStatus.Code=2
-	res.AccommodationList.Accommodation[0].LateCheckOutConfirmationStatus.Name="Не подтвержден"
+	res.AccommodationList.Accommodation[0].Persons.Items[0].LastName = "ИВАНОВ"
+	res.AccommodationList.Accommodation[0].Persons.Items[0].FirstName = "ИВАН ИВАНОВИЧ"
+	res.AccommodationList.Accommodation[0].Persons.Items[0].Category.Code = 1
+	res.AccommodationList.Accommodation[0].Persons.Items[0].Category.Name = "Господин"
+	res.AccommodationList.Accommodation[0].Persons.Items[0].Citizenship.Code = 0
+	res.AccommodationList.Accommodation[0].Persons.Items[0].Citizenship.Name = ""
+	res.AccommodationList.Accommodation[0].IsEarlyCheckIn.Code = 1
+	res.AccommodationList.Accommodation[0].IsEarlyCheckIn.Name = "Да"
+	res.AccommodationList.Accommodation[0].CriticalEarlyCheckIn.Code = 1
+	res.AccommodationList.Accommodation[0].CriticalEarlyCheckIn.Name = "Критично"
+	res.AccommodationList.Accommodation[0].EarlyCheckInConfirmationStatus.Code = 2
+	res.AccommodationList.Accommodation[0].EarlyCheckInConfirmationStatus.Name = "Не подтвержден"
+	res.AccommodationList.Accommodation[0].IsHour.Code = 2
+	res.AccommodationList.Accommodation[0].IsHour.Name = "Нет"
+	res.AccommodationList.Accommodation[0].IsLateCheckOut.Code = 1
+	res.AccommodationList.Accommodation[0].IsLateCheckOut.Name = "Да"
+	res.AccommodationList.Accommodation[0].CriticalLateCheckOut.Code = 2
+	res.AccommodationList.Accommodation[0].CriticalLateCheckOut.Name = "Некритично"
+	res.AccommodationList.Accommodation[0].LateCheckOutConfirmationStatus.Code = 2
+	res.AccommodationList.Accommodation[0].LateCheckOutConfirmationStatus.Name = "Не подтвержден"
 
 	return res
 }
 
 func getAgencyAgreementsWithAdditionalBenefitsRequestObject() *acaseSts.OrderInfoNotifyRequestType {
 	res := &acaseSts.OrderInfoNotifyRequestType{
-		ContractNumber: "0157/13",
-		ContractDate: "01.07.2013",
-		GuaranteeAmount: 0.00,
-		NotifierId: "Academservice",
-		Password: "322223",
-		Language: "en",
-		Id: 546797,
-		ReferenceNumber: "CYXBW",
-		ReferenceNumberName: "Ref No",
-		RegistrationDate: "16.03.2005",
-		DeadlineDate: "15.03.2005",
-		Price: 142.00,
+		ContractNumber:         "0157/13",
+		ContractDate:           "01.07.2013",
+		GuaranteeAmount:        0.00,
+		NotifierId:             "Academservice",
+		Password:               "322223",
+		Language:               "en",
+		Id:                     546797,
+		ReferenceNumber:        "CYXBW",
+		ReferenceNumberName:    "Ref No",
+		RegistrationDate:       "16.03.2005",
+		DeadlineDate:           "15.03.2005",
+		Price:                  142.00,
 		TravelAgencyCommission: 0.00,
-		Penalty: 0.00,
-		StartDate: "16.03.2005",
-		EndDate: "17.03.2005",
-		InvoiceRule: 3,
-		InvoiceId: 7413250,
-		ConfirmId: 0,
+		Penalty:                0.00,
+		StartDate:              "16.03.2005",
+		EndDate:                "17.03.2005",
+		InvoiceRule:            3,
+		InvoiceId:              7413250,
+		ConfirmId:              0,
 	}
 	res.Currency.Code = 3
 	res.Currency.Name = "USD"
@@ -260,47 +262,47 @@ func getAgencyAgreementsWithAdditionalBenefitsRequestObject() *acaseSts.OrderInf
 	res.AccommodationList.Accommodation[0].DeadlineTimeSys = "15.03.2005 13:00"
 	res.AccommodationList.Accommodation[0].DeadlineTimeUTC = "15.03.2005 10:00"
 	res.AccommodationList.Accommodation[0].PossiblePenaltySize = 142.00
-	res.AccommodationList.Accommodation[0].ToBeCancelled.Code=2
-	res.AccommodationList.Accommodation[0].ToBeCancelled.Name="Нет"
-	res.AccommodationList.Accommodation[0].ToBeChanged.Code=2
-	res.AccommodationList.Accommodation[0].ToBeChanged.Name="Нет"
-	res.AccommodationList.Accommodation[0].Hotel.Code=300061
-	res.AccommodationList.Accommodation[0].Hotel.Name="Русь (Солнечный)"
-	res.AccommodationList.Accommodation[0].ObjType.Code=2
-	res.AccommodationList.Accommodation[0].ObjType.Name="Гостиница"
-	res.AccommodationList.Accommodation[0].ObjType.NameWhere="гостинице"
-	res.AccommodationList.Accommodation[0].Country.Code=9
-	res.AccommodationList.Accommodation[0].Country.Name="Россия"
-	res.AccommodationList.Accommodation[0].City.Code=2
-	res.AccommodationList.Accommodation[0].City.Name="Москва"
-	res.AccommodationList.Accommodation[0].Status.Code=41
-	res.AccommodationList.Accommodation[0].Status.Name="Подтверждено"
-	res.AccommodationList.Accommodation[0].AmendmentRejected.Code=2
-	res.AccommodationList.Accommodation[0].AmendmentRejected.Name="Нет"
-	res.AccommodationList.Accommodation[0].AllowCancel.Code=1
-	res.AccommodationList.Accommodation[0].AllowCancel.Name="Да"
-	res.AccommodationList.Accommodation[0].AllowModify.Code=1
-	res.AccommodationList.Accommodation[0].AllowModify.Name="Да"
-	res.AccommodationList.Accommodation[0].AllowSetGain = &acaseSts.YesNoCodeType{Code:1,Name:"Да"}
-	res.AccommodationList.Accommodation[0].Product.Code=410167
-	res.AccommodationList.Accommodation[0].Product.RoomName="Junior Suite"
-	res.AccommodationList.Accommodation[0].Product.RoomCode=900153
-	res.AccommodationList.Accommodation[0].Product.RateCode=900185
-	res.AccommodationList.Accommodation[0].Product.RateName="FIT"
-	res.AccommodationList.Accommodation[0].Product.RateDescription=""
-	res.AccommodationList.Accommodation[0].Product.RateGroupCode=4
-	res.AccommodationList.Accommodation[0].Product.RateGroupName="FIT"
-	res.AccommodationList.Accommodation[0].Product.Allotment.Code="500235"
-	res.AccommodationList.Accommodation[0].Product.Allotment.Name="РУСЬ-ДЛЯ ВСЕХ"
-	res.AccommodationList.Accommodation[0].Meal.Code=0
-	res.AccommodationList.Accommodation[0].Meal.Name=""
+	res.AccommodationList.Accommodation[0].ToBeCancelled.Code = 2
+	res.AccommodationList.Accommodation[0].ToBeCancelled.Name = "Нет"
+	res.AccommodationList.Accommodation[0].ToBeChanged.Code = 2
+	res.AccommodationList.Accommodation[0].ToBeChanged.Name = "Нет"
+	res.AccommodationList.Accommodation[0].Hotel.Code = 300061
+	res.AccommodationList.Accommodation[0].Hotel.Name = "Русь (Солнечный)"
+	res.AccommodationList.Accommodation[0].ObjType.Code = 2
+	res.AccommodationList.Accommodation[0].ObjType.Name = "Гостиница"
+	res.AccommodationList.Accommodation[0].ObjType.NameWhere = "гостинице"
+	res.AccommodationList.Accommodation[0].Country.Code = 9
+	res.AccommodationList.Accommodation[0].Country.Name = "Россия"
+	res.AccommodationList.Accommodation[0].City.Code = 2
+	res.AccommodationList.Accommodation[0].City.Name = "Москва"
+	res.AccommodationList.Accommodation[0].Status.Code = 41
+	res.AccommodationList.Accommodation[0].Status.Name = "Подтверждено"
+	res.AccommodationList.Accommodation[0].AmendmentRejected.Code = 2
+	res.AccommodationList.Accommodation[0].AmendmentRejected.Name = "Нет"
+	res.AccommodationList.Accommodation[0].AllowCancel.Code = 1
+	res.AccommodationList.Accommodation[0].AllowCancel.Name = "Да"
+	res.AccommodationList.Accommodation[0].AllowModify.Code = 1
+	res.AccommodationList.Accommodation[0].AllowModify.Name = "Да"
+	res.AccommodationList.Accommodation[0].AllowSetGain = &acaseSts.YesNoCodeType{Code: 1, Name: "Да"}
+	res.AccommodationList.Accommodation[0].Product.Code = 410167
+	res.AccommodationList.Accommodation[0].Product.RoomName = "Junior Suite"
+	res.AccommodationList.Accommodation[0].Product.RoomCode = 900153
+	res.AccommodationList.Accommodation[0].Product.RateCode = 900185
+	res.AccommodationList.Accommodation[0].Product.RateName = "FIT"
+	res.AccommodationList.Accommodation[0].Product.RateDescription = ""
+	res.AccommodationList.Accommodation[0].Product.RateGroupCode = 4
+	res.AccommodationList.Accommodation[0].Product.RateGroupName = "FIT"
+	res.AccommodationList.Accommodation[0].Product.Allotment.Code = "500235"
+	res.AccommodationList.Accommodation[0].Product.Allotment.Name = "РУСЬ-ДЛЯ ВСЕХ"
+	res.AccommodationList.Accommodation[0].Meal.Code = 0
+	res.AccommodationList.Accommodation[0].Meal.Name = ""
 	res.AccommodationList.Accommodation[0].Persons.Items = make([]acaseSts.PersonType, 1)
-	res.AccommodationList.Accommodation[0].Persons.Items[0].LastName="ИВАНОВ"
-	res.AccommodationList.Accommodation[0].Persons.Items[0].FirstName="ИВАН ИВАНОВИЧ"
-	res.AccommodationList.Accommodation[0].Persons.Items[0].Category.Code=1
-	res.AccommodationList.Accommodation[0].Persons.Items[0].Category.Name="Господин"
-	res.AccommodationList.Accommodation[0].Persons.Items[0].Citizenship.Code=0
-	res.AccommodationList.Accommodation[0].Persons.Items[0].Citizenship.Name=""
+	res.AccommodationList.Accommodation[0].Persons.Items[0].LastName = "ИВАНОВ"
+	res.AccommodationList.Accommodation[0].Persons.Items[0].FirstName = "ИВАН ИВАНОВИЧ"
+	res.AccommodationList.Accommodation[0].Persons.Items[0].Category.Code = 1
+	res.AccommodationList.Accommodation[0].Persons.Items[0].Category.Name = "Господин"
+	res.AccommodationList.Accommodation[0].Persons.Items[0].Citizenship.Code = 0
+	res.AccommodationList.Accommodation[0].Persons.Items[0].Citizenship.Name = ""
 	res.AccommodationList.Accommodation[0].Penalties.Items = make([]acaseSts.PenaltyType, 2)
 	res.AccommodationList.Accommodation[0].Penalties.Items[0].Id = 1
 	res.AccommodationList.Accommodation[0].Penalties.Items[0].VATIncludedInPrice = 0.00
@@ -320,20 +322,20 @@ func getAgencyAgreementsWithAdditionalBenefitsRequestObject() *acaseSts.OrderInf
 	res.AccommodationList.Accommodation[0].Penalties.Items[0].Reason.Name = "Штраф за позднее изменение"
 	res.AccommodationList.Accommodation[0].Penalties.Items[0].AllowSetGain.Code = 1
 	res.AccommodationList.Accommodation[0].Penalties.Items[0].AllowSetGain.Name = "Да"
-	res.AccommodationList.Accommodation[0].IsEarlyCheckIn.Code=1
-	res.AccommodationList.Accommodation[0].IsEarlyCheckIn.Name="Да"
-	res.AccommodationList.Accommodation[0].CriticalEarlyCheckIn.Code=1
-	res.AccommodationList.Accommodation[0].CriticalEarlyCheckIn.Name="Критично"
-	res.AccommodationList.Accommodation[0].EarlyCheckInConfirmationStatus.Code=2
-	res.AccommodationList.Accommodation[0].EarlyCheckInConfirmationStatus.Name="Не подтвержден"
-	res.AccommodationList.Accommodation[0].IsHour.Code=2
-	res.AccommodationList.Accommodation[0].IsHour.Name="Нет"
-	res.AccommodationList.Accommodation[0].IsLateCheckOut.Code=1
-	res.AccommodationList.Accommodation[0].IsLateCheckOut.Name="Да"
-	res.AccommodationList.Accommodation[0].CriticalLateCheckOut.Code=2
-	res.AccommodationList.Accommodation[0].CriticalLateCheckOut.Name="Некритично"
-	res.AccommodationList.Accommodation[0].LateCheckOutConfirmationStatus.Code=2
-	res.AccommodationList.Accommodation[0].LateCheckOutConfirmationStatus.Name="Не подтвержден"
+	res.AccommodationList.Accommodation[0].IsEarlyCheckIn.Code = 1
+	res.AccommodationList.Accommodation[0].IsEarlyCheckIn.Name = "Да"
+	res.AccommodationList.Accommodation[0].CriticalEarlyCheckIn.Code = 1
+	res.AccommodationList.Accommodation[0].CriticalEarlyCheckIn.Name = "Критично"
+	res.AccommodationList.Accommodation[0].EarlyCheckInConfirmationStatus.Code = 2
+	res.AccommodationList.Accommodation[0].EarlyCheckInConfirmationStatus.Name = "Не подтвержден"
+	res.AccommodationList.Accommodation[0].IsHour.Code = 2
+	res.AccommodationList.Accommodation[0].IsHour.Name = "Нет"
+	res.AccommodationList.Accommodation[0].IsLateCheckOut.Code = 1
+	res.AccommodationList.Accommodation[0].IsLateCheckOut.Name = "Да"
+	res.AccommodationList.Accommodation[0].CriticalLateCheckOut.Code = 2
+	res.AccommodationList.Accommodation[0].CriticalLateCheckOut.Name = "Некритично"
+	res.AccommodationList.Accommodation[0].LateCheckOutConfirmationStatus.Code = 2
+	res.AccommodationList.Accommodation[0].LateCheckOutConfirmationStatus.Name = "Не подтвержден"
 
 	return res
 }
@@ -354,7 +356,7 @@ func TestOrderNotifyRequest_AccommodationAndTransfers_Ok(t *testing.T) {
 	defer gockOff()
 
 	item := getAccommodationAndTransfersRequestObject()
-	_, err := acApi.OrderInfoNotifyRequest(item)
+	_, err := acApi.OrderInfoNotifyRequest(context.Background(), item)
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
 }
@@ -364,7 +366,7 @@ func TestOrderNotifyRequest_AgencyAgreementsWithAdditionalBenefits_Ok(t *testing
 	defer gockOff()
 
 	item := getAgencyAgreementsWithAdditionalBenefitsRequestObject()
-	_, err := acApi.OrderInfoNotifyRequest(item)
+	_, err := acApi.OrderInfoNotifyRequest(context.Background(), item)
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
 }
@@ -374,7 +376,7 @@ func TestOrderNotifyRequest_Error(t *testing.T) {
 	defer gockOff()
 
 	item := getAgencyAgreementsWithAdditionalBenefitsRequestObject()
-	_, err := acApi.OrderInfoNotifyRequest(item)
+	_, err := acApi.OrderInfoNotifyRequest(context.Background(), item)
 
 	st.Expect(t, err.Message, "Доступ запрещен !")
 }

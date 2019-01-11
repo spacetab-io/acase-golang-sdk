@@ -1,6 +1,7 @@
 package test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/nbio/st"
@@ -11,8 +12,8 @@ func TestOrderInfoRequest_CheckStatus_Ok(t *testing.T) {
 	testRequest("orderinfo_response_example.xml", false)
 	defer gockOff()
 
-	req := &acaseSts.OrderInfoRequestType{Id:"2054859"}
-	data, err := acApi.OrderInfoRequest(req)
+	req := &acaseSts.OrderInfoRequestType{Id: "2054859"}
+	data, err := acApi.OrderInfoRequest(context.Background(), req)
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
 	st.Expect(t, data.Language, "ru")
@@ -177,9 +178,8 @@ func TestOrderInfoRequest_Error(t *testing.T) {
 
 	req := &acaseSts.OrderInfoRequestType{}
 	req.Id = "001"
-	_, err := acApi.OrderInfoRequest(req)
+	_, err := acApi.OrderInfoRequest(context.Background(), req)
 
 	st.Expect(t, err.Code, "9998")
 	st.Expect(t, err.Message, "Доступ запрещен !")
 }
-

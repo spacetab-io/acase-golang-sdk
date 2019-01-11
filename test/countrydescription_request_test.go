@@ -1,16 +1,17 @@
 package test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/nbio/st"
 )
 
-func TestCountryDescriptionRequest_Ok(t *testing.T)  {
+func TestCountryDescriptionRequest_Ok(t *testing.T) {
 	testRequest("countrydescription_response_example.xml", false)
 	defer gockOff()
 
-	data, err := acApi.CountryDescriptionRequest(9)
+	data, err := acApi.CountryDescriptionRequest(context.Background(), 9)
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
 	st.Expect(t, data.Code, 9)
@@ -24,9 +25,8 @@ func TestCountryDescriptionRequest_Error(t *testing.T) {
 	testRequest("countrydescription_error_example.xml", true)
 	defer gockOff()
 
-	_, err := acApi.CountryDescriptionRequest(9)
+	_, err := acApi.CountryDescriptionRequest(context.Background(), 9)
 
 	st.Expect(t, err.Code, "9998")
 	st.Expect(t, err.Message, "Доступ запрещен !")
 }
-

@@ -1,18 +1,20 @@
 package test
 
 import (
-	"github.com/nbio/st"
+	"context"
 	"testing"
+
+	"github.com/nbio/st"
 )
 
 func TestStatusListRequest_Ok(t *testing.T) {
 	testRequest("statuslist_response_example.xml", false)
 	defer gockOff()
 
-	data, err := acApi.StatusListRequest()
+	data, err := acApi.StatusListRequest(context.Background())
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
-	st.Expect(t, len(data.Status) , 29)
+	st.Expect(t, len(data.Status), 29)
 	st.Expect(t, data.Status[0].Code, 1)
 	st.Expect(t, data.Status[0].Name, "Запрос цены")
 	st.Expect(t, data.Status[1].Code, 5)
@@ -39,9 +41,8 @@ func TestStatusListRequest_Error(t *testing.T) {
 	testRequest("statuslist_error_example.xml", true)
 	defer gockOff()
 
-	_, err := acApi.StatusListRequest()
+	_, err := acApi.StatusListRequest(context.Background())
 
 	st.Expect(t, err.Code, "9998")
 	st.Expect(t, err.Message, "Доступ запрещен !")
 }
-

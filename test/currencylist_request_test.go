@@ -1,16 +1,17 @@
 package test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/nbio/st"
 )
 
-func TestCurrencyListRequest_Ok(t *testing.T)  {
+func TestCurrencyListRequest_Ok(t *testing.T) {
 	testRequest("currencylist_response_example.xml", false)
 	defer gockOff()
 
-	data, err := acApi.CurrencyListRequest(22, "","")
+	data, err := acApi.CurrencyListRequest(context.Background(), 22, "", "")
 	er := getCustomErrorType()
 	st.Expect(t, err, er)
 	st.Expect(t, len(data.Currency), 3)
@@ -26,7 +27,7 @@ func TestCurrencyListRequest_Error(t *testing.T) {
 	testRequest("currencylist_error_example.xml", true)
 	defer gockOff()
 
-	_, err := acApi.CurrencyListRequest(0, "","")
+	_, err := acApi.CurrencyListRequest(context.Background(), 0, "", "")
 
 	st.Expect(t, err.Code, "9998")
 	st.Expect(t, err.Message, "Доступ запрещен !")
