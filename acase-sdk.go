@@ -22,6 +22,7 @@ type Api struct {
 	ApiUrl string
 
 	credentials acaseSts.Credentials
+	urlInfo     *url.URL
 }
 
 func NewApi(auth Auth, apiUrl string) *Api {
@@ -47,6 +48,8 @@ func NewApi(auth Auth, apiUrl string) *Api {
 
 func (a *Api) init() *Api {
 	a.EventListener.Init()
+
+	a.urlInfo, _ = url.Parse(a.ApiUrl)
 
 	return a
 }
@@ -84,7 +87,7 @@ func (a *Api) requestInternal(ctx context.Context, requestName, body string) ([]
 	req.Header.Add("Content-Type", reqContentType)
 	req.Header.Add("Content-Length", string(len(body)))
 
-	a.EventListener.raiseEvent(BeforeRequestSend, ctx, requestName, reqContentType, reqData)
+	a.EventListener.raiseEvent(BeforeRequestSend, ctx, requestName, a.urlInfo.RawQuery, reqContentType, reqData)
 
 	resp, err := (&http.Client{}).Do(req)
 	if err != nil {
@@ -108,7 +111,7 @@ func (a *Api) requestInternal(ctx context.Context, requestName, body string) ([]
 			respContentType = strings.TrimSpace(parts[0])
 		}
 
-		a.EventListener.raiseEvent(AfterResponseReceive, ctx, requestName, respContentType, respData)
+		a.EventListener.raiseEvent(AfterResponseReceive, ctx, requestName, a.urlInfo.RawQuery, respContentType, respData)
 	}
 
 	return respData, nil

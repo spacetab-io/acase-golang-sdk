@@ -5,7 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/tmconsulting/acase-golang-sdk"
+	acaseSdk "github.com/tmconsulting/acase-golang-sdk"
 	"gopkg.in/h2non/gock.v1"
 )
 

@@ -1,0 +1,4 @@
+github.com/nbio/st v0.0.0-20140626010706-e9e8d9816f32 h1:W6apQkHrMkS0Muv8G/TipAy/FJl/rCYT0+EuS8+Z0z4=
+github.com/nbio/st v0.0.0-20140626010706-e9e8d9816f32/go.mod h1:9wM+0iRr9ahx58uYLpLIr5fm8diHn0JbqRycJi6w0Ms=
+gopkg.in/h2non/gock.v1 v1.0.7 h1:gmqCLBL3msXfxHnjvplDgPe6pT4a0+9WlnBrA8bKtbA=
+gopkg.in/h2non/gock.v1 v1.0.7/go.mod h1:KHI4Z1sxDW6P4N3DfTWSEza07YpkQP7KJBfglRMEjKY=

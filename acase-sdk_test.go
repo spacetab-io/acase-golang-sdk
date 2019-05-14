@@ -34,11 +34,13 @@ func TestApi_OrderListRequest(t *testing.T) {
 
 	var (
 		reqMethodName string
+		reqQuery      string
 		reqMimeType   string
 		reqData       []byte
 		reqCtxValue   int
 
 		respMethodName string
+		respQuery      string
 		respMimeType   string
 		respData       []byte
 		respCtxValue   int
@@ -46,8 +48,9 @@ func TestApi_OrderListRequest(t *testing.T) {
 
 	api := NewApi(auth, server.URL)
 
-	api.RegisterEventHandler(BeforeRequestSend, func(ctx context.Context, methodName, mimeType string, data []byte) {
+	api.RegisterEventHandler(BeforeRequestSend, func(ctx context.Context, methodName, query, mimeType string, data []byte) {
 		reqMethodName = methodName
+		reqQuery = query
 		reqMimeType = mimeType
 
 		params, _ := url.ParseQuery(string(data))
@@ -56,8 +59,9 @@ func TestApi_OrderListRequest(t *testing.T) {
 
 		reqCtxValue = ctx.Value("value").(int)
 
-	}).RegisterEventHandler(AfterResponseReceive, func(ctx context.Context, methodName, mimeType string, data []byte) {
+	}).RegisterEventHandler(AfterResponseReceive, func(ctx context.Context, methodName, query, mimeType string, data []byte) {
 		respMethodName = methodName
+		respQuery = query
 		respMimeType = mimeType
 
 		respData = data
@@ -76,11 +80,13 @@ func TestApi_OrderListRequest(t *testing.T) {
 	st.Expect(t, err, (*AcaseResponseError)(nil))
 
 	st.Expect(t, reqMethodName, "CityDescriptionRequest")
+	st.Expect(t, reqQuery, "")
 	st.Expect(t, reqMimeType, "application/x-www-form-urlencoded")
 	st.Expect(t, reqCtxValue, value)
 	st.Expect(t, reqData, []byte(strconv.Itoa(int(cityCode))))
 
 	st.Expect(t, respMethodName, "CityDescriptionRequest")
+	st.Expect(t, respQuery, "")
 	st.Expect(t, respMimeType, "text/xml")
 	st.Expect(t, respCtxValue, value)
 	st.Expect(t, string(respData), `<CityDescription Code="" Name="" Description="" Url=""><Success></Success><Country Code="0" Name=""></Country><AdmUnit1 Code="0" Name=""></AdmUnit1><AdmUnit2 Code="0" Name=""><AdmUnit1 Code="0" Name=""></AdmUnit1></AdmUnit2><TypeOfPlace Code="0" Name=""></TypeOfPlace><Position></Position></CityDescription>`)
